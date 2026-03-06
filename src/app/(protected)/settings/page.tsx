@@ -7,7 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import type { User, UserPreference } from "@/lib/types/database";
 
 const inputClasses =
-  "w-full rounded-lg border border-[#E5E5E5] bg-white px-3 py-2.5 text-sm text-[#1D1D1F] focus:outline-none focus:ring-2 focus:ring-[#B85C42] focus:border-[#B85C42]";
+  "w-full rounded-[10px] border border-[#E5E5E5] bg-[#FAFAFA] px-3.5 py-2.5 text-sm text-[#1D1D1F] focus:outline-none focus:ring-2 focus:ring-[#B85C42]/30 focus:border-[#B85C42] focus:bg-white transition-all";
 
 export default function SettingsPage() {
   const [profile, setProfile] = useState<User | null>(null);
@@ -74,7 +74,15 @@ export default function SettingsPage() {
 
   return (
     <div className="max-w-lg space-y-6">
-      <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Settings</h1>
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 rounded-full bg-gradient-to-b from-[#C46B50] to-[#B85C42] flex items-center justify-center text-white text-sm font-semibold shadow-[0_2px_8px_rgba(184,92,66,0.25)]">
+          {profile.email?.charAt(0).toUpperCase()}
+        </div>
+        <div>
+          <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Settings</h1>
+          <p className="text-[13px] text-[#6B7280]">{profile.email}</p>
+        </div>
+      </div>
 
       <ProfileCard profile={profile} />
 

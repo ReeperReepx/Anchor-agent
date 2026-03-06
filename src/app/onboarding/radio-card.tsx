@@ -11,8 +11,8 @@ export function RadioCard({ label, description, selected, onClick }: RadioCardPr
       onClick={onClick}
       className={`w-full text-left px-5 py-4 rounded-[12px] border transition-all ${
         selected
-          ? "border-[#B85C42] bg-[rgba(184,92,66,0.08)]"
-          : "border-[#E5E5E5] bg-white hover:border-[#6B7280]"
+          ? "border-[#B85C42] bg-[rgba(184,92,66,0.08)] shadow-[0_0_0_3px_rgba(184,92,66,0.08)]"
+          : "border-[#E5E5E5] bg-white hover:border-[#B85C42]/30 hover:bg-[#FAFAFA]"
       }`}
     >
       <div className="flex items-center justify-between">

@@ -1,24 +1,24 @@
 import { NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
 
   if (code) {
-    const cookieStore = await cookies();
+    const responseHeaders = new Headers();
     const supabase = createServerClient(
       process.env.NEXT_PUBLIC_SUPABASE_URL!,
       process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
       {
         cookies: {
           getAll() {
-            return cookieStore.getAll();
+            return parseCookies(request.headers.get("cookie") ?? "");
           },
           setAll(cookiesToSet) {
             cookiesToSet.forEach(({ name, value, options }) => {
-              cookieStore.set(name, value, options);
+              const cookie = serializeCookie(name, value, options);
+              responseHeaders.append("set-cookie", cookie);
             });
           },
         },
@@ -31,6 +31,8 @@ export async function GET(request: Request) {
         data: { user },
       } = await supabase.auth.getUser();
 
+      let redirectTo = `${origin}/dashboard`;
+
       if (user) {
         const { data: profile } = await supabase
           .from("users")
@@ -39,13 +41,48 @@ export async function GET(request: Request) {
           .single();
 
         if (!profile?.onboarded_at) {
-          return NextResponse.redirect(`${origin}/onboarding`);
+          redirectTo = `${origin}/onboarding`;
         }
       }
 
-      return NextResponse.redirect(`${origin}/dashboard`);
+      const response = NextResponse.redirect(redirectTo);
+      responseHeaders.forEach((value, key) => {
+        response.headers.append(key, value);
+      });
+      return response;
     }
   }
 
   return NextResponse.redirect(`${origin}/login?error=auth`);
+}
+
+function parseCookies(cookieHeader: string) {
+  return cookieHeader
+    .split(";")
+    .filter(Boolean)
+    .map((pair) => {
+      const [name, ...rest] = pair.trim().split("=");
+      return { name, value: rest.join("=") };
+    });
+}
+
+function serializeCookie(
+  name: string,
+  value: string,
+  options?: Record<string, unknown>
+): string {
+  let cookie = `${name}=${value}`;
+  if (!options) return cookie;
+
+  if (options.maxAge) cookie += `; Max-Age=${options.maxAge}`;
+  if (options.domain) cookie += `; Domain=${options.domain}`;
+  if (options.path) cookie += `; Path=${options.path}`;
+  else cookie += "; Path=/";
+  if (options.httpOnly) cookie += "; HttpOnly";
+  if (options.secure) cookie += "; Secure";
+  if (options.sameSite) {
+    const sameSite = String(options.sameSite);
+    cookie += `; SameSite=${sameSite.charAt(0).toUpperCase() + sameSite.slice(1)}`;
+  }
+  return cookie;
 }

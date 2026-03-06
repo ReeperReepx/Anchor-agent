@@ -51,7 +51,10 @@ export default async function SummariesPage() {
 
   return (
     <div className="space-y-8">
-      <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Summaries</h1>
+      <div>
+        <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Summaries</h1>
+        <p className="text-[13px] text-[#6B7280] mt-1">AI-generated insights from your standups</p>
+      </div>
 
       {!hasAny ? (
         <Card>

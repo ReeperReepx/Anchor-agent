@@ -13,7 +13,7 @@ interface StepProps {
 export function StepWelcome({ next }: { next: () => void }) {
   return (
     <div className="text-center">
-      <div className="w-16 h-16 bg-[rgba(184,92,66,0.1)] rounded-full flex items-center justify-center mx-auto mb-6">
+      <div className="w-16 h-16 bg-[rgba(184,92,66,0.08)] border border-[rgba(184,92,66,0.15)] rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_24px_rgba(184,92,66,0.08)]">
         <svg
           width="28"
           height="28"
@@ -133,7 +133,7 @@ export function StepGoals({ data, setData }: StepProps) {
               onClick={() => toggleGoal(goal)}
               className={`px-4 py-2.5 rounded-[10px] text-sm font-medium transition-all ${
                 selected
-                  ? "bg-[#B85C42] text-white"
+                  ? "bg-[#B85C42] text-white shadow-[0_2px_8px_rgba(184,92,66,0.3)]"
                   : "bg-[#F0F0F0] text-[#6B7280] hover:text-[#1D1D1F] hover:bg-[#E5E5E5]"
               }`}
             >
@@ -230,9 +230,9 @@ export function StepComplete({
 }) {
   return (
     <div className="text-center">
-      <div className="text-[#2D8A56] mb-6">
+      <div className="w-16 h-16 bg-[rgba(45,138,86,0.08)] border border-[rgba(45,138,86,0.15)] rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_24px_rgba(45,138,86,0.08)]">
         <svg
-          className="w-16 h-16 mx-auto"
+          className="w-7 h-7 text-[#2D8A56]"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -240,7 +240,7 @@ export function StepComplete({
           <path
             strokeLinecap="round"
             strokeLinejoin="round"
-            strokeWidth={2}
+            strokeWidth={2.5}
             d="M5 13l4 4L19 7"
           />
         </svg>

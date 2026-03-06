@@ -97,10 +97,11 @@ export default function PartnerPage() {
             <h2 className="text-[15px] font-semibold text-[#1D1D1F] mb-2">
               No partner yet
             </h2>
-            <p className="text-[#6B7280] text-sm mb-6 max-w-xs mx-auto">
+            <p className="text-[#6B7280] text-sm mb-2 max-w-xs mx-auto">
               You&apos;ll be matched with a new accountability partner every week
               based on your goals and timezone.
             </p>
+            <p className="text-[12px] text-[#9CA3AF] mb-6">Partners see each other&apos;s standup summaries — never recordings.</p>
             <Button>Join matching queue</Button>
           </CardContent>
         </Card>
@@ -223,7 +224,7 @@ function ChatThread({
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             placeholder="Write a message..."
-            className="flex-1 rounded-[10px] border border-[#E5E5E5] bg-white px-3 py-2.5 text-sm text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#B85C42]"
+            className="flex-1 rounded-[10px] border border-[#E5E5E5] bg-[#FAFAFA] px-3.5 py-2.5 text-sm text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#B85C42]/30 focus:border-[#B85C42] focus:bg-white transition-all"
           />
           <Button type="submit" size="md">
             Send

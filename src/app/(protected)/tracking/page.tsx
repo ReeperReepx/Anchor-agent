@@ -125,65 +125,77 @@ export default async function TrackingPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Tracking</h1>
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Tracking</h1>
+        <div className="flex items-center gap-2 text-[13px] text-[#6B7280]">
+          <svg className="w-4 h-4 text-[#B85C42]" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 23c-3.866 0-7-2.686-7-6 0-1.664.558-3.202 1.5-4.5.96-1.32 1.5-2.836 1.5-4.5 0-.414.336-.75.75-.75.267 0 .501.14.633.35C10.89 10.13 12 12.5 12 14c1.5-2 2-4.5 2-7 0-.414.336-.75.75-.75.2 0 .382.08.516.21C17.632 8.72 19 11.84 19 15c0 4.418-3.134 8-7 8z"/>
+          </svg>
+          <span className="font-semibold text-[#B85C42]">{streak?.current_streak ?? 0}</span> day streak
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {/* This Week */}
         <Card>
-          <CardHeader>
-            <CardTitle className="text-[11px] font-semibold text-[#6B7280] uppercase tracking-[1px]">This Week</CardTitle>
-          </CardHeader>
           <CardContent>
-            <div className="flex items-baseline gap-2">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-[11px] font-semibold text-[#6B7280] uppercase tracking-[1px]">This Week</span>
+              <span className="text-[12px] font-medium text-[#9CA3AF]">{weekPct}%</span>
+            </div>
+            <div className="flex items-baseline gap-2 mb-3">
               <span className="text-3xl font-bold text-[#1D1D1F]">
                 {thisWeek?.completed ?? 0}
-                <span className="text-lg text-[#9CA3AF]">/{thisWeek?.total ?? 5}</span>
               </span>
+              <span className="text-lg text-[#9CA3AF]">/{thisWeek?.total ?? 5}</span>
               <span className="text-sm text-[#9CA3AF]">days</span>
             </div>
-            <div className="mt-2 h-1.5 bg-[#E5E5E5] rounded-full overflow-hidden">
+            <div className="h-2 bg-[#F0F0F0] rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#B85C42] rounded-full transition-all"
+                className="h-full rounded-full transition-all bg-gradient-to-r from-[#B85C42]/60 to-[#B85C42]"
                 style={{ width: `${weekPct}%` }}
               />
             </div>
-            <p className="text-xs text-[#9CA3AF] mt-1">{weekPct}% complete</p>
           </CardContent>
         </Card>
 
+        {/* This Month */}
         <Card>
-          <CardHeader>
-            <CardTitle className="text-[11px] font-semibold text-[#6B7280] uppercase tracking-[1px]">This Month</CardTitle>
-          </CardHeader>
           <CardContent>
-            <div className="flex items-baseline gap-2">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-[11px] font-semibold text-[#6B7280] uppercase tracking-[1px]">This Month</span>
+              <span className="text-[12px] font-medium text-[#9CA3AF]">{monthPct}%</span>
+            </div>
+            <div className="flex items-baseline gap-2 mb-3">
               <span className="text-3xl font-bold text-[#1D1D1F]">
                 {thisMonth?.completed ?? 0}
-                <span className="text-lg text-[#9CA3AF]">/{thisMonth?.total ?? 22}</span>
               </span>
+              <span className="text-lg text-[#9CA3AF]">/{thisMonth?.total ?? 22}</span>
               <span className="text-sm text-[#9CA3AF]">days</span>
             </div>
-            <div className="mt-2 h-1.5 bg-[#E5E5E5] rounded-full overflow-hidden">
+            <div className="h-2 bg-[#F0F0F0] rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#60A5FA] rounded-full transition-all"
+                className="h-full rounded-full transition-all bg-gradient-to-r from-[#60A5FA]/60 to-[#60A5FA]"
                 style={{ width: `${monthPct}%` }}
               />
             </div>
-            <p className="text-xs text-[#9CA3AF] mt-1">{monthPct}% complete</p>
           </CardContent>
         </Card>
 
-        <Card className="!bg-[rgba(184,92,66,0.08)] !border-[rgba(184,92,66,0.2)]">
-          <CardHeader>
-            <CardTitle className="text-[11px] font-semibold text-[#6B7280] uppercase tracking-[1px]">Current Streak</CardTitle>
-          </CardHeader>
+        {/* Streak */}
+        <Card className="!bg-gradient-to-br !from-[rgba(184,92,66,0.07)] !to-[rgba(184,92,66,0.02)] !border-[rgba(184,92,66,0.2)] relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-20 h-20 bg-[rgba(184,92,66,0.06)] rounded-full -translate-y-1/2 translate-x-1/2" />
           <CardContent>
-            <div className="flex items-baseline gap-2">
+            <div className="flex items-center justify-between mb-3">
+              <span className="text-[11px] font-semibold text-[#B85C42] uppercase tracking-[1px]">Current Streak</span>
+            </div>
+            <div className="flex items-baseline gap-2 mb-1">
               <span className="text-3xl font-bold text-[#B85C42]">
                 {streak?.current_streak ?? 0}
               </span>
               <span className="text-sm text-[#9CA3AF]">days</span>
             </div>
-            <p className="text-xs text-[#9CA3AF] mt-2">
+            <p className="text-[12px] text-[#2D8A56] font-medium">
               Best: {streak?.longest_streak ?? 0} days
             </p>
           </CardContent>
@@ -192,7 +204,12 @@ export default async function TrackingPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Activity</CardTitle>
+          <CardTitle className="flex items-center gap-2">
+            <svg className="w-4 h-4 text-[#6B7280]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+            </svg>
+            Activity
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <ActivityHeatmap data={heatmapData} />
@@ -201,7 +218,12 @@ export default async function TrackingPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle>Weekly Completion</CardTitle>
+          <CardTitle className="flex items-center gap-2">
+            <svg className="w-4 h-4 text-[#6B7280]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+            Weekly Completion
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <WeeklyBars weeks={weeklyData} />

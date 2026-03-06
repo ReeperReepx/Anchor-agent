@@ -108,7 +108,7 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search standups..."
-          className="w-full rounded-[10px] border border-[#E5E5E5] bg-white pl-9 pr-3 py-2.5 text-sm text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#B85C42] transition-shadow"
+          className="w-full rounded-[10px] border border-[#E5E5E5] bg-[#FAFAFA] pl-9 pr-3 py-2.5 text-sm text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#B85C42]/30 focus:border-[#B85C42] focus:bg-white transition-all"
         />
       </div>
 
@@ -118,10 +118,10 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
           <button
             key={t}
             onClick={() => setTypeFilter(t)}
-            className={`px-3 py-1.5 rounded-full text-[13px] font-medium transition-colors ${
+            className={`px-3 py-1.5 rounded-full text-[13px] font-medium transition-all ${
               typeFilter === t
-                ? "bg-[#B85C42] text-white border border-[#B85C42]"
-                : "bg-white border border-[#E5E5E5] text-[#6B7280] hover:border-[#6B7280]"
+                ? "bg-[#B85C42] text-white border border-[#B85C42] shadow-[0_2px_8px_rgba(184,92,66,0.25)]"
+                : "bg-white border border-[#E5E5E5] text-[#6B7280] hover:border-[#B85C42]/30"
             }`}
           >
             {t === "all" ? "All" : t === "daily" ? "Daily" : "Weekly"}
@@ -134,10 +134,10 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
           <button
             key={t}
             onClick={() => setTimeFilter(timeFilter === t ? "all" : t)}
-            className={`px-3 py-1.5 rounded-full text-[13px] font-medium transition-colors ${
+            className={`px-3 py-1.5 rounded-full text-[13px] font-medium transition-all ${
               timeFilter === t
-                ? "bg-[#B85C42] text-white border border-[#B85C42]"
-                : "bg-white border border-[#E5E5E5] text-[#6B7280] hover:border-[#6B7280]"
+                ? "bg-[#B85C42] text-white border border-[#B85C42] shadow-[0_2px_8px_rgba(184,92,66,0.25)]"
+                : "bg-white border border-[#E5E5E5] text-[#6B7280] hover:border-[#B85C42]/30"
             }`}
           >
             {t === "this_week" ? "This week" : "This month"}
