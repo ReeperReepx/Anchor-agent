@@ -22,7 +22,7 @@ async function getData(): Promise<{
   const [streakResult, recentResult, profileResult, countResult] = await Promise.all([
     supabase.from("streaks").select("*").eq("user_id", user.id).single<Streak>(),
     supabase.from("standups").select("*").eq("user_id", user.id).order("created_at", { ascending: false }).limit(3).returns<Standup[]>(),
-    supabase.from("users").select("standup_time, goal_categories").eq("id", user.id).single(),
+    supabase.from("users").select("standup_time, goal_categories").eq("id", user.id).single<{ standup_time: string | null; goal_categories: string | null }>(),
     supabase.from("standups").select("id", { count: "exact", head: true }).eq("user_id", user.id),
   ]);
 

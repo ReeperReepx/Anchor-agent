@@ -2,7 +2,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { createClient } from "@/lib/supabase/server";
 import { ActivityHeatmap } from "@/components/tracking/activity-heatmap";
 import { WeeklyBars } from "@/components/tracking/weekly-bars";
-import type { Standup } from "@/lib/types/database";
+import type { Standup, Streak } from "@/lib/types/database";
 
 interface WeekData {
   weekLabel: string;
@@ -86,7 +86,7 @@ async function getTrackingData() {
       .gte("date", cutoff)
       .order("date", { ascending: true })
       .returns<Standup[]>(),
-    supabase.from("streaks").select("*").eq("user_id", user.id).single(),
+    supabase.from("streaks").select("*").eq("user_id", user.id).single<Streak>(),
     supabase
       .from("standups")
       .select("id", { count: "exact", head: true })
