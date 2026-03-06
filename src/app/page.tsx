@@ -4,11 +4,13 @@ import { Hero } from "@/components/landing/hero";
 import { StatsBar, OutcomeCards } from "@/components/landing/outcomes";
 import { Pricing } from "@/components/landing/pricing";
 import { FAQ } from "@/components/landing/faq";
+import { HowItWorks } from "@/components/landing/how-it-works";
+import { Testimonials } from "@/components/landing/testimonials";
 
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-[#FAF6F1]">
-      <nav className="flex items-center justify-between px-10 py-5 max-w-[1100px] mx-auto border-b border-[#E8DDD3]">
+      <nav className="sticky top-0 z-50 bg-[#FAF6F1]/85 backdrop-blur-md flex items-center justify-between px-10 py-5 max-w-[1100px] mx-auto border-b border-[#E8DDD3]">
         <span className="text-[22px] font-bold text-[#C4654A]">Anchor</span>
         <div className="flex items-center gap-5 text-sm text-[#8a7e74]">
           <a href="#how-it-works" className="hover:text-[#2C2825] transition-colors">
@@ -36,7 +38,9 @@ export default function LandingPage() {
       </div>
 
       <StatsBar />
+      <HowItWorks />
       <OutcomeCards />
+      <Testimonials />
       <Pricing />
       <FAQ />
 

@@ -11,19 +11,30 @@ async function getData(): Promise<{
   userName: string;
   standupTime: string | null;
   totalCount: number;
+  thisWeekCount: number;
 }> {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
 
-  if (!user) return { streak: null, recentStandups: [], userName: "", standupTime: null, totalCount: 0 };
+  if (!user) return { streak: null, recentStandups: [], userName: "", standupTime: null, totalCount: 0, thisWeekCount: 0 };
 
-  const [streakResult, recentResult, profileResult, countResult] = await Promise.all([
+  // Calculate Monday of this week
+  const now = new Date();
+  const day = now.getDay();
+  const diffToMonday = day === 0 ? 6 : day - 1;
+  const monday = new Date(now);
+  monday.setDate(now.getDate() - diffToMonday);
+  monday.setHours(0, 0, 0, 0);
+  const mondayStr = monday.toISOString().split("T")[0];
+
+  const [streakResult, recentResult, profileResult, countResult, weekCountResult] = await Promise.all([
     supabase.from("streaks").select("*").eq("user_id", user.id).single<Streak>(),
     supabase.from("standups").select("*").eq("user_id", user.id).order("created_at", { ascending: false }).limit(3).returns<Standup[]>(),
     supabase.from("users").select("standup_time, goal_categories").eq("id", user.id).single<{ standup_time: string | null; goal_categories: string | null }>(),
     supabase.from("standups").select("id", { count: "exact", head: true }).eq("user_id", user.id),
+    supabase.from("standups").select("id", { count: "exact", head: true }).eq("user_id", user.id).eq("type", "daily").gte("date", mondayStr),
   ]);
 
   return {
@@ -32,6 +43,7 @@ async function getData(): Promise<{
     userName: user.user_metadata?.name ?? user.email?.split("@")[0] ?? "",
     standupTime: profileResult.data?.standup_time ?? null,
     totalCount: countResult.count ?? 0,
+    thisWeekCount: weekCountResult.count ?? 0,
   };
 }
 
@@ -43,8 +55,48 @@ function getGreeting(): string {
 }
 
 export default async function DashboardPage() {
-  const { streak, recentStandups, userName, standupTime, totalCount } = await getData();
+  const { streak, recentStandups, userName, standupTime, totalCount, thisWeekCount } = await getData();
   const completedDays = recentStandups.filter((s) => s.type === "daily").map((s) => s.date);
+
+  // Determine AI insight
+  let insight: { icon: React.ReactNode; title: string; message: string } | null = null;
+  const currentStreak = streak?.current_streak ?? 0;
+  const longestStreak = streak?.longest_streak ?? 0;
+
+  if (currentStreak >= longestStreak && currentStreak > 0) {
+    insight = {
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4654A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+        </svg>
+      ),
+      title: "New personal record!",
+      message: `${currentStreak} day streak — your longest ever. Keep the momentum going.`,
+    };
+  } else if (thisWeekCount >= 4) {
+    insight = {
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4654A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+        </svg>
+      ),
+      title: "Crushing it this week",
+      message: `${thisWeekCount}/5 standups done. One more to go!`,
+    };
+  } else if (recentStandups.length > 0) {
+    insight = {
+      icon: (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4654A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+          <polyline points="22 4 12 14.01 9 11.01" />
+        </svg>
+      ),
+      title: "You're building a habit",
+      message: currentStreak > 0
+        ? `${currentStreak} day streak and counting. Show up again tomorrow.`
+        : "You've been showing up. Start a new streak today.",
+    };
+  }
 
   return (
     <div className="space-y-8">
@@ -69,6 +121,18 @@ export default async function DashboardPage() {
           Start Standup
         </a>
       </div>
+
+      {insight && (
+        <div className="bg-gradient-to-br from-[rgba(196,101,74,0.06)] to-[rgba(196,101,74,0.02)] border border-[rgba(196,101,74,0.15)] rounded-[14px] p-5 flex items-start gap-4">
+          <div className="w-10 h-10 rounded-[10px] bg-[rgba(196,101,74,0.1)] flex items-center justify-center shrink-0">
+            {insight.icon}
+          </div>
+          <div>
+            <h3 className="text-[14px] font-semibold text-[#2C2825] mb-1">{insight.title}</h3>
+            <p className="text-[13px] text-[#8a7e74] leading-relaxed">{insight.message}</p>
+          </div>
+        </div>
+      )}
 
       <Card>
         <CardHeader>

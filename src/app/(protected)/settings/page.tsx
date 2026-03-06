@@ -86,6 +86,8 @@ export default function SettingsPage() {
         saved={saved}
       />
 
+      <NotificationsCard />
+
       <SubscriptionCard />
     </div>
   );
@@ -214,6 +216,57 @@ function PreferencesCard({
             )}
           </div>
         </form>
+      </CardContent>
+    </Card>
+  );
+}
+
+function NotificationsCard() {
+  const [prefs, setPrefs] = useState({
+    dailyReminder: true,
+    streakWarnings: true,
+    partnerUpdates: false,
+    weeklySummary: true,
+  });
+
+  function toggle(key: keyof typeof prefs) {
+    setPrefs((p) => ({ ...p, [key]: !p[key] }));
+  }
+
+  const items = [
+    { key: "dailyReminder" as const, label: "Daily reminder", sub: "Email at your standup time" },
+    { key: "streakWarnings" as const, label: "Streak warnings", sub: "Alert before you lose your streak" },
+    { key: "partnerUpdates" as const, label: "Partner updates", sub: "When your partner completes a standup" },
+    { key: "weeklySummary" as const, label: "Weekly summary email", sub: "Recap sent every Monday morning" },
+  ];
+
+  return (
+    <Card>
+      <CardHeader>
+        <CardTitle>Notifications</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <div className="space-y-0">
+          {items.map((item) => (
+            <div key={item.key} className="flex items-center justify-between py-3 border-b border-[#E8DDD3] last:border-b-0">
+              <div>
+                <div className="text-[13px] font-medium text-[#2C2825]">{item.label}</div>
+                <div className="text-[11px] text-[#a89a8e]">{item.sub}</div>
+              </div>
+              <button
+                type="button"
+                onClick={() => toggle(item.key)}
+                className={`w-9 h-5 rounded-full transition-colors relative ${
+                  prefs[item.key] ? "bg-[#C4654A]" : "bg-[#E8DDD3]"
+                }`}
+              >
+                <div className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow-sm transition-transform ${
+                  prefs[item.key] ? "translate-x-4" : "translate-x-0"
+                }`} />
+              </button>
+            </div>
+          ))}
+        </div>
       </CardContent>
     </Card>
   );

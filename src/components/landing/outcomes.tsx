@@ -64,7 +64,7 @@ export function StatsBar() {
 
 export function OutcomeCards() {
   return (
-    <section id="how-it-works" className="px-10 py-[60px] max-w-[960px] mx-auto">
+    <section className="px-10 py-[60px] max-w-[960px] mx-auto">
       <h2 className="text-[36px] font-bold tracking-[-0.02em] text-[#2C2825] mb-4 text-center">
         What actually changes
       </h2>

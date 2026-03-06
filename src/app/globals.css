@@ -64,6 +64,11 @@ body {
   50% { box-shadow: 0 0 0 20px rgba(196, 101, 74, 0); }
 }
 
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
 /* Blog article typography */
 .prose-anchor {
   color: #5a524a;
