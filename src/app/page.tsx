@@ -17,6 +17,9 @@ export default function LandingPage() {
           <a href="#early-access" className="hover:text-[#2C2825] transition-colors">
             Early Access
           </a>
+          <Link href="/blog" className="hover:text-[#2C2825] transition-colors">
+            Blog
+          </Link>
           <Link href="/login" className="hover:text-[#2C2825] transition-colors">
             Login
           </Link>

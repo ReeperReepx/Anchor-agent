@@ -64,6 +64,59 @@ body {
   50% { box-shadow: 0 0 0 20px rgba(196, 101, 74, 0); }
 }
 
+/* Blog article typography */
+.prose-anchor {
+  color: #5a524a;
+  font-size: 16px;
+  line-height: 1.75;
+}
+.prose-anchor h2 {
+  color: #2C2825;
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+.prose-anchor h3 {
+  color: #2C2825;
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.prose-anchor p {
+  margin-bottom: 1.25rem;
+}
+.prose-anchor strong {
+  color: #2C2825;
+  font-weight: 600;
+}
+.prose-anchor em {
+  font-style: italic;
+}
+.prose-anchor ul, .prose-anchor ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+.prose-anchor ul {
+  list-style-type: disc;
+}
+.prose-anchor ol {
+  list-style-type: decimal;
+}
+.prose-anchor li {
+  margin-bottom: 0.5rem;
+}
+.prose-anchor a {
+  color: #C4654A;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose-anchor a:hover {
+  color: #D4856A;
+}
+
 .skeleton {
   background: linear-gradient(90deg, #F5F0E8 25%, #FAF6F1 50%, #F5F0E8 75%);
   background-size: 200% 100%;

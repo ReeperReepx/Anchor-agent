@@ -9,9 +9,35 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Anchor - Ground your day",
+  title: {
+    default: "Anchor — Daily Standups for Solopreneurs",
+    template: "%s — Anchor",
+  },
   description:
-    "Voice-first personal standup for solopreneurs. Five minutes. Three questions. Every damn day.",
+    "Voice-first daily standup for solopreneurs. Five minutes. Three questions. Every damn day. Stay accountable and ship faster.",
+  keywords: [
+    "daily standup",
+    "solopreneur",
+    "accountability",
+    "voice standup",
+    "productivity",
+    "solo founder",
+    "accountability partner",
+    "standup app",
+  ],
+  openGraph: {
+    type: "website",
+    siteName: "Anchor",
+    title: "Anchor — Daily Standups for Solopreneurs",
+    description:
+      "Voice-first daily standup for solopreneurs. Five minutes. Three questions. Every damn day.",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || "https://anchor-agent.vercel.app"
+  ),
 };
 
 export default function RootLayout({
