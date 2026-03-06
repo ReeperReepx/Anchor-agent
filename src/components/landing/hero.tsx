@@ -5,12 +5,12 @@ import { Waveform } from "./waveform";
 export function Hero() {
   return (
     <section className="px-10 pt-[100px] pb-20 max-w-3xl mx-auto text-center">
-      <h1 className="text-[52px] font-bold tracking-[-0.02em] leading-[1.15] text-[#2C2825]">
+      <h1 className="text-[52px] font-bold tracking-[-0.02em] leading-[1.15] text-[#1D1D1F]">
         Five minutes. Three questions.
         <br />
-        <span className="text-[#C4654A]">Every damn day.</span>
+        <span className="text-[#B85C42]">Every damn day.</span>
       </h1>
-      <p className="mt-6 text-lg text-[#8a7e74] max-w-[500px] mx-auto leading-relaxed">
+      <p className="mt-6 text-lg text-[#6B7280] max-w-[500px] mx-auto leading-relaxed">
         The voice-first standup for solopreneurs who ship. No typing, no
         dashboards, no excuses.
       </p>

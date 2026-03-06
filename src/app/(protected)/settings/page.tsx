@@ -7,7 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import type { User, UserPreference } from "@/lib/types/database";
 
 const inputClasses =
-  "w-full rounded-lg border border-[#E8DDD3] bg-white px-3 py-2.5 text-sm text-[#2C2825] focus:outline-none focus:ring-2 focus:ring-[#C4654A] focus:border-[#C4654A]";
+  "w-full rounded-lg border border-[#E5E5E5] bg-white px-3 py-2.5 text-sm text-[#1D1D1F] focus:outline-none focus:ring-2 focus:ring-[#B85C42] focus:border-[#B85C42]";
 
 export default function SettingsPage() {
   const [profile, setProfile] = useState<User | null>(null);
@@ -56,13 +56,13 @@ export default function SettingsPage() {
     return (
       <div className="max-w-lg space-y-6">
         <div className="skeleton h-7 w-32" />
-        <div className="rounded-[14px] border border-[#E8DDD3] bg-white p-[28px]">
+        <div className="rounded-[14px] border border-[#E5E5E5] bg-white p-[28px]">
           <div className="skeleton h-4 w-24 mb-4" />
           <div className="skeleton h-3 w-full mb-3" />
           <div className="skeleton h-3 w-3/4 mb-3" />
           <div className="skeleton h-3 w-1/2" />
         </div>
-        <div className="rounded-[14px] border border-[#E8DDD3] bg-white p-[28px]">
+        <div className="rounded-[14px] border border-[#E5E5E5] bg-white p-[28px]">
           <div className="skeleton h-4 w-28 mb-4" />
           <div className="skeleton h-10 w-full mb-3" />
           <div className="skeleton h-10 w-full mb-3" />
@@ -74,7 +74,7 @@ export default function SettingsPage() {
 
   return (
     <div className="max-w-lg space-y-6">
-      <h1 className="text-2xl font-semibold text-[#2C2825] tracking-[-0.02em]">Settings</h1>
+      <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Settings</h1>
 
       <ProfileCard profile={profile} />
 
@@ -102,12 +102,12 @@ function ProfileCard({ profile }: { profile: User }) {
       <CardContent>
         <div className="space-y-3">
           <div className="flex justify-between text-sm">
-            <span className="text-[#8a7e74]">Email</span>
-            <span className="text-[#2C2825]">{profile.email}</span>
+            <span className="text-[#6B7280]">Email</span>
+            <span className="text-[#1D1D1F]">{profile.email}</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-[#8a7e74]">Member since</span>
-            <span className="text-[#2C2825]">
+            <span className="text-[#6B7280]">Member since</span>
+            <span className="text-[#1D1D1F]">
               {new Date(profile.created_at).toLocaleDateString("en-US", {
                 month: "long",
                 year: "numeric",
@@ -115,12 +115,12 @@ function ProfileCard({ profile }: { profile: User }) {
             </span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-[#8a7e74]">Goals</span>
+            <span className="text-[#6B7280]">Goals</span>
             <div className="flex gap-1.5">
               {profile.goal_categories.map((g) => (
                 <span
                   key={g}
-                  className="bg-[rgba(196,101,74,0.1)] text-[#C4654A] text-xs px-2 py-0.5 rounded-full"
+                  className="bg-[rgba(184,92,66,0.1)] text-[#B85C42] text-xs px-2 py-0.5 rounded-full"
                 >
                   {g}
                 </span>
@@ -154,7 +154,7 @@ function PreferencesCard({
       <CardContent>
         <form onSubmit={onSave} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-[#8a7e74] mb-1">
+            <label className="block text-sm font-medium text-[#6B7280] mb-1">
               Timezone
             </label>
             <select
@@ -174,7 +174,7 @@ function PreferencesCard({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-[#8a7e74] mb-1">
+            <label className="block text-sm font-medium text-[#6B7280] mb-1">
               Standup Time
             </label>
             <input
@@ -188,7 +188,7 @@ function PreferencesCard({
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-[#8a7e74] mb-1">
+            <label className="block text-sm font-medium text-[#6B7280] mb-1">
               Standup Mode
             </label>
             <select
@@ -248,16 +248,16 @@ function NotificationsCard() {
       <CardContent>
         <div className="space-y-0">
           {items.map((item) => (
-            <div key={item.key} className="flex items-center justify-between py-3 border-b border-[#E8DDD3] last:border-b-0">
+            <div key={item.key} className="flex items-center justify-between py-3 border-b border-[#E5E5E5] last:border-b-0">
               <div>
-                <div className="text-[13px] font-medium text-[#2C2825]">{item.label}</div>
-                <div className="text-[11px] text-[#a89a8e]">{item.sub}</div>
+                <div className="text-[13px] font-medium text-[#1D1D1F]">{item.label}</div>
+                <div className="text-[11px] text-[#9CA3AF]">{item.sub}</div>
               </div>
               <button
                 type="button"
                 onClick={() => toggle(item.key)}
                 className={`w-9 h-5 rounded-full transition-colors relative ${
-                  prefs[item.key] ? "bg-[#C4654A]" : "bg-[#E8DDD3]"
+                  prefs[item.key] ? "bg-[#B85C42]" : "bg-[#E5E5E5]"
                 }`}
               >
                 <div className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow-sm transition-transform ${
@@ -281,13 +281,13 @@ function SubscriptionCard() {
       <CardContent>
         <div className="space-y-3">
           <div className="flex justify-between items-center text-sm">
-            <span className="text-[#8a7e74]">Plan</span>
+            <span className="text-[#6B7280]">Plan</span>
             <span className="bg-[rgba(45,138,86,0.1)] text-[#2D8A56] text-xs font-medium px-2.5 py-0.5 rounded-full uppercase tracking-[1px]">
               Early Access
             </span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-[#8a7e74]">Status</span>
+            <span className="text-[#6B7280]">Status</span>
             <span className="text-[#2D8A56]">Active — Free</span>
           </div>
         </div>

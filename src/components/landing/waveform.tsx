@@ -1,16 +1,16 @@
 "use client";
 
 const BARS = [
-  { color: "#C4654A", delay: "0s" },
-  { color: "#C4654A", delay: "0.1s" },
-  { color: "#C4654A", delay: "0.2s" },
-  { color: "#D4856A", delay: "0.3s" },
-  { color: "#C4654A", delay: "0.4s" },
-  { color: "#D4856A", delay: "0.5s" },
-  { color: "#C4654A", delay: "0.6s" },
-  { color: "#C4654A", delay: "0.7s" },
-  { color: "#D4856A", delay: "0.8s" },
-  { color: "#C4654A", delay: "0.9s" },
+  { color: "#B85C42", delay: "0s" },
+  { color: "#B85C42", delay: "0.1s" },
+  { color: "#B85C42", delay: "0.2s" },
+  { color: "#D4917F", delay: "0.3s" },
+  { color: "#B85C42", delay: "0.4s" },
+  { color: "#D4917F", delay: "0.5s" },
+  { color: "#B85C42", delay: "0.6s" },
+  { color: "#B85C42", delay: "0.7s" },
+  { color: "#D4917F", delay: "0.8s" },
+  { color: "#B85C42", delay: "0.9s" },
 ];
 
 export function Waveform() {

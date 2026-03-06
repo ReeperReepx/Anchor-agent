@@ -1,20 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --background: #FAF6F1;
-  --foreground: #2C2825;
+  --background: #F8F7F4;
+  --foreground: #1D1D1F;
   --surface: #FFFFFF;
-  --surface-elevated: #F5F0E8;
-  --accent: #C4654A;
-  --accent-hover: #D4856A;
-  --accent-pressed: #A8503A;
-  --accent-subtle: rgba(196, 101, 74, 0.1);
-  --text-primary: #2C2825;
-  --text-secondary: #8a7e74;
-  --text-muted: #a89a8e;
-  --border-default: #E8DDD3;
-  --border-subtle: #E8DDD3;
-  --border-active: #C4654A;
+  --surface-elevated: #F0F0F0;
+  --accent: #B85C42;
+  --accent-hover: #D4917F;
+  --accent-pressed: #9A4E36;
+  --accent-subtle: rgba(184, 92, 66, 0.1);
+  --text-primary: #1D1D1F;
+  --text-secondary: #6B7280;
+  --text-muted: #9CA3AF;
+  --border-default: #E5E5E5;
+  --border-subtle: #E5E5E5;
+  --border-active: #B85C42;
   --success: #2D8A56;
   --warning: #C4900A;
   --error: #C43030;
@@ -60,8 +60,8 @@ body {
 }
 
 @keyframes mic-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(196, 101, 74, 0.4); }
-  50% { box-shadow: 0 0 0 20px rgba(196, 101, 74, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(184, 92, 66, 0.4); }
+  50% { box-shadow: 0 0 0 20px rgba(184, 92, 66, 0); }
 }
 
 @keyframes slideIn {
@@ -71,12 +71,12 @@ body {
 
 /* Blog article typography */
 .prose-anchor {
-  color: #5a524a;
+  color: #4B5563;
   font-size: 16px;
   line-height: 1.75;
 }
 .prose-anchor h2 {
-  color: #2C2825;
+  color: #1D1D1F;
   font-size: 24px;
   font-weight: 700;
   margin-top: 2.5rem;
@@ -84,7 +84,7 @@ body {
   letter-spacing: -0.01em;
 }
 .prose-anchor h3 {
-  color: #2C2825;
+  color: #1D1D1F;
   font-size: 18px;
   font-weight: 600;
   margin-top: 2rem;
@@ -94,7 +94,7 @@ body {
   margin-bottom: 1.25rem;
 }
 .prose-anchor strong {
-  color: #2C2825;
+  color: #1D1D1F;
   font-weight: 600;
 }
 .prose-anchor em {
@@ -114,16 +114,16 @@ body {
   margin-bottom: 0.5rem;
 }
 .prose-anchor a {
-  color: #C4654A;
+  color: #B85C42;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 .prose-anchor a:hover {
-  color: #D4856A;
+  color: #D4917F;
 }
 
 .skeleton {
-  background: linear-gradient(90deg, #F5F0E8 25%, #FAF6F1 50%, #F5F0E8 75%);
+  background: linear-gradient(90deg, #F0F0F0 25%, #F8F7F4 50%, #F0F0F0 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
   border-radius: 8px;

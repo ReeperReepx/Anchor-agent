@@ -4,7 +4,7 @@ export function Skeleton({ className = "" }: { className?: string }) {
 
 export function SkeletonCard() {
   return (
-    <div className="rounded-[14px] border border-[#E8DDD3] bg-white p-[28px] shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
+    <div className="rounded-[14px] border border-[#E5E5E5] bg-white p-[28px] shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
       <Skeleton className="h-4 w-24 mb-4" />
       <Skeleton className="h-8 w-16 mb-2" />
       <Skeleton className="h-3 w-20" />
@@ -22,7 +22,7 @@ export function SkeletonPage() {
         <SkeletonCard />
         <SkeletonCard />
       </div>
-      <div className="rounded-[14px] border border-[#E8DDD3] bg-white p-[28px]">
+      <div className="rounded-[14px] border border-[#E5E5E5] bg-white p-[28px]">
         <Skeleton className="h-4 w-32 mb-6" />
         <Skeleton className="h-3 w-full mb-3" />
         <Skeleton className="h-3 w-3/4 mb-3" />

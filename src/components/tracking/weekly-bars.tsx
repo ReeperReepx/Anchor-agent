@@ -18,11 +18,11 @@ export function WeeklyBars({ weeks }: { weeks: WeekData[] }) {
 
         return (
           <div key={week.weekLabel} className="flex items-center gap-3">
-            <span className="text-xs text-[#a89a8e] w-16 shrink-0 text-right">
+            <span className="text-xs text-[#9CA3AF] w-16 shrink-0 text-right">
               {week.weekLabel}
             </span>
             <div
-              className="h-6 bg-[#F5F0E8] rounded-[5px] overflow-hidden relative"
+              className="h-6 bg-[#F0F0F0] rounded-[5px] overflow-hidden relative"
               style={{ width: `${barWidth}%`, minWidth: "40px" }}
             >
               <div
@@ -36,15 +36,15 @@ export function WeeklyBars({ weeks }: { weeks: WeekData[] }) {
                   background: isComplete
                     ? "linear-gradient(90deg, rgba(45,138,86,0.6), #2D8A56)"
                     : pct >= 60
-                      ? "linear-gradient(90deg, rgba(196,101,74,0.4), #C4654A)"
+                      ? "linear-gradient(90deg, rgba(184,92,66,0.4), #B85C42)"
                       : pct > 0
-                        ? "linear-gradient(90deg, rgba(196,101,74,0.2), rgba(196,101,74,0.5))"
+                        ? "linear-gradient(90deg, rgba(184,92,66,0.2), rgba(184,92,66,0.5))"
                         : "transparent",
                 }}
               />
             </div>
             <span className={`text-xs w-12 shrink-0 font-medium ${
-              isComplete ? "text-[#2D8A56]" : "text-[#a89a8e]"
+              isComplete ? "text-[#2D8A56]" : "text-[#9CA3AF]"
             }`}>
               {week.completed}/{week.total}
             </span>

@@ -37,7 +37,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
         {toasts.map((t) => (
           <div
             key={t.id}
-            className="pointer-events-auto flex items-center gap-3 bg-[#2C2825] text-white px-5 py-3.5 rounded-[12px] shadow-[0_8px_32px_rgba(0,0,0,0.2)] text-[13px] font-medium animate-[slideIn_0.25s_ease-out]"
+            className="pointer-events-auto flex items-center gap-3 bg-[#1D1D1F] text-white px-5 py-3.5 rounded-[12px] shadow-[0_8px_32px_rgba(0,0,0,0.2)] text-[13px] font-medium animate-[slideIn_0.25s_ease-out]"
           >
             {t.type === "success" && (
               <div className="w-5 h-5 rounded-full bg-[#2D8A56] flex items-center justify-center shrink-0">
@@ -50,7 +50,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
               </div>
             )}
             {t.type === "info" && (
-              <div className="w-5 h-5 rounded-full bg-[#C4654A] flex items-center justify-center shrink-0">
+              <div className="w-5 h-5 rounded-full bg-[#B85C42] flex items-center justify-center shrink-0">
                 <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 8v4m0 4h.01"/></svg>
               </div>
             )}

@@ -125,65 +125,65 @@ export default async function TrackingPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold text-[#2C2825] tracking-[-0.02em]">Tracking</h1>
+      <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Tracking</h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card>
           <CardHeader>
-            <CardTitle className="text-[11px] font-semibold text-[#8a7e74] uppercase tracking-[1px]">This Week</CardTitle>
+            <CardTitle className="text-[11px] font-semibold text-[#6B7280] uppercase tracking-[1px]">This Week</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold text-[#2C2825]">
+              <span className="text-3xl font-bold text-[#1D1D1F]">
                 {thisWeek?.completed ?? 0}
-                <span className="text-lg text-[#a89a8e]">/{thisWeek?.total ?? 5}</span>
+                <span className="text-lg text-[#9CA3AF]">/{thisWeek?.total ?? 5}</span>
               </span>
-              <span className="text-sm text-[#a89a8e]">days</span>
+              <span className="text-sm text-[#9CA3AF]">days</span>
             </div>
-            <div className="mt-2 h-1.5 bg-[#E8DDD3] rounded-full overflow-hidden">
+            <div className="mt-2 h-1.5 bg-[#E5E5E5] rounded-full overflow-hidden">
               <div
-                className="h-full bg-[#C4654A] rounded-full transition-all"
+                className="h-full bg-[#B85C42] rounded-full transition-all"
                 style={{ width: `${weekPct}%` }}
               />
             </div>
-            <p className="text-xs text-[#a89a8e] mt-1">{weekPct}% complete</p>
+            <p className="text-xs text-[#9CA3AF] mt-1">{weekPct}% complete</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader>
-            <CardTitle className="text-[11px] font-semibold text-[#8a7e74] uppercase tracking-[1px]">This Month</CardTitle>
+            <CardTitle className="text-[11px] font-semibold text-[#6B7280] uppercase tracking-[1px]">This Month</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold text-[#2C2825]">
+              <span className="text-3xl font-bold text-[#1D1D1F]">
                 {thisMonth?.completed ?? 0}
-                <span className="text-lg text-[#a89a8e]">/{thisMonth?.total ?? 22}</span>
+                <span className="text-lg text-[#9CA3AF]">/{thisMonth?.total ?? 22}</span>
               </span>
-              <span className="text-sm text-[#a89a8e]">days</span>
+              <span className="text-sm text-[#9CA3AF]">days</span>
             </div>
-            <div className="mt-2 h-1.5 bg-[#E8DDD3] rounded-full overflow-hidden">
+            <div className="mt-2 h-1.5 bg-[#E5E5E5] rounded-full overflow-hidden">
               <div
                 className="h-full bg-[#60A5FA] rounded-full transition-all"
                 style={{ width: `${monthPct}%` }}
               />
             </div>
-            <p className="text-xs text-[#a89a8e] mt-1">{monthPct}% complete</p>
+            <p className="text-xs text-[#9CA3AF] mt-1">{monthPct}% complete</p>
           </CardContent>
         </Card>
 
-        <Card className="!bg-[rgba(196,101,74,0.08)] !border-[rgba(196,101,74,0.2)]">
+        <Card className="!bg-[rgba(184,92,66,0.08)] !border-[rgba(184,92,66,0.2)]">
           <CardHeader>
-            <CardTitle className="text-[11px] font-semibold text-[#8a7e74] uppercase tracking-[1px]">Current Streak</CardTitle>
+            <CardTitle className="text-[11px] font-semibold text-[#6B7280] uppercase tracking-[1px]">Current Streak</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-bold text-[#C4654A]">
+              <span className="text-3xl font-bold text-[#B85C42]">
                 {streak?.current_streak ?? 0}
               </span>
-              <span className="text-sm text-[#a89a8e]">days</span>
+              <span className="text-sm text-[#9CA3AF]">days</span>
             </div>
-            <p className="text-xs text-[#a89a8e] mt-2">
+            <p className="text-xs text-[#9CA3AF] mt-2">
               Best: {streak?.longest_streak ?? 0} days
             </p>
           </CardContent>

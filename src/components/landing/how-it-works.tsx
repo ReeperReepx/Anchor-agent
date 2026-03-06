@@ -22,22 +22,22 @@ const STEPS = [
 export function HowItWorks() {
   return (
     <section id="how-it-works" className="px-10 py-[60px] max-w-[960px] mx-auto">
-      <p className="text-center text-xs font-semibold tracking-[0.15em] uppercase text-[#a89a8e] mb-3">
+      <p className="text-center text-xs font-semibold tracking-[0.15em] uppercase text-[#9CA3AF] mb-3">
         How It Works
       </p>
-      <h2 className="text-[36px] font-bold tracking-[-0.02em] text-[#2C2825] mb-14 text-center">
+      <h2 className="text-[36px] font-bold tracking-[-0.02em] text-[#1D1D1F] mb-14 text-center">
         Three steps. Zero friction.
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {STEPS.map((step) => (
           <div key={step.number} className="flex flex-col items-center text-center">
-            <div className="w-12 h-12 rounded-full bg-[#C4654A] text-white flex items-center justify-center text-lg font-bold mb-5">
+            <div className="w-12 h-12 rounded-full bg-[#B85C42] text-white flex items-center justify-center text-lg font-bold mb-5">
               {step.number}
             </div>
-            <h3 className="text-[17px] font-semibold text-[#2C2825] mb-2">
+            <h3 className="text-[17px] font-semibold text-[#1D1D1F] mb-2">
               {step.title}
             </h3>
-            <p className="text-[14px] text-[#8a7e74] leading-[1.6] max-w-[260px]">
+            <p className="text-[14px] text-[#6B7280] leading-[1.6] max-w-[260px]">
               {step.description}
             </p>
           </div>

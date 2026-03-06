@@ -73,16 +73,16 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
     return (
       <Card>
         <CardContent className="py-12 text-center">
-          <div className="w-16 h-16 bg-[rgba(196,101,74,0.08)] border border-[rgba(196,101,74,0.15)] rounded-full flex items-center justify-center mx-auto mb-5 shadow-[0_0_24px_rgba(196,101,74,0.08)]">
-            <svg className="w-7 h-7 text-[#C4654A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-16 h-16 bg-[rgba(184,92,66,0.08)] border border-[rgba(184,92,66,0.15)] rounded-full flex items-center justify-center mx-auto mb-5 shadow-[0_0_24px_rgba(184,92,66,0.08)]">
+            <svg className="w-7 h-7 text-[#B85C42]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <p className="text-[15px] font-semibold text-[#2C2825] mb-1">No standups yet</p>
-          <p className="text-sm text-[#8a7e74] mb-5">Complete your first standup to see it here.</p>
+          <p className="text-[15px] font-semibold text-[#1D1D1F] mb-1">No standups yet</p>
+          <p className="text-sm text-[#6B7280] mb-5">Complete your first standup to see it here.</p>
           <a
             href="/standup"
-            className="inline-flex items-center gap-2 bg-[#C4654A] hover:bg-[#D4856A] text-white px-5 py-2.5 rounded-[10px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(196,101,74,0.3)]"
+            className="inline-flex items-center gap-2 bg-[#B85C42] hover:bg-[#D4917F] text-white px-5 py-2.5 rounded-[10px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(184,92,66,0.3)]"
           >
             Start a standup
           </a>
@@ -96,7 +96,7 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
       {/* Search */}
       <div className="relative">
         <svg
-          className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#a89a8e] pointer-events-none"
+          className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF] pointer-events-none"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -108,7 +108,7 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search standups..."
-          className="w-full rounded-[10px] border border-[#E8DDD3] bg-white pl-9 pr-3 py-2.5 text-sm text-[#2C2825] placeholder-[#a89a8e] focus:outline-none focus:ring-2 focus:ring-[#C4654A] transition-shadow"
+          className="w-full rounded-[10px] border border-[#E5E5E5] bg-white pl-9 pr-3 py-2.5 text-sm text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#B85C42] transition-shadow"
         />
       </div>
 
@@ -120,15 +120,15 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
             onClick={() => setTypeFilter(t)}
             className={`px-3 py-1.5 rounded-full text-[13px] font-medium transition-colors ${
               typeFilter === t
-                ? "bg-[#C4654A] text-white border border-[#C4654A]"
-                : "bg-white border border-[#E8DDD3] text-[#8a7e74] hover:border-[#8a7e74]"
+                ? "bg-[#B85C42] text-white border border-[#B85C42]"
+                : "bg-white border border-[#E5E5E5] text-[#6B7280] hover:border-[#6B7280]"
             }`}
           >
             {t === "all" ? "All" : t === "daily" ? "Daily" : "Weekly"}
           </button>
         ))}
 
-        <div className="w-px h-5 bg-[#E8DDD3] mx-1" />
+        <div className="w-px h-5 bg-[#E5E5E5] mx-1" />
 
         {(["this_week", "this_month"] as const).map((t) => (
           <button
@@ -136,8 +136,8 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
             onClick={() => setTimeFilter(timeFilter === t ? "all" : t)}
             className={`px-3 py-1.5 rounded-full text-[13px] font-medium transition-colors ${
               timeFilter === t
-                ? "bg-[#C4654A] text-white border border-[#C4654A]"
-                : "bg-white border border-[#E8DDD3] text-[#8a7e74] hover:border-[#8a7e74]"
+                ? "bg-[#B85C42] text-white border border-[#B85C42]"
+                : "bg-white border border-[#E5E5E5] text-[#6B7280] hover:border-[#6B7280]"
             }`}
           >
             {t === "this_week" ? "This week" : "This month"}
@@ -149,11 +149,11 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
       {filtered.length === 0 ? (
         <Card>
           <CardContent className="py-10 text-center">
-            <p className="text-sm text-[#8a7e74]">No standups match your filters.</p>
+            <p className="text-sm text-[#6B7280]">No standups match your filters.</p>
           </CardContent>
         </Card>
       ) : (
-        <Card className="!p-0 divide-y divide-[#E8DDD3]">
+        <Card className="!p-0 divide-y divide-[#E5E5E5]">
           {filtered.map((standup) => {
             const isExpanded = expanded.has(standup.id);
 
@@ -162,30 +162,30 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
                 <button
                   type="button"
                   onClick={() => toggleExpanded(standup.id)}
-                  className="w-full text-left px-6 py-4 hover:bg-[#FAF6F1] transition-colors"
+                  className="w-full text-left px-6 py-4 hover:bg-[#F8F7F4] transition-colors"
                 >
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2.5">
                       <div
                         className={`w-2 h-2 rounded-full shrink-0 ${
-                          standup.type === "weekly" ? "bg-[#C4900A]" : "bg-[#C4654A]"
+                          standup.type === "weekly" ? "bg-[#C4900A]" : "bg-[#B85C42]"
                         }`}
                       />
-                      <span className="text-[13px] font-medium text-[#2C2825] capitalize">
+                      <span className="text-[13px] font-medium text-[#1D1D1F] capitalize">
                         {standup.type}
                       </span>
-                      <span className="text-[13px] text-[#a89a8e]">
+                      <span className="text-[13px] text-[#9CA3AF]">
                         {formatRelativeDate(standup.date)}
                       </span>
                     </div>
                     <div className="flex items-center gap-2.5">
                       {standup.duration_seconds && (
-                        <span className="text-[12px] text-[#a89a8e]">
+                        <span className="text-[12px] text-[#9CA3AF]">
                           {formatDuration(standup.duration_seconds)}
                         </span>
                       )}
                       <svg
-                        className={`w-4 h-4 text-[#a89a8e] transition-transform ${
+                        className={`w-4 h-4 text-[#9CA3AF] transition-transform ${
                           isExpanded ? "rotate-180" : ""
                         }`}
                         fill="none"
@@ -198,7 +198,7 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
                   </div>
 
                   {!isExpanded && standup.done_summary && (
-                    <p className="text-sm text-[#5a524a] line-clamp-2 mb-2">
+                    <p className="text-sm text-[#4B5563] line-clamp-2 mb-2">
                       {standup.done_summary}
                     </p>
                   )}
@@ -228,7 +228,7 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
                     {standup.done_summary && (
                       <div className="border-l-2 border-[rgba(45,138,86,0.4)] pl-3 py-1">
                         <p className="text-[12px] font-semibold text-[#2D8A56] mb-1">Done</p>
-                        <p className="text-sm text-[#5a524a] leading-relaxed whitespace-pre-line">
+                        <p className="text-sm text-[#4B5563] leading-relaxed whitespace-pre-line">
                           {standup.done_summary}
                         </p>
                       </div>
@@ -236,7 +236,7 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
                     {standup.planned_summary && (
                       <div className="border-l-2 border-[rgba(59,111,196,0.4)] pl-3 py-1">
                         <p className="text-[12px] font-semibold text-[#3B6FC4] mb-1">Planned</p>
-                        <p className="text-sm text-[#5a524a] leading-relaxed whitespace-pre-line">
+                        <p className="text-sm text-[#4B5563] leading-relaxed whitespace-pre-line">
                           {standup.planned_summary}
                         </p>
                       </div>
@@ -244,7 +244,7 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
                     {standup.blockers_summary && (
                       <div className="border-l-2 border-[rgba(196,48,48,0.4)] pl-3 py-1">
                         <p className="text-[12px] font-semibold text-[#C43030] mb-1">Blockers</p>
-                        <p className="text-sm text-[#5a524a] leading-relaxed whitespace-pre-line">
+                        <p className="text-sm text-[#4B5563] leading-relaxed whitespace-pre-line">
                           {standup.blockers_summary}
                         </p>
                       </div>

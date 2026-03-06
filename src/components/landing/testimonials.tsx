@@ -25,27 +25,27 @@ const TESTIMONIALS = [
 export function Testimonials() {
   return (
     <section className="px-10 py-[60px] max-w-[960px] mx-auto">
-      <h2 className="text-[36px] font-bold tracking-[-0.02em] text-[#2C2825] mb-14 text-center">
+      <h2 className="text-[36px] font-bold tracking-[-0.02em] text-[#1D1D1F] mb-14 text-center">
         What builders are saying
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         {TESTIMONIALS.map((t) => (
           <div
             key={t.name}
-            className="bg-white rounded-[14px] p-7 border border-[#E8DDD3] hover:border-[#C4654A]/40 transition-colors"
+            className="bg-white rounded-[14px] p-7 border border-[#E5E5E5] hover:border-[#B85C42]/40 transition-colors"
           >
-            <p className="text-[14px] italic text-[#2C2825] leading-[1.7] mb-6">
+            <p className="text-[14px] italic text-[#1D1D1F] leading-[1.7] mb-6">
               &ldquo;{t.quote}&rdquo;
             </p>
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-full bg-[rgba(196,101,74,0.15)] text-[#C4654A] flex items-center justify-center text-xs font-semibold shrink-0">
+              <div className="w-9 h-9 rounded-full bg-[rgba(184,92,66,0.15)] text-[#B85C42] flex items-center justify-center text-xs font-semibold shrink-0">
                 {t.initials}
               </div>
               <div>
-                <p className="text-[13px] font-semibold text-[#2C2825]">
+                <p className="text-[13px] font-semibold text-[#1D1D1F]">
                   {t.name}
                 </p>
-                <p className="text-[12px] text-[#a89a8e]">{t.role}</p>
+                <p className="text-[12px] text-[#9CA3AF]">{t.role}</p>
               </div>
             </div>
           </div>

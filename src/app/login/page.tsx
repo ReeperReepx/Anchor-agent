@@ -39,23 +39,23 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#FAF6F1] px-4">
+    <div className="min-h-screen flex items-center justify-center bg-[#F8F7F4] px-4">
       <div className="w-full max-w-sm">
         <Link
           href="/"
-          className="block text-center text-[22px] font-bold text-[#C4654A] mb-8"
+          className="block text-center text-[22px] font-bold text-[#B85C42] mb-8"
         >
           Anchor
         </Link>
 
         {sent ? (
           <div className="text-center">
-            <h2 className="text-lg font-semibold text-[#2C2825]">
+            <h2 className="text-lg font-semibold text-[#1D1D1F]">
               Check your email
             </h2>
-            <p className="mt-2 text-sm text-[#8a7e74]">
+            <p className="mt-2 text-sm text-[#6B7280]">
               We sent a sign-in link to{" "}
-              <strong className="text-[#2C2825]">{email}</strong>
+              <strong className="text-[#1D1D1F]">{email}</strong>
             </p>
           </div>
         ) : (
@@ -70,17 +70,17 @@ export default function LoginPage() {
 
             <div className="relative my-6">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-[#E8DDD3]" />
+                <div className="w-full border-t border-[#E5E5E5]" />
               </div>
               <div className="relative flex justify-center text-xs">
-                <span className="bg-[#FAF6F1] px-2 text-[#a89a8e]">or</span>
+                <span className="bg-[#F8F7F4] px-2 text-[#9CA3AF]">or</span>
               </div>
             </div>
 
             <form onSubmit={handleMagicLink}>
               <label
                 htmlFor="email"
-                className="block text-sm font-medium text-[#8a7e74] mb-1"
+                className="block text-sm font-medium text-[#6B7280] mb-1"
               >
                 Email
               </label>
@@ -91,7 +91,7 @@ export default function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="you@example.com"
-                className="w-full rounded-lg border border-[#E8DDD3] bg-white px-3 py-2.5 text-sm text-[#2C2825] placeholder-[#a89a8e] focus:outline-none focus:ring-2 focus:ring-[#C4654A] focus:border-[#C4654A]"
+                className="w-full rounded-lg border border-[#E5E5E5] bg-white px-3 py-2.5 text-sm text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#B85C42] focus:border-[#B85C42]"
               />
               {error && (
                 <p className="mt-2 text-sm text-[#EF4444]">{error}</p>

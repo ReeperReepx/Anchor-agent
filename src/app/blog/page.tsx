@@ -16,18 +16,18 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   return (
-    <div className="min-h-screen bg-[#FAF6F1]">
-      <nav className="flex items-center justify-between px-10 py-5 max-w-[1100px] mx-auto border-b border-[#E8DDD3]">
-        <Link href="/" className="text-[22px] font-bold text-[#C4654A]">
+    <div className="min-h-screen bg-[#F8F7F4]">
+      <nav className="flex items-center justify-between px-10 py-5 max-w-[1100px] mx-auto border-b border-[#E5E5E5]">
+        <Link href="/" className="text-[22px] font-bold text-[#B85C42]">
           Anchor
         </Link>
-        <div className="flex items-center gap-5 text-sm text-[#8a7e74]">
-          <Link href="/" className="hover:text-[#2C2825] transition-colors">
+        <div className="flex items-center gap-5 text-sm text-[#6B7280]">
+          <Link href="/" className="hover:text-[#1D1D1F] transition-colors">
             Home
           </Link>
           <Link
             href="/login"
-            className="bg-[#C4654A] hover:bg-[#D4856A] text-white px-4 py-2 rounded-[10px] text-sm font-semibold transition-all"
+            className="bg-[#B85C42] hover:bg-[#D4917F] text-white px-4 py-2 rounded-[10px] text-sm font-semibold transition-all"
           >
             Get Early Access
           </Link>
@@ -35,10 +35,10 @@ export default function BlogPage() {
       </nav>
 
       <div className="max-w-[800px] mx-auto px-6 py-16">
-        <h1 className="text-[40px] font-bold tracking-[-0.02em] text-[#2C2825] mb-3">
+        <h1 className="text-[40px] font-bold tracking-[-0.02em] text-[#1D1D1F] mb-3">
           Blog
         </h1>
-        <p className="text-lg text-[#8a7e74] mb-12">
+        <p className="text-lg text-[#6B7280] mb-12">
           Accountability strategies, productivity systems, and founder habits
           that actually work.
         </p>
@@ -50,19 +50,19 @@ export default function BlogPage() {
               href={`/blog/${article.slug}`}
               className="block group"
             >
-              <article className="bg-white rounded-[14px] border border-[#E8DDD3] p-8 transition-all hover:border-[#C4654A]/30 hover:shadow-[0_4px_24px_rgba(196,101,74,0.08)]">
+              <article className="bg-white rounded-[14px] border border-[#E5E5E5] p-8 transition-all hover:border-[#B85C42]/30 hover:shadow-[0_4px_24px_rgba(184,92,66,0.08)]">
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="text-[11px] font-semibold text-[#C4654A] uppercase tracking-[1px]">
+                  <span className="text-[11px] font-semibold text-[#B85C42] uppercase tracking-[1px]">
                     {article.category}
                   </span>
-                  <span className="text-[12px] text-[#a89a8e]">
+                  <span className="text-[12px] text-[#9CA3AF]">
                     {article.readTime}
                   </span>
                 </div>
-                <h2 className="text-xl font-semibold text-[#2C2825] mb-2 group-hover:text-[#C4654A] transition-colors leading-snug">
+                <h2 className="text-xl font-semibold text-[#1D1D1F] mb-2 group-hover:text-[#B85C42] transition-colors leading-snug">
                   {article.title}
                 </h2>
-                <p className="text-sm text-[#8a7e74] leading-relaxed">
+                <p className="text-sm text-[#6B7280] leading-relaxed">
                   {article.description}
                 </p>
               </article>
@@ -71,7 +71,7 @@ export default function BlogPage() {
         </div>
       </div>
 
-      <footer className="px-10 py-6 border-t border-[#E8DDD3] text-center text-xs text-[#a89a8e]">
+      <footer className="px-10 py-6 border-t border-[#E5E5E5] text-center text-xs text-[#9CA3AF]">
         2026 Anchor. All rights reserved.
       </footer>
     </div>

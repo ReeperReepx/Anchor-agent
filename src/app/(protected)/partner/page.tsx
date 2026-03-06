@@ -64,7 +64,7 @@ export default function PartnerPage() {
     return (
       <div className="space-y-6">
         <div className="skeleton h-7 w-48" />
-        <div className="rounded-[14px] border border-[#E8DDD3] bg-white p-[28px]">
+        <div className="rounded-[14px] border border-[#E5E5E5] bg-white p-[28px]">
           <div className="skeleton h-4 w-32 mb-4" />
           <div className="skeleton h-3 w-full mb-3" />
           <div className="skeleton h-3 w-3/4" />
@@ -76,12 +76,12 @@ export default function PartnerPage() {
   if (noPartner) {
     return (
       <div className="space-y-6">
-        <h1 className="text-2xl font-semibold text-[#2C2825] tracking-[-0.02em]">Partner Standup</h1>
+        <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Partner Standup</h1>
         <Card>
           <CardContent className="py-12 text-center">
-            <div className="w-16 h-16 bg-[rgba(196,101,74,0.08)] border border-[rgba(196,101,74,0.15)] rounded-full flex items-center justify-center mx-auto mb-5 shadow-[0_0_24px_rgba(196,101,74,0.08)]">
+            <div className="w-16 h-16 bg-[rgba(184,92,66,0.08)] border border-[rgba(184,92,66,0.15)] rounded-full flex items-center justify-center mx-auto mb-5 shadow-[0_0_24px_rgba(184,92,66,0.08)]">
               <svg
-                className="w-7 h-7 text-[#C4654A]"
+                className="w-7 h-7 text-[#B85C42]"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -94,10 +94,10 @@ export default function PartnerPage() {
                 />
               </svg>
             </div>
-            <h2 className="text-[15px] font-semibold text-[#2C2825] mb-2">
+            <h2 className="text-[15px] font-semibold text-[#1D1D1F] mb-2">
               No partner yet
             </h2>
-            <p className="text-[#8a7e74] text-sm mb-6 max-w-xs mx-auto">
+            <p className="text-[#6B7280] text-sm mb-6 max-w-xs mx-auto">
               You&apos;ll be matched with a new accountability partner every week
               based on your goals and timezone.
             </p>
@@ -111,7 +111,7 @@ export default function PartnerPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold text-[#2C2825] tracking-[-0.02em]">Partner Standup</h1>
+        <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Partner Standup</h1>
         <RotationBadge daysLeft={daysLeft} />
       </div>
 
@@ -120,13 +120,13 @@ export default function PartnerPage() {
           <CardHeader>
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-[rgba(196,101,74,0.15)] flex items-center justify-center text-[#C4654A] text-sm font-semibold">
+                <div className="w-8 h-8 rounded-full bg-[rgba(184,92,66,0.15)] flex items-center justify-center text-[#B85C42] text-sm font-semibold">
                   P
                 </div>
                 <CardTitle>Your partner&apos;s standup</CardTitle>
                 <Badge variant="info">{partnerStandup.type}</Badge>
               </div>
-              <div className="flex items-center gap-3 text-sm text-[#8a7e74]">
+              <div className="flex items-center gap-3 text-sm text-[#6B7280]">
                 {partnerStandup.duration_seconds && (
                   <span>
                     {formatDuration(partnerStandup.duration_seconds)}
@@ -158,7 +158,7 @@ export default function PartnerPage() {
 
 function RotationBadge({ daysLeft }: { daysLeft: number }) {
   return (
-    <div className="flex items-center gap-2 text-sm text-[#8a7e74]">
+    <div className="flex items-center gap-2 text-sm text-[#6B7280]">
       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
       </svg>
@@ -188,7 +188,7 @@ function ChatThread({
       <CardContent>
         <div className="space-y-3 mb-4 max-h-[300px] overflow-y-auto">
           {chat.length === 0 ? (
-            <p className="text-sm text-[#a89a8e]">
+            <p className="text-sm text-[#9CA3AF]">
               No messages yet. Say something about their standup.
             </p>
           ) : (
@@ -200,14 +200,14 @@ function ChatThread({
                 <div
                   className={`max-w-[75%] rounded-[12px] px-4 py-2.5 ${
                     msg.from === "you"
-                      ? "bg-[#C4654A] text-white"
-                      : "bg-[#F5F0E8] text-[#2C2825]"
+                      ? "bg-[#B85C42] text-white"
+                      : "bg-[#F0F0F0] text-[#1D1D1F]"
                   }`}
                 >
                   <p className="text-sm">{msg.text}</p>
                   <p
                     className={`text-[11px] mt-1 ${
-                      msg.from === "you" ? "text-white/60" : "text-[#a89a8e]"
+                      msg.from === "you" ? "text-white/60" : "text-[#9CA3AF]"
                     }`}
                   >
                     {msg.time}
@@ -223,7 +223,7 @@ function ChatThread({
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             placeholder="Write a message..."
-            className="flex-1 rounded-[10px] border border-[#E8DDD3] bg-white px-3 py-2.5 text-sm text-[#2C2825] placeholder-[#a89a8e] focus:outline-none focus:ring-2 focus:ring-[#C4654A]"
+            className="flex-1 rounded-[10px] border border-[#E5E5E5] bg-white px-3 py-2.5 text-sm text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#B85C42]"
           />
           <Button type="submit" size="md">
             Send

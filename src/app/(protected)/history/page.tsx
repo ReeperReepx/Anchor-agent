@@ -25,7 +25,7 @@ export default async function HistoryPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold text-[#2C2825] tracking-[-0.02em]">Standup History</h1>
+      <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Standup History</h1>
       <HistoryList standups={standups} />
     </div>
   );

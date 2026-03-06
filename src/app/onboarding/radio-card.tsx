@@ -11,28 +11,28 @@ export function RadioCard({ label, description, selected, onClick }: RadioCardPr
       onClick={onClick}
       className={`w-full text-left px-5 py-4 rounded-[12px] border transition-all ${
         selected
-          ? "border-[#C4654A] bg-[rgba(196,101,74,0.08)]"
-          : "border-[#E8DDD3] bg-white hover:border-[#8a7e74]"
+          ? "border-[#B85C42] bg-[rgba(184,92,66,0.08)]"
+          : "border-[#E5E5E5] bg-white hover:border-[#6B7280]"
       }`}
     >
       <div className="flex items-center justify-between">
         <div>
           <div
             className={`text-sm font-semibold ${
-              selected ? "text-[#2C2825]" : "text-[#5a524a]"
+              selected ? "text-[#1D1D1F]" : "text-[#4B5563]"
             }`}
           >
             {label}
           </div>
-          <div className="text-[13px] text-[#8a7e74] mt-0.5">{description}</div>
+          <div className="text-[13px] text-[#6B7280] mt-0.5">{description}</div>
         </div>
         <div
           className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-            selected ? "border-[#C4654A]" : "border-[#E8DDD3]"
+            selected ? "border-[#B85C42]" : "border-[#E5E5E5]"
           }`}
         >
           {selected && (
-            <div className="w-2.5 h-2.5 rounded-full bg-[#C4654A]" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#B85C42]" />
           )}
         </div>
       </div>

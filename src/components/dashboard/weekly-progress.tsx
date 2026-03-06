@@ -22,16 +22,16 @@ export function WeeklyProgress({ completedDays }: WeeklyProgressProps) {
 
         return (
           <div key={day} className="flex flex-col items-center gap-1.5">
-            <span className={`text-[11px] font-medium ${isToday ? "text-[#2C2825]" : "text-[#a89a8e]"}`}>
+            <span className={`text-[11px] font-medium ${isToday ? "text-[#1D1D1F]" : "text-[#9CA3AF]"}`}>
               {day}
             </span>
             <div
               className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
                 isCompleted
-                  ? "bg-[#C4654A] text-[#2C2825]"
+                  ? "bg-[#B85C42] text-[#1D1D1F]"
                   : isToday
-                  ? "border-2 border-[#C4654A] text-[#C4654A]"
-                  : "bg-[#E8DDD3] text-[#a89a8e]"
+                  ? "border-2 border-[#B85C42] text-[#B85C42]"
+                  : "bg-[#E5E5E5] text-[#9CA3AF]"
               }`}
             >
               {isCompleted ? (

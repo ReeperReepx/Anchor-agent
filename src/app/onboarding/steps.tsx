@@ -13,13 +13,13 @@ interface StepProps {
 export function StepWelcome({ next }: { next: () => void }) {
   return (
     <div className="text-center">
-      <div className="w-16 h-16 bg-[rgba(196,101,74,0.1)] rounded-full flex items-center justify-center mx-auto mb-6">
+      <div className="w-16 h-16 bg-[rgba(184,92,66,0.1)] rounded-full flex items-center justify-center mx-auto mb-6">
         <svg
           width="28"
           height="28"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="#C4654A"
+          stroke="#B85C42"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -29,10 +29,10 @@ export function StepWelcome({ next }: { next: () => void }) {
           <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
         </svg>
       </div>
-      <h1 className="text-[32px] font-bold text-[#2C2825] tracking-[-0.02em] mb-3">
+      <h1 className="text-[32px] font-bold text-[#1D1D1F] tracking-[-0.02em] mb-3">
         Welcome to Anchor
       </h1>
-      <p className="text-[#8a7e74] text-base mb-10 max-w-sm mx-auto leading-relaxed">
+      <p className="text-[#6B7280] text-base mb-10 max-w-sm mx-auto leading-relaxed">
         Six quick questions to set up your daily standup. Takes about a minute.
       </p>
       <Button size="lg" onClick={next}>
@@ -45,10 +45,10 @@ export function StepWelcome({ next }: { next: () => void }) {
 export function StepName({ data, setData, next, canProceed }: StepProps & { canProceed: boolean }) {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-[#2C2825] mb-2">
+      <h2 className="text-2xl font-bold text-[#1D1D1F] mb-2">
         What should we call you?
       </h2>
-      <p className="text-[#8a7e74] text-sm mb-8">
+      <p className="text-[#6B7280] text-sm mb-8">
         Your AI agent will use this during standups.
       </p>
       <input
@@ -67,15 +67,15 @@ export function StepName({ data, setData, next, canProceed }: StepProps & { canP
 export function StepSchedule({ data, setData }: StepProps) {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-[#2C2825] mb-2">
+      <h2 className="text-2xl font-bold text-[#1D1D1F] mb-2">
         When do you want to standup?
       </h2>
-      <p className="text-[#8a7e74] text-sm mb-8">
+      <p className="text-[#6B7280] text-sm mb-8">
         We&apos;ll send you a reminder and sync it to your calendar.
       </p>
       <div className="space-y-4">
         <div>
-          <label className="block text-sm text-[#8a7e74] mb-2">Timezone</label>
+          <label className="block text-sm text-[#6B7280] mb-2">Timezone</label>
           <select
             value={data.timezone}
             onChange={(e) => setData({ ...data, timezone: e.target.value })}
@@ -89,7 +89,7 @@ export function StepSchedule({ data, setData }: StepProps) {
           </select>
         </div>
         <div>
-          <label className="block text-sm text-[#8a7e74] mb-2">
+          <label className="block text-sm text-[#6B7280] mb-2">
             Standup time
           </label>
           <input
@@ -118,10 +118,10 @@ export function StepGoals({ data, setData }: StepProps) {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-[#2C2825] mb-2">
+      <h2 className="text-2xl font-bold text-[#1D1D1F] mb-2">
         What are you building?
       </h2>
-      <p className="text-[#8a7e74] text-sm mb-8">
+      <p className="text-[#6B7280] text-sm mb-8">
         Pick as many as apply. This helps us match you with the right partner.
       </p>
       <div className="flex flex-wrap gap-2">
@@ -133,8 +133,8 @@ export function StepGoals({ data, setData }: StepProps) {
               onClick={() => toggleGoal(goal)}
               className={`px-4 py-2.5 rounded-[10px] text-sm font-medium transition-all ${
                 selected
-                  ? "bg-[#C4654A] text-white"
-                  : "bg-[#F5F0E8] text-[#8a7e74] hover:text-[#2C2825] hover:bg-[#E8DDD3]"
+                  ? "bg-[#B85C42] text-white"
+                  : "bg-[#F0F0F0] text-[#6B7280] hover:text-[#1D1D1F] hover:bg-[#E5E5E5]"
               }`}
             >
               {goal}
@@ -167,10 +167,10 @@ const PREFERENCE_OPTIONS = [
 export function StepPreference({ data, setData }: StepProps) {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-[#2C2825] mb-2">
+      <h2 className="text-2xl font-bold text-[#1D1D1F] mb-2">
         How do you want to standup?
       </h2>
-      <p className="text-[#8a7e74] text-sm mb-8">
+      <p className="text-[#6B7280] text-sm mb-8">
         Solo is just you and the AI. Shared means you&apos;ll also see a
         partner&apos;s standup after you both complete yours.
       </p>
@@ -194,10 +194,10 @@ export function StepPreference({ data, setData }: StepProps) {
 export function StepAccountability({ data, setData }: StepProps) {
   return (
     <div>
-      <h2 className="text-2xl font-bold text-[#2C2825] mb-2">
+      <h2 className="text-2xl font-bold text-[#1D1D1F] mb-2">
         How should the AI hold you accountable?
       </h2>
-      <p className="text-[#8a7e74] text-sm mb-8">
+      <p className="text-[#6B7280] text-sm mb-8">
         This sets the personality of your AI standup agent.
       </p>
       <div className="space-y-3">
@@ -245,12 +245,12 @@ export function StepComplete({
           />
         </svg>
       </div>
-      <h2 className="text-[28px] font-bold text-[#2C2825] mb-2">
+      <h2 className="text-[28px] font-bold text-[#1D1D1F] mb-2">
         You&apos;re all set, {data.name}
       </h2>
-      <p className="text-[#8a7e74] mb-10">
+      <p className="text-[#6B7280] mb-10">
         Your first standup is at{" "}
-        <span className="text-[#2C2825] font-medium">{data.standup_time}</span>{" "}
+        <span className="text-[#1D1D1F] font-medium">{data.standup_time}</span>{" "}
         tomorrow. Or start one right now.
       </p>
       <div className="flex flex-col gap-3 max-w-xs mx-auto">

@@ -44,7 +44,7 @@ function WaveformBars({ active, getVolume }: { active: boolean; getVolume?: () =
       {levels.map((h, i) => (
         <div
           key={i}
-          className={`w-1 rounded-full transition-all duration-100 ${active ? "bg-[#C4654A]" : "bg-[#E8DDD3]"}`}
+          className={`w-1 rounded-full transition-all duration-100 ${active ? "bg-[#B85C42]" : "bg-[#E5E5E5]"}`}
           style={{ height: active ? `${h}px` : "8px" }}
         />
       ))}
@@ -282,8 +282,8 @@ export default function StandupPage() {
                   onClick={() => setStandupType(t)}
                   className={`px-5 py-2 rounded-[10px] text-sm font-medium transition-colors ${
                     standupType === t
-                      ? "bg-[#C4654A] text-white"
-                      : "bg-[#F5F0E8] text-[#8a7e74] hover:text-[#2C2825]"
+                      ? "bg-[#B85C42] text-white"
+                      : "bg-[#F0F0F0] text-[#6B7280] hover:text-[#1D1D1F]"
                   }`}
                 >
                   {t === "daily" ? "Daily" : "Weekly"}
@@ -291,13 +291,13 @@ export default function StandupPage() {
               ))}
             </div>
 
-            <h1 className="text-3xl font-semibold text-[#2C2825] tracking-[-0.02em] mb-3">{info.title}</h1>
-            <p className="text-[#8a7e74] mb-1">{info.description}</p>
-            <p className="text-[13px] text-[#a89a8e] mb-10">{info.cap}</p>
+            <h1 className="text-3xl font-semibold text-[#1D1D1F] tracking-[-0.02em] mb-3">{info.title}</h1>
+            <p className="text-[#6B7280] mb-1">{info.description}</p>
+            <p className="text-[13px] text-[#9CA3AF] mb-10">{info.cap}</p>
 
             <button
               onClick={startSession}
-              className="group relative w-28 h-28 mx-auto rounded-full bg-[#C4654A] text-white flex items-center justify-center transition-all hover:bg-[#D4856A] active:scale-95 shadow-[0_4px_24px_rgba(196,101,74,0.35)] hover:shadow-[0_6px_32px_rgba(196,101,74,0.5)]"
+              className="group relative w-28 h-28 mx-auto rounded-full bg-[#B85C42] text-white flex items-center justify-center transition-all hover:bg-[#D4917F] active:scale-95 shadow-[0_4px_24px_rgba(184,92,66,0.35)] hover:shadow-[0_6px_32px_rgba(184,92,66,0.5)]"
               style={{ animation: "mic-pulse 2.5s ease-in-out infinite" }}
             >
               <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -306,11 +306,11 @@ export default function StandupPage() {
                 <line x1="12" y1="19" x2="12" y2="23" />
               </svg>
             </button>
-            <p className="text-[13px] text-[#a89a8e] mt-4">Tap to start</p>
+            <p className="text-[13px] text-[#9CA3AF] mt-4">Tap to start</p>
 
             <button
               onClick={() => router.push("/dashboard")}
-              className="block mx-auto mt-4 text-sm text-[#a89a8e] hover:text-[#8a7e74] transition-colors"
+              className="block mx-auto mt-4 text-sm text-[#9CA3AF] hover:text-[#6B7280] transition-colors"
             >
               Back to dashboard
             </button>
@@ -320,13 +320,13 @@ export default function StandupPage() {
         {state === "connecting" && (
           <>
             <WaveformBars active={true} />
-            <p className="text-[#8a7e74]">Connecting to your AI standup partner...</p>
+            <p className="text-[#6B7280]">Connecting to your AI standup partner...</p>
           </>
         )}
 
         {state === "active" && (
           <>
-            <div className="text-xs text-[#C4654A] uppercase tracking-[1px] font-medium mb-6">
+            <div className="text-xs text-[#B85C42] uppercase tracking-[1px] font-medium mb-6">
               {info.title}
             </div>
 
@@ -334,30 +334,30 @@ export default function StandupPage() {
               {["Done", "Planned", "Blockers"].map((label, i) => (
                 <React.Fragment key={label}>
                   {i > 0 && (
-                    <div className={`w-10 h-0.5 ${questionStep >= i ? "bg-[#2D8A56]" : "bg-[#E8DDD3]"}`} />
+                    <div className={`w-10 h-0.5 ${questionStep >= i ? "bg-[#2D8A56]" : "bg-[#E5E5E5]"}`} />
                   )}
                   <div className="flex flex-col items-center gap-1">
                     <div className={`w-3 h-3 rounded-full border-2 transition-all ${
                       questionStep > i
                         ? "bg-[#2D8A56] border-[#2D8A56]"
                         : questionStep === i
-                        ? "border-[#C4654A] shadow-[0_0_0_4px_rgba(196,101,74,0.15)]"
-                        : "border-[#E8DDD3]"
+                        ? "border-[#B85C42] shadow-[0_0_0_4px_rgba(184,92,66,0.15)]"
+                        : "border-[#E5E5E5]"
                     }`} />
                     <span className={`text-[10px] font-medium ${
-                      questionStep > i ? "text-[#2D8A56]" : questionStep === i ? "text-[#C4654A]" : "text-[#a89a8e]"
+                      questionStep > i ? "text-[#2D8A56]" : questionStep === i ? "text-[#B85C42]" : "text-[#9CA3AF]"
                     }`}>{label}</span>
                   </div>
                 </React.Fragment>
               ))}
             </div>
 
-            <div className="text-6xl font-mono font-bold text-[#2C2825] mb-2">
+            <div className="text-6xl font-mono font-bold text-[#1D1D1F] mb-2">
               {formatTimer(elapsed)}
             </div>
             <div className="flex items-center justify-center gap-2 mb-4">
               <div className="w-2.5 h-2.5 bg-[#2D8A56] rounded-full animate-pulse" />
-              <span className="text-sm text-[#8a7e74]">
+              <span className="text-sm text-[#6B7280]">
                 {conversation.isSpeaking ? "Anchor is speaking..." : "Listening..."}
               </span>
             </div>
@@ -368,19 +368,19 @@ export default function StandupPage() {
             />
 
             {liveMessages.length > 0 && (
-              <div className="bg-[#F5F0E8] rounded-[12px] px-4 py-3 text-left max-h-[100px] overflow-y-auto mb-4">
+              <div className="bg-[#F0F0F0] rounded-[12px] px-4 py-3 text-left max-h-[100px] overflow-y-auto mb-4">
                 {liveMessages.slice(-3).map((msg, i) => (
                   <div key={i} className="text-[13px] mb-1 last:mb-0">
-                    <span className={`font-medium ${msg.role === "Anchor" ? "text-[#C4654A]" : "text-[#8a7e74]"}`}>
+                    <span className={`font-medium ${msg.role === "Anchor" ? "text-[#B85C42]" : "text-[#6B7280]"}`}>
                       {msg.role}:
                     </span>{" "}
-                    <span className="text-[#5a524a]">{msg.text}</span>
+                    <span className="text-[#4B5563]">{msg.text}</span>
                   </div>
                 ))}
               </div>
             )}
 
-            <p className="text-sm text-[#a89a8e] mb-8">
+            <p className="text-sm text-[#9CA3AF] mb-8">
               Speak naturally. Anchor is listening.
             </p>
             <Button variant="secondary" onClick={endSession} className="px-10">
@@ -397,28 +397,28 @@ export default function StandupPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h2 className="text-xl font-bold text-[#2C2825]">{info.title} complete</h2>
-              <span className="text-sm text-[#8a7e74]">{formatTimer(elapsed)}</span>
+              <h2 className="text-xl font-bold text-[#1D1D1F]">{info.title} complete</h2>
+              <span className="text-sm text-[#6B7280]">{formatTimer(elapsed)}</span>
             </div>
 
             {completionData && (completionData.done || completionData.planned || completionData.blockers) && (
-              <div className="bg-[#F5F0E8] rounded-[14px] p-5 text-left mb-8 space-y-4">
+              <div className="bg-[#F0F0F0] rounded-[14px] p-5 text-left mb-8 space-y-4">
                 {completionData.done && (
                   <div className="pl-3 border-l-2 border-[rgba(45,138,86,0.4)]">
                     <div className="text-[10px] font-semibold text-[#2D8A56] uppercase tracking-[0.5px] mb-1">What you got done</div>
-                    <p className="text-[13px] text-[#5a524a] leading-relaxed">{completionData.done}</p>
+                    <p className="text-[13px] text-[#4B5563] leading-relaxed">{completionData.done}</p>
                   </div>
                 )}
                 {completionData.planned && (
                   <div className="pl-3 border-l-2 border-[rgba(59,111,196,0.4)]">
                     <div className="text-[10px] font-semibold text-[#3B6FC4] uppercase tracking-[0.5px] mb-1">What&apos;s next</div>
-                    <p className="text-[13px] text-[#5a524a] leading-relaxed">{completionData.planned}</p>
+                    <p className="text-[13px] text-[#4B5563] leading-relaxed">{completionData.planned}</p>
                   </div>
                 )}
                 {completionData.blockers && (
                   <div className="pl-3 border-l-2 border-[rgba(196,48,48,0.4)]">
                     <div className="text-[10px] font-semibold text-[#C43030] uppercase tracking-[0.5px] mb-1">Blockers</div>
-                    <p className="text-[13px] text-[#5a524a] leading-relaxed">{completionData.blockers}</p>
+                    <p className="text-[13px] text-[#4B5563] leading-relaxed">{completionData.blockers}</p>
                   </div>
                 )}
               </div>

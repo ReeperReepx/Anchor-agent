@@ -19,15 +19,15 @@ const FAQ_ITEMS = [
 
 export function FAQ() {
   return (
-    <section className="px-10 py-[60px] max-w-[600px] mx-auto border-t border-[#E8DDD3]">
-      <h2 className="text-[36px] font-bold tracking-[-0.02em] text-[#2C2825] mb-10 text-center">
+    <section className="px-10 py-[60px] max-w-[600px] mx-auto border-t border-[#E5E5E5]">
+      <h2 className="text-[36px] font-bold tracking-[-0.02em] text-[#1D1D1F] mb-10 text-center">
         FAQ
       </h2>
       <div className="space-y-6">
         {FAQ_ITEMS.map((item) => (
           <div key={item.q}>
-            <h3 className="font-semibold text-[#2C2825]">{item.q}</h3>
-            <p className="mt-1 text-sm text-[#8a7e74] leading-relaxed">
+            <h3 className="font-semibold text-[#1D1D1F]">{item.q}</h3>
+            <p className="mt-1 text-sm text-[#6B7280] leading-relaxed">
               {item.a}
             </p>
           </div>

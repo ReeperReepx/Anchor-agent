@@ -10,11 +10,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    "bg-[#C4654A] text-white hover:bg-[#D4856A] active:bg-[#A8503A] shadow-[0_2px_12px_rgba(196,101,74,0.3)] hover:shadow-[0_4px_16px_rgba(196,101,74,0.4)] hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97]",
+    "bg-[#B85C42] text-white hover:bg-[#D4917F] active:bg-[#9A4E36] shadow-[0_2px_12px_rgba(184,92,66,0.3)] hover:shadow-[0_4px_16px_rgba(184,92,66,0.4)] hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97]",
   secondary:
-    "border border-[#E8DDD3] text-[#2C2825] hover:bg-[#F5F0E8] hover:border-[#8a7e74] hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97]",
+    "border border-[#E5E5E5] text-[#1D1D1F] hover:bg-[#F0F0F0] hover:border-[#6B7280] hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97]",
   ghost:
-    "text-[#8a7e74] hover:text-[#2C2825] hover:bg-[#F5F0E8] active:scale-[0.97]",
+    "text-[#6B7280] hover:text-[#1D1D1F] hover:bg-[#F0F0F0] active:scale-[0.97]",
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
@@ -28,7 +28,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <button
         ref={ref}
-        className={`inline-flex items-center justify-center rounded-[12px] font-semibold transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C4654A] disabled:pointer-events-none disabled:opacity-50 ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
+        className={`inline-flex items-center justify-center rounded-[12px] font-semibold transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B85C42] disabled:pointer-events-none disabled:opacity-50 ${variantStyles[variant]} ${sizeStyles[size]} ${className}`}
         {...props}
       />
     );

@@ -59,26 +59,26 @@ export default async function ArticlePage({
   };
 
   return (
-    <div className="min-h-screen bg-[#FAF6F1]">
+    <div className="min-h-screen bg-[#F8F7F4]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <nav className="flex items-center justify-between px-10 py-5 max-w-[1100px] mx-auto border-b border-[#E8DDD3]">
-        <Link href="/" className="text-[22px] font-bold text-[#C4654A]">
+      <nav className="flex items-center justify-between px-10 py-5 max-w-[1100px] mx-auto border-b border-[#E5E5E5]">
+        <Link href="/" className="text-[22px] font-bold text-[#B85C42]">
           Anchor
         </Link>
-        <div className="flex items-center gap-5 text-sm text-[#8a7e74]">
+        <div className="flex items-center gap-5 text-sm text-[#6B7280]">
           <Link
             href="/blog"
-            className="hover:text-[#2C2825] transition-colors"
+            className="hover:text-[#1D1D1F] transition-colors"
           >
             Blog
           </Link>
           <Link
             href="/login"
-            className="bg-[#C4654A] hover:bg-[#D4856A] text-white px-4 py-2 rounded-[10px] text-sm font-semibold transition-all"
+            className="bg-[#B85C42] hover:bg-[#D4917F] text-white px-4 py-2 rounded-[10px] text-sm font-semibold transition-all"
           >
             Get Early Access
           </Link>
@@ -88,24 +88,24 @@ export default async function ArticlePage({
       <article className="max-w-[700px] mx-auto px-6 py-16">
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
-            <span className="text-[11px] font-semibold text-[#C4654A] uppercase tracking-[1px]">
+            <span className="text-[11px] font-semibold text-[#B85C42] uppercase tracking-[1px]">
               {article.category}
             </span>
-            <span className="text-[12px] text-[#a89a8e]">
+            <span className="text-[12px] text-[#9CA3AF]">
               {new Date(article.publishedAt).toLocaleDateString("en-US", {
                 month: "long",
                 day: "numeric",
                 year: "numeric",
               })}
             </span>
-            <span className="text-[12px] text-[#a89a8e]">
+            <span className="text-[12px] text-[#9CA3AF]">
               {article.readTime}
             </span>
           </div>
-          <h1 className="text-[36px] font-bold tracking-[-0.02em] text-[#2C2825] leading-[1.2] mb-4">
+          <h1 className="text-[36px] font-bold tracking-[-0.02em] text-[#1D1D1F] leading-[1.2] mb-4">
             {article.title}
           </h1>
-          <p className="text-lg text-[#8a7e74] leading-relaxed">
+          <p className="text-lg text-[#6B7280] leading-relaxed">
             {article.description}
           </p>
         </div>
@@ -115,18 +115,18 @@ export default async function ArticlePage({
           dangerouslySetInnerHTML={{ __html: article.content }}
         />
 
-        <div className="mt-16 pt-8 border-t border-[#E8DDD3]">
-          <div className="bg-white rounded-[14px] border border-[#E8DDD3] p-8 text-center">
-            <h3 className="text-xl font-semibold text-[#2C2825] mb-2">
+        <div className="mt-16 pt-8 border-t border-[#E5E5E5]">
+          <div className="bg-white rounded-[14px] border border-[#E5E5E5] p-8 text-center">
+            <h3 className="text-xl font-semibold text-[#1D1D1F] mb-2">
               Ready to start your streak?
             </h3>
-            <p className="text-sm text-[#8a7e74] mb-5">
+            <p className="text-sm text-[#6B7280] mb-5">
               Anchor is a voice-first daily standup for solopreneurs. Free
               during early access.
             </p>
             <Link
               href="/login"
-              className="inline-flex items-center gap-2 bg-[#C4654A] hover:bg-[#D4856A] text-white px-6 py-3 rounded-[10px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(196,101,74,0.3)]"
+              className="inline-flex items-center gap-2 bg-[#B85C42] hover:bg-[#D4917F] text-white px-6 py-3 rounded-[10px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(184,92,66,0.3)]"
             >
               Get Early Access — Free
             </Link>
@@ -136,14 +136,14 @@ export default async function ArticlePage({
         <div className="mt-8">
           <Link
             href="/blog"
-            className="text-sm text-[#C4654A] hover:text-[#D4856A] transition-colors"
+            className="text-sm text-[#B85C42] hover:text-[#D4917F] transition-colors"
           >
             &larr; Back to all articles
           </Link>
         </div>
       </article>
 
-      <footer className="px-10 py-6 border-t border-[#E8DDD3] text-center text-xs text-[#a89a8e]">
+      <footer className="px-10 py-6 border-t border-[#E5E5E5] text-center text-xs text-[#9CA3AF]">
         2026 Anchor. All rights reserved.
       </footer>
     </div>

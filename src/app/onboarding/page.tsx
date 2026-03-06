@@ -103,7 +103,7 @@ export default function OnboardingPage() {
   const stepProps = { data, setData, next };
 
   return (
-    <div className="min-h-screen bg-[#FAF6F1] flex flex-col">
+    <div className="min-h-screen bg-[#F8F7F4] flex flex-col">
       {step > 0 && step < TOTAL_STEPS && (
         <div className="px-6 pt-6">
           <div className="max-w-lg mx-auto">
@@ -117,17 +117,17 @@ export default function OnboardingPage() {
                     key={i}
                     className={`h-2 rounded-full transition-all duration-500 ${
                       isDone
-                        ? "w-8 bg-[#C4654A]"
+                        ? "w-8 bg-[#B85C42]"
                         : isActive
-                          ? "w-8 bg-[#C4654A] shadow-[0_0_8px_rgba(196,101,74,0.4)]"
-                          : "w-2 bg-[#E8DDD3]"
+                          ? "w-8 bg-[#B85C42] shadow-[0_0_8px_rgba(184,92,66,0.4)]"
+                          : "w-2 bg-[#E5E5E5]"
                     }`}
                   />
                 );
               })}
             </div>
-            <p className="text-center text-[13px] text-[#a89a8e]">
-              Step <span className="text-[#C4654A] font-medium">{step}</span> of {TOTAL_STEPS - 1}
+            <p className="text-center text-[13px] text-[#9CA3AF]">
+              Step <span className="text-[#B85C42] font-medium">{step}</span> of {TOTAL_STEPS - 1}
             </p>
           </div>
         </div>
@@ -154,7 +154,7 @@ export default function OnboardingPage() {
             <div className="flex items-center justify-between mt-10">
               <button
                 onClick={back}
-                className="text-sm text-[#8a7e74] hover:text-[#2C2825] transition-colors"
+                className="text-sm text-[#6B7280] hover:text-[#1D1D1F] transition-colors"
               >
                 Back
               </button>

@@ -10,22 +10,22 @@ describe("Badge", () => {
 
   it("applies default variant", () => {
     render(<Badge>test</Badge>);
-    expect(screen.getByText("test").className).toContain("bg-[#3A3A3E]");
+    expect(screen.getByText("test").className).toContain("bg-[#F0F0F0]");
   });
 
   it("applies success variant", () => {
     render(<Badge variant="success">done</Badge>);
-    expect(screen.getByText("done").className).toContain("text-[#4ADE80]");
+    expect(screen.getByText("done").className).toContain("text-[#2D8A56]");
   });
 
   it("applies warning variant", () => {
     render(<Badge variant="warning">warn</Badge>);
-    expect(screen.getByText("warn").className).toContain("text-[#FBBF24]");
+    expect(screen.getByText("warn").className).toContain("text-[#C4900A]");
   });
 
   it("applies info variant", () => {
     render(<Badge variant="info">info</Badge>);
-    expect(screen.getByText("info").className).toContain("text-[#60A5FA]");
+    expect(screen.getByText("info").className).toContain("text-[#3B6FC4]");
   });
 
   it("accepts custom className", () => {

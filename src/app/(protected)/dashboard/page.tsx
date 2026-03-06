@@ -66,7 +66,7 @@ export default async function DashboardPage() {
   if (currentStreak >= longestStreak && currentStreak > 0) {
     insight = {
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4654A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B85C42" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
         </svg>
       ),
@@ -76,7 +76,7 @@ export default async function DashboardPage() {
   } else if (thisWeekCount >= 4) {
     insight = {
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4654A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B85C42" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
         </svg>
       ),
@@ -86,7 +86,7 @@ export default async function DashboardPage() {
   } else if (recentStandups.length > 0) {
     insight = {
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#C4654A" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B85C42" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
           <polyline points="22 4 12 14.01 9 11.01" />
         </svg>
@@ -102,17 +102,17 @@ export default async function DashboardPage() {
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-[#2C2825] tracking-[-0.02em]">
+          <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">
             {getGreeting()}{userName ? `, ${userName}` : ""}
           </h1>
           {standupTime && (
-            <p className="text-sm text-[#8a7e74] mt-1">
+            <p className="text-sm text-[#6B7280] mt-1">
               Your next standup is at{" "}
-              <span className="text-[#C4654A] font-medium">{standupTime}</span>
+              <span className="text-[#B85C42] font-medium">{standupTime}</span>
             </p>
           )}
         </div>
-        <a href="/standup" className="inline-flex items-center gap-2 bg-[#C4654A] hover:bg-[#D4856A] text-white px-5 py-2.5 rounded-[10px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(196,101,74,0.3)] hover:shadow-[0_4px_16px_rgba(196,101,74,0.4)] hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97]">
+        <a href="/standup" className="inline-flex items-center gap-2 bg-[#B85C42] hover:bg-[#D4917F] text-white px-5 py-2.5 rounded-[10px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(184,92,66,0.3)] hover:shadow-[0_4px_16px_rgba(184,92,66,0.4)] hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97]">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
             <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
             <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
@@ -123,20 +123,20 @@ export default async function DashboardPage() {
       </div>
 
       {insight && (
-        <div className="bg-gradient-to-br from-[rgba(196,101,74,0.06)] to-[rgba(196,101,74,0.02)] border border-[rgba(196,101,74,0.15)] rounded-[14px] p-5 flex items-start gap-4">
-          <div className="w-10 h-10 rounded-[10px] bg-[rgba(196,101,74,0.1)] flex items-center justify-center shrink-0">
+        <div className="bg-gradient-to-br from-[rgba(184,92,66,0.06)] to-[rgba(184,92,66,0.02)] border border-[rgba(184,92,66,0.15)] rounded-[14px] p-5 flex items-start gap-4">
+          <div className="w-10 h-10 rounded-[10px] bg-[rgba(184,92,66,0.1)] flex items-center justify-center shrink-0">
             {insight.icon}
           </div>
           <div>
-            <h3 className="text-[14px] font-semibold text-[#2C2825] mb-1">{insight.title}</h3>
-            <p className="text-[13px] text-[#8a7e74] leading-relaxed">{insight.message}</p>
+            <h3 className="text-[14px] font-semibold text-[#1D1D1F] mb-1">{insight.title}</h3>
+            <p className="text-[13px] text-[#6B7280] leading-relaxed">{insight.message}</p>
           </div>
         </div>
       )}
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-sm font-medium text-[#8a7e74]">This Week</CardTitle>
+          <CardTitle className="text-sm font-medium text-[#6B7280]">This Week</CardTitle>
         </CardHeader>
         <CardContent>
           <WeeklyProgress completedDays={completedDays} />
@@ -144,38 +144,38 @@ export default async function DashboardPage() {
       </Card>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card className="!bg-[rgba(196,101,74,0.06)] !border-[rgba(196,101,74,0.2)] !shadow-[0_2px_16px_rgba(196,101,74,0.08)]">
+        <Card className="!bg-[rgba(184,92,66,0.06)] !border-[rgba(184,92,66,0.2)] !shadow-[0_2px_16px_rgba(184,92,66,0.08)]">
           <CardHeader>
-            <CardTitle className="text-[11px] font-semibold text-[#8a7e74] uppercase tracking-[1px]">Current Streak</CardTitle>
+            <CardTitle className="text-[11px] font-semibold text-[#6B7280] uppercase tracking-[1px]">Current Streak</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-baseline gap-2">
-              <div className="text-3xl font-bold text-[#C4654A]">{streak?.current_streak ?? 0}</div>
-              <p className="text-sm text-[#a89a8e]">days</p>
+              <div className="text-3xl font-bold text-[#B85C42]">{streak?.current_streak ?? 0}</div>
+              <p className="text-sm text-[#9CA3AF]">days</p>
             </div>
             <p className="text-[12px] text-[#2D8A56] mt-2">Best: {streak?.longest_streak ?? 0} days</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle className="text-[11px] font-semibold text-[#8a7e74] uppercase tracking-[1px]">Longest Streak</CardTitle>
+            <CardTitle className="text-[11px] font-semibold text-[#6B7280] uppercase tracking-[1px]">Longest Streak</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-baseline gap-2">
-              <div className="text-3xl font-bold text-[#2C2825]">{streak?.longest_streak ?? 0}</div>
-              <p className="text-sm text-[#a89a8e]">days</p>
+              <div className="text-3xl font-bold text-[#1D1D1F]">{streak?.longest_streak ?? 0}</div>
+              <p className="text-sm text-[#9CA3AF]">days</p>
             </div>
-            <p className="text-[12px] text-[#a89a8e] mt-2">Personal record</p>
+            <p className="text-[12px] text-[#9CA3AF] mt-2">Personal record</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader>
-            <CardTitle className="text-[11px] font-semibold text-[#8a7e74] uppercase tracking-[1px]">Total Standups</CardTitle>
+            <CardTitle className="text-[11px] font-semibold text-[#6B7280] uppercase tracking-[1px]">Total Standups</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-baseline gap-2">
-              <div className="text-3xl font-bold text-[#2C2825]">{totalCount}</div>
-              <p className="text-sm text-[#a89a8e]">completed</p>
+              <div className="text-3xl font-bold text-[#1D1D1F]">{totalCount}</div>
+              <p className="text-sm text-[#9CA3AF]">completed</p>
             </div>
             <p className="text-[12px] text-[#2D8A56] mt-2">Keep it up!</p>
           </CardContent>
@@ -189,16 +189,16 @@ export default async function DashboardPage() {
         <CardContent>
           {recentStandups.length === 0 ? (
             <div className="py-10 text-center">
-              <div className="w-16 h-16 bg-[rgba(196,101,74,0.08)] border border-[rgba(196,101,74,0.15)] rounded-full flex items-center justify-center mx-auto mb-5 shadow-[0_0_24px_rgba(196,101,74,0.08)]">
-                <svg className="w-7 h-7 text-[#C4654A]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-16 h-16 bg-[rgba(184,92,66,0.08)] border border-[rgba(184,92,66,0.15)] rounded-full flex items-center justify-center mx-auto mb-5 shadow-[0_0_24px_rgba(184,92,66,0.08)]">
+                <svg className="w-7 h-7 text-[#B85C42]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 10v2a7 7 0 0 1-14 0v-2" />
                   <line x1="12" y1="19" x2="12" y2="23" strokeWidth={2} />
                 </svg>
               </div>
-              <p className="text-[15px] font-semibold text-[#2C2825] mb-1">No standups yet</p>
-              <p className="text-sm text-[#8a7e74] mb-5">Start your first voice standup to begin tracking your daily progress.</p>
-              <a href="/standup" className="inline-flex items-center gap-2 bg-[#C4654A] hover:bg-[#D4856A] text-white px-5 py-2.5 rounded-[10px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(196,101,74,0.3)]">
+              <p className="text-[15px] font-semibold text-[#1D1D1F] mb-1">No standups yet</p>
+              <p className="text-sm text-[#6B7280] mb-5">Start your first voice standup to begin tracking your daily progress.</p>
+              <a href="/standup" className="inline-flex items-center gap-2 bg-[#B85C42] hover:bg-[#D4917F] text-white px-5 py-2.5 rounded-[10px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(184,92,66,0.3)]">
                 Start your first standup
               </a>
             </div>
@@ -208,7 +208,7 @@ export default async function DashboardPage() {
                 <div
                   key={standup.id}
                   className={`flex items-start justify-between border-l-2 pl-4 pb-4 last:pb-0 ${
-                    standup.type === "weekly" ? "border-l-[#FBBF24]" : "border-l-[#C4654A]"
+                    standup.type === "weekly" ? "border-l-[#FBBF24]" : "border-l-[#B85C42]"
                   }`}
                 >
                   <div className="min-w-0">
@@ -216,14 +216,14 @@ export default async function DashboardPage() {
                       <Badge variant={standup.type === "daily" ? "info" : "warning"}>
                         {standup.type}
                       </Badge>
-                      <span className="text-sm text-[#8a7e74]">{formatRelativeDate(standup.date)}</span>
+                      <span className="text-sm text-[#6B7280]">{formatRelativeDate(standup.date)}</span>
                     </div>
                     {standup.done_summary && (
-                      <p className="mt-1.5 text-sm text-[#5a524a] line-clamp-2">{standup.done_summary}</p>
+                      <p className="mt-1.5 text-sm text-[#4B5563] line-clamp-2">{standup.done_summary}</p>
                     )}
                   </div>
                   {standup.duration_seconds && (
-                    <span className="text-xs text-[#a89a8e] ml-4 shrink-0">{formatDuration(standup.duration_seconds)}</span>
+                    <span className="text-xs text-[#9CA3AF] ml-4 shrink-0">{formatDuration(standup.duration_seconds)}</span>
                   )}
                 </div>
               ))}
