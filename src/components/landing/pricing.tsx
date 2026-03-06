@@ -15,7 +15,8 @@ export function Pricing() {
           Early users will be grandfathered into the best pricing when we launch paid plans.
         </p>
 
-        <div className="bg-white rounded-[14px] border-2 border-[#B85C42] p-10 max-w-[400px] mx-auto text-left shadow-[0_4px_24px_rgba(184,92,66,0.1)]">
+        <div className="bg-white rounded-[16px] border border-[#E5E5E5] p-10 max-w-[400px] mx-auto text-left shadow-[0_4px_32px_rgba(0,0,0,0.06),0_0_0_1px_rgba(184,92,66,0.1)] relative overflow-hidden">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#B85C42] to-[#D4917F]" />
           <div className="flex items-center gap-2 mb-4">
             <div className="text-[13px] text-[#B85C42] uppercase tracking-[1px] font-semibold">Early Access</div>
             <span className="text-[11px] bg-[rgba(184,92,66,0.1)] text-[#B85C42] px-2 py-0.5 rounded-full font-medium">Free</span>

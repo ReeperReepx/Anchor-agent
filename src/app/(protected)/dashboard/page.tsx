@@ -100,7 +100,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-8">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between bg-gradient-to-r from-[rgba(184,92,66,0.04)] to-transparent rounded-[16px] px-6 py-5 -mx-1">
         <div>
           <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">
             {getGreeting()}{userName ? `, ${userName}` : ""}
@@ -112,7 +112,7 @@ export default async function DashboardPage() {
             </p>
           )}
         </div>
-        <a href="/standup" className="inline-flex items-center gap-2 bg-[#B85C42] hover:bg-[#D4917F] text-white px-5 py-2.5 rounded-[10px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(184,92,66,0.3)] hover:shadow-[0_4px_16px_rgba(184,92,66,0.4)] hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97]">
+        <a href="/standup" className="inline-flex items-center gap-2 bg-[#B85C42] hover:bg-[#D4917F] text-white px-5 py-2.5 rounded-[12px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(184,92,66,0.25)] hover:shadow-[0_4px_20px_rgba(184,92,66,0.35)] hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97]">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
             <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
             <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
@@ -144,16 +144,17 @@ export default async function DashboardPage() {
       </Card>
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card className="!bg-[rgba(184,92,66,0.06)] !border-[rgba(184,92,66,0.2)] !shadow-[0_2px_16px_rgba(184,92,66,0.08)]">
+        <Card className="!bg-gradient-to-br !from-[rgba(184,92,66,0.07)] !to-[rgba(184,92,66,0.02)] !border-[rgba(184,92,66,0.2)] !shadow-[0_2px_16px_rgba(184,92,66,0.08)] relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-20 h-20 bg-[rgba(184,92,66,0.06)] rounded-full -translate-y-1/2 translate-x-1/2" />
           <CardHeader>
-            <CardTitle className="text-[11px] font-semibold text-[#6B7280] uppercase tracking-[1px]">Current Streak</CardTitle>
+            <CardTitle className="text-[11px] font-semibold text-[#B85C42] uppercase tracking-[1px]">Current Streak</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="flex items-baseline gap-2">
               <div className="text-3xl font-bold text-[#B85C42]">{streak?.current_streak ?? 0}</div>
               <p className="text-sm text-[#9CA3AF]">days</p>
             </div>
-            <p className="text-[12px] text-[#2D8A56] mt-2">Best: {streak?.longest_streak ?? 0} days</p>
+            <p className="text-[12px] text-[#2D8A56] mt-2 font-medium">Best: {streak?.longest_streak ?? 0} days</p>
           </CardContent>
         </Card>
         <Card>

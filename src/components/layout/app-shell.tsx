@@ -134,7 +134,7 @@ export function AppShell({
   return (
     <div className="min-h-screen bg-[#F8F7F4]">
       {/* Desktop sidebar */}
-      <aside className="hidden sm:flex fixed top-0 left-0 bottom-0 w-[220px] flex-col border-r border-[#E5E5E5] bg-white z-50">
+      <aside className="hidden sm:flex fixed top-0 left-0 bottom-0 w-[220px] flex-col border-r border-[#E5E5E5] bg-gradient-to-b from-white via-white to-[#FAFAF8] z-50">
         <div className="px-5 h-16 flex items-center">
           <Link
             href="/dashboard"
@@ -158,7 +158,7 @@ export function AppShell({
                 href={item.href}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-[10px] text-[13px] font-medium transition-colors relative ${
                   isActive
-                    ? "bg-[#F0F0F0] text-[#1D1D1F]"
+                    ? "bg-[rgba(184,92,66,0.06)] text-[#1D1D1F]"
                     : "text-[#6B7280] hover:text-[#1D1D1F] hover:bg-[#F8F7F4]"
                 }`}
               >

@@ -295,17 +295,23 @@ export default function StandupPage() {
             <p className="text-[#6B7280] mb-1">{info.description}</p>
             <p className="text-[13px] text-[#9CA3AF] mb-10">{info.cap}</p>
 
-            <button
-              onClick={startSession}
-              className="group relative w-28 h-28 mx-auto rounded-full bg-[#B85C42] text-white flex items-center justify-center transition-all hover:bg-[#D4917F] active:scale-95 shadow-[0_4px_24px_rgba(184,92,66,0.35)] hover:shadow-[0_6px_32px_rgba(184,92,66,0.5)]"
-              style={{ animation: "mic-pulse 2.5s ease-in-out infinite" }}
-            >
-              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-                <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-                <line x1="12" y1="19" x2="12" y2="23" />
-              </svg>
-            </button>
+            <div className="relative w-40 h-40 mx-auto flex items-center justify-center">
+              {/* Outer glow ring */}
+              <div className="absolute inset-0 rounded-full bg-[rgba(184,92,66,0.06)] animate-[mic-pulse_2.5s_ease-in-out_infinite]" />
+              {/* Middle ring */}
+              <div className="absolute inset-3 rounded-full bg-[rgba(184,92,66,0.08)]" />
+              {/* Button */}
+              <button
+                onClick={startSession}
+                className="relative w-28 h-28 rounded-full bg-gradient-to-b from-[#C46B50] to-[#B85C42] text-white flex items-center justify-center transition-all hover:from-[#D4917F] hover:to-[#C46B50] active:scale-95 shadow-[0_4px_24px_rgba(184,92,66,0.35),0_8px_40px_rgba(184,92,66,0.15)] hover:shadow-[0_6px_32px_rgba(184,92,66,0.5)]"
+              >
+                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                  <line x1="12" y1="19" x2="12" y2="23" />
+                </svg>
+              </button>
+            </div>
             <p className="text-[13px] text-[#9CA3AF] mt-4">Tap to start</p>
 
             <button
