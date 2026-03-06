@@ -23,7 +23,26 @@ export async function POST(request: Request) {
     );
   }
 
-  const body: CalendarSyncBody = await request.json();
+  let body: CalendarSyncBody;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
+  }
+
+  if (!body.standup_time || !/^\d{2}:\d{2}$/.test(body.standup_time)) {
+    return NextResponse.json({ error: "Invalid standup_time format" }, { status: 400 });
+  }
+
+  if (!body.timezone || typeof body.timezone !== "string") {
+    return NextResponse.json({ error: "Invalid timezone" }, { status: 400 });
+  }
+
+  try {
+    Intl.DateTimeFormat(undefined, { timeZone: body.timezone });
+  } catch {
+    return NextResponse.json({ error: "Invalid timezone" }, { status: 400 });
+  }
 
   // Parse standup time
   const [hours, minutes] = body.standup_time.split(":").map(Number);

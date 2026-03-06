@@ -255,6 +255,9 @@ function NotificationsCard() {
               </div>
               <button
                 type="button"
+                role="switch"
+                aria-checked={prefs[item.key]}
+                aria-label={item.label}
                 onClick={() => toggle(item.key)}
                 className={`w-9 h-5 rounded-full transition-colors relative ${
                   prefs[item.key] ? "bg-[#B85C42]" : "bg-[#E5E5E5]"

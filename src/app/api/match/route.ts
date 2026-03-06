@@ -16,7 +16,17 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const body: MatchBody = await request.json();
+  let body: MatchBody;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
+  }
+
+  if (!body.goal_category || typeof body.goal_category !== "string") {
+    return NextResponse.json({ error: "Missing goal_category" }, { status: 400 });
+  }
+
   const weekOf = getWeekStart();
 
   // Check if user already has a match for this week
@@ -69,7 +79,8 @@ export async function POST(request: Request) {
       .single();
 
     if (error) {
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      console.error("Match update error:", error);
+      return NextResponse.json({ error: "Failed to create match" }, { status: 500 });
     }
 
     return NextResponse.json({ match, matched: true });
@@ -88,7 +99,8 @@ export async function POST(request: Request) {
     .single();
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("Match insert error:", error);
+    return NextResponse.json({ error: "Failed to create match" }, { status: 500 });
   }
 
   return NextResponse.json({ match, matched: false, queued: true });

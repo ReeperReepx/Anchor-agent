@@ -13,7 +13,13 @@ export async function GET(request: Request) {
   }
 
   const { searchParams } = new URL(request.url);
-  const weekOf = searchParams.get("week_of") || getWeekStart();
+  const weekOfParam = searchParams.get("week_of");
+
+  if (weekOfParam && !/^\d{4}-\d{2}-\d{2}$/.test(weekOfParam)) {
+    return NextResponse.json({ error: "Invalid week_of format. Use YYYY-MM-DD." }, { status: 400 });
+  }
+
+  const weekOf = weekOfParam || getWeekStart();
 
   // Get all standups from the requested week
   const weekEnd = new Date(weekOf);

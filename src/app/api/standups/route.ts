@@ -12,8 +12,10 @@ export async function GET(request: Request) {
   }
 
   const { searchParams } = new URL(request.url);
-  const limit = Math.min(parseInt(searchParams.get("limit") ?? "20"), 100);
-  const offset = parseInt(searchParams.get("offset") ?? "0");
+  const parsedLimit = parseInt(searchParams.get("limit") ?? "20");
+  const parsedOffset = parseInt(searchParams.get("offset") ?? "0");
+  const limit = Math.min(Number.isFinite(parsedLimit) && parsedLimit > 0 ? parsedLimit : 20, 100);
+  const offset = Number.isFinite(parsedOffset) && parsedOffset >= 0 ? parsedOffset : 0;
   const type = searchParams.get("type");
 
   let query = supabase
@@ -30,7 +32,8 @@ export async function GET(request: Request) {
   const { data, error } = await query;
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("Standups fetch error:", error);
+    return NextResponse.json({ error: "Failed to fetch standups" }, { status: 500 });
   }
 
   return NextResponse.json({ standups: data });

@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { AppShell } from "@/components/layout/app-shell";
+import { ErrorBoundary } from "@/components/layout/error-boundary";
 
 export default async function ProtectedLayout({
   children,
@@ -16,5 +17,9 @@ export default async function ProtectedLayout({
     redirect("/login");
   }
 
-  return <AppShell user={user}>{children}</AppShell>;
+  return (
+    <AppShell user={user}>
+      <ErrorBoundary>{children}</ErrorBoundary>
+    </AppShell>
+  );
 }

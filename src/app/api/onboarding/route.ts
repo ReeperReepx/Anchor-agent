@@ -19,7 +19,20 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const body: OnboardingBody = await request.json();
+  let body: OnboardingBody;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
+  }
+
+  if (!body.timezone || !body.standup_time || !body.preference) {
+    return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+  }
+
+  if (!/^\d{2}:\d{2}$/.test(body.standup_time)) {
+    return NextResponse.json({ error: "Invalid standup_time format" }, { status: 400 });
+  }
 
   const { error } = await supabase.from("users").upsert({
     id: user.id,
@@ -32,7 +45,8 @@ export async function POST(request: Request) {
   });
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("Onboarding error:", error);
+    return NextResponse.json({ error: "Failed to save profile" }, { status: 500 });
   }
 
   // Initialize streak record

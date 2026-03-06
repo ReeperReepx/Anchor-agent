@@ -23,19 +23,40 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const body: CompleteBody = await request.json();
+  let body: CompleteBody;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
+  }
 
-  // Find the most recent incomplete standup for this user
-  const { data: standup } = await supabase
-    .from("standups")
-    .select("id")
-    .eq("user_id", user.id)
-    .is("transcript", null)
-    .order("created_at", { ascending: false })
-    .limit(1)
-    .single();
+  let standupId = body.standup_id;
 
-  const standupId = body.standup_id ?? standup?.id;
+  if (standupId) {
+    // Verify the caller owns this standup
+    const { data: owned } = await supabase
+      .from("standups")
+      .select("id")
+      .eq("id", standupId)
+      .eq("user_id", user.id)
+      .single();
+
+    if (!owned) {
+      return NextResponse.json({ error: "Standup not found" }, { status: 404 });
+    }
+  } else {
+    // Find the most recent incomplete standup for this user
+    const { data: standup } = await supabase
+      .from("standups")
+      .select("id")
+      .eq("user_id", user.id)
+      .is("transcript", null)
+      .order("created_at", { ascending: false })
+      .limit(1)
+      .single();
+
+    standupId = standup?.id;
+  }
 
   if (!standupId) {
     return NextResponse.json(
@@ -44,7 +65,6 @@ export async function POST(request: Request) {
     );
   }
 
-  // Update standup with results
   const { error: updateError } = await supabase
     .from("standups")
     .update({
@@ -55,11 +75,14 @@ export async function POST(request: Request) {
       planned_summary: body.planned_summary,
       blockers_summary: body.blockers_summary,
     })
-    .eq("id", standupId);
+    .eq("id", standupId)
+    .eq("user_id", user.id);
 
   if (updateError) {
-    return NextResponse.json({ error: updateError.message }, { status: 500 });
+    console.error("Standup update error:", updateError);
+    return NextResponse.json({ error: "Failed to complete standup" }, { status: 500 });
   }
+
 
   // Update streak
   const today = new Date().toISOString().split("T")[0];

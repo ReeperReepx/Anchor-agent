@@ -31,12 +31,13 @@ export async function POST(request: Request) {
     .single();
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 });
+    console.error("Standup start error:", error);
+    return NextResponse.json({ error: "Failed to start standup" }, { status: 500 });
   }
 
   // Return standup ID and ElevenLabs config placeholder
   return NextResponse.json({
     standup_id: standup.id,
-    agent_id: process.env.ELEVENLABS_AGENT_ID ?? null,
+    agent_id: process.env.NEXT_PUBLIC_ELEVENLABS_AGENT_ID ?? null,
   });
 }

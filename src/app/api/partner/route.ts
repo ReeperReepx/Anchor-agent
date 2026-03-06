@@ -34,7 +34,7 @@ export async function GET() {
   // Get partner's latest completed standup from this week
   const { data: partnerStandup } = await supabase
     .from("standups")
-    .select("*")
+    .select("id, date, type, done_summary, planned_summary, blockers_summary, duration_seconds, created_at")
     .eq("user_id", partnerId)
     .gte("date", weekOf)
     .not("transcript", "is", null)
