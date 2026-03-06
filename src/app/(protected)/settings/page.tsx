@@ -229,23 +229,14 @@ function SubscriptionCard() {
         <div className="space-y-3">
           <div className="flex justify-between items-center text-sm">
             <span className="text-[#8a7e74]">Plan</span>
-            <span className="bg-[rgba(196,101,74,0.1)] text-[#C4654A] text-xs font-medium px-2.5 py-0.5 rounded-full uppercase tracking-[1px]">
-              Premium
+            <span className="bg-[rgba(45,138,86,0.1)] text-[#2D8A56] text-xs font-medium px-2.5 py-0.5 rounded-full uppercase tracking-[1px]">
+              Early Access
             </span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-[#8a7e74]">Status</span>
-            <span className="text-[#2D8A56]">Active</span>
+            <span className="text-[#2D8A56]">Active — Free</span>
           </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-[#8a7e74]">Next billing</span>
-            <span className="text-[#2C2825]">April 15, 2026</span>
-          </div>
-        </div>
-        <div className="mt-5 pt-4 border-t border-[#E8DDD3]">
-          <Button variant="ghost" size="sm">
-            Manage subscription
-          </Button>
         </div>
       </CardContent>
     </Card>
