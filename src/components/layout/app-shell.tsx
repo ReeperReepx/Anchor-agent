@@ -204,7 +204,7 @@ export function AppShell({
       </aside>
 
       {/* Main content - offset by sidebar width on desktop */}
-      <main className="sm:ml-[220px] px-5 py-8 pb-24 sm:pb-8 max-w-5xl mx-auto">{children}</main>
+      <main className="sm:ml-[220px] px-5 sm:px-10 py-8 pb-24 sm:pb-8">{children}</main>
 
       {/* Mobile bottom tab bar */}
       <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-[#E5E5E5] z-50">

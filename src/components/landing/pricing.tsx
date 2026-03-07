@@ -3,9 +3,9 @@ import { Button } from "@/components/ui/button";
 
 export function Pricing() {
   return (
-    <section id="early-access" className="px-10 py-[60px] text-center border-t border-[#E5E5E5]">
+    <section id="early-access" className="px-5 sm:px-10 py-12 sm:py-[60px] text-center border-t border-[#E5E5E5]">
       <div className="max-w-[600px] mx-auto">
-        <h2 className="text-[36px] font-bold tracking-[-0.02em] text-[#1D1D1F] mb-3">
+        <h2 className="text-[28px] sm:text-[36px] font-bold tracking-[-0.02em] text-[#1D1D1F] mb-3">
           Free while we build.
         </h2>
         <p className="text-[15px] text-[#6B7280] mb-3 leading-relaxed">
@@ -15,7 +15,7 @@ export function Pricing() {
           Early users will be grandfathered into the best pricing when we launch paid plans.
         </p>
 
-        <div className="bg-white rounded-[16px] border border-[#E5E5E5] p-10 max-w-[400px] mx-auto text-left shadow-[0_4px_32px_rgba(0,0,0,0.06),0_0_0_1px_rgba(184,92,66,0.1)] relative overflow-hidden">
+        <div className="bg-white rounded-[16px] border border-[#E5E5E5] p-6 sm:p-10 max-w-[400px] mx-auto text-left shadow-[0_4px_32px_rgba(0,0,0,0.06),0_0_0_1px_rgba(184,92,66,0.1)] relative overflow-hidden">
           <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#B85C42] to-[#D4917F]" />
           <div className="flex items-center gap-2 mb-4">
             <div className="text-[13px] text-[#B85C42] uppercase tracking-[1px] font-semibold">Early Access</div>

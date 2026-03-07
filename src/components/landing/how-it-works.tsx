@@ -21,11 +21,11 @@ const STEPS = [
 
 export function HowItWorks() {
   return (
-    <section id="how-it-works" className="px-10 py-[60px] max-w-[960px] mx-auto">
+    <section id="how-it-works" className="px-5 sm:px-10 py-12 sm:py-[60px] max-w-[960px] mx-auto">
       <p className="text-center text-xs font-semibold tracking-[0.15em] uppercase text-[#9CA3AF] mb-3">
         How It Works
       </p>
-      <h2 className="text-[36px] font-bold tracking-[-0.02em] text-[#1D1D1F] mb-14 text-center">
+      <h2 className="text-[28px] sm:text-[36px] font-bold tracking-[-0.02em] text-[#1D1D1F] mb-10 sm:mb-14 text-center">
         Three steps. Zero friction.
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

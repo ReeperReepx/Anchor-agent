@@ -19,8 +19,8 @@ const FAQ_ITEMS = [
 
 export function FAQ() {
   return (
-    <section className="px-10 py-[60px] max-w-[600px] mx-auto border-t border-[#E5E5E5]">
-      <h2 className="text-[36px] font-bold tracking-[-0.02em] text-[#1D1D1F] mb-10 text-center">
+    <section className="px-5 sm:px-10 py-12 sm:py-[60px] max-w-[600px] mx-auto border-t border-[#E5E5E5]">
+      <h2 className="text-[28px] sm:text-[36px] font-bold tracking-[-0.02em] text-[#1D1D1F] mb-10 text-center">
         FAQ
       </h2>
       <div className="space-y-6">

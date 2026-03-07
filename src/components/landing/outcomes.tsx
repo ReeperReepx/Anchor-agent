@@ -47,11 +47,11 @@ const OUTCOMES = [
 
 export function StatsBar() {
   return (
-    <section className="px-10 py-[60px] border-t border-[#E5E5E5]">
-      <div className="max-w-[900px] mx-auto flex justify-center gap-16">
+    <section className="px-5 sm:px-10 py-12 sm:py-[60px] border-t border-[#E5E5E5]">
+      <div className="max-w-[900px] mx-auto flex flex-col sm:flex-row justify-center gap-8 sm:gap-16">
         {STATS.map((stat) => (
           <div key={stat.label} className="text-center">
-            <div className="text-[44px] font-bold text-[#B85C42] tracking-[-0.02em]">
+            <div className="text-[36px] sm:text-[44px] font-bold text-[#B85C42] tracking-[-0.02em]">
               {stat.value}
             </div>
             <p className="text-sm text-[#6B7280] mt-1">{stat.label}</p>
@@ -64,14 +64,14 @@ export function StatsBar() {
 
 export function OutcomeCards() {
   return (
-    <section className="px-10 py-[60px] max-w-[960px] mx-auto">
-      <h2 className="text-[36px] font-bold tracking-[-0.02em] text-[#1D1D1F] mb-4 text-center">
+    <section className="px-5 sm:px-10 py-12 sm:py-[60px] max-w-[960px] mx-auto">
+      <h2 className="text-[28px] sm:text-[36px] font-bold tracking-[-0.02em] text-[#1D1D1F] mb-4 text-center">
         What actually changes
       </h2>
-      <p className="text-center text-[#6B7280] text-[15px] mb-14 max-w-[440px] mx-auto">
+      <p className="text-center text-[#6B7280] text-[15px] mb-10 sm:mb-14 max-w-[440px] mx-auto">
         Five minutes of talking replaces hours of drifting. Here&apos;s what happens when you show up.
       </p>
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
         {OUTCOMES.map((outcome) => (
           <div
             key={outcome.title}

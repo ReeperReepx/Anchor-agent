@@ -100,9 +100,9 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-8">
-      <div className="flex items-center justify-between bg-gradient-to-r from-[rgba(184,92,66,0.04)] to-transparent rounded-[16px] px-6 py-5 -mx-1">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gradient-to-r from-[rgba(184,92,66,0.04)] to-transparent rounded-[16px] px-5 sm:px-6 py-5 -mx-1">
         <div>
-          <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">
+          <h1 className="text-xl sm:text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">
             {getGreeting()}{userName ? `, ${userName}` : ""}
           </h1>
           {standupTime && (
@@ -112,7 +112,7 @@ export default async function DashboardPage() {
             </p>
           )}
         </div>
-        <a href="/standup" className="inline-flex items-center gap-2 bg-[#B85C42] hover:bg-[#D4917F] text-white px-5 py-2.5 rounded-[12px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(184,92,66,0.25)] hover:shadow-[0_4px_20px_rgba(184,92,66,0.35)] hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97]">
+        <a href="/standup" className="inline-flex items-center justify-center gap-2 bg-[#B85C42] hover:bg-[#D4917F] text-white px-5 py-2.5 rounded-[12px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(184,92,66,0.25)] hover:shadow-[0_4px_20px_rgba(184,92,66,0.35)] hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97] shrink-0">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
             <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
             <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
@@ -151,7 +151,7 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="flex items-baseline gap-2">
-              <div className="text-3xl font-bold text-[#B85C42]">{streak?.current_streak ?? 0}</div>
+              <div className="text-2xl sm:text-3xl font-bold text-[#B85C42]">{streak?.current_streak ?? 0}</div>
               <p className="text-sm text-[#9CA3AF]">days</p>
             </div>
             <p className="text-[12px] text-[#2D8A56] mt-2 font-medium">Best: {streak?.longest_streak ?? 0} days</p>
@@ -163,7 +163,7 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="flex items-baseline gap-2">
-              <div className="text-3xl font-bold text-[#1D1D1F]">{streak?.longest_streak ?? 0}</div>
+              <div className="text-2xl sm:text-3xl font-bold text-[#1D1D1F]">{streak?.longest_streak ?? 0}</div>
               <p className="text-sm text-[#9CA3AF]">days</p>
             </div>
             <p className="text-[12px] text-[#9CA3AF] mt-2">Personal record</p>
@@ -175,7 +175,7 @@ export default async function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="flex items-baseline gap-2">
-              <div className="text-3xl font-bold text-[#1D1D1F]">{totalCount}</div>
+              <div className="text-2xl sm:text-3xl font-bold text-[#1D1D1F]">{totalCount}</div>
               <p className="text-sm text-[#9CA3AF]">completed</p>
             </div>
             <p className="text-[12px] text-[#2D8A56] mt-2">Keep it up!</p>

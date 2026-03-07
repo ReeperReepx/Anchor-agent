@@ -119,15 +119,15 @@ export default function PartnerPage() {
       {partnerStandup && (
         <Card>
           <CardHeader>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-[rgba(184,92,66,0.15)] flex items-center justify-center text-[#B85C42] text-sm font-semibold">
+                <div className="w-8 h-8 rounded-full bg-[rgba(184,92,66,0.15)] flex items-center justify-center text-[#B85C42] text-sm font-semibold shrink-0">
                   P
                 </div>
                 <CardTitle>Your partner&apos;s standup</CardTitle>
                 <Badge variant="info">{partnerStandup.type}</Badge>
               </div>
-              <div className="flex items-center gap-3 text-sm text-[#6B7280]">
+              <div className="flex items-center gap-3 text-sm text-[#6B7280] pl-10 sm:pl-0">
                 {partnerStandup.duration_seconds && (
                   <span>
                     {formatDuration(partnerStandup.duration_seconds)}

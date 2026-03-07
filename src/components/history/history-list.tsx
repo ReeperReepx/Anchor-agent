@@ -162,7 +162,7 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
                 <button
                   type="button"
                   onClick={() => toggleExpanded(standup.id)}
-                  className="w-full text-left px-6 py-4 hover:bg-[#F8F7F4] transition-colors"
+                  className="w-full text-left px-4 sm:px-6 py-4 hover:bg-[#F8F7F4] transition-colors"
                 >
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2.5">
@@ -224,7 +224,7 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
 
                 {/* Expanded details */}
                 {isExpanded && (
-                  <div className="px-6 pb-5 space-y-3">
+                  <div className="px-4 sm:px-6 pb-5 space-y-3">
                     {standup.done_summary && (
                       <div className="border-l-2 border-[rgba(45,138,86,0.4)] pl-3 py-1">
                         <p className="text-[12px] font-semibold text-[#2D8A56] mb-1">Done</p>

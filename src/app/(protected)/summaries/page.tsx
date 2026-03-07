@@ -79,14 +79,14 @@ export default async function SummariesPage() {
                 {monthly.map((s) => (
                   <Card key={s.id} className="hover:border-[#B85C42]/30 transition-colors">
                     <CardContent>
-                      <div className="flex items-center justify-between mb-3">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 sm:gap-0 mb-3">
                         <div className="flex items-center gap-2.5">
                           <div className="w-2 h-2 rounded-full bg-[#B85C42] shrink-0" />
                           <span className="text-[15px] font-semibold text-[#1D1D1F]">
                             {formatMonth(s.month_of)}
                           </span>
                         </div>
-                        <div className="flex items-center gap-3 text-[12px] text-[#9CA3AF]">
+                        <div className="flex items-center gap-3 text-[12px] text-[#9CA3AF] pl-[18px] sm:pl-0">
                           <span>{s.standup_count} standups</span>
                           {s.streak_best != null && (
                             <span className="text-[#B85C42] font-medium">{s.streak_best}-day best streak</span>
@@ -113,7 +113,7 @@ export default async function SummariesPage() {
               <h2 className="text-[11px] font-semibold text-[#6B7280] uppercase tracking-[1px] mb-4">Weekly</h2>
               <Card className="!p-0 divide-y divide-[#E5E5E5]">
                 {weekly.map((s) => (
-                  <div key={s.id} className="px-6 py-4 hover:bg-[#F8F7F4] transition-colors">
+                  <div key={s.id} className="px-4 sm:px-6 py-4 hover:bg-[#F8F7F4] transition-colors">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2.5">
                         <div className="w-1.5 h-1.5 rounded-full bg-[#3B6FC4] shrink-0" />

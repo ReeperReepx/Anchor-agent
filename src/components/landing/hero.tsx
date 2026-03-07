@@ -4,17 +4,17 @@ import { Waveform } from "./waveform";
 
 export function Hero() {
   return (
-    <section className="px-10 pt-[80px] pb-20 max-w-3xl mx-auto text-center">
-      <div className="inline-flex items-center gap-2 bg-white border border-[#E5E5E5] rounded-full px-4 py-1.5 text-[12px] font-medium text-[#6B7280] mb-8 shadow-[0_1px_4px_rgba(0,0,0,0.04)]">
+    <section className="px-5 sm:px-10 pt-16 sm:pt-[80px] pb-16 sm:pb-20 max-w-3xl mx-auto text-center">
+      <div className="inline-flex items-center gap-2 bg-white border border-[#E5E5E5] rounded-full px-4 py-1.5 text-[12px] font-medium text-[#6B7280] mb-6 sm:mb-8 shadow-[0_1px_4px_rgba(0,0,0,0.04)]">
         <span className="w-1.5 h-1.5 rounded-full bg-[#2D8A56] animate-pulse" />
         Now in early access
       </div>
-      <h1 className="text-[52px] font-bold tracking-[-0.025em] leading-[1.1] text-[#1D1D1F]">
+      <h1 className="text-[32px] sm:text-[44px] md:text-[52px] font-bold tracking-[-0.025em] leading-[1.1] text-[#1D1D1F]">
         Five minutes. Three questions.
         <br />
         <span className="bg-gradient-to-r from-[#B85C42] to-[#D4917F] bg-clip-text text-transparent">Every damn day.</span>
       </h1>
-      <p className="mt-6 text-lg text-[#6B7280] max-w-[480px] mx-auto leading-relaxed">
+      <p className="mt-5 sm:mt-6 text-base sm:text-lg text-[#6B7280] max-w-[480px] mx-auto leading-relaxed">
         The voice-first standup for solopreneurs who ship. No typing, no
         dashboards, no excuses.
       </p>

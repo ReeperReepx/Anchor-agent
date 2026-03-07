@@ -291,7 +291,7 @@ export default function StandupPage() {
               ))}
             </div>
 
-            <h1 className="text-3xl font-semibold text-[#1D1D1F] tracking-[-0.02em] mb-3">{info.title}</h1>
+            <h1 className="text-2xl sm:text-3xl font-semibold text-[#1D1D1F] tracking-[-0.02em] mb-3">{info.title}</h1>
             <p className="text-[#6B7280] mb-1">{info.description}</p>
             <p className="text-[13px] text-[#9CA3AF] mb-10">{info.cap}</p>
 
@@ -358,7 +358,7 @@ export default function StandupPage() {
               ))}
             </div>
 
-            <div className="text-6xl font-mono font-bold text-[#1D1D1F] mb-2">
+            <div className="text-5xl sm:text-6xl font-mono font-bold text-[#1D1D1F] mb-2">
               {formatTimer(elapsed)}
             </div>
             <div className="flex items-center justify-center gap-2 mb-4">
@@ -374,7 +374,7 @@ export default function StandupPage() {
             />
 
             {liveMessages.length > 0 && (
-              <div className="bg-[#F0F0F0] rounded-[12px] px-4 py-3 text-left max-h-[100px] overflow-y-auto mb-4">
+              <div className="bg-[#F0F0F0] rounded-[12px] px-3 sm:px-4 py-3 text-left max-h-[100px] overflow-y-auto mb-4">
                 {liveMessages.slice(-3).map((msg, i) => (
                   <div key={i} className="text-[13px] mb-1 last:mb-0">
                     <span className={`font-medium ${msg.role === "Anchor" ? "text-[#B85C42]" : "text-[#6B7280]"}`}>

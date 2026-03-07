@@ -144,7 +144,7 @@ export default async function TrackingPage() {
               <span className="text-[12px] font-medium text-[#9CA3AF]">{weekPct}%</span>
             </div>
             <div className="flex items-baseline gap-2 mb-3">
-              <span className="text-3xl font-bold text-[#1D1D1F]">
+              <span className="text-2xl sm:text-3xl font-bold text-[#1D1D1F]">
                 {thisWeek?.completed ?? 0}
               </span>
               <span className="text-lg text-[#9CA3AF]">/{thisWeek?.total ?? 5}</span>
@@ -167,7 +167,7 @@ export default async function TrackingPage() {
               <span className="text-[12px] font-medium text-[#9CA3AF]">{monthPct}%</span>
             </div>
             <div className="flex items-baseline gap-2 mb-3">
-              <span className="text-3xl font-bold text-[#1D1D1F]">
+              <span className="text-2xl sm:text-3xl font-bold text-[#1D1D1F]">
                 {thisMonth?.completed ?? 0}
               </span>
               <span className="text-lg text-[#9CA3AF]">/{thisMonth?.total ?? 22}</span>
@@ -190,7 +190,7 @@ export default async function TrackingPage() {
               <span className="text-[11px] font-semibold text-[#B85C42] uppercase tracking-[1px]">Current Streak</span>
             </div>
             <div className="flex items-baseline gap-2 mb-1">
-              <span className="text-3xl font-bold text-[#B85C42]">
+              <span className="text-2xl sm:text-3xl font-bold text-[#B85C42]">
                 {streak?.current_streak ?? 0}
               </span>
               <span className="text-sm text-[#9CA3AF]">days</span>

@@ -24,8 +24,8 @@ const TESTIMONIALS = [
 
 export function Testimonials() {
   return (
-    <section className="px-10 py-[60px] max-w-[960px] mx-auto">
-      <h2 className="text-[36px] font-bold tracking-[-0.02em] text-[#1D1D1F] mb-14 text-center">
+    <section className="px-5 sm:px-10 py-12 sm:py-[60px] max-w-[960px] mx-auto">
+      <h2 className="text-[28px] sm:text-[36px] font-bold tracking-[-0.02em] text-[#1D1D1F] mb-10 sm:mb-14 text-center">
         What builders are saying
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
