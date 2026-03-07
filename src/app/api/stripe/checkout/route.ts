@@ -42,7 +42,7 @@ export async function POST(request: Request) {
     customerId = customer.id;
   }
 
-  const { origin } = new URL(request.url);
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || new URL(request.url).origin;
 
   const session = await getStripe().checkout.sessions.create({
     customer: customerId,
@@ -52,8 +52,8 @@ export async function POST(request: Request) {
       trial_period_days: 7,
       metadata: { supabase_user_id: user.id, plan },
     },
-    success_url: `${origin}/dashboard?subscribed=true`,
-    cancel_url: `${origin}/pricing`,
+    success_url: `${appUrl}/dashboard?subscribed=true`,
+    cancel_url: `${appUrl}/pricing`,
     metadata: { supabase_user_id: user.id, plan },
   });
 

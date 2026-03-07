@@ -22,11 +22,11 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "No subscription found" }, { status: 404 });
   }
 
-  const { origin } = new URL(request.url);
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || new URL(request.url).origin;
 
   const session = await getStripe().billingPortal.sessions.create({
     customer: sub.stripe_customer_id,
-    return_url: `${origin}/settings`,
+    return_url: `${appUrl}/settings`,
   });
 
   return NextResponse.json({ url: session.url });

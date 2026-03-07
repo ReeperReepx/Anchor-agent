@@ -307,11 +307,16 @@ function SubscriptionCard() {
     setPortalLoading(true);
     const res = await fetch("/api/stripe/portal", { method: "POST" });
     const data = await res.json();
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      setPortalLoading(false);
+    if (data.url && typeof data.url === "string") {
+      try {
+        const parsed = new URL(data.url);
+        if (parsed.hostname.endsWith("stripe.com")) {
+          window.location.href = data.url;
+          return;
+        }
+      } catch { /* invalid URL */ }
     }
+    setPortalLoading(false);
   }
 
   const planLabel = access?.isGrandfathered

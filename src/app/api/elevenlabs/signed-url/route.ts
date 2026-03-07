@@ -29,7 +29,7 @@ export async function GET() {
   );
 
   if (!response.ok) {
-    console.error("ElevenLabs signed-url error:", response.status, await response.text());
+    console.error("ElevenLabs signed-url error:", response.status);
     return NextResponse.json(
       { error: "Failed to get conversation URL" },
       { status: 502 }

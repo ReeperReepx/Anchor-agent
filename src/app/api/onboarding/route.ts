@@ -30,14 +30,42 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
+  // Validate timezone
+  try {
+    Intl.DateTimeFormat(undefined, { timeZone: body.timezone.trim() });
+  } catch {
+    return NextResponse.json({ error: "Invalid timezone" }, { status: 400 });
+  }
+
+  // Validate standup_time format and range
   if (!/^\d{2}:\d{2}$/.test(body.standup_time)) {
     return NextResponse.json({ error: "Invalid standup_time format" }, { status: 400 });
+  }
+  const [hours, minutes] = body.standup_time.split(":").map(Number);
+  if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) {
+    return NextResponse.json({ error: "Invalid standup_time value" }, { status: 400 });
+  }
+
+  // Validate preference enum
+  const VALID_PREFS: string[] = ["solo", "shared", "both"];
+  if (!VALID_PREFS.includes(body.preference)) {
+    return NextResponse.json({ error: "Invalid preference" }, { status: 400 });
+  }
+
+  // Validate goal_categories
+  if (!Array.isArray(body.goal_categories) || body.goal_categories.length > 10) {
+    return NextResponse.json({ error: "Invalid goal_categories" }, { status: 400 });
+  }
+  for (const g of body.goal_categories) {
+    if (typeof g !== "string" || g.length > 50) {
+      return NextResponse.json({ error: "Invalid goal category" }, { status: 400 });
+    }
   }
 
   const { error } = await supabase.from("users").upsert({
     id: user.id,
     email: user.email!,
-    timezone: body.timezone,
+    timezone: body.timezone.trim(),
     standup_time: body.standup_time,
     goal_categories: body.goal_categories,
     preference: body.preference,

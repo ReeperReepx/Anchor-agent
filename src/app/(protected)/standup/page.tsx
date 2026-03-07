@@ -98,7 +98,7 @@ export default function StandupPage() {
 
   const conversation = useConversation({
     onConnect: () => {
-      console.log("[Anchor] ElevenLabs connected");
+      if (process.env.NODE_ENV === "development") console.log("[Anchor] ElevenLabs connected");
       wasActiveRef.current = true;
       setState("active");
       startTimeRef.current = Date.now();
@@ -110,14 +110,13 @@ export default function StandupPage() {
       const maxMs = (maxMinutesRef.current + 0.5) * 60 * 1000;
       maxTimerRef.current = setTimeout(() => {
         if (wasActiveRef.current && !endingRef.current) {
-          console.log("[Anchor] Max duration reached, auto-ending");
           endingRef.current = true;
           conversation.endSession();
         }
       }, maxMs);
     },
     onDisconnect: async (details) => {
-      console.log("[Anchor] ElevenLabs disconnected, wasActive:", wasActiveRef.current, "details:", details);
+      if (process.env.NODE_ENV === "development") console.log("[Anchor] ElevenLabs disconnected", details);
       if (timerRef.current) {
         clearInterval(timerRef.current);
         timerRef.current = null;
@@ -167,7 +166,6 @@ export default function StandupPage() {
       }
     },
     onMessage: (message) => {
-      console.log("[Anchor] Message:", message.source, message.message);
       if (message.source === "user" || message.source === "ai") {
         const role = message.source === "user" ? "You" : "Anchor";
         transcriptRef.current.push(`${role}: ${message.message}`);
@@ -194,7 +192,6 @@ export default function StandupPage() {
           ];
           if (goodbyePhrases.some((phrase) => msg.includes(phrase)) && !endingRef.current) {
             endingRef.current = true;
-            console.log("[Anchor] Agent wrapped up, auto-ending in 3s");
             setTimeout(() => {
               conversation.endSession();
             }, 3000);
@@ -203,7 +200,7 @@ export default function StandupPage() {
       }
     },
     onError: (err) => {
-      console.error("[Anchor] ElevenLabs error:", err);
+      if (process.env.NODE_ENV === "development") console.error("[Anchor] ElevenLabs error:", err);
       setError(typeof err === "string" ? err : "Voice connection error");
       setState("error");
       wasActiveRef.current = false;
@@ -253,7 +250,6 @@ export default function StandupPage() {
       const sessionMaxMinutes = serverMaxMinutes || 10;
       setMaxMinutes(sessionMaxMinutes);
       maxMinutesRef.current = sessionMaxMinutes;
-      console.log("[Anchor] Standup created:", standup_id, "max:", sessionMaxMinutes, "min");
 
       // 2. Get signed URL for ElevenLabs
       const urlRes = await fetch("/api/elevenlabs/signed-url");
@@ -262,14 +258,12 @@ export default function StandupPage() {
         throw new Error(body.error || "Failed to connect to voice agent");
       }
       const { signed_url } = await urlRes.json();
-      console.log("[Anchor] Got signed URL, starting conversation...");
 
       // 3. Request mic permission explicitly first
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
         // Stop the stream — we just needed the permission grant
         stream.getTracks().forEach((t) => t.stop());
-        console.log("[Anchor] Mic permission granted");
       } catch (micErr) {
         throw new Error("Microphone access denied. Please allow mic access and try again.");
       }
@@ -302,7 +296,6 @@ export default function StandupPage() {
         lastDone = lastStandupRes.data?.planned_summary || "none";
       }
 
-      console.log("[Anchor] Dynamic vars:", { name: userName, goals, streak, last_done: lastDone });
 
       // 5. Start ElevenLabs conversation with dynamic variables
       await conversation.startSession({
@@ -315,7 +308,7 @@ export default function StandupPage() {
         },
       });
     } catch (err) {
-      console.error("[Anchor] Start error:", err);
+      if (process.env.NODE_ENV === "development") console.error("[Anchor] Start error:", err);
       setError(err instanceof Error ? err.message : "Something went wrong");
       setState("error");
     }

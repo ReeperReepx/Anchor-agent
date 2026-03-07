@@ -16,11 +16,16 @@ export default function PricingPage() {
       body: JSON.stringify({ plan }),
     });
     const data = await res.json();
-    if (data.url) {
-      window.location.href = data.url;
-    } else {
-      setLoading(null);
+    if (data.url && typeof data.url === "string") {
+      try {
+        const parsed = new URL(data.url);
+        if (parsed.hostname.endsWith("stripe.com")) {
+          window.location.href = data.url;
+          return;
+        }
+      } catch { /* invalid URL */ }
     }
+    setLoading(null);
   }
 
   const builder = PLANS.builder;

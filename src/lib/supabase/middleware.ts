@@ -4,7 +4,7 @@ import { NextResponse, type NextRequest } from "next/server";
 const PUBLIC_ROUTES = ["/", "/login", "/onboarding", "/auth/callback"];
 const PUBLIC_PREFIXES = ["/blog"];
 // Routes that require auth but NOT a subscription
-const NO_SUB_REQUIRED = ["/pricing", "/settings", "/api/"];
+const NO_SUB_REQUIRED = ["/pricing", "/settings", "/api/stripe/", "/api/subscription", "/api/onboarding", "/api/calendar/"];
 
 export async function updateSession(request: NextRequest) {
   const pathname = request.nextUrl.pathname;

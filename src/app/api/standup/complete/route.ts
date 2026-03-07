@@ -31,6 +31,27 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
   }
 
+  // Input validation
+  const MAX_TRANSCRIPT = 50_000;
+  if (body.transcript && body.transcript.length > MAX_TRANSCRIPT) {
+    return NextResponse.json({ error: "Transcript too long" }, { status: 400 });
+  }
+  if (body.duration_seconds !== undefined && (body.duration_seconds < 0 || body.duration_seconds > 7200)) {
+    return NextResponse.json({ error: "Invalid duration" }, { status: 400 });
+  }
+  if (body.audio_url && (body.audio_url.length > 2048 || !/^https?:\/\//.test(body.audio_url))) {
+    return NextResponse.json({ error: "Invalid audio URL" }, { status: 400 });
+  }
+  if (body.done_summary && body.done_summary.length > 2000) {
+    return NextResponse.json({ error: "Summary too long" }, { status: 400 });
+  }
+  if (body.planned_summary && body.planned_summary.length > 2000) {
+    return NextResponse.json({ error: "Summary too long" }, { status: 400 });
+  }
+  if (body.blockers_summary && body.blockers_summary.length > 2000) {
+    return NextResponse.json({ error: "Summary too long" }, { status: 400 });
+  }
+
   let standupId = body.standup_id;
 
   if (standupId) {
