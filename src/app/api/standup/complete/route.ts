@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { calculateStreakUpdate } from "@/lib/utils/streaks";
+import { summarizeTranscript } from "@/lib/ai";
 import type { Streak } from "@/lib/types/database";
 
 interface CompleteBody {
@@ -65,15 +66,21 @@ export async function POST(request: Request) {
     );
   }
 
+  // Generate AI summaries from transcript
+  const transcript = body.transcript ?? "";
+  const summaries = body.done_summary
+    ? { done_summary: body.done_summary, planned_summary: body.planned_summary || null, blockers_summary: body.blockers_summary || null }
+    : await summarizeTranscript(transcript);
+
   const { error: updateError } = await supabase
     .from("standups")
     .update({
-      transcript: body.transcript ?? "Standup completed",
+      transcript: transcript || "Standup completed",
       audio_url: body.audio_url,
       duration_seconds: body.duration_seconds,
-      done_summary: body.done_summary,
-      planned_summary: body.planned_summary,
-      blockers_summary: body.blockers_summary,
+      done_summary: summaries.done_summary,
+      planned_summary: summaries.planned_summary,
+      blockers_summary: summaries.blockers_summary,
     })
     .eq("id", standupId)
     .eq("user_id", user.id);
@@ -82,7 +89,6 @@ export async function POST(request: Request) {
     console.error("Standup update error:", updateError);
     return NextResponse.json({ error: "Failed to complete standup" }, { status: 500 });
   }
-
 
   // Update streak
   const today = new Date().toISOString().split("T")[0];
@@ -100,5 +106,10 @@ export async function POST(request: Request) {
       .eq("user_id", user.id);
   }
 
-  return NextResponse.json({ success: true });
+  return NextResponse.json({
+    success: true,
+    done_summary: summaries.done_summary,
+    planned_summary: summaries.planned_summary,
+    blockers_summary: summaries.blockers_summary,
+  });
 }

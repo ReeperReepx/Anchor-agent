@@ -5,7 +5,7 @@ const FAQ_ITEMS = [
   },
   {
     q: "How long does a standup take?",
-    a: "Daily standups are 5-10 minutes. Weekly planning sessions are up to 45 minutes (Premium).",
+    a: "Daily standups are 5-10 minutes. Weekly planning sessions are up to 45 minutes (Founder plan).",
   },
   {
     q: "What are shared standups?",

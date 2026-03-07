@@ -86,7 +86,7 @@ export default function OnboardingPage() {
       });
     }
 
-    router.push("/dashboard");
+    router.push("/pricing");
   }
 
   const canProceed = (() => {

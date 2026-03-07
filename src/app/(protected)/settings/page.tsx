@@ -54,7 +54,7 @@ export default function SettingsPage() {
 
   if (!profile) {
     return (
-      <div className="max-w-lg space-y-6">
+      <div className="space-y-6">
         <div className="skeleton h-7 w-32" />
         <div className="rounded-[14px] border border-[#E5E5E5] bg-white p-[28px]">
           <div className="skeleton h-4 w-24 mb-4" />
@@ -73,7 +73,7 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="max-w-lg space-y-6">
+    <div className="space-y-6">
       <div className="flex items-center gap-3">
         <div className="w-10 h-10 rounded-full bg-gradient-to-b from-[#C46B50] to-[#B85C42] flex items-center justify-center text-white text-sm font-semibold shadow-[0_2px_8px_rgba(184,92,66,0.25)]">
           {profile.email?.charAt(0).toUpperCase()}
@@ -284,6 +284,52 @@ function NotificationsCard() {
 }
 
 function SubscriptionCard() {
+  const [access, setAccess] = useState<{
+    hasAccess: boolean;
+    isGrandfathered: boolean;
+    isTrial: boolean;
+    tier: string | null;
+    trialDaysLeft: number | null;
+  } | null>(null);
+  const [portalLoading, setPortalLoading] = useState(false);
+
+  useEffect(() => {
+    async function load() {
+      const res = await fetch("/api/subscription");
+      if (res.ok) {
+        setAccess(await res.json());
+      }
+    }
+    load();
+  }, []);
+
+  async function openPortal() {
+    setPortalLoading(true);
+    const res = await fetch("/api/stripe/portal", { method: "POST" });
+    const data = await res.json();
+    if (data.url) {
+      window.location.href = data.url;
+    } else {
+      setPortalLoading(false);
+    }
+  }
+
+  const planLabel = access?.isGrandfathered
+    ? "Grandfathered"
+    : access?.tier
+      ? access.tier.charAt(0).toUpperCase() + access.tier.slice(1)
+      : "None";
+
+  const statusLabel = access?.isGrandfathered
+    ? "Active — Free"
+    : access?.isTrial
+      ? `Trial — ${access.trialDaysLeft} day${access.trialDaysLeft !== 1 ? "s" : ""} left`
+      : access?.hasAccess
+        ? "Active"
+        : "Inactive";
+
+  const statusColor = access?.hasAccess || access?.isGrandfathered ? "#2D8A56" : "#B85C42";
+
   return (
     <Card>
       <CardHeader>
@@ -294,13 +340,32 @@ function SubscriptionCard() {
           <div className="flex justify-between items-center text-sm">
             <span className="text-[#6B7280]">Plan</span>
             <span className="bg-[rgba(45,138,86,0.1)] text-[#2D8A56] text-xs font-medium px-2.5 py-0.5 rounded-full uppercase tracking-[1px]">
-              Early Access
+              {planLabel}
             </span>
           </div>
           <div className="flex justify-between text-sm">
             <span className="text-[#6B7280]">Status</span>
-            <span className="text-[#2D8A56]">Active — Free</span>
+            <span style={{ color: statusColor }}>{statusLabel}</span>
           </div>
+          {access && !access.isGrandfathered && access.hasAccess && (
+            <Button
+              variant="secondary"
+              className="w-full mt-2"
+              onClick={openPortal}
+              disabled={portalLoading}
+            >
+              {portalLoading ? "Loading..." : "Manage Subscription"}
+            </Button>
+          )}
+          {access && !access.hasAccess && !access.isGrandfathered && (
+            <Button
+              variant="primary"
+              className="w-full mt-2"
+              onClick={() => window.location.href = "/pricing"}
+            >
+              Choose a Plan
+            </Button>
+          )}
         </div>
       </CardContent>
     </Card>

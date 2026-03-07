@@ -141,12 +141,12 @@ describe("Database types", () => {
       user_id: "user-uuid",
       stripe_customer_id: "cus_123",
       stripe_subscription_id: "sub_123",
-      tier: "premium",
+      tier: "founder",
       status: "active",
       trial_ends_at: null,
       current_period_end: "2024-02-01T00:00:00Z",
     };
-    expect(sub.tier).toBe("premium");
+    expect(sub.tier).toBe("founder");
   });
 
   it("type unions are valid", () => {
@@ -154,7 +154,7 @@ describe("Database types", () => {
     const preferences: UserPreference[] = ["solo", "shared", "both"];
     const styles: AccountabilityStyle[] = ["gentle", "direct", "drill"];
     const matchStatuses: MatchStatus[] = ["pending", "active", "paused", "ended"];
-    const tiers: SubscriptionTier[] = ["standard", "premium"];
+    const tiers: SubscriptionTier[] = ["builder", "founder"];
     const subStatuses: SubscriptionStatus[] = [
       "trialing",
       "active",

@@ -3,6 +3,8 @@ import { NextResponse, type NextRequest } from "next/server";
 
 const PUBLIC_ROUTES = ["/", "/login", "/onboarding", "/auth/callback"];
 const PUBLIC_PREFIXES = ["/blog"];
+// Routes that require auth but NOT a subscription
+const NO_SUB_REQUIRED = ["/pricing", "/settings", "/api/"];
 
 export async function updateSession(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
@@ -49,6 +51,41 @@ export async function updateSession(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
     return NextResponse.redirect(url);
+  }
+
+  // Check subscription for protected routes (skip public, pricing, settings, API)
+  if (user && !isPublicRoute && !NO_SUB_REQUIRED.some((r) => pathname.startsWith(r))) {
+    // Check if user is grandfathered (created before cutoff)
+    const { data: profile } = await supabase
+      .from("users")
+      .select("created_at")
+      .eq("id", user.id)
+      .single();
+
+    const GRANDFATHER_CUTOFF = "2026-03-07T23:00:00Z";
+    const isGrandfathered = profile && profile.created_at < GRANDFATHER_CUTOFF;
+
+    if (!isGrandfathered) {
+      // Check for active subscription
+      const { data: sub } = await supabase
+        .from("subscriptions")
+        .select("status, trial_ends_at")
+        .eq("user_id", user.id)
+        .single();
+
+      const hasActiveSub =
+        sub &&
+        (sub.status === "active" ||
+          (sub.status === "trialing" &&
+            sub.trial_ends_at &&
+            new Date(sub.trial_ends_at) > new Date()));
+
+      if (!hasActiveSub) {
+        const url = request.nextUrl.clone();
+        url.pathname = "/pricing";
+        return NextResponse.redirect(url);
+      }
+    }
   }
 
   return supabaseResponse;

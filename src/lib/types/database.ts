@@ -2,7 +2,7 @@ export type StandupType = "daily" | "weekly";
 export type UserPreference = "solo" | "shared" | "both";
 export type AccountabilityStyle = "gentle" | "direct" | "drill";
 export type MatchStatus = "pending" | "active" | "paused" | "ended";
-export type SubscriptionTier = "standard" | "premium";
+export type SubscriptionTier = "builder" | "founder";
 export type SubscriptionStatus = "trialing" | "active" | "canceled" | "expired";
 
 export interface User {

@@ -64,13 +64,37 @@ export default function StandupPage() {
     planned: string | null;
     blockers: string | null;
   } | null>(null);
+  const [access, setAccess] = useState<{
+    hasAccess: boolean;
+    isGrandfathered: boolean;
+    tier: string | null;
+    loading: boolean;
+  }>({ hasAccess: true, isGrandfathered: false, tier: null, loading: true });
+  const [maxMinutes, setMaxMinutes] = useState<number>(10);
+  const maxMinutesRef = useRef<number>(10);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const maxTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const startTimeRef = useRef<number>(0);
   const standupIdRef = useRef<string | null>(null);
   const transcriptRef = useRef<string[]>([]);
   const wasActiveRef = useRef(false);
   const questionStepRef = useRef(0);
+  const endingRef = useRef(false);
   const router = useRouter();
+
+  useEffect(() => {
+    fetch("/api/subscription")
+      .then((r) => r.json())
+      .then((data) => {
+        setAccess({
+          hasAccess: data.hasAccess || data.isGrandfathered,
+          isGrandfathered: data.isGrandfathered,
+          tier: data.tier,
+          loading: false,
+        });
+      })
+      .catch(() => setAccess((prev) => ({ ...prev, loading: false })));
+  }, []);
 
   const conversation = useConversation({
     onConnect: () => {
@@ -81,12 +105,26 @@ export default function StandupPage() {
       timerRef.current = setInterval(() => {
         setElapsed(Math.floor((Date.now() - startTimeRef.current) / 1000));
       }, 1000);
+
+      // Auto-end at max duration (with 30s grace buffer)
+      const maxMs = (maxMinutesRef.current + 0.5) * 60 * 1000;
+      maxTimerRef.current = setTimeout(() => {
+        if (wasActiveRef.current && !endingRef.current) {
+          console.log("[Anchor] Max duration reached, auto-ending");
+          endingRef.current = true;
+          conversation.endSession();
+        }
+      }, maxMs);
     },
     onDisconnect: async (details) => {
       console.log("[Anchor] ElevenLabs disconnected, wasActive:", wasActiveRef.current, "details:", details);
       if (timerRef.current) {
         clearInterval(timerRef.current);
         timerRef.current = null;
+      }
+      if (maxTimerRef.current) {
+        clearTimeout(maxTimerRef.current);
+        maxTimerRef.current = null;
       }
 
       // Only complete if we actually had an active session
@@ -135,15 +173,31 @@ export default function StandupPage() {
         transcriptRef.current.push(`${role}: ${message.message}`);
         setLiveMessages((prev) => [...prev.slice(-4), { role, text: message.message }]);
 
-        // Detect question transitions from AI messages
         if (message.source === "ai") {
           const msg = message.message.toLowerCase();
+
+          // Detect question transitions
           if (msg.includes("what's next") || msg.includes("what are you planning") || msg.includes("plan for today") || msg.includes("what do you want to") || msg.includes("priorities")) {
             questionStepRef.current = Math.max(questionStepRef.current, 1);
             setQuestionStep(questionStepRef.current);
           } else if (msg.includes("blocker") || msg.includes("blocking") || msg.includes("stuck") || msg.includes("obstacle") || msg.includes("in the way") || msg.includes("challenge")) {
             questionStepRef.current = Math.max(questionStepRef.current, 2);
             setQuestionStep(questionStepRef.current);
+          }
+
+          // Auto-end when agent wraps up / says goodbye
+          const goodbyePhrases = [
+            "have a great", "have a good", "good luck", "go crush it",
+            "talk to you", "see you", "until next time", "that's a wrap",
+            "standup is done", "standup complete", "all done", "you're all set",
+            "catch you", "take care",
+          ];
+          if (goodbyePhrases.some((phrase) => msg.includes(phrase)) && !endingRef.current) {
+            endingRef.current = true;
+            console.log("[Anchor] Agent wrapped up, auto-ending in 3s");
+            setTimeout(() => {
+              conversation.endSession();
+            }, 3000);
           }
         }
       }
@@ -163,6 +217,7 @@ export default function StandupPage() {
   useEffect(() => {
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
+      if (maxTimerRef.current) clearTimeout(maxTimerRef.current);
     };
   }, []);
 
@@ -176,6 +231,11 @@ export default function StandupPage() {
     questionStepRef.current = 0;
     transcriptRef.current = [];
     wasActiveRef.current = false;
+    endingRef.current = false;
+    if (maxTimerRef.current) {
+      clearTimeout(maxTimerRef.current);
+      maxTimerRef.current = null;
+    }
 
     try {
       // 1. Create the standup record in DB
@@ -188,9 +248,12 @@ export default function StandupPage() {
         const body = await startRes.json().catch(() => ({}));
         throw new Error(body.error || "Failed to start session");
       }
-      const { standup_id } = await startRes.json();
+      const { standup_id, max_minutes: serverMaxMinutes } = await startRes.json();
       standupIdRef.current = standup_id;
-      console.log("[Anchor] Standup created:", standup_id);
+      const sessionMaxMinutes = serverMaxMinutes || 10;
+      setMaxMinutes(sessionMaxMinutes);
+      maxMinutesRef.current = sessionMaxMinutes;
+      console.log("[Anchor] Standup created:", standup_id, "max:", sessionMaxMinutes, "min");
 
       // 2. Get signed URL for ElevenLabs
       const urlRes = await fetch("/api/elevenlabs/signed-url");
@@ -269,6 +332,29 @@ export default function StandupPage() {
   };
 
   const info = SESSION_INFO[standupType];
+  const canWeekly = access.isGrandfathered || access.tier === "founder";
+
+  if (access.loading) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[70vh]">
+        <p className="text-[#6B7280]">Loading...</p>
+      </div>
+    );
+  }
+
+  if (!access.hasAccess) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[70vh]">
+        <div className="w-full max-w-sm text-center">
+          <h1 className="text-2xl font-semibold text-[#1D1D1F] mb-3">Subscribe to continue</h1>
+          <p className="text-[#6B7280] mb-8">Choose a plan to start your daily standups.</p>
+          <Button variant="primary" className="w-full" onClick={() => router.push("/pricing")}>
+            View Plans
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[70vh]">
@@ -279,14 +365,23 @@ export default function StandupPage() {
               {(["daily", "weekly"] as const).map((t) => (
                 <button
                   key={t}
-                  onClick={() => setStandupType(t)}
+                  onClick={() => {
+                    if (t === "weekly" && !canWeekly) return;
+                    setStandupType(t);
+                  }}
                   className={`px-5 py-2 rounded-[10px] text-sm font-medium transition-colors ${
                     standupType === t
                       ? "bg-[#B85C42] text-white"
-                      : "bg-[#F0F0F0] text-[#6B7280] hover:text-[#1D1D1F]"
+                      : t === "weekly" && !canWeekly
+                        ? "bg-[#F0F0F0] text-[#D1D5DB] cursor-not-allowed"
+                        : "bg-[#F0F0F0] text-[#6B7280] hover:text-[#1D1D1F]"
                   }`}
+                  title={t === "weekly" && !canWeekly ? "Founder plan required" : undefined}
                 >
                   {t === "daily" ? "Daily" : "Weekly"}
+                  {t === "weekly" && !canWeekly && (
+                    <span className="ml-1 text-[10px] text-[#9CA3AF]">PRO</span>
+                  )}
                 </button>
               ))}
             </div>
@@ -386,8 +481,16 @@ export default function StandupPage() {
               </div>
             )}
 
-            <p className="text-sm text-[#9CA3AF] mb-8">
+            <p className="text-sm text-[#9CA3AF] mb-2">
               Speak naturally. Anchor is listening.
+            </p>
+            {elapsed >= maxMinutes * 60 - 60 && elapsed < maxMinutes * 60 && (
+              <p className="text-xs text-[#B85C42] mb-2 animate-pulse">
+                Less than 1 minute remaining
+              </p>
+            )}
+            <p className="text-[11px] text-[#D1D5DB] mb-6">
+              {maxMinutes} min max
             </p>
             <Button variant="secondary" onClick={endSession} className="px-10">
               End Session

@@ -1,7 +1,7 @@
 const STATS = [
-  { value: "91%", label: "of daily priorities completed" },
-  { value: "23", label: "day average streak" },
-  { value: "2.3x", label: "more likely to hit weekly goals" },
+  { value: "5 min", label: "daily standup, voice-first" },
+  { value: "3", label: "questions to lock in your day" },
+  { value: "$0", label: "for your first 7 days" },
 ];
 
 const OUTCOMES = [
@@ -21,15 +21,15 @@ const OUTCOMES = [
   {
     title: "Lock in your priorities",
     description:
-      "Say it out loud, commit to it. Users who speak their plan follow through 91% of the time.",
+      "Say it out loud, commit to it. Speaking your plan creates real accountability — no more vague to-do lists.",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#B85C42" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10" />
         <polyline points="12 6 12 12 16 14" />
       </svg>
     ),
-    stat: "91%",
-    statLabel: "follow-through rate",
+    stat: "3",
+    statLabel: "focused questions daily",
   },
   {
     title: "Kill your blockers",

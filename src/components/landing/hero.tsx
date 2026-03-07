@@ -7,7 +7,7 @@ export function Hero() {
     <section className="px-5 sm:px-10 pt-16 sm:pt-[80px] pb-16 sm:pb-20 max-w-3xl mx-auto text-center">
       <div className="inline-flex items-center gap-2 bg-white border border-[#E5E5E5] rounded-full px-4 py-1.5 text-[12px] font-medium text-[#6B7280] mb-6 sm:mb-8 shadow-[0_1px_4px_rgba(0,0,0,0.04)]">
         <span className="w-1.5 h-1.5 rounded-full bg-[#2D8A56] animate-pulse" />
-        Now in early access
+        7-day free trial
       </div>
       <h1 className="text-[32px] sm:text-[44px] md:text-[52px] font-bold tracking-[-0.025em] leading-[1.1] text-[#1D1D1F]">
         Five minutes. Three questions.
@@ -33,10 +33,10 @@ export function Hero() {
               <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
               <line x1="12" y1="19" x2="12" y2="23" />
             </svg>
-            Get Early Access — Free
+            Start Free Trial
           </Button>
         </Link>
-        <span className="text-[12px] text-[#9CA3AF]">No credit card required</span>
+        <span className="text-[12px] text-[#9CA3AF]">7 days free, then from $20/mo</span>
       </div>
       <div className="mt-10">
         <Waveform />

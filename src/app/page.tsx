@@ -18,14 +18,14 @@ export default function LandingPage() {
           <a href="#how-it-works" className="hidden sm:inline hover:text-[#1D1D1F] transition-colors">
             How it works
           </a>
-          <a href="#early-access" className="hidden sm:inline hover:text-[#1D1D1F] transition-colors">
+          <a href="#pricing" className="hidden sm:inline hover:text-[#1D1D1F] transition-colors">
             Pricing
           </a>
           <Link href="/login" className="hover:text-[#1D1D1F] transition-colors">
             Login
           </Link>
           <Link href="/login">
-            <Button size="sm">Get Early Access</Button>
+            <Button size="sm">Start Free Trial</Button>
           </Link>
         </div>
       </nav>

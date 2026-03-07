@@ -29,7 +29,7 @@ export default function BlogPage() {
             href="/login"
             className="bg-[#B85C42] hover:bg-[#D4917F] text-white px-4 py-2 rounded-[10px] text-sm font-semibold transition-all"
           >
-            Get Early Access
+            Start Free Trial
           </Link>
         </div>
       </nav>

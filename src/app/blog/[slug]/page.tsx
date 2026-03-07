@@ -80,7 +80,7 @@ export default async function ArticlePage({
             href="/login"
             className="bg-[#B85C42] hover:bg-[#D4917F] text-white px-4 py-2 rounded-[10px] text-sm font-semibold transition-all"
           >
-            Get Early Access
+            Start Free Trial
           </Link>
         </div>
       </nav>
@@ -121,14 +121,13 @@ export default async function ArticlePage({
               Ready to start your streak?
             </h3>
             <p className="text-sm text-[#6B7280] mb-5">
-              Anchor is a voice-first daily standup for solopreneurs. Free
-              during early access.
+              Anchor is a voice-first daily standup for solopreneurs. Start your 7-day free trial.
             </p>
             <Link
               href="/login"
               className="inline-flex items-center gap-2 bg-[#B85C42] hover:bg-[#D4917F] text-white px-6 py-3 rounded-[10px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(184,92,66,0.3)]"
             >
-              Get Early Access — Free
+              Start Free Trial
             </Link>
           </div>
         </div>
