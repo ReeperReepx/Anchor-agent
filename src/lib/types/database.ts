@@ -102,6 +102,25 @@ export interface PartnerQueue {
   status: PartnerQueueStatus;
 }
 
+export interface Community {
+  id: string;
+  name: string;
+  description: string | null;
+  slug: string;
+  created_by: string;
+  member_count: number;
+  is_public: boolean;
+  created_at: string;
+}
+
+export interface CommunityMember {
+  id: string;
+  community_id: string;
+  user_id: string;
+  role: "owner" | "member";
+  joined_at: string;
+}
+
 export interface Database {
   public: {
     Tables: {
@@ -149,6 +168,16 @@ export interface Database {
         Row: PartnerQueue;
         Insert: Omit<PartnerQueue, "id">;
         Update: Partial<Omit<PartnerQueue, "id">>;
+      };
+      communities: {
+        Row: Community;
+        Insert: Omit<Community, "id" | "created_at">;
+        Update: Partial<Omit<Community, "id" | "created_at">>;
+      };
+      community_members: {
+        Row: CommunityMember;
+        Insert: Omit<CommunityMember, "id">;
+        Update: Partial<Omit<CommunityMember, "id">>;
       };
     };
   };
