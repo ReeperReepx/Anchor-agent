@@ -74,45 +74,13 @@ export default function PartnerPage() {
   }
 
   if (noPartner) {
-    return (
-      <div className="space-y-6">
-        <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Partner Standup</h1>
-        <Card>
-          <CardContent className="py-12 text-center">
-            <div className="w-16 h-16 bg-[rgba(255,149,0,0.08)] border border-[rgba(255,149,0,0.15)] rounded-full flex items-center justify-center mx-auto mb-5 shadow-[0_0_24px_rgba(255,149,0,0.08)]">
-              <svg
-                className="w-7 h-7 text-[#FF9500]"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-              </svg>
-            </div>
-            <h2 className="text-[15px] font-semibold text-[#1D1D1F] mb-2">
-              No partner yet
-            </h2>
-            <p className="text-[#86868B] text-sm mb-2 max-w-xs mx-auto">
-              You&apos;ll be matched with a new accountability partner every week
-              based on your goals and timezone.
-            </p>
-            <p className="text-[12px] text-[#9CA3AF] mb-6">Partners see each other&apos;s standup summaries, never recordings.</p>
-            <Button>Find an accountability partner</Button>
-          </CardContent>
-        </Card>
-      </div>
-    );
+    return <JoinQueueView />;
   }
 
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Partner Standup</h1>
+        <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Collaborative Standups</h1>
         <RotationBadge daysLeft={daysLeft} />
       </div>
 
@@ -166,6 +134,99 @@ function RotationBadge({ daysLeft }: { daysLeft: number }) {
       <span>
         New partner in {daysLeft} day{daysLeft !== 1 ? "s" : ""}
       </span>
+    </div>
+  );
+}
+
+const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri"] as const;
+
+function JoinQueueView() {
+  const [selectedDays, setSelectedDays] = useState<string[]>([]);
+  const [joined, setJoined] = useState(false);
+
+  function toggleDay(day: string) {
+    setSelectedDays((prev) =>
+      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
+    );
+  }
+
+  function handleJoin() {
+    if (selectedDays.length === 0) return;
+    // TODO: POST to /api/partner/join with selectedDays
+    setJoined(true);
+  }
+
+  return (
+    <div className="space-y-6">
+      <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Collaborative Standups</h1>
+      <Card>
+        <CardContent className="py-12 text-center">
+          <div className="w-16 h-16 bg-[rgba(255,149,0,0.08)] border border-[rgba(255,149,0,0.15)] rounded-full flex items-center justify-center mx-auto mb-5 shadow-[0_0_24px_rgba(255,149,0,0.08)]">
+            <svg
+              className="w-7 h-7 text-[#FF9500]"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+            </svg>
+          </div>
+
+          {joined ? (
+            <>
+              <h2 className="text-[15px] font-semibold text-[#1D1D1F] mb-2">
+                You&apos;re in the queue!
+              </h2>
+              <p className="text-[#86868B] text-sm mb-2 max-w-sm mx-auto">
+                We&apos;ll match you with another solopreneur for collaborative standups on{" "}
+                <span className="font-medium text-[#1D1D1F]">{selectedDays.join(", ")}</span>.
+              </p>
+              <p className="text-[12px] text-[#9CA3AF]">You&apos;ll be notified when your match is ready.</p>
+            </>
+          ) : (
+            <>
+              <h2 className="text-[15px] font-semibold text-[#1D1D1F] mb-2">
+                Join a collaborative standup
+              </h2>
+              <p className="text-[#86868B] text-sm mb-6 max-w-sm mx-auto">
+                Get matched with another solopreneur for joint standup sessions.
+                You&apos;ll each do your standup separately, then see each other&apos;s summaries.
+              </p>
+
+              <div className="mb-6">
+                <p className="text-[13px] font-medium text-[#1D1D1F] mb-3">
+                  Which days do you want joint sessions?
+                </p>
+                <div className="flex items-center justify-center gap-2">
+                  {WEEKDAYS.map((day) => (
+                    <button
+                      key={day}
+                      onClick={() => toggleDay(day)}
+                      className={`w-12 h-12 rounded-xl text-sm font-semibold transition-all ${
+                        selectedDays.includes(day)
+                          ? "bg-[#FF9500] text-white shadow-[0_2px_8px_rgba(255,149,0,0.3)]"
+                          : "bg-[#F5F5F7] text-[#86868B] hover:bg-[#EEEEEF]"
+                      }`}
+                    >
+                      {day}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <p className="text-[12px] text-[#9CA3AF] mb-6">Partners see each other&apos;s standup summaries, never recordings.</p>
+              <Button onClick={handleJoin} disabled={selectedDays.length === 0}>
+                Join the queue
+              </Button>
+            </>
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 }

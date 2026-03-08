@@ -1,5 +1,4 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { formatRelativeDate, formatDuration } from "@/lib/utils/formatting";
 import type { Standup } from "@/lib/types/database";
 
@@ -26,30 +25,57 @@ export function RecentStandupsList({ standups }: { standups: Standup[] }) {
             </a>
           </div>
         ) : (
-          <div className="space-y-4">
-            {standups.map((standup) => (
-              <div
-                key={standup.id}
-                className={`flex items-start justify-between border-l-2 pl-4 pb-4 last:pb-0 ${
-                  standup.type === "weekly" ? "border-l-[#FBBF24]" : "border-l-[#FF9500]"
-                }`}
-              >
-                <div className="min-w-0">
-                  <div className="flex items-center gap-2">
-                    <Badge variant={standup.type === "daily" ? "info" : "warning"}>
-                      {standup.type}
-                    </Badge>
-                    <span className="text-sm text-[#86868B]">{formatRelativeDate(standup.date)}</span>
+          <div className="relative pl-6">
+            {/* Timeline line */}
+            <div className="absolute left-[7px] top-1 bottom-1 w-[2px] bg-[#F0F0F0] rounded-full" />
+
+            <div className="space-y-5">
+              {standups.map((standup) => {
+                const isDaily = standup.type === "daily";
+                return (
+                  <div key={standup.id} className="relative">
+                    {/* Timeline dot */}
+                    <div
+                      className={`absolute -left-6 top-1 w-3.5 h-3.5 rounded-full border-2 border-white ${
+                        isDaily
+                          ? "bg-[#FF9500] shadow-[0_0_0_2px_#FF9500]"
+                          : "bg-[#FBBF24] shadow-[0_0_0_2px_#FBBF24]"
+                      }`}
+                    />
+
+                    {/* Content */}
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span
+                            className={`text-[10px] font-bold uppercase tracking-[0.5px] px-2 py-0.5 rounded-md ${
+                              isDaily
+                                ? "bg-[rgba(255,149,0,0.1)] text-[#FF9500]"
+                                : "bg-[rgba(251,191,36,0.1)] text-[#D97706]"
+                            }`}
+                          >
+                            {standup.type}
+                          </span>
+                          <span className="text-[11px] text-[#CACACA]">
+                            {formatRelativeDate(standup.date)}
+                          </span>
+                        </div>
+                        {standup.done_summary && (
+                          <p className="text-[13px] text-[#6E6E73] leading-relaxed line-clamp-2">
+                            {standup.done_summary}
+                          </p>
+                        )}
+                      </div>
+                      {standup.duration_seconds && (
+                        <span className="text-[11px] text-[#CACACA] shrink-0 mt-0.5">
+                          {formatDuration(standup.duration_seconds)}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  {standup.done_summary && (
-                    <p className="mt-1.5 text-sm text-[#4B5563] line-clamp-2">{standup.done_summary}</p>
-                  )}
-                </div>
-                {standup.duration_seconds && (
-                  <span className="text-xs text-[#9CA3AF] ml-4 shrink-0">{formatDuration(standup.duration_seconds)}</span>
-                )}
-              </div>
-            ))}
+                );
+              })}
+            </div>
           </div>
         )}
       </CardContent>
