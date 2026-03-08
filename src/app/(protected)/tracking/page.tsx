@@ -2,6 +2,7 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { createClient } from "@/lib/supabase/server";
 import { ActivityHeatmap } from "@/components/tracking/activity-heatmap";
 import { WeeklyBars } from "@/components/tracking/weekly-bars";
+import { RingGauge } from "@/components/tracking/ring-gauge";
 import type { Standup, Streak } from "@/lib/types/database";
 
 interface WeekData {
@@ -126,108 +127,113 @@ export default async function TrackingPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Tracking</h1>
-        <div className="flex items-center gap-2 text-[13px] text-[#86868B]">
-          <svg className="w-4 h-4 text-[#FF9500]" fill="currentColor" viewBox="0 0 24 24">
+        <h1 className="text-[28px] font-semibold text-[#1D1D1F] tracking-[-0.02em]">Tracking</h1>
+        <div className="flex items-center gap-2 text-[16px] text-[#86868B]">
+          <svg className="w-4 h-4 text-accent" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 23c-3.866 0-7-2.686-7-6 0-1.664.558-3.202 1.5-4.5.96-1.32 1.5-2.836 1.5-4.5 0-.414.336-.75.75-.75.267 0 .501.14.633.35C10.89 10.13 12 12.5 12 14c1.5-2 2-4.5 2-7 0-.414.336-.75.75-.75.2 0 .382.08.516.21C17.632 8.72 19 11.84 19 15c0 4.418-3.134 8-7 8z"/>
           </svg>
-          <span className="font-semibold text-[#FF9500]">{streak?.current_streak ?? 0}</span> day streak
+          <span className="font-semibold text-accent">{streak?.current_streak ?? 0}</span> day streak
         </div>
       </div>
 
+      {/* Stat Cards - Ring Gauges */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {/* This Week */}
         <Card>
           <CardContent>
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] font-semibold text-[#86868B] uppercase tracking-[1px]">This Week</span>
-              <span className="text-[12px] font-medium text-[#9CA3AF]">{weekPct}%</span>
-            </div>
-            <div className="flex items-baseline gap-2 mb-3">
-              <span className="text-2xl sm:text-3xl font-bold text-[#1D1D1F]">
-                {thisWeek?.completed ?? 0}
-              </span>
-              <span className="text-lg text-[#9CA3AF]">/{thisWeek?.total ?? 5}</span>
-              <span className="text-sm text-[#9CA3AF]">days</span>
-            </div>
-            <div className="h-2 bg-[#F0F0F0] rounded-full overflow-hidden">
-              <div
-                className="h-full rounded-full transition-all bg-gradient-to-r from-[#FF9500]/60 to-[#FF9500]"
-                style={{ width: `${weekPct}%` }}
-              />
+            <div className="flex items-center gap-5">
+              <RingGauge percentage={weekPct} color="#D4890A">
+                <span className="text-[16px] font-bold text-[#1D1D1F]">{weekPct}%</span>
+              </RingGauge>
+              <div>
+                <h3 className="text-[13px] font-semibold text-[#86868B] uppercase tracking-[1px] mb-1">
+                  This Week
+                </h3>
+                <div className="text-[28px] font-bold text-[#1D1D1F] leading-none">
+                  {thisWeek?.completed ?? 0}
+                  <span className="text-[18px] text-[#9CA3AF] font-medium"> / {thisWeek?.total ?? 5} days</span>
+                </div>
+                {weekPct >= 60 && (
+                  <p className="text-[13px] text-[#34C759] font-medium mt-1">On track</p>
+                )}
+              </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* This Month */}
         <Card>
           <CardContent>
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] font-semibold text-[#86868B] uppercase tracking-[1px]">This Month</span>
-              <span className="text-[12px] font-medium text-[#9CA3AF]">{monthPct}%</span>
-            </div>
-            <div className="flex items-baseline gap-2 mb-3">
-              <span className="text-2xl sm:text-3xl font-bold text-[#1D1D1F]">
-                {thisMonth?.completed ?? 0}
-              </span>
-              <span className="text-lg text-[#9CA3AF]">/{thisMonth?.total ?? 22}</span>
-              <span className="text-sm text-[#9CA3AF]">days</span>
-            </div>
-            <div className="h-2 bg-[#F0F0F0] rounded-full overflow-hidden">
-              <div
-                className="h-full rounded-full transition-all bg-gradient-to-r from-[#60A5FA]/60 to-[#60A5FA]"
-                style={{ width: `${monthPct}%` }}
-              />
+            <div className="flex items-center gap-5">
+              <RingGauge percentage={monthPct} color="#60A5FA">
+                <span className="text-[16px] font-bold text-[#1D1D1F]">{monthPct}%</span>
+              </RingGauge>
+              <div>
+                <h3 className="text-[13px] font-semibold text-[#86868B] uppercase tracking-[1px] mb-1">
+                  This Month
+                </h3>
+                <div className="text-[28px] font-bold text-[#1D1D1F] leading-none">
+                  {thisMonth?.completed ?? 0}
+                  <span className="text-[18px] text-[#9CA3AF] font-medium"> / {thisMonth?.total ?? 22} days</span>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* Streak */}
-        <Card className="relative overflow-hidden">
+        <Card>
           <CardContent>
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] font-semibold text-[#FF9500] uppercase tracking-[1px]">Current Streak</span>
+            <div className="flex items-center gap-5">
+              <RingGauge percentage={100} color="#34C759">
+                <svg className="w-5 h-5 text-accent" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 23c-3.866 0-7-2.686-7-6 0-1.664.558-3.202 1.5-4.5.96-1.32 1.5-2.836 1.5-4.5 0-.414.336-.75.75-.75.267 0 .501.14.633.35C10.89 10.13 12 12.5 12 14c1.5-2 2-4.5 2-7 0-.414.336-.75.75-.75.2 0 .382.08.516.21C17.632 8.72 19 11.84 19 15c0 4.418-3.134 8-7 8z"/>
+                </svg>
+              </RingGauge>
+              <div>
+                <h3 className="text-[13px] font-semibold text-accent uppercase tracking-[1px] mb-1">
+                  Current Streak
+                </h3>
+                <div className="text-[28px] font-bold text-accent leading-none">
+                  {streak?.current_streak ?? 0}
+                  <span className="text-[18px] text-[#9CA3AF] font-medium"> days</span>
+                </div>
+                <p className="text-[13px] text-[#34C759] font-medium mt-1">
+                  Best: {streak?.longest_streak ?? 0} days
+                </p>
+              </div>
             </div>
-            <div className="flex items-baseline gap-2 mb-1">
-              <span className="text-2xl sm:text-3xl font-bold text-[#FF9500]">
-                {streak?.current_streak ?? 0}
-              </span>
-              <span className="text-sm text-[#9CA3AF]">days</span>
-            </div>
-            <p className="text-[12px] text-[#34C759] font-medium">
-              Best: {streak?.longest_streak ?? 0} days
-            </p>
           </CardContent>
         </Card>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <svg className="w-4 h-4 text-[#86868B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-            </svg>
-            Activity
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <ActivityHeatmap data={heatmapData} />
-        </CardContent>
-      </Card>
+      {/* Activity Heatmap + Weekly Completion side by side on desktop */}
+      <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-4">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-[#86868B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+              </svg>
+              Activity
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ActivityHeatmap data={heatmapData} />
+          </CardContent>
+        </Card>
 
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <svg className="w-4 h-4 text-[#86868B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-            </svg>
-            Weekly Completion
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <WeeklyBars weeks={weeklyData} />
-        </CardContent>
-      </Card>
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <svg className="w-4 h-4 text-[#86868B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+              Weekly Completion
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <WeeklyBars weeks={weeklyData} />
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }
