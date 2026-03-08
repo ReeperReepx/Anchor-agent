@@ -1,4 +1,4 @@
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { WeeklyOverview } from "@/components/dashboard/weekly-overview";
 
 import { StatsCards } from "@/components/dashboard/stats-cards";
@@ -85,12 +85,7 @@ export default async function DashboardPage() {
       <StatsCards streak={streak} totalCount={totalCount} />
 
       <Card>
-        <CardHeader>
-          <CardTitle className="text-sm font-medium text-[#86868B]">This Week</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <WeeklyOverview completedDays={completedDays} />
-        </CardContent>
+        <WeeklyOverview completedDays={completedDays} />
       </Card>
 
       <RecentStandupsList standups={recentStandups} />
