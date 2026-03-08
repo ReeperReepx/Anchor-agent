@@ -19,8 +19,9 @@ export async function GET() {
     .order("member_count", { ascending: false });
 
   if (error) {
+    console.error("Communities fetch error:", error);
     return NextResponse.json(
-      { error: "Failed to fetch communities" },
+      { error: "Failed to fetch communities", details: error.message },
       { status: 500 }
     );
   }

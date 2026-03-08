@@ -22,8 +22,8 @@ export default function CommunityPage() {
   const fetchCommunities = useCallback(async () => {
     try {
       const res = await fetch("/api/communities");
-      if (!res.ok) throw new Error("Failed to load communities");
       const data = await res.json();
+      if (!res.ok) throw new Error(data.details || data.error || "Failed to load communities");
       setCommunities(data.communities || []);
       setMyCommunities(new Set(data.memberCommunityIds || []));
     } catch {
