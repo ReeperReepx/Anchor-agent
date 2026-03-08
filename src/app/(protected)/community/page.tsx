@@ -26,8 +26,8 @@ export default function CommunityPage() {
       if (!res.ok) throw new Error(data.details || data.error || "Failed to load communities");
       setCommunities(data.communities || []);
       setMyCommunities(new Set(data.memberCommunityIds || []));
-    } catch {
-      setError("Failed to load communities");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to load communities");
     } finally {
       setLoading(false);
     }
