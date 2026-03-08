@@ -7,7 +7,7 @@ import { createClient } from "@/lib/supabase/client";
 import type { User, UserPreference } from "@/lib/types/database";
 
 const inputClasses =
-  "w-full rounded-[10px] border border-[#E5E5E5] bg-[#FAFAFA] px-3.5 py-2.5 text-sm text-[#1D1D1F] focus:outline-none focus:ring-2 focus:ring-[#B85C42]/30 focus:border-[#B85C42] focus:bg-white transition-all";
+  "w-full rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] px-3.5 py-2.5 text-sm text-[#1D1D1F] focus:outline-none focus:ring-2 focus:ring-[#B85C42]/30 focus:border-[#B85C42] focus:bg-white transition-all";
 
 export default function SettingsPage() {
   const [profile, setProfile] = useState<User | null>(null);
@@ -216,7 +216,7 @@ function PreferencesCard({
           </div>
 
           <div className="flex items-center gap-3">
-            <Button type="submit" disabled={saving}>
+            <Button type="submit" loading={saving}>
               {saving ? "Saving..." : "Save changes"}
             </Button>
             {saved && (
@@ -265,14 +265,14 @@ function NotificationsCard() {
                 type="button"
                 role="switch"
                 aria-checked={prefs[item.key]}
-                aria-label={item.label}
+                aria-label={`${item.label}: ${item.sub}`}
                 onClick={() => toggle(item.key)}
-                className={`w-9 h-5 rounded-full transition-colors relative ${
-                  prefs[item.key] ? "bg-[#B85C42]" : "bg-[#E5E5E5]"
+                className={`w-11 h-6 rounded-full transition-colors relative shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B85C42] focus-visible:ring-offset-2 ${
+                  prefs[item.key] ? "bg-[#B85C42]" : "bg-[#D1D5DB]"
                 }`}
               >
-                <div className={`absolute top-0.5 left-0.5 w-4 h-4 rounded-full bg-white shadow-sm transition-transform ${
-                  prefs[item.key] ? "translate-x-4" : "translate-x-0"
+                <div className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-sm transition-transform ${
+                  prefs[item.key] ? "translate-x-5" : "translate-x-0"
                 }`} />
               </button>
             </div>
@@ -359,7 +359,7 @@ function SubscriptionCard() {
               onClick={openPortal}
               disabled={portalLoading}
             >
-              {portalLoading ? "Loading..." : "Manage Subscription"}
+              {portalLoading ? <><span className="spinner spinner-sm" /> Loading...</> : "Manage Subscription"}
             </Button>
           )}
           {access && !access.hasAccess && !access.isGrandfathered && (

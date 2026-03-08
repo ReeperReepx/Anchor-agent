@@ -44,7 +44,7 @@ export default function PricingPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
         {/* Free Trial */}
-        <div className="relative rounded-[16px] border border-[#2D8A56] p-6 sm:p-8 bg-white shadow-[0_4px_32px_rgba(45,138,86,0.08)]">
+        <div className="relative rounded-xl border border-[#2D8A56] p-6 sm:p-8 bg-white shadow-[0_4px_32px_rgba(45,138,86,0.08)]">
           <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#2D8A56] to-[#5BB88A] rounded-t-[16px]" />
           <div className="flex items-center gap-2 mb-4">
             <h2 className="text-lg font-semibold text-[#1D1D1F]">Free Trial</h2>
@@ -76,6 +76,7 @@ export default function PricingPage() {
             className="w-full"
             variant="primary"
             onClick={() => handleCheckout("builder")}
+            loading={loading === "builder"}
             disabled={loading !== null}
           >
             {loading === "builder" ? "Redirecting..." : "Start free trial"}
@@ -86,7 +87,7 @@ export default function PricingPage() {
         </div>
 
         {/* Builder */}
-        <div className="relative rounded-[16px] border border-[#E5E5E5] p-6 sm:p-8 bg-white">
+        <div className="relative rounded-xl border border-[#E5E5E5] p-6 sm:p-8 bg-white">
           <div className="flex items-center gap-2 mb-4">
             <h2 className="text-lg font-semibold text-[#1D1D1F]">{builder.name}</h2>
           </div>
@@ -108,6 +109,7 @@ export default function PricingPage() {
             className="w-full"
             variant="secondary"
             onClick={() => handleCheckout("builder")}
+            loading={loading === "builder"}
             disabled={loading !== null}
           >
             {loading === "builder" ? "Redirecting..." : "Start with Builder"}
@@ -118,7 +120,7 @@ export default function PricingPage() {
         </div>
 
         {/* Founder */}
-        <div className="relative rounded-[16px] border border-[#B85C42] p-6 sm:p-8 bg-white shadow-[0_4px_32px_rgba(184,92,66,0.12)]">
+        <div className="relative rounded-xl border border-[#B85C42] p-6 sm:p-8 bg-white shadow-[0_4px_32px_rgba(184,92,66,0.12)]">
           <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#B85C42] to-[#D4917F] rounded-t-[16px]" />
           <div className="flex items-center gap-2 mb-4">
             <h2 className="text-lg font-semibold text-[#1D1D1F]">{founder.name}</h2>
@@ -144,6 +146,7 @@ export default function PricingPage() {
             className="w-full"
             variant="primary"
             onClick={() => handleCheckout("founder")}
+            loading={loading === "founder"}
             disabled={loading !== null}
           >
             {loading === "founder" ? "Redirecting..." : "Start with Founder"}

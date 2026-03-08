@@ -102,7 +102,7 @@ export default function PartnerPage() {
               based on your goals and timezone.
             </p>
             <p className="text-[12px] text-[#9CA3AF] mb-6">Partners see each other&apos;s standup summaries — never recordings.</p>
-            <Button>Join matching queue</Button>
+            <Button>Find an accountability partner</Button>
           </CardContent>
         </Card>
       </div>
@@ -223,8 +223,14 @@ function ChatThread({
             type="text"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            placeholder="Write a message..."
-            className="flex-1 rounded-[10px] border border-[#E5E5E5] bg-[#FAFAFA] px-3.5 py-2.5 text-sm text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#B85C42]/30 focus:border-[#B85C42] focus:bg-white transition-all"
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) {
+                onSend(e);
+              }
+            }}
+            placeholder="Write a message... (Ctrl+Enter to send)"
+            aria-label="Message to partner"
+            className="flex-1 rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] px-3.5 py-2.5 text-sm text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#B85C42]/30 focus:border-[#B85C42] focus:bg-white transition-all"
           />
           <Button type="submit" size="md">
             Send

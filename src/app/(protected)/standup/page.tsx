@@ -329,8 +329,9 @@ export default function StandupPage() {
 
   if (access.loading) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-[70vh]">
-        <p className="text-[#6B7280]">Loading...</p>
+      <div className="flex flex-col items-center justify-center min-h-[70vh] gap-3">
+        <span className="spinner text-[#B85C42]" style={{ width: 24, height: 24 }} />
+        <p className="text-sm text-[#6B7280]">Loading your session...</p>
       </div>
     );
   }
@@ -362,7 +363,7 @@ export default function StandupPage() {
                     if (t === "weekly" && !canWeekly) return;
                     setStandupType(t);
                   }}
-                  className={`px-5 py-2 rounded-[10px] text-sm font-medium transition-colors ${
+                  className={`px-5 py-2 rounded-xl text-sm font-medium transition-colors ${
                     standupType === t
                       ? "bg-[#B85C42] text-white"
                       : t === "weekly" && !canWeekly
@@ -391,7 +392,8 @@ export default function StandupPage() {
               {/* Button */}
               <button
                 onClick={startSession}
-                className="relative w-28 h-28 rounded-full bg-gradient-to-b from-[#C46B50] to-[#B85C42] text-white flex items-center justify-center transition-all hover:from-[#D4917F] hover:to-[#C46B50] active:scale-95 shadow-[0_4px_24px_rgba(184,92,66,0.35),0_8px_40px_rgba(184,92,66,0.15)] hover:shadow-[0_6px_32px_rgba(184,92,66,0.5)]"
+                aria-label="Start standup session"
+                className="relative w-28 h-28 rounded-full bg-gradient-to-b from-[#C46B50] to-[#B85C42] text-white flex items-center justify-center transition-all hover:from-[#D4917F] hover:to-[#C46B50] active:scale-95 shadow-[0_4px_24px_rgba(184,92,66,0.35),0_8px_40px_rgba(184,92,66,0.15)] hover:shadow-[0_6px_32px_rgba(184,92,66,0.5)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#B85C42]/50"
               >
                 <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
@@ -401,6 +403,7 @@ export default function StandupPage() {
               </button>
             </div>
             <p className="text-[13px] text-[#9CA3AF] mt-4">Tap to start</p>
+            <p className="text-[11px] text-[#D1D5DB] mt-1">Microphone access required</p>
 
             <button
               onClick={() => router.push("/dashboard")}
@@ -504,7 +507,7 @@ export default function StandupPage() {
             </div>
 
             {completionData && (completionData.done || completionData.planned || completionData.blockers) && (
-              <div className="bg-[#F0F0F0] rounded-[14px] p-5 text-left mb-8 space-y-4">
+              <div className="bg-[#F0F0F0] rounded-xl p-5 text-left mb-8 space-y-4">
                 {completionData.done && (
                   <div className="pl-3 border-l-2 border-[rgba(45,138,86,0.4)]">
                     <div className="text-[10px] font-semibold text-[#2D8A56] uppercase tracking-[0.5px] mb-1">What you got done</div>

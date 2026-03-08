@@ -100,7 +100,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gradient-to-r from-[rgba(184,92,66,0.04)] to-transparent rounded-[16px] px-5 sm:px-6 py-5 -mx-1">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gradient-to-r from-[rgba(184,92,66,0.04)] to-transparent rounded-xl px-5 sm:px-6 py-5 -mx-1">
         <div>
           <h1 className="text-xl sm:text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">
             {getGreeting()}{userName ? `, ${userName}` : ""}
@@ -112,7 +112,7 @@ export default async function DashboardPage() {
             </p>
           )}
         </div>
-        <a href="/standup" className="inline-flex items-center justify-center gap-2 bg-[#B85C42] hover:bg-[#D4917F] text-white px-5 py-2.5 rounded-[12px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(184,92,66,0.25)] hover:shadow-[0_4px_20px_rgba(184,92,66,0.35)] hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97] shrink-0">
+        <a href="/standup" className="inline-flex items-center justify-center gap-2 bg-[#B85C42] hover:bg-[#D4917F] text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(184,92,66,0.25)] hover:shadow-[0_4px_20px_rgba(184,92,66,0.35)] hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97] shrink-0">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
             <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
             <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
@@ -123,8 +123,8 @@ export default async function DashboardPage() {
       </div>
 
       {insight && (
-        <div className="bg-gradient-to-br from-[rgba(184,92,66,0.06)] to-[rgba(184,92,66,0.02)] border border-[rgba(184,92,66,0.15)] rounded-[14px] p-5 flex items-start gap-4">
-          <div className="w-10 h-10 rounded-[10px] bg-[rgba(184,92,66,0.1)] flex items-center justify-center shrink-0">
+        <div className="bg-gradient-to-br from-[rgba(184,92,66,0.06)] to-[rgba(184,92,66,0.02)] border border-[rgba(184,92,66,0.15)] rounded-xl p-5 flex items-start gap-4">
+          <div className="w-10 h-10 rounded-xl bg-[rgba(184,92,66,0.1)] flex items-center justify-center shrink-0">
             {insight.icon}
           </div>
           <div>
@@ -199,7 +199,7 @@ export default async function DashboardPage() {
               </div>
               <p className="text-[15px] font-semibold text-[#1D1D1F] mb-1">No standups yet</p>
               <p className="text-sm text-[#6B7280] mb-5">Start your first voice standup to begin tracking your daily progress.</p>
-              <a href="/standup" className="inline-flex items-center gap-2 bg-[#B85C42] hover:bg-[#D4917F] text-white px-5 py-2.5 rounded-[10px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(184,92,66,0.3)]">
+              <a href="/standup" className="inline-flex items-center gap-2 bg-[#B85C42] hover:bg-[#D4917F] text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(184,92,66,0.3)]">
                 Start your first standup
               </a>
             </div>

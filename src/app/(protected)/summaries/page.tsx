@@ -66,7 +66,13 @@ export default async function SummariesPage() {
             </div>
             <p className="text-[15px] font-semibold text-[#1D1D1F] mb-1">No summaries yet</p>
             <p className="text-sm text-[#6B7280] mb-1">Weekly and monthly summaries are generated automatically after you complete standups.</p>
-            <p className="text-xs text-[#9CA3AF]">Complete a full week of standups to get your first summary.</p>
+            <p className="text-xs text-[#9CA3AF] mb-5">Complete a full week of standups to get your first summary.</p>
+            <a
+              href="/standup"
+              className="inline-flex items-center gap-2 bg-[#B85C42] hover:bg-[#D4917F] text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(184,92,66,0.3)]"
+            >
+              Start a standup
+            </a>
           </CardContent>
         </Card>
       ) : (

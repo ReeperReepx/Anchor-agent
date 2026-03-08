@@ -117,6 +117,7 @@ export function AppShell({
   const router = useRouter();
 
   async function handleSignOut() {
+    if (!window.confirm("Sign out of Anchor?")) return;
     const { createClient } = await import("@/lib/supabase/client");
     const supabase = createClient();
     await supabase.auth.signOut();
@@ -204,7 +205,7 @@ export function AppShell({
       </aside>
 
       {/* Main content - offset by sidebar width on desktop */}
-      <main className="sm:ml-[220px] px-5 sm:px-10 py-8 pb-24 sm:pb-8">{children}</main>
+      <main className="sm:ml-[220px] px-5 sm:px-10 py-8 pb-24 sm:pb-8 animate-fade-in">{children}</main>
 
       {/* Mobile bottom tab bar */}
       <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-[#E5E5E5] z-50">
@@ -216,7 +217,8 @@ export function AppShell({
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex flex-col items-center gap-1 px-3 py-1 rounded-lg transition-colors ${
+                aria-label={item.label}
+                className={`flex flex-col items-center gap-1 min-w-[48px] min-h-[48px] justify-center rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B85C42] ${
                   isActive ? "text-[#B85C42]" : "text-[#9CA3AF]"
                 }`}
               >
@@ -229,7 +231,8 @@ export function AppShell({
           {/* Center FAB */}
           <Link
             href="/standup"
-            className="flex items-center justify-center w-[52px] h-[52px] -mt-6 rounded-full bg-[#B85C42] text-white shadow-[0_4px_20px_rgba(184,92,66,0.35)] active:scale-95 transition-transform"
+            aria-label="Start standup"
+            className="flex items-center justify-center w-[52px] h-[52px] -mt-6 rounded-full bg-[#B85C42] text-white shadow-[0_4px_20px_rgba(184,92,66,0.35)] active:scale-95 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B85C42] focus-visible:ring-offset-2"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
@@ -245,7 +248,8 @@ export function AppShell({
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex flex-col items-center gap-1 px-3 py-1 rounded-lg transition-colors ${
+                aria-label={item.label}
+                className={`flex flex-col items-center gap-1 min-w-[48px] min-h-[48px] justify-center rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B85C42] ${
                   isActive ? "text-[#B85C42]" : "text-[#9CA3AF]"
                 }`}
               >
