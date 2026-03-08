@@ -9,66 +9,68 @@ import { Testimonials } from "@/components/landing/testimonials";
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen">
-      {/* Dark hero section with nav */}
-      <div className="bg-[#111113] relative overflow-hidden">
-        {/* Subtle radial glow */}
-        <div className="absolute top-[-200px] left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[#B85C42] rounded-full opacity-[0.04] blur-[120px] pointer-events-none" />
-
-        <nav className="sticky top-0 z-50 bg-[#111113]/80 backdrop-blur-xl flex items-center justify-between px-5 sm:px-10 py-4 max-w-[1100px] mx-auto border-b border-white/[0.06]">
-          <span className="text-[20px] sm:text-[22px] font-bold text-white">
-            <span className="text-[#D4917F]">A</span>nchor
+    <div className="min-h-screen bg-white overflow-x-hidden">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-[#d2d2d7]/60">
+        <div className="flex items-center justify-between px-5 sm:px-10 py-3 max-w-[1080px] mx-auto">
+          <span className="text-[20px] font-bold text-[#1d1d1f] tracking-tight">
+            Anchor
           </span>
-          <div className="flex items-center gap-3 sm:gap-6 text-[13px] text-[#8A8A8E] font-medium">
-            <a href="#how-it-works" className="hidden sm:inline hover:text-white transition-colors">
+          <div className="flex items-center gap-2 sm:gap-8 text-[13px] font-medium">
+            <a href="#how-it-works" className="hidden sm:inline text-[#1d1d1f]/60 hover:text-[#1d1d1f] transition-colors py-2">
               How it works
             </a>
-            <a href="#pricing" className="hidden sm:inline hover:text-white transition-colors">
+            <a href="#pricing" className="hidden sm:inline text-[#1d1d1f]/60 hover:text-[#1d1d1f] transition-colors py-2">
               Pricing
             </a>
-            <Link href="/login" className="hover:text-white transition-colors">
-              Login
+            <Link href="/login" className="text-[#0071E3] hover:text-[#0077ED] transition-colors py-2 px-1">
+              Log in
             </Link>
             <Link href="/login">
-              <Button size="sm">Start Free Trial</Button>
+              <Button
+                size="sm"
+                className="bg-[#0071E3] hover:bg-[#0077ED] text-white rounded-full px-5 text-[13px] border-none shadow-none"
+              >
+                Try free
+              </Button>
             </Link>
           </div>
-        </nav>
+        </div>
+      </nav>
 
-        <Hero />
-      </div>
+      {/* Hero — text left, transcript right */}
+      <Hero />
 
-      {/* Light sections */}
-      <div className="bg-[#F8F7F4]">
-        <StatsBar />
-        <HowItWorks />
-        <OutcomeCards />
-      </div>
+      {/* Stats — horizontal bar */}
+      <StatsBar />
 
-      {/* Dark band for social proof */}
-      <div className="bg-[#111113]">
-        <Testimonials />
-      </div>
+      {/* How it works — summary left, steps right, black bg */}
+      <HowItWorks />
 
-      {/* Light sections */}
-      <div className="bg-[#F8F7F4]">
-        <Pricing />
-        <FAQ />
+      {/* Outcomes — text+list left, streak calendar right */}
+      <OutcomeCards />
 
-        <footer className="px-5 sm:px-10 py-8 border-t border-[#E5E5E5] max-w-[1100px] mx-auto">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#9CA3AF]">
-            <span className="font-semibold text-[#1D1D1F] text-sm">
-              <span className="text-[#B85C42]">A</span>nchor
-            </span>
-            <div className="flex items-center gap-4">
-              <Link href="/blog" className="hover:text-[#1D1D1F] transition-colors">Blog</Link>
-              <span>Terms</span>
-              <span>Privacy</span>
-            </div>
-            <span>&copy; 2026 Anchor</span>
+      {/* Why Anchor — sticky heading left, cards right */}
+      <Testimonials />
+
+      {/* Pricing — heading left, plan cards right, black bg */}
+      <Pricing />
+
+      {/* FAQ — heading left, accordion right */}
+      <FAQ />
+
+      {/* Footer */}
+      <footer className="px-5 sm:px-10 py-6 border-t border-[#d2d2d7]/60 bg-[#f5f5f7]">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#86868b] max-w-[1080px] mx-auto">
+          <span className="font-semibold text-[#1d1d1f] text-sm">Anchor</span>
+          <div className="flex items-center gap-5">
+            <Link href="/blog" className="hover:text-[#1d1d1f] transition-colors">Blog</Link>
+            <span>Terms</span>
+            <span>Privacy</span>
           </div>
-        </footer>
-      </div>
+          <span>&copy; 2026 Anchor</span>
+        </div>
+      </footer>
     </div>
   );
 }

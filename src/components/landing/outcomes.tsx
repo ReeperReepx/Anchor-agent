@@ -1,61 +1,33 @@
-const STATS = [
-  { value: "5 min", label: "daily standup, voice-first" },
-  { value: "3", label: "questions to lock in your day" },
-  { value: "$0", label: "for your first 7 days" },
-];
+import { ScrollReveal } from "./scroll-reveal";
 
-const OUTCOMES = [
-  {
-    title: "Track your wins",
-    description:
-      "Every standup is saved. Searchable. A running record that proves you're shipping — not just busy.",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <polyline points="9 11 12 14 22 4" />
-        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
-      </svg>
-    ),
-    stat: "100%",
-    statLabel: "of standups saved & searchable",
-  },
-  {
-    title: "Lock in your priorities",
-    description:
-      "Say it out loud, commit to it. Speaking your plan creates real accountability — no more vague to-do lists.",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10" />
-        <polyline points="12 6 12 12 16 14" />
-      </svg>
-    ),
-    stat: "3",
-    statLabel: "focused questions daily",
-  },
-  {
-    title: "Kill your blockers",
-    description:
-      "Name what's in the way. Saying it out loud forces clarity. The AI helps you break it down.",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-      </svg>
-    ),
-    stat: "5 min",
-    statLabel: "to unblock your day",
-  },
+const TICKER_ITEMS = [
+  "5-Minute Standups",
+  "Voice-First",
+  "AI Summaries",
+  "Streak Tracking",
+  "Zero Typing",
+  "Blocker Detection",
+  "Weekly Planning",
+  "Accountability Partner",
+  "Searchable History",
+  "Pattern Insights",
 ];
 
 export function StatsBar() {
   return (
-    <section className="px-5 sm:px-10 py-16 sm:py-20">
-      <div className="max-w-[900px] mx-auto grid grid-cols-3 gap-4 sm:gap-8">
-        {STATS.map((stat) => (
-          <div key={stat.label} className="text-center">
-            <div className="text-[32px] sm:text-[48px] font-bold text-[#1D1D1F] tracking-[-0.03em]">
-              {stat.value}
-            </div>
-            <p className="text-xs sm:text-sm text-[#6B7280] mt-1">{stat.label}</p>
-          </div>
+    <section className="py-4 sm:py-5 border-y border-[#e5e5e5] overflow-hidden bg-[#fafafa]">
+      <div
+        className="flex gap-8 sm:gap-12 whitespace-nowrap"
+        style={{ animation: "ticker 30s linear infinite", width: "max-content" }}
+      >
+        {/* Duplicate items for seamless loop */}
+        {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
+          <span key={i} className="flex items-center gap-2 text-[13px] sm:text-[14px] text-[#86868b] font-medium">
+            <svg className="w-3.5 h-3.5 text-[#0071E3] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+            </svg>
+            {item}
+          </span>
         ))}
       </div>
     </section>
@@ -64,41 +36,73 @@ export function StatsBar() {
 
 export function OutcomeCards() {
   return (
-    <section className="px-5 sm:px-10 py-16 sm:py-20 max-w-[960px] mx-auto">
-      <p className="text-center text-xs font-semibold tracking-[0.15em] uppercase text-[#B85C42] mb-3">
-        Results
-      </p>
-      <h2 className="text-[28px] sm:text-[40px] font-bold tracking-[-0.025em] text-[#1D1D1F] mb-4 text-center leading-tight">
-        What actually changes
-      </h2>
-      <p className="text-center text-[#6B7280] text-sm sm:text-base mb-12 sm:mb-16 max-w-[460px] mx-auto leading-relaxed">
-        Five minutes of talking replaces hours of drifting.
-      </p>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-        {OUTCOMES.map((outcome) => (
-          <div
-            key={outcome.title}
-            className="relative bg-white rounded-xl p-6 sm:p-7 border border-[#E5E5E5] hover:border-[#D4917F]/60 hover:shadow-[0_8px_40px_rgba(184,92,66,0.08)] transition-all duration-300 group"
-          >
-            <div className="w-11 h-11 rounded-xl bg-[rgba(184,92,66,0.08)] text-[#B85C42] flex items-center justify-center mb-5 group-hover:bg-[rgba(184,92,66,0.12)] transition-colors">
-              {outcome.icon}
-            </div>
-            <h4 className="text-[15px] font-semibold text-[#1D1D1F] mb-2">
-              {outcome.title}
-            </h4>
-            <p className="text-[13px] text-[#6B7280] leading-[1.65] mb-5">
-              {outcome.description}
+    <section className="px-5 sm:px-10 py-16 sm:py-24 max-w-[1200px] mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+        {/* Left — copy */}
+        <ScrollReveal>
+          <div>
+            <p className="text-[#0071E3] text-sm font-semibold mb-3 tracking-wide">
+              Results
             </p>
-            <div className="pt-4 border-t border-[#E5E5E5]">
-              <span className="text-xl font-bold text-[#B85C42]">
-                {outcome.stat}
-              </span>
-              <span className="text-[12px] text-[#9CA3AF] ml-2">
-                {outcome.statLabel}
-              </span>
+            <h2 className="text-[32px] sm:text-[44px] font-bold tracking-[-0.035em] text-[#1d1d1f] leading-tight">
+              Every standup saved.
+              <br />
+              <span className="text-[#86868b]">Every win tracked.</span>
+            </h2>
+            <p className="text-[#86868b] text-base sm:text-lg mt-4 max-w-[420px] leading-relaxed">
+              AI summaries, pattern detection, and a searchable history of everything you ship. Five minutes in, clarity out.
+            </p>
+          </div>
+        </ScrollReveal>
+
+        {/* Right — streak calendar */}
+        <ScrollReveal direction="right">
+          <div className="bg-[#f5f5f7] rounded-2xl p-6 sm:p-8 max-w-[340px] mx-auto md:ml-auto md:mr-0">
+            <div className="flex items-center justify-between mb-5">
+              <div className="text-[15px] font-semibold text-[#1d1d1f]">Your streak</div>
+              <div className="text-[13px] text-[#86868b]">March 2026</div>
+            </div>
+            <div className="grid grid-cols-7 gap-[6px]">
+              {["M","Tu","W","Th","F","Sa","Su"].map((d) => (
+                <div key={d} className="text-[10px] text-[#86868b] text-center font-medium pb-1">{d.charAt(0)}</div>
+              ))}
+              {/* 0=missed, 1=low, 2=medium, 3=high, 4=today */}
+              {[3,2,3,1,3,0,2, 3,2,3,3,0,1,2, 3,2,1,3,2,3,4, 3,2,3,1,0,2,3].map((level, i) => (
+                <div
+                  key={i}
+                  className={`aspect-square rounded-[6px] ${
+                    level === 4
+                      ? "bg-[#0071E3] ring-2 ring-[#0071E3]/30"
+                      : level === 3
+                      ? "bg-[#0071E3]"
+                      : level === 2
+                      ? "bg-[#0071E3]/60"
+                      : level === 1
+                      ? "bg-[#0071E3]/30"
+                      : "bg-[#e5e5e5]"
+                  }`}
+                />
+              ))}
+            </div>
+            <div className="flex items-center justify-end gap-1 mt-3">
+              <span className="text-[9px] text-[#86868b]">Less</span>
+              <div className="w-3 h-3 rounded-[3px] bg-[#0071E3]/30" />
+              <div className="w-3 h-3 rounded-[3px] bg-[#0071E3]/60" />
+              <div className="w-3 h-3 rounded-[3px] bg-[#0071E3]" />
+              <span className="text-[9px] text-[#86868b]">More</span>
+            </div>
+            <div className="mt-5 pt-4 border-t border-[#e5e5e5] flex items-center justify-between">
+              <div>
+                <div className="text-[28px] font-bold text-[#1d1d1f] tracking-tight leading-none">26</div>
+                <div className="text-[12px] text-[#86868b] mt-0.5">day streak</div>
+              </div>
+              <div className="text-right">
+                <div className="text-[28px] font-bold text-[#34C759] tracking-tight leading-none">85%</div>
+                <div className="text-[12px] text-[#86868b] mt-0.5">consistency</div>
+              </div>
             </div>
           </div>
-        ))}
+        </ScrollReveal>
       </div>
     </section>
   );

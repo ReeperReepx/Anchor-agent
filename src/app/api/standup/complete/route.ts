@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { calculateStreakUpdate } from "@/lib/utils/streaks";
-import { summarizeTranscript } from "@/lib/ai";
+import { summarizeTranscript, scoreProductivity } from "@/lib/ai";
 import type { Streak } from "@/lib/types/database";
 
 interface CompleteBody {
@@ -93,6 +93,24 @@ export async function POST(request: Request) {
     ? { done_summary: body.done_summary, planned_summary: body.planned_summary || null, blockers_summary: body.blockers_summary || null }
     : await summarizeTranscript(transcript);
 
+  // Fetch previous standup's planned_summary for follow-through scoring
+  const { data: prevStandup } = await supabase
+    .from("standups")
+    .select("planned_summary")
+    .eq("user_id", user.id)
+    .not("planned_summary", "is", null)
+    .neq("id", standupId)
+    .order("created_at", { ascending: false })
+    .limit(1)
+    .single();
+
+  // Score productivity
+  const productivityResult = scoreProductivity(
+    summaries,
+    body.duration_seconds ?? null,
+    prevStandup?.planned_summary ?? null,
+  );
+
   const { error: updateError } = await supabase
     .from("standups")
     .update({
@@ -102,6 +120,8 @@ export async function POST(request: Request) {
       done_summary: summaries.done_summary,
       planned_summary: summaries.planned_summary,
       blockers_summary: summaries.blockers_summary,
+      productivity_score: productivityResult.score,
+      score_reasoning: productivityResult.reasoning,
     })
     .eq("id", standupId)
     .eq("user_id", user.id);
@@ -132,5 +152,7 @@ export async function POST(request: Request) {
     done_summary: summaries.done_summary,
     planned_summary: summaries.planned_summary,
     blockers_summary: summaries.blockers_summary,
+    productivity_score: productivityResult.score,
+    score_reasoning: productivityResult.reasoning,
   });
 }

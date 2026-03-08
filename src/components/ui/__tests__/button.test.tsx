@@ -48,6 +48,6 @@ describe("Button", () => {
   it("uses 12px border radius", () => {
     render(<Button>Rounded</Button>);
     const button = screen.getByRole("button");
-    expect(button.className).toContain("rounded-[12px]");
+    expect(button.className).toContain("rounded-xl");
   });
 });

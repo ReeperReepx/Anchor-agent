@@ -17,6 +17,8 @@ export const DEV_STANDUPS: Standup[] = [
     planned_summary:
       "Finish the partner matching algorithm. Deploy staging build. Write copy for the landing page FAQ.",
     blockers_summary: null,
+    productivity_score: 4,
+    score_reasoning: "shipped multiple items, clear plan ahead",
     created_at: new Date(now).toISOString(),
   },
   {
@@ -32,7 +34,9 @@ export const DEV_STANDUPS: Standup[] = [
     planned_summary:
       "Build the onboarding voice flow. Connect ElevenLabs WebSocket.",
     blockers_summary:
-      "Waiting on ElevenLabs API key approval — submitted 2 days ago.",
+      "Waiting on ElevenLabs API key approval, submitted 2 days ago.",
+    productivity_score: 3,
+    score_reasoning: "completed a couple tasks, clear plan ahead, identified blockers",
     created_at: new Date(now - day).toISOString(),
   },
   {
@@ -48,7 +52,9 @@ export const DEV_STANDUPS: Standup[] = [
     planned_summary:
       "Focus this week on voice integration and partner matching. Target: MVP by Friday.",
     blockers_summary:
-      "Need to decide on hosting — VPS vs managed. Budget concern.",
+      "Need to decide on hosting, VPS vs managed. Budget concern.",
+    productivity_score: 4,
+    score_reasoning: "shipped multiple items, clear plan ahead, identified blockers",
     created_at: new Date(now - 3 * day).toISOString(),
   },
   {
@@ -63,6 +69,8 @@ export const DEV_STANDUPS: Standup[] = [
       "Set up CI/CD pipeline. Configured Docker for self-hosting. Added error tracking with Sentry.",
     planned_summary: "Start on the full app scaffold. Get auth working.",
     blockers_summary: null,
+    productivity_score: 3,
+    score_reasoning: "shipped multiple items, clear plan ahead",
     created_at: new Date(now - 4 * day).toISOString(),
   },
   {
@@ -79,6 +87,8 @@ export const DEV_STANDUPS: Standup[] = [
       "Build out the database schema. Start Supabase integration.",
     blockers_summary:
       "Still comparing ElevenLabs vs Deepgram for voice. Need to test latency.",
+    productivity_score: 3,
+    score_reasoning: "shipped multiple items, clear plan ahead, identified blockers",
     created_at: new Date(now - 5 * day).toISOString(),
   },
 ];
@@ -117,6 +127,8 @@ export const DEV_PARTNER_STANDUP: Standup = {
   planned_summary:
     "Write the onboarding email sequence. Set up analytics. Start on referral system.",
   blockers_summary:
-    "Stripe webhook keeps timing out in staging — need to debug.",
+    "Stripe webhook keeps timing out in staging, need to debug.",
+  productivity_score: 4,
+  score_reasoning: "shipped multiple items, clear plan ahead, identified blockers",
   created_at: new Date().toISOString(),
 };

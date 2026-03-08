@@ -64,6 +64,8 @@ describe("Database types", () => {
       done_summary: "did stuff",
       planned_summary: "will do stuff",
       blockers_summary: null,
+      productivity_score: null,
+      score_reasoning: null,
       created_at: "2024-01-15T09:00:00Z",
     };
     expect(standup.type).toBe("daily");

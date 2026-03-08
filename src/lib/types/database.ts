@@ -29,6 +29,8 @@ export interface Standup {
   done_summary: string | null;
   planned_summary: string | null;
   blockers_summary: string | null;
+  productivity_score: number | null;
+  score_reasoning: string | null;
   created_at: string;
 }
 

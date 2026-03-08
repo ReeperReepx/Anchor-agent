@@ -160,3 +160,42 @@ body {
   width: 14px;
   height: 14px;
 }
+
+/* Scroll reveal animations */
+.sr-base {
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.sr-up { transform: translateY(30px); }
+.sr-down { transform: translateY(-30px); }
+.sr-left { transform: translateX(30px); }
+.sr-right { transform: translateX(-30px); }
+.sr-fade { transform: none; }
+
+.sr-visible {
+  opacity: 1 !important;
+  transform: translateY(0) translateX(0) !important;
+}
+
+/* Hero floating bubble animation */
+@keyframes bubbleIn {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.hero-bubble {
+  animation: bubbleIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Ticker scroll */
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}

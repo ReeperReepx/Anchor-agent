@@ -101,7 +101,7 @@ export default function PartnerPage() {
               You&apos;ll be matched with a new accountability partner every week
               based on your goals and timezone.
             </p>
-            <p className="text-[12px] text-[#9CA3AF] mb-6">Partners see each other&apos;s standup summaries — never recordings.</p>
+            <p className="text-[12px] text-[#9CA3AF] mb-6">Partners see each other&apos;s standup summaries, never recordings.</p>
             <Button>Find an accountability partner</Button>
           </CardContent>
         </Card>

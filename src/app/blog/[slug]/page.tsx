@@ -17,7 +17,7 @@ export async function generateMetadata({
   if (!article) return {};
 
   return {
-    title: `${article.title} — Anchor`,
+    title: `${article.title} | Anchor`,
     description: article.description,
     openGraph: {
       title: article.title,

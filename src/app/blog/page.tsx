@@ -3,11 +3,11 @@ import type { Metadata } from "next";
 import { articles } from "./articles";
 
 export const metadata: Metadata = {
-  title: "Blog — Anchor | Daily Standups for Solopreneurs",
+  title: "Blog | Anchor | Daily Standups for Solopreneurs",
   description:
     "Productivity tips, accountability strategies, and founder habits. Learn how daily standups help solopreneurs ship faster and stay consistent.",
   openGraph: {
-    title: "Anchor Blog — Accountability & Productivity for Solopreneurs",
+    title: "Anchor Blog | Accountability & Productivity for Solopreneurs",
     description:
       "Productivity tips, accountability strategies, and founder habits from the Anchor team.",
     type: "website",

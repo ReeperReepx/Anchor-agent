@@ -12,8 +12,8 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Anchor — Daily Standups for Solopreneurs",
-    template: "%s — Anchor",
+    default: "Anchor | Daily Standups for Solopreneurs",
+    template: "%s | Anchor",
   },
   description:
     "Voice-first daily standup for solopreneurs. Five minutes. Three questions. Every damn day. Stay accountable and ship faster.",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Anchor",
-    title: "Anchor — Daily Standups for Solopreneurs",
+    title: "Anchor | Daily Standups for Solopreneurs",
     description:
       "Voice-first daily standup for solopreneurs. Five minutes. Three questions. Every damn day.",
   },

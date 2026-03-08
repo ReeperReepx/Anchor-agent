@@ -1,49 +1,49 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Waveform } from "./waveform";
+import { HeroTranscript } from "./hero-transcript";
 
 export function Hero() {
   return (
-    <section className="px-5 sm:px-10 pt-20 sm:pt-28 pb-20 sm:pb-28 max-w-3xl mx-auto text-center relative">
-      <div className="inline-flex items-center gap-2 bg-white/[0.06] border border-white/[0.08] rounded-full px-4 py-1.5 text-[12px] font-medium text-[#8A8A8E] mb-8 backdrop-blur-sm">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#2D8A56] animate-pulse" />
-        7-day free trial — no credit card
-      </div>
+    <section className="px-5 sm:px-10 pt-8 sm:pt-16 pb-10 sm:pb-20 max-w-[1200px] mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-[10vw] items-center">
+        {/* Left — copy */}
+        <div>
+          <div className="inline-flex items-center gap-2 bg-[#f5f5f7] rounded-full px-3.5 py-1.5 mb-5 sm:mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#34C759]" />
+            <span className="text-[12px] text-[#86868b] font-medium">Trusted by 200+ solo founders</span>
+          </div>
+          <h1 className="text-[36px] sm:text-[52px] md:text-[60px] font-bold tracking-[-0.04em] leading-[1.06] text-[#1d1d1f]">
+            Daily planning
+            <br />
+            and standups{" "}
+            <br className="hidden sm:block" />
+            <span className="text-[#86868b]">for solo founders.</span>
+          </h1>
+          <p className="mt-4 sm:mt-5 text-[15px] sm:text-[17px] text-[#86868b] max-w-[380px] leading-relaxed">
+            The perfect app for solopreneurs who want to get ahead of their day.
+          </p>
+          <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
+            <Link href="/login">
+              <Button
+                size="lg"
+                className="bg-[#0071E3] hover:bg-[#0077ED] text-white px-8 py-4 text-base rounded-full shadow-none border-none w-full sm:w-auto min-h-[48px]"
+              >
+                Start free trial
+              </Button>
+            </Link>
+            <a
+              href="#how-it-works"
+              className="text-[#0071E3] text-[15px] font-semibold hover:underline underline-offset-4 min-h-[48px] flex items-center"
+            >
+              See how it works &darr;
+            </a>
+          </div>
+        </div>
 
-      <h1 className="text-[36px] sm:text-[52px] md:text-[64px] font-bold tracking-[-0.035em] leading-[1.05] text-white">
-        Five minutes.
-        <br />
-        Three questions.
-        <br />
-        <span className="bg-gradient-to-r from-[#D4917F] via-[#E8B4A2] to-[#D4917F] bg-clip-text text-transparent">
-          Every damn day.
-        </span>
-      </h1>
-
-      <p className="mt-6 sm:mt-8 text-base sm:text-lg text-[#8A8A8E] max-w-[500px] mx-auto leading-relaxed">
-        The voice-first standup for solopreneurs who ship.
-        <br className="hidden sm:block" />
-        No typing, no dashboards, no excuses.
-      </p>
-
-      <div className="mt-10 flex flex-col items-center gap-4">
-        <Link href="/login">
-          <Button size="lg" className="gap-2.5 text-base px-10 py-4 shadow-[0_4px_30px_rgba(184,92,66,0.4)]">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2">
-              <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-              <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-              <line x1="12" y1="19" x2="12" y2="23" />
-            </svg>
-            Start Free Trial
-          </Button>
-        </Link>
-        <span className="text-[12px] text-[#6B6B70]">
-          7 days free, then from $20/mo
-        </span>
-      </div>
-
-      <div className="mt-14">
-        <Waveform />
+        {/* Right — floating transcript bubbles */}
+        <div className="relative">
+          <HeroTranscript />
+        </div>
       </div>
     </section>
   );
