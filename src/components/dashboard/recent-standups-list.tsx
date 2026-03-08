@@ -2,11 +2,34 @@ import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { formatRelativeDate, formatDuration } from "@/lib/utils/formatting";
 import type { Standup } from "@/lib/types/database";
 
+function groupByDate(standups: Standup[]): { label: string; items: Standup[] }[] {
+  const groups: { label: string; items: Standup[] }[] = [];
+  for (const s of standups) {
+    const label = formatRelativeDate(s.date);
+    const existing = groups.find((g) => g.label === label);
+    if (existing) {
+      existing.items.push(s);
+    } else {
+      groups.push({ label, items: [s] });
+    }
+  }
+  return groups;
+}
+
 export function RecentStandupsList({ standups }: { standups: Standup[] }) {
+  const thisWeekCount = standups.length;
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Recent Standups</CardTitle>
+        <div className="flex items-center justify-between">
+          <CardTitle>Recent Standups</CardTitle>
+          {thisWeekCount > 0 && (
+            <span className="text-[11px] text-[#86868B] bg-[#F5F5F7] px-2 py-0.5 rounded-md font-medium">
+              {thisWeekCount} this week
+            </span>
+          )}
+        </div>
       </CardHeader>
       <CardContent>
         {standups.length === 0 ? (
@@ -25,57 +48,74 @@ export function RecentStandupsList({ standups }: { standups: Standup[] }) {
             </a>
           </div>
         ) : (
-          <div className="relative pl-6">
-            {/* Timeline line */}
-            <div className="absolute left-[7px] top-1 bottom-1 w-[2px] bg-[#F0F0F0] rounded-full" />
+          <div className="space-y-5">
+            {groupByDate(standups).map((group) => (
+              <div key={group.label}>
+                {/* Date header */}
+                <p className="text-[11px] font-semibold text-[#86868B] uppercase tracking-[0.5px] mb-2 pl-0.5">
+                  {group.label}
+                </p>
 
-            <div className="space-y-5">
-              {standups.map((standup) => {
-                const isDaily = standup.type === "daily";
-                return (
-                  <div key={standup.id} className="relative">
-                    {/* Timeline dot */}
-                    <div
-                      className={`absolute -left-6 top-1 w-3.5 h-3.5 rounded-full border-2 border-white ${
-                        isDaily
-                          ? "bg-[#FF9500] shadow-[0_0_0_2px_#FF9500]"
-                          : "bg-[#FBBF24] shadow-[0_0_0_2px_#FBBF24]"
-                      }`}
-                    />
+                {/* Entries */}
+                <div className="space-y-0.5">
+                  {group.items.map((standup) => {
+                    const isDaily = standup.type === "daily";
+                    const score = standup.productivity_score;
+                    const scorePercent = score ? Math.round((score / 4) * 100) : 0;
 
-                    {/* Content */}
-                    <div className="flex items-start justify-between gap-3">
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span
-                            className={`text-[10px] font-bold uppercase tracking-[0.5px] px-2 py-0.5 rounded-md ${
-                              isDaily
-                                ? "bg-[rgba(255,149,0,0.1)] text-[#FF9500]"
-                                : "bg-[rgba(251,191,36,0.1)] text-[#D97706]"
-                            }`}
-                          >
-                            {standup.type}
-                          </span>
-                          <span className="text-[11px] text-[#CACACA]">
-                            {formatRelativeDate(standup.date)}
-                          </span>
+                    return (
+                      <div
+                        key={standup.id}
+                        className="flex items-start gap-3 p-2.5 -mx-2.5 rounded-xl hover:bg-[#FAFAFA] transition-colors"
+                      >
+                        {/* Status circle */}
+                        <div
+                          className={`w-[22px] h-[22px] rounded-full flex items-center justify-center shrink-0 mt-0.5 ${
+                            isDaily ? "bg-[#FF9500]" : "bg-[#FBBF24]"
+                          }`}
+                        >
+                          <svg className="w-2.5 h-2.5" fill="none" stroke="white" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
                         </div>
-                        {standup.done_summary && (
-                          <p className="text-[13px] text-[#6E6E73] leading-relaxed line-clamp-2">
-                            {standup.done_summary}
-                          </p>
-                        )}
+
+                        {/* Content */}
+                        <div className="flex-1 min-w-0">
+                          {standup.done_summary ? (
+                            <p className="text-[13px] text-[#1D1D1F] font-medium leading-snug line-clamp-2">
+                              {standup.done_summary}
+                            </p>
+                          ) : (
+                            <p className="text-[13px] text-[#86868B] italic">No summary</p>
+                          )}
+                          <div className="flex items-center gap-2 mt-1">
+                            <span className="text-[10px] text-[#CACACA] capitalize">{standup.type}</span>
+                            {standup.duration_seconds && (
+                              <>
+                                <span className="w-[2px] h-[2px] rounded-full bg-[#E5E5E5]" />
+                                <span className="text-[10px] text-[#CACACA]">
+                                  {formatDuration(standup.duration_seconds)}
+                                </span>
+                              </>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Score bar */}
+                        {score ? (
+                          <div className="w-12 h-1 bg-[#F0F0F0] rounded-full overflow-hidden shrink-0 mt-2">
+                            <div
+                              className="h-full rounded-full bg-gradient-to-r from-[#FF9500] to-[#FFB340]"
+                              style={{ width: `${scorePercent}%` }}
+                            />
+                          </div>
+                        ) : null}
                       </div>
-                      {standup.duration_seconds && (
-                        <span className="text-[11px] text-[#CACACA] shrink-0 mt-0.5">
-                          {formatDuration(standup.duration_seconds)}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+                    );
+                  })}
+                </div>
+              </div>
+            ))}
           </div>
         )}
       </CardContent>
