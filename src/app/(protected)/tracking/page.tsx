@@ -22,13 +22,23 @@ function getWeekdayCount(start: Date, end: Date): number {
   return count;
 }
 
+function getMondayOfWeek(d: Date): Date {
+  const date = new Date(d);
+  const day = date.getDay();
+  // getDay(): 0=Sun,1=Mon,...,6=Sat. For Sunday, go back 6 days; otherwise go back (day-1) days.
+  const diff = day === 0 ? 6 : day - 1;
+  date.setDate(date.getDate() - diff);
+  return date;
+}
+
 function buildWeeklyData(standups: Standup[]): WeekData[] {
   const weeks: WeekData[] = [];
   const now = new Date();
+  const thisMonday = getMondayOfWeek(now);
 
   for (let i = 7; i >= 0; i--) {
-    const weekStart = new Date(now);
-    weekStart.setDate(now.getDate() - now.getDay() + 1 - i * 7);
+    const weekStart = new Date(thisMonday);
+    weekStart.setDate(thisMonday.getDate() - i * 7);
     const weekEnd = new Date(weekStart);
     weekEnd.setDate(weekStart.getDate() + 4); // Friday
 
@@ -86,8 +96,7 @@ async function getTrackingData() {
 
   const now = new Date();
   const monthStart = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split("T")[0];
-  const weekStart = new Date(now);
-  weekStart.setDate(now.getDate() - now.getDay() + 1);
+  const weekStart = getMondayOfWeek(now);
   const weekStartStr = weekStart.toISOString().split("T")[0];
   const todayStr = now.toISOString().split("T")[0];
 
