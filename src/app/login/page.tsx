@@ -43,8 +43,8 @@ export default function LoginPage() {
       {/* Left brand panel — hidden on mobile */}
       <div className="hidden lg:flex lg:w-[45%] bg-gradient-to-br from-[#1D1D1F] via-[#2A2A2C] to-[#1D1D1F] relative overflow-hidden flex-col justify-between p-12">
         {/* Subtle accent glow */}
-        <div className="absolute top-[-20%] right-[-10%] w-[400px] h-[400px] bg-[#FF9500] rounded-full opacity-[0.06] blur-[100px]" />
-        <div className="absolute bottom-[-15%] left-[-10%] w-[300px] h-[300px] bg-[#FF9500] rounded-full opacity-[0.04] blur-[80px]" />
+        <div className="absolute top-[-20%] right-[-10%] w-[400px] h-[400px] bg-[#0071E3] rounded-full opacity-[0.06] blur-[100px]" />
+        <div className="absolute bottom-[-15%] left-[-10%] w-[300px] h-[300px] bg-[#0071E3] rounded-full opacity-[0.04] blur-[80px]" />
 
         <div>
           <Link href="/" className="text-[22px] font-bold text-white">
@@ -56,7 +56,7 @@ export default function LoginPage() {
           <h1 className="text-[38px] font-bold text-white leading-[1.2] tracking-[-0.02em] mb-5">
             Five minutes.<br />
             Three questions.<br />
-            <span className="text-[#FFa526]">Every damn day.</span>
+            <span className="text-[#0077ED]">Every damn day.</span>
           </h1>
           <p className="text-[16px] text-[#9CA3AF] leading-relaxed max-w-[360px]">
             The voice-first daily standup for solopreneurs who ship. No typing, no dashboards, no excuses.
@@ -105,7 +105,7 @@ export default function LoginPage() {
           {/* Mobile logo */}
           <Link
             href="/"
-            className="lg:hidden block text-center text-[22px] font-bold text-[#FF9500] mb-2"
+            className="lg:hidden block text-center text-[22px] font-bold text-[#0071E3] mb-2"
           >
             Anchor
           </Link>
@@ -127,7 +127,7 @@ export default function LoginPage() {
                 </p>
                 <button
                   onClick={() => setSent(false)}
-                  className="mt-4 text-sm text-[#FF9500] hover:text-[#FFa526] transition-colors"
+                  className="mt-4 text-sm text-[#0071E3] hover:text-[#0077ED] transition-colors"
                 >
                   Use a different email
                 </button>
@@ -179,7 +179,7 @@ export default function LoginPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
-                    className="w-full rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] px-3.5 py-2.5 text-sm text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#FF9500]/30 focus:border-[#FF9500] transition-all"
+                    className="w-full rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] px-3.5 py-2.5 text-sm text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#0071E3]/30 focus:border-[#0071E3] transition-all"
                   />
                   {error && (
                     <p className="mt-2 text-sm text-[#EF4444]">{error}</p>

@@ -41,7 +41,7 @@ export function Testimonials() {
         {/* Left — sticky heading (2 cols) */}
         <div className="md:col-span-2 md:sticky md:top-24">
           <ScrollReveal>
-            <p className="text-[#FF9500] text-sm font-semibold mb-3 tracking-wide">
+            <p className="text-[#0071E3] text-sm font-semibold mb-3 tracking-wide">
               Why Anchor
             </p>
             <h2 className="text-[32px] sm:text-[40px] font-bold tracking-[-0.035em] text-[#1d1d1f] leading-tight">
@@ -55,7 +55,7 @@ export function Testimonials() {
             <div className="mt-8">
               <Link
                 href="/login"
-                className="inline-flex items-center justify-center gap-2 bg-[#FF9500] hover:bg-[#FFa526] text-white px-7 py-3 rounded-full text-[14px] font-semibold transition-colors w-full sm:w-auto min-h-[48px]"
+                className="inline-flex items-center justify-center gap-2 bg-[#0071E3] hover:bg-[#0077ED] text-white px-7 py-3 rounded-full text-[14px] font-semibold transition-colors w-full sm:w-auto min-h-[48px]"
               >
                 Start your free trial
               </Link>

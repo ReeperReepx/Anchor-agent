@@ -23,7 +23,7 @@ export function StatsBar() {
         {/* Duplicate items for seamless loop */}
         {[...TICKER_ITEMS, ...TICKER_ITEMS].map((item, i) => (
           <span key={i} className="flex items-center gap-2 text-[13px] sm:text-[14px] text-[#86868b] font-medium">
-            <svg className="w-3.5 h-3.5 text-[#FF9500] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-3.5 h-3.5 text-[#0071E3] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
             </svg>
             {item}
@@ -41,7 +41,7 @@ export function OutcomeCards() {
         {/* Left — copy */}
         <ScrollReveal>
           <div>
-            <p className="text-[#FF9500] text-sm font-semibold mb-3 tracking-wide">
+            <p className="text-[#0071E3] text-sm font-semibold mb-3 tracking-wide">
               Results
             </p>
             <h2 className="text-[32px] sm:text-[44px] font-bold tracking-[-0.035em] text-[#1d1d1f] leading-tight">
@@ -72,13 +72,13 @@ export function OutcomeCards() {
                   key={i}
                   className={`aspect-square rounded-[6px] ${
                     level === 4
-                      ? "bg-[#FF9500] ring-2 ring-[#FF9500]/30"
+                      ? "bg-[#0071E3] ring-2 ring-[#0071E3]/30"
                       : level === 3
-                      ? "bg-[#FF9500]"
+                      ? "bg-[#0071E3]"
                       : level === 2
-                      ? "bg-[#FF9500]/60"
+                      ? "bg-[#0071E3]/60"
                       : level === 1
-                      ? "bg-[#FF9500]/30"
+                      ? "bg-[#0071E3]/30"
                       : "bg-[#e5e5e5]"
                   }`}
                 />
@@ -86,9 +86,9 @@ export function OutcomeCards() {
             </div>
             <div className="flex items-center justify-end gap-1 mt-3">
               <span className="text-[9px] text-[#86868b]">Less</span>
-              <div className="w-3 h-3 rounded-[3px] bg-[#FF9500]/30" />
-              <div className="w-3 h-3 rounded-[3px] bg-[#FF9500]/60" />
-              <div className="w-3 h-3 rounded-[3px] bg-[#FF9500]" />
+              <div className="w-3 h-3 rounded-[3px] bg-[#0071E3]/30" />
+              <div className="w-3 h-3 rounded-[3px] bg-[#0071E3]/60" />
+              <div className="w-3 h-3 rounded-[3px] bg-[#0071E3]" />
               <span className="text-[9px] text-[#86868b]">More</span>
             </div>
             <div className="mt-5 pt-4 border-t border-[#e5e5e5] flex items-center justify-between">

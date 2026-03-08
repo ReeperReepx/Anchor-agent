@@ -18,7 +18,7 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-[#F5F5F7]">
       <nav className="flex items-center justify-between px-10 py-5 max-w-[1100px] mx-auto border-b border-[#E5E5E5]">
-        <Link href="/" className="text-[22px] font-bold text-[#FF9500]">
+        <Link href="/" className="text-[22px] font-bold text-[#0071E3]">
           Anchor
         </Link>
         <div className="flex items-center gap-5 text-sm text-[#86868B]">
@@ -27,7 +27,7 @@ export default function BlogPage() {
           </Link>
           <Link
             href="/login"
-            className="bg-[#FF9500] hover:bg-[#FFa526] text-white px-4 py-2 rounded-[10px] text-sm font-semibold transition-all"
+            className="bg-[#0071E3] hover:bg-[#0077ED] text-white px-4 py-2 rounded-[10px] text-sm font-semibold transition-all"
           >
             Start Free Trial
           </Link>
@@ -50,16 +50,16 @@ export default function BlogPage() {
               href={`/blog/${article.slug}`}
               className="block group"
             >
-              <article className="bg-white rounded-[14px] border border-[#E5E5E5] p-8 transition-all hover:border-[#FF9500]/30 hover:shadow-[0_4px_24px_rgba(255,149,0,0.08)]">
+              <article className="bg-white rounded-[14px] border border-[#E5E5E5] p-8 transition-all hover:border-[#0071E3]/30 hover:shadow-[0_4px_24px_rgba(255,149,0,0.08)]">
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="text-[11px] font-semibold text-[#FF9500] uppercase tracking-[1px]">
+                  <span className="text-[11px] font-semibold text-[#0071E3] uppercase tracking-[1px]">
                     {article.category}
                   </span>
                   <span className="text-[12px] text-[#9CA3AF]">
                     {article.readTime}
                   </span>
                 </div>
-                <h2 className="text-xl font-semibold text-[#1D1D1F] mb-2 group-hover:text-[#FF9500] transition-colors leading-snug">
+                <h2 className="text-xl font-semibold text-[#1D1D1F] mb-2 group-hover:text-[#0071E3] transition-colors leading-snug">
                   {article.title}
                 </h2>
                 <p className="text-sm text-[#86868B] leading-relaxed">
