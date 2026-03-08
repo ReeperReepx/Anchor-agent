@@ -8,7 +8,7 @@ interface WeekData {
 
 export function WeeklyBars({ weeks }: { weeks: WeekData[] }) {
   return (
-    <div className="flex items-end justify-between gap-2 sm:gap-3 h-[200px]">
+    <div className="flex items-end justify-between gap-1.5 h-[200px] min-w-0">
       {weeks.map((week) => {
         const pct = Math.min(
           Math.round((week.completed / Math.max(week.total, 1)) * 100),
@@ -19,9 +19,9 @@ export function WeeklyBars({ weeks }: { weeks: WeekData[] }) {
         return (
           <div
             key={week.weekLabel}
-            className="flex-1 flex flex-col items-center h-full justify-end gap-1.5"
+            className="flex-1 min-w-0 flex flex-col items-center h-full justify-end gap-1.5"
           >
-            <span className="text-[13px] font-semibold text-[#1D1D1F]">
+            <span className="text-[11px] font-semibold text-[#1D1D1F]">
               {week.completed}/{week.total}
             </span>
             <div className="w-full max-w-[48px] h-full bg-[#F0F0F0] rounded-t-lg overflow-hidden relative flex flex-col justify-end">
@@ -41,7 +41,7 @@ export function WeeklyBars({ weeks }: { weeks: WeekData[] }) {
                 }}
               />
             </div>
-            <span className="text-[11px] sm:text-[12px] text-[#9CA3AF] font-medium whitespace-nowrap">
+            <span className="text-[10px] sm:text-[11px] text-[#9CA3AF] font-medium truncate w-full text-center">
               {week.weekLabel}
             </span>
           </div>

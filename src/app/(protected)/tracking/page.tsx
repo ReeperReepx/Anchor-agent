@@ -217,7 +217,7 @@ export default async function TrackingPage() {
       </div>
 
       {/* Activity Heatmap + Weekly Completion side by side on desktop */}
-      <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -232,7 +232,7 @@ export default async function TrackingPage() {
           </CardContent>
         </Card>
 
-        <Card>
+        <Card className="overflow-hidden">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <svg className="w-4 h-4 text-[#86868B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -241,7 +241,7 @@ export default async function TrackingPage() {
               Weekly Completion
             </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="min-w-0">
             <WeeklyBars weeks={weeklyData} />
           </CardContent>
         </Card>
