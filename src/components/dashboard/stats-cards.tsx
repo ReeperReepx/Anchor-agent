@@ -12,7 +12,10 @@ export function StatsCards({
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
       <Card className="relative overflow-hidden">
         <CardHeader>
-          <CardTitle className="text-[11px] font-semibold text-[#FF9500] uppercase tracking-[1px]">Current Streak</CardTitle>
+          <div className="flex items-center gap-2">
+            <span className="text-lg">🔥</span>
+            <CardTitle className="text-[11px] font-semibold text-[#FF9500] uppercase tracking-[1px]">Current Streak</CardTitle>
+          </div>
         </CardHeader>
         <CardContent>
           <div className="flex items-baseline gap-2">

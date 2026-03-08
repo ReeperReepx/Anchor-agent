@@ -1,6 +1,6 @@
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { WeeklyOverview } from "@/components/dashboard/weekly-overview";
-import { InsightCard } from "@/components/dashboard/insight-card";
+
 import { StatsCards } from "@/components/dashboard/stats-cards";
 import { RecentStandupsList } from "@/components/dashboard/recent-standups-list";
 import { createClient } from "@/lib/supabase/server";
@@ -55,7 +55,7 @@ function getGreeting(): string {
 }
 
 export default async function DashboardPage() {
-  const { streak, recentStandups, userName, standupTime, totalCount, thisWeekCount } = await getData();
+  const { streak, recentStandups, userName, standupTime, totalCount } = await getData();
   const completedDays = recentStandups.filter((s) => s.type === "daily").map((s) => s.date);
 
   return (
@@ -82,7 +82,7 @@ export default async function DashboardPage() {
         </a>
       </div>
 
-      <InsightCard streak={streak} thisWeekCount={thisWeekCount} hasStandups={recentStandups.length > 0} />
+      <StatsCards streak={streak} totalCount={totalCount} />
 
       <Card>
         <CardHeader>
@@ -92,8 +92,6 @@ export default async function DashboardPage() {
           <WeeklyOverview completedDays={completedDays} />
         </CardContent>
       </Card>
-
-      <StatsCards streak={streak} totalCount={totalCount} />
 
       <RecentStandupsList standups={recentStandups} />
     </div>
