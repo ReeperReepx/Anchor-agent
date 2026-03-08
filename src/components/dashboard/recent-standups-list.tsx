@@ -61,7 +61,7 @@ export function RecentStandupsList({ standups }: { standups: Standup[] }) {
                   {group.items.map((standup) => {
                     const isDaily = standup.type === "daily";
                     const score = standup.productivity_score;
-                    const scorePercent = score ? Math.round((score / 4) * 100) : 0;
+                    const scorePercent = score ?? 0;
 
                     return (
                       <div

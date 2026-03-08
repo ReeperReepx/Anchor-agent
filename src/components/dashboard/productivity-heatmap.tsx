@@ -19,9 +19,9 @@ function getMonthRange(year: number, month: number) {
 
 function scoreColor(score: number | null): string {
   if (!score) return "bg-[#E5E5E5]";
-  if (score === 1) return "bg-[#FF9500]/30";
-  if (score === 2) return "bg-[#FF9500]/55";
-  if (score === 3) return "bg-[#FF9500]/80";
+  if (score <= 25) return "bg-[#FF9500]/30";
+  if (score <= 50) return "bg-[#FF9500]/55";
+  if (score <= 75) return "bg-[#FF9500]/80";
   return "bg-[#FF9500]";
 }
 
@@ -80,7 +80,7 @@ export function ProductivityHeatmap() {
   // Calculate average score for the month
   const scoredDays = scores.filter((s) => s.productivity_score);
   const avgScore = scoredDays.length > 0
-    ? (scoredDays.reduce((sum, s) => sum + s.productivity_score, 0) / scoredDays.length).toFixed(1)
+    ? Math.round(scoredDays.reduce((sum, s) => sum + s.productivity_score, 0) / scoredDays.length)
     : null;
 
   return (
@@ -138,7 +138,7 @@ export function ProductivityHeatmap() {
                   className={`aspect-square rounded-[5px] ${scoreColor(score)} ${
                     isToday ? "ring-2 ring-[#FF9500]/40" : ""
                   } transition-colors`}
-                  title={score ? `${MONTHS[month]} ${day}: Score ${score}/4` : `${MONTHS[month]} ${day}: No standup`}
+                  title={score ? `${MONTHS[month]} ${day}: ${score}%` : `${MONTHS[month]} ${day}: No standup`}
                 />
               );
             })}
@@ -156,7 +156,7 @@ export function ProductivityHeatmap() {
         </div>
         {avgScore && (
           <span className="text-[11px] text-[#86868B]">
-            Avg: <span className="font-semibold text-[#1D1D1F]">{avgScore}</span>/4
+            Avg: <span className="font-semibold text-[#1D1D1F]">{avgScore}%</span>
           </span>
         )}
       </div>

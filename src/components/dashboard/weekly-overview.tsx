@@ -11,30 +11,29 @@ interface ScoreEntry {
   productivity_score: number;
 }
 
-const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+const SHORT_DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-function getWeekRange() {
+function getLast5Days() {
+  const days: { date: string; label: string; dateStr: string }[] = [];
   const now = new Date();
-  const day = now.getDay();
-  const diffToMonday = day === 0 ? 6 : day - 1;
-  const monday = new Date(now);
-  monday.setDate(now.getDate() - diffToMonday);
-  monday.setHours(0, 0, 0, 0);
-  const friday = new Date(monday);
-  friday.setDate(monday.getDate() + 4);
-  return {
-    from: monday.toISOString().split("T")[0],
-    to: friday.toISOString().split("T")[0],
-    monday,
-  };
+  for (let i = 4; i >= 0; i--) {
+    const d = new Date(now);
+    d.setDate(now.getDate() - i);
+    d.setHours(0, 0, 0, 0);
+    const dateStr = d.toISOString().split("T")[0];
+    const label = i === 0 ? "Today" : SHORT_DAYS[d.getDay()];
+    days.push({ date: dateStr, label, dateStr });
+  }
+  return days;
 }
 
 export function WeeklyOverview({ completedDays }: WeeklyOverviewProps) {
-  const today = new Date();
-  const todayDay = today.getDay();
   const [scores, setScores] = useState<ScoreEntry[]>([]);
   const [loading, setLoading] = useState(true);
-  const { from, to } = getWeekRange();
+
+  const last5 = getLast5Days();
+  const from = last5[0].dateStr;
+  const to = last5[4].dateStr;
 
   useEffect(() => {
     setLoading(true);
@@ -48,21 +47,19 @@ export function WeeklyOverview({ completedDays }: WeeklyOverviewProps) {
       .finally(() => setLoading(false));
   }, [from, to]);
 
-  const scoreMap = new Map<number, number>();
+  // Map date string -> score
+  const scoreMap = new Map<string, number>();
   for (const entry of scores) {
-    const date = new Date(entry.date + "T00:00:00");
-    scoreMap.set(date.getDay(), entry.productivity_score);
+    scoreMap.set(entry.date, entry.productivity_score);
   }
 
-  // Build per-day data (Mon=1 ... Fri=5)
-  const dayData = DAYS.map((label, i) => {
-    const dayIndex = i + 1;
-    const isCompleted = completedDays.some((d) => new Date(d).getDay() === dayIndex);
-    const isToday = todayDay === dayIndex;
-    const isFuture = dayIndex > todayDay;
-    const score = scoreMap.get(dayIndex) ?? null;
-    const pct = score !== null ? Math.round((score / 4) * 100) : null;
-    return { label, dayIndex, isCompleted, isToday, isFuture, score, pct };
+  // Build per-day data
+  const dayData = last5.map((day, i) => {
+    const isCompleted = completedDays.includes(day.dateStr);
+    const isToday = i === 4;
+    const score = scoreMap.get(day.dateStr) ?? null;
+    const pct = score !== null ? score : null;
+    return { ...day, isCompleted, isToday, score, pct, idx: i };
   });
 
   const completedCount = dayData.filter((d) => d.isCompleted).length;
@@ -81,12 +78,12 @@ export function WeeklyOverview({ completedDays }: WeeklyOverviewProps) {
   const usableH = H - PAD_TOP - PAD_BOT;
 
   // Build sparkline points — only for days with scores
-  const points: { x: number; y: number; pct: number; label: string; isToday: boolean; isCompleted: boolean; isFuture: boolean }[] = [];
+  const points: { x: number; y: number; pct: number; isToday: boolean }[] = [];
   for (const d of dayData) {
-    const x = PAD_X + ((d.dayIndex - 1) / 4) * usableW;
+    const x = PAD_X + (d.idx / 4) * usableW;
     if (d.pct !== null) {
       const y = PAD_TOP + usableH - (d.pct / 100) * usableH;
-      points.push({ x, y, pct: d.pct, label: d.label, isToday: d.isToday, isCompleted: d.isCompleted, isFuture: d.isFuture });
+      points.push({ x, y, pct: d.pct, isToday: d.isToday });
     }
   }
 
@@ -106,7 +103,7 @@ export function WeeklyOverview({ completedDays }: WeeklyOverviewProps) {
         </div>
         <div className="h-16 rounded-xl bg-[#F5F5F7] animate-pulse mb-3" />
         <div className="flex justify-between">
-          {DAYS.map((d) => <div key={d} className="h-3 w-6 rounded bg-[#F0F0F0] animate-pulse" />)}
+          {last5.map((d) => <div key={d.dateStr} className="h-3 w-6 rounded bg-[#F0F0F0] animate-pulse" />)}
         </div>
       </div>
     );
@@ -114,7 +111,7 @@ export function WeeklyOverview({ completedDays }: WeeklyOverviewProps) {
 
   return (
     <div>
-      {/* Header: big score + trend */}
+      {/* Header: big score + completion count */}
       <div className="flex items-baseline justify-between mb-3">
         <div className="flex items-baseline gap-1.5">
           <span className="text-[28px] font-extrabold text-[#FF9500] leading-none tracking-tight">
@@ -122,8 +119,8 @@ export function WeeklyOverview({ completedDays }: WeeklyOverviewProps) {
           </span>
           <span className="text-[12px] text-[#86868B] font-medium">productivity</span>
         </div>
-        <span className="text-[13px] text-[#86868B]">
-          <span className="font-bold text-[#1D1D1F]">{completedCount}</span>/5 days
+        <span className="text-[12px] text-[#86868B]">
+          Last 5 days &middot; <span className="font-bold text-[#1D1D1F]">{completedCount}</span> completed
         </span>
       </div>
 
@@ -173,12 +170,12 @@ export function WeeklyOverview({ completedDays }: WeeklyOverviewProps) {
             />
           ))}
 
-          {/* Vertical markers for all 5 days at bottom */}
-          {dayData.map((d, i) => {
-            const x = PAD_X + (i / 4) * usableW;
+          {/* Vertical tick marks for all 5 days */}
+          {dayData.map((d) => {
+            const x = PAD_X + (d.idx / 4) * usableW;
             return (
               <line
-                key={d.label}
+                key={d.dateStr}
                 x1={x} y1={H - 1} x2={x} y2={H - 4}
                 stroke={d.isCompleted ? "#FF9500" : d.isToday ? "#FF9500" : "#E5E5E5"}
                 strokeWidth="1.5"
@@ -192,7 +189,7 @@ export function WeeklyOverview({ completedDays }: WeeklyOverviewProps) {
       {/* Day labels + per-day scores */}
       <div className="flex justify-between px-1">
         {dayData.map((d) => (
-          <div key={d.label} className="flex flex-col items-center gap-0.5">
+          <div key={d.dateStr} className="flex flex-col items-center gap-0.5">
             <span className={`text-[10px] font-semibold ${
               d.isToday ? "text-[#FF9500]" : d.isCompleted ? "text-[#1D1D1F]" : "text-[#CACACA]"
             }`}>

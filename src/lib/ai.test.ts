@@ -9,19 +9,19 @@ describe("scoreProductivity", () => {
     blockers_summary: null,
   };
 
-  it("returns score 1 for empty summaries", () => {
+  it("returns 0% for empty summaries", () => {
     const result = scoreProductivity(baseSummaries, 300, null);
-    expect(result.score).toBe(1);
+    expect(result.score).toBe(0);
   });
 
-  it("returns score 1 for minimal done summary", () => {
+  it("returns low score for minimal done summary", () => {
     const result = scoreProductivity(
       { ...baseSummaries, done_summary: "Fixed a bug" },
       300,
       null,
     );
     expect(result.score).toBeGreaterThanOrEqual(1);
-    expect(result.score).toBeLessThanOrEqual(2);
+    expect(result.score).toBeLessThanOrEqual(50);
   });
 
   it("returns higher score for multiple completed tasks", () => {
@@ -34,7 +34,7 @@ describe("scoreProductivity", () => {
       300,
       null,
     );
-    expect(result.score).toBeGreaterThanOrEqual(3);
+    expect(result.score).toBeGreaterThanOrEqual(50);
   });
 
   it("gives bonus for follow-through on previous plan", () => {
@@ -77,7 +77,7 @@ describe("scoreProductivity", () => {
     expect(shortSession.score).toBeLessThanOrEqual(normalSession.score);
   });
 
-  it("returns score between 1 and 4", () => {
+  it("returns score between 0 and 100", () => {
     // Test with maximum inputs
     const maxResult = scoreProductivity(
       {
@@ -88,13 +88,13 @@ describe("scoreProductivity", () => {
       600,
       "Feature A and bug B",
     );
-    expect(maxResult.score).toBeGreaterThanOrEqual(1);
-    expect(maxResult.score).toBeLessThanOrEqual(4);
+    expect(maxResult.score).toBeGreaterThanOrEqual(0);
+    expect(maxResult.score).toBeLessThanOrEqual(100);
 
     // Test with minimum inputs
     const minResult = scoreProductivity(baseSummaries, null, null);
-    expect(minResult.score).toBeGreaterThanOrEqual(1);
-    expect(minResult.score).toBeLessThanOrEqual(4);
+    expect(minResult.score).toBeGreaterThanOrEqual(0);
+    expect(minResult.score).toBeLessThanOrEqual(100);
   });
 
   it("includes reasoning string", () => {

@@ -22,19 +22,16 @@ async function getData(): Promise<{
   if (!user) return { streak: null, recentStandups: [], userName: "", standupTime: null, totalCount: 0, thisWeekCount: 0 };
 
   const now = new Date();
-  const day = now.getDay();
-  const diffToMonday = day === 0 ? 6 : day - 1;
-  const monday = new Date(now);
-  monday.setDate(now.getDate() - diffToMonday);
-  monday.setHours(0, 0, 0, 0);
-  const mondayStr = monday.toISOString().split("T")[0];
+  const fiveDaysAgo = new Date(now);
+  fiveDaysAgo.setDate(now.getDate() - 4);
+  fiveDaysAgo.setHours(0, 0, 0, 0);
+  const fiveDaysAgoStr = fiveDaysAgo.toISOString().split("T")[0];
 
-  const [streakResult, recentResult, profileResult, countResult, weekCountResult] = await Promise.all([
+  const [streakResult, recentResult, profileResult, countResult] = await Promise.all([
     supabase.from("streaks").select("*").eq("user_id", user.id).single<Streak>(),
-    supabase.from("standups").select("*").eq("user_id", user.id).order("created_at", { ascending: false }).limit(3).returns<Standup[]>(),
+    supabase.from("standups").select("*").eq("user_id", user.id).order("created_at", { ascending: false }).limit(5).returns<Standup[]>(),
     supabase.from("users").select("standup_time, goal_categories").eq("id", user.id).single<{ standup_time: string | null; goal_categories: string | null }>(),
     supabase.from("standups").select("id", { count: "exact", head: true }).eq("user_id", user.id),
-    supabase.from("standups").select("id", { count: "exact", head: true }).eq("user_id", user.id).eq("type", "daily").gte("date", mondayStr),
   ]);
 
   return {
@@ -43,7 +40,7 @@ async function getData(): Promise<{
     userName: user.user_metadata?.name ?? user.email?.split("@")[0] ?? "",
     standupTime: profileResult.data?.standup_time ?? null,
     totalCount: countResult.count ?? 0,
-    thisWeekCount: weekCountResult.count ?? 0,
+    thisWeekCount: 0,
   };
 }
 

@@ -5,7 +5,7 @@ export interface StandupSummaries {
 }
 
 export interface ProductivityScore {
-  score: number; // 1-4
+  score: number; // 0-100 whole percent
   reasoning: string;
 }
 
@@ -148,13 +148,10 @@ export function scoreProductivity(
     reasons.push("very short session");
   }
 
-  // Normalize to 1-4 scale
+  // Normalize to 0-100% (whole percent)
   // Max possible raw score = 8 (3 + 2 + 2 + 1)
-  let finalScore: number;
-  if (score <= 1) finalScore = 1;
-  else if (score <= 3) finalScore = 2;
-  else if (score <= 5) finalScore = 3;
-  else finalScore = 4;
+  const maxRaw = 8;
+  const finalScore = Math.min(100, Math.max(0, Math.round((score / maxRaw) * 100)));
 
   return {
     score: finalScore,
