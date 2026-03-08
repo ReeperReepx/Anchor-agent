@@ -13,13 +13,13 @@ interface StepProps {
 export function StepWelcome({ next }: { next: () => void }) {
   return (
     <div className="text-center">
-      <div className="w-16 h-16 bg-[rgba(184,92,66,0.08)] border border-[rgba(184,92,66,0.15)] rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_24px_rgba(184,92,66,0.08)]">
+      <div className="w-16 h-16 bg-[rgba(0,113,227,0.08)] border border-[rgba(0,113,227,0.15)] rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_24px_rgba(0,113,227,0.08)]">
         <svg
           width="28"
           height="28"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="#B85C42"
+          stroke="#0071E3"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -32,7 +32,7 @@ export function StepWelcome({ next }: { next: () => void }) {
       <h1 className="text-[32px] font-bold text-[#1D1D1F] tracking-[-0.02em] mb-3">
         Welcome to Anchor
       </h1>
-      <p className="text-[#6B7280] text-base mb-10 max-w-sm mx-auto leading-relaxed">
+      <p className="text-[#86868B] text-base mb-10 max-w-sm mx-auto leading-relaxed">
         Six quick questions to set up your daily standup. Takes about a minute.
       </p>
       <Button size="lg" onClick={next}>
@@ -48,7 +48,7 @@ export function StepName({ data, setData, next, canProceed }: StepProps & { canP
       <h2 className="text-2xl font-bold text-[#1D1D1F] mb-2">
         What should we call you?
       </h2>
-      <p className="text-[#6B7280] text-sm mb-8">
+      <p className="text-[#86868B] text-sm mb-8">
         Your AI agent will use this during standups.
       </p>
       <input
@@ -70,12 +70,12 @@ export function StepSchedule({ data, setData }: StepProps) {
       <h2 className="text-2xl font-bold text-[#1D1D1F] mb-2">
         When do you want to standup?
       </h2>
-      <p className="text-[#6B7280] text-sm mb-8">
+      <p className="text-[#86868B] text-sm mb-8">
         We&apos;ll send you a reminder and sync it to your calendar.
       </p>
       <div className="space-y-4">
         <div>
-          <label className="block text-sm text-[#6B7280] mb-2">Timezone</label>
+          <label className="block text-sm text-[#86868B] mb-2">Timezone</label>
           <select
             value={data.timezone}
             onChange={(e) => setData({ ...data, timezone: e.target.value })}
@@ -89,7 +89,7 @@ export function StepSchedule({ data, setData }: StepProps) {
           </select>
         </div>
         <div>
-          <label className="block text-sm text-[#6B7280] mb-2">
+          <label className="block text-sm text-[#86868B] mb-2">
             Standup time
           </label>
           <input
@@ -121,7 +121,7 @@ export function StepGoals({ data, setData }: StepProps) {
       <h2 className="text-2xl font-bold text-[#1D1D1F] mb-2">
         What are you building?
       </h2>
-      <p className="text-[#6B7280] text-sm mb-8">
+      <p className="text-[#86868B] text-sm mb-8">
         Pick as many as apply. This helps us match you with the right partner.
       </p>
       <div className="flex flex-wrap gap-2">
@@ -133,8 +133,8 @@ export function StepGoals({ data, setData }: StepProps) {
               onClick={() => toggleGoal(goal)}
               className={`px-4 py-2.5 rounded-[10px] text-sm font-medium transition-all ${
                 selected
-                  ? "bg-[#B85C42] text-white shadow-[0_2px_8px_rgba(184,92,66,0.3)]"
-                  : "bg-[#F0F0F0] text-[#6B7280] hover:text-[#1D1D1F] hover:bg-[#E5E5E5]"
+                  ? "bg-[#0071E3] text-white shadow-[0_2px_8px_rgba(0,113,227,0.3)]"
+                  : "bg-[#F0F0F0] text-[#86868B] hover:text-[#1D1D1F] hover:bg-[#E5E5E5]"
               }`}
             >
               {goal}
@@ -170,7 +170,7 @@ export function StepPreference({ data, setData }: StepProps) {
       <h2 className="text-2xl font-bold text-[#1D1D1F] mb-2">
         How do you want to standup?
       </h2>
-      <p className="text-[#6B7280] text-sm mb-8">
+      <p className="text-[#86868B] text-sm mb-8">
         Solo is just you and the AI. Shared means you&apos;ll also see a
         partner&apos;s standup after you both complete yours.
       </p>
@@ -197,7 +197,7 @@ export function StepAccountability({ data, setData }: StepProps) {
       <h2 className="text-2xl font-bold text-[#1D1D1F] mb-2">
         How should the AI hold you accountable?
       </h2>
-      <p className="text-[#6B7280] text-sm mb-8">
+      <p className="text-[#86868B] text-sm mb-8">
         This sets the personality of your AI standup agent.
       </p>
       <div className="space-y-3">
@@ -230,9 +230,9 @@ export function StepComplete({
 }) {
   return (
     <div className="text-center">
-      <div className="w-16 h-16 bg-[rgba(45,138,86,0.08)] border border-[rgba(45,138,86,0.15)] rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_24px_rgba(45,138,86,0.08)]">
+      <div className="w-16 h-16 bg-[rgba(52,199,89,0.08)] border border-[rgba(52,199,89,0.15)] rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_24px_rgba(52,199,89,0.08)]">
         <svg
-          className="w-7 h-7 text-[#2D8A56]"
+          className="w-7 h-7 text-[#34C759]"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -248,7 +248,7 @@ export function StepComplete({
       <h2 className="text-[28px] font-bold text-[#1D1D1F] mb-2">
         You&apos;re all set, {data.name}
       </h2>
-      <p className="text-[#6B7280] mb-10">
+      <p className="text-[#86868B] mb-10">
         Your first standup is at{" "}
         <span className="text-[#1D1D1F] font-medium">{data.standup_time}</span>{" "}
         tomorrow. Or start one right now.

@@ -25,7 +25,7 @@ export function WaveformBars({ active, getVolume }: { active: boolean; getVolume
       {levels.map((h, i) => (
         <div
           key={i}
-          className={`w-1 rounded-full transition-all duration-100 ${active ? "bg-[#B85C42]" : "bg-[#E5E5E5]"}`}
+          className={`w-1 rounded-full transition-all duration-100 ${active ? "bg-[#0071E3]" : "bg-[#E5E5E5]"}`}
           style={{ height: active ? `${h}px` : "8px" }}
         />
       ))}

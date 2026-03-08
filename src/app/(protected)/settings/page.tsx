@@ -74,12 +74,12 @@ export default function SettingsPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-full bg-gradient-to-b from-[#C46B50] to-[#B85C42] flex items-center justify-center text-white text-sm font-semibold shadow-[0_2px_8px_rgba(184,92,66,0.25)]">
+        <div className="w-10 h-10 rounded-full bg-gradient-to-b from-[#2A8AF6] to-[#0071E3] flex items-center justify-center text-white text-sm font-semibold shadow-[0_2px_8px_rgba(0,113,227,0.25)]">
           {profile.email?.charAt(0).toUpperCase()}
         </div>
         <div>
           <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Settings</h1>
-          <p className="text-[13px] text-[#6B7280]">{profile.email}</p>
+          <p className="text-[13px] text-[#86868B]">{profile.email}</p>
         </div>
       </div>
 

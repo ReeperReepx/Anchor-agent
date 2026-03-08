@@ -33,8 +33,8 @@ export default function StandupPage() {
   if (access.loading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[70vh] gap-3">
-        <span className="spinner text-[#B85C42]" style={{ width: 24, height: 24 }} />
-        <p className="text-sm text-[#6B7280]">Loading your session...</p>
+        <span className="spinner text-[#0071E3]" style={{ width: 24, height: 24 }} />
+        <p className="text-sm text-[#86868B]">Loading your session...</p>
       </div>
     );
   }
@@ -44,7 +44,7 @@ export default function StandupPage() {
       <div className="flex flex-col items-center justify-center min-h-[70vh]">
         <div className="w-full max-w-sm text-center">
           <h1 className="text-2xl font-semibold text-[#1D1D1F] mb-3">Subscribe to continue</h1>
-          <p className="text-[#6B7280] mb-8">Choose a plan to start your daily standups.</p>
+          <p className="text-[#86868B] mb-8">Choose a plan to start your daily standups.</p>
           <Button variant="primary" className="w-full" onClick={() => router.push("/pricing")}>
             View Plans
           </Button>
@@ -68,7 +68,7 @@ export default function StandupPage() {
         {state === "connecting" && (
           <>
             <WaveformBars active={true} />
-            <p className="text-[#6B7280]">Connecting to your AI standup partner...</p>
+            <p className="text-[#86868B]">Connecting to your AI standup partner...</p>
           </>
         )}
 

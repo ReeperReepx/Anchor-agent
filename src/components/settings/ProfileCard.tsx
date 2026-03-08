@@ -12,11 +12,11 @@ export function ProfileCard({ profile }: { profile: User }) {
       <CardContent>
         <div className="space-y-3">
           <div className="flex justify-between text-sm">
-            <span className="text-[#6B7280]">Email</span>
+            <span className="text-[#86868B]">Email</span>
             <span className="text-[#1D1D1F]">{profile.email}</span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-[#6B7280]">Member since</span>
+            <span className="text-[#86868B]">Member since</span>
             <span className="text-[#1D1D1F]">
               {new Date(profile.created_at).toLocaleDateString("en-US", {
                 month: "long",
@@ -25,12 +25,12 @@ export function ProfileCard({ profile }: { profile: User }) {
             </span>
           </div>
           <div className="flex justify-between text-sm">
-            <span className="text-[#6B7280]">Goals</span>
+            <span className="text-[#86868B]">Goals</span>
             <div className="flex gap-1.5">
               {profile.goal_categories.map((g) => (
                 <span
                   key={g}
-                  className="bg-[rgba(184,92,66,0.1)] text-[#B85C42] text-xs px-2 py-0.5 rounded-full"
+                  className="bg-[rgba(0,113,227,0.1)] text-[#0071E3] text-xs px-2 py-0.5 rounded-full"
                 >
                   {g}
                 </span>

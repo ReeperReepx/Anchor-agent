@@ -31,7 +31,7 @@ export function SessionActiveView({
 
   return (
     <>
-      <div className="text-xs text-[#B85C42] uppercase tracking-[1px] font-medium mb-6">
+      <div className="text-xs text-[#0071E3] uppercase tracking-[1px] font-medium mb-6">
         {info.title}
       </div>
 
@@ -39,18 +39,18 @@ export function SessionActiveView({
         {["Done", "Planned", "Blockers"].map((label, i) => (
           <React.Fragment key={label}>
             {i > 0 && (
-              <div className={`w-10 h-0.5 ${questionStep >= i ? "bg-[#2D8A56]" : "bg-[#E5E5E5]"}`} />
+              <div className={`w-10 h-0.5 ${questionStep >= i ? "bg-[#34C759]" : "bg-[#E5E5E5]"}`} />
             )}
             <div className="flex flex-col items-center gap-1">
               <div className={`w-3 h-3 rounded-full border-2 transition-all ${
                 questionStep > i
-                  ? "bg-[#2D8A56] border-[#2D8A56]"
+                  ? "bg-[#34C759] border-[#34C759]"
                   : questionStep === i
-                  ? "border-[#B85C42] shadow-[0_0_0_4px_rgba(184,92,66,0.15)]"
+                  ? "border-[#0071E3] shadow-[0_0_0_4px_rgba(0,113,227,0.15)]"
                   : "border-[#E5E5E5]"
               }`} />
               <span className={`text-[10px] font-medium ${
-                questionStep > i ? "text-[#2D8A56]" : questionStep === i ? "text-[#B85C42]" : "text-[#9CA3AF]"
+                questionStep > i ? "text-[#34C759]" : questionStep === i ? "text-[#0071E3]" : "text-[#9CA3AF]"
               }`}>{label}</span>
             </div>
           </React.Fragment>
@@ -61,9 +61,9 @@ export function SessionActiveView({
         {formatTimer(elapsed)}
       </div>
       <div className="flex items-center justify-center gap-2 mb-4">
-        <div className="w-2.5 h-2.5 bg-[#2D8A56] rounded-full animate-pulse" />
-        <span className="text-sm text-[#6B7280]">
-          {isSpeaking ? "Anchor is speaking..." : "Listening..."}
+        <div className="w-2.5 h-2.5 bg-[#34C759] rounded-full animate-pulse" />
+        <span className="text-sm text-[#86868B]">
+  {isSpeaking ? "Anchor is speaking..." : "Listening..."}
         </span>
       </div>
 
@@ -73,7 +73,7 @@ export function SessionActiveView({
         <div className="bg-[#F0F0F0] rounded-[12px] px-3 sm:px-4 py-3 text-left max-h-[100px] overflow-y-auto mb-4">
           {liveMessages.slice(-3).map((msg, i) => (
             <div key={i} className="text-[13px] mb-1 last:mb-0">
-              <span className={`font-medium ${msg.role === "Anchor" ? "text-[#B85C42]" : "text-[#6B7280]"}`}>
+              <span className={`font-medium ${msg.role === "Anchor" ? "text-[#0071E3]" : "text-[#86868B]"}`}>
                 {msg.role}:
               </span>{" "}
               <span className="text-[#4B5563]">{msg.text}</span>
@@ -86,7 +86,7 @@ export function SessionActiveView({
         Speak naturally. Anchor is listening.
       </p>
       {elapsed >= maxMinutes * 60 - 60 && elapsed < maxMinutes * 60 && (
-        <p className="text-xs text-[#B85C42] mb-2 animate-pulse">
+        <p className="text-xs text-[#0071E3] mb-2 animate-pulse">
           Less than 1 minute remaining
         </p>
       )}

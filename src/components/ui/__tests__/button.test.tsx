@@ -12,7 +12,7 @@ describe("Button", () => {
   it("applies primary variant by default", () => {
     render(<Button>Primary</Button>);
     const button = screen.getByRole("button");
-    expect(button.className).toContain("bg-[#B85C42]");
+    expect(button.className).toContain("bg-[#0071E3]");
   });
 
   it("applies secondary variant", () => {
@@ -24,7 +24,7 @@ describe("Button", () => {
   it("applies ghost variant", () => {
     render(<Button variant="ghost">Ghost</Button>);
     const button = screen.getByRole("button");
-    expect(button.className).toContain("text-[#6B7280]");
+    expect(button.className).toContain("text-[#86868B]");
   });
 
   it("applies size classes", () => {

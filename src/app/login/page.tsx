@@ -43,8 +43,8 @@ export default function LoginPage() {
       {/* Left brand panel — hidden on mobile */}
       <div className="hidden lg:flex lg:w-[45%] bg-gradient-to-br from-[#1D1D1F] via-[#2A2A2C] to-[#1D1D1F] relative overflow-hidden flex-col justify-between p-12">
         {/* Subtle accent glow */}
-        <div className="absolute top-[-20%] right-[-10%] w-[400px] h-[400px] bg-[#B85C42] rounded-full opacity-[0.06] blur-[100px]" />
-        <div className="absolute bottom-[-15%] left-[-10%] w-[300px] h-[300px] bg-[#B85C42] rounded-full opacity-[0.04] blur-[80px]" />
+        <div className="absolute top-[-20%] right-[-10%] w-[400px] h-[400px] bg-[#0071E3] rounded-full opacity-[0.06] blur-[100px]" />
+        <div className="absolute bottom-[-15%] left-[-10%] w-[300px] h-[300px] bg-[#0071E3] rounded-full opacity-[0.04] blur-[80px]" />
 
         <div>
           <Link href="/" className="text-[22px] font-bold text-white">
@@ -56,7 +56,7 @@ export default function LoginPage() {
           <h1 className="text-[38px] font-bold text-white leading-[1.2] tracking-[-0.02em] mb-5">
             Five minutes.<br />
             Three questions.<br />
-            <span className="text-[#D4917F]">Every damn day.</span>
+            <span className="text-[#0077ED]">Every damn day.</span>
           </h1>
           <p className="text-[16px] text-[#9CA3AF] leading-relaxed max-w-[360px]">
             The voice-first daily standup for solopreneurs who ship. No typing, no dashboards, no excuses.
@@ -76,21 +76,21 @@ export default function LoginPage() {
             ))}
             <span className="text-[13px] text-[#9CA3AF] ml-1">Join 200+ builders</span>
           </div>
-          <div className="flex items-center gap-4 text-[12px] text-[#6B7280]">
+          <div className="flex items-center gap-4 text-[12px] text-[#86868B]">
             <span className="flex items-center gap-1.5">
-              <svg className="w-3.5 h-3.5 text-[#2D8A56]" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-3.5 h-3.5 text-[#34C759]" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               Free for 7 days
             </span>
             <span className="flex items-center gap-1.5">
-              <svg className="w-3.5 h-3.5 text-[#2D8A56]" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-3.5 h-3.5 text-[#34C759]" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               No credit card
             </span>
             <span className="flex items-center gap-1.5">
-              <svg className="w-3.5 h-3.5 text-[#2D8A56]" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-3.5 h-3.5 text-[#34C759]" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
               </svg>
               Cancel anytime
@@ -100,12 +100,12 @@ export default function LoginPage() {
       </div>
 
       {/* Right form panel */}
-      <div className="flex-1 flex items-center justify-center bg-[#F8F7F4] px-6">
+      <div className="flex-1 flex items-center justify-center bg-[#F5F5F7] px-6">
         <div className="w-full max-w-[380px]">
           {/* Mobile logo */}
           <Link
             href="/"
-            className="lg:hidden block text-center text-[22px] font-bold text-[#B85C42] mb-2"
+            className="lg:hidden block text-center text-[22px] font-bold text-[#0071E3] mb-2"
           >
             Anchor
           </Link>
@@ -113,21 +113,21 @@ export default function LoginPage() {
           <div className="bg-white rounded-xl border border-[#E5E5E5] shadow-[0_4px_24px_rgba(0,0,0,0.06)] p-8">
             {sent ? (
               <div className="text-center py-4">
-                <div className="w-14 h-14 bg-[rgba(45,138,86,0.1)] rounded-full flex items-center justify-center mx-auto mb-4">
-                  <svg className="w-7 h-7 text-[#2D8A56]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="w-14 h-14 bg-[rgba(52,199,89,0.1)] rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg className="w-7 h-7 text-[#34C759]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                   </svg>
                 </div>
                 <h2 className="text-lg font-semibold text-[#1D1D1F] mb-2">
                   Check your email
                 </h2>
-                <p className="text-sm text-[#6B7280]">
+                <p className="text-sm text-[#86868B]">
                   We sent a sign-in link to{" "}
                   <strong className="text-[#1D1D1F]">{email}</strong>
                 </p>
                 <button
                   onClick={() => setSent(false)}
-                  className="mt-4 text-sm text-[#B85C42] hover:text-[#D4917F] transition-colors"
+                  className="mt-4 text-sm text-[#0071E3] hover:text-[#0077ED] transition-colors"
                 >
                   Use a different email
                 </button>
@@ -138,7 +138,7 @@ export default function LoginPage() {
                   <h2 className="text-xl font-semibold text-[#1D1D1F] mb-1">
                     Welcome back
                   </h2>
-                  <p className="text-sm text-[#6B7280]">
+                  <p className="text-sm text-[#86868B]">
                     Sign in to continue your streak
                   </p>
                 </div>
@@ -179,7 +179,7 @@ export default function LoginPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@example.com"
-                    className="w-full rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] px-3.5 py-2.5 text-sm text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#B85C42]/30 focus:border-[#B85C42] transition-all"
+                    className="w-full rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] px-3.5 py-2.5 text-sm text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#0071E3]/30 focus:border-[#0071E3] transition-all"
                   />
                   {error && (
                     <p className="mt-2 text-sm text-[#EF4444]">{error}</p>

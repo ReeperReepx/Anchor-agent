@@ -59,17 +59,17 @@ export default async function ArticlePage({
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F7F4]">
+    <div className="min-h-screen bg-[#F5F5F7]">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       <nav className="flex items-center justify-between px-10 py-5 max-w-[1100px] mx-auto border-b border-[#E5E5E5]">
-        <Link href="/" className="text-[22px] font-bold text-[#B85C42]">
+        <Link href="/" className="text-[22px] font-bold text-[#0071E3]">
           Anchor
         </Link>
-        <div className="flex items-center gap-5 text-sm text-[#6B7280]">
+        <div className="flex items-center gap-5 text-sm text-[#86868B]">
           <Link
             href="/blog"
             className="hover:text-[#1D1D1F] transition-colors"
@@ -78,7 +78,7 @@ export default async function ArticlePage({
           </Link>
           <Link
             href="/login"
-            className="bg-[#B85C42] hover:bg-[#D4917F] text-white px-4 py-2 rounded-[10px] text-sm font-semibold transition-all"
+            className="bg-[#0071E3] hover:bg-[#0077ED] text-white px-4 py-2 rounded-[10px] text-sm font-semibold transition-all"
           >
             Start Free Trial
           </Link>
@@ -88,7 +88,7 @@ export default async function ArticlePage({
       <article className="max-w-[700px] mx-auto px-6 py-16">
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
-            <span className="text-[11px] font-semibold text-[#B85C42] uppercase tracking-[1px]">
+            <span className="text-[11px] font-semibold text-[#0071E3] uppercase tracking-[1px]">
               {article.category}
             </span>
             <span className="text-[12px] text-[#9CA3AF]">
@@ -105,7 +105,7 @@ export default async function ArticlePage({
           <h1 className="text-[36px] font-bold tracking-[-0.02em] text-[#1D1D1F] leading-[1.2] mb-4">
             {article.title}
           </h1>
-          <p className="text-lg text-[#6B7280] leading-relaxed">
+          <p className="text-lg text-[#86868B] leading-relaxed">
             {article.description}
           </p>
         </div>
@@ -120,12 +120,12 @@ export default async function ArticlePage({
             <h3 className="text-xl font-semibold text-[#1D1D1F] mb-2">
               Ready to start your streak?
             </h3>
-            <p className="text-sm text-[#6B7280] mb-5">
+            <p className="text-sm text-[#86868B] mb-5">
               Anchor is a voice-first daily standup for solopreneurs. Start your 7-day free trial.
             </p>
             <Link
               href="/login"
-              className="inline-flex items-center gap-2 bg-[#B85C42] hover:bg-[#D4917F] text-white px-6 py-3 rounded-[10px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(184,92,66,0.3)]"
+              className="inline-flex items-center gap-2 bg-[#0071E3] hover:bg-[#0077ED] text-white px-6 py-3 rounded-[10px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(0,113,227,0.3)]"
             >
               Start Free Trial
             </Link>
@@ -135,7 +135,7 @@ export default async function ArticlePage({
         <div className="mt-8">
           <Link
             href="/blog"
-            className="text-sm text-[#B85C42] hover:text-[#D4917F] transition-colors"
+            className="text-sm text-[#0071E3] hover:text-[#0077ED] transition-colors"
           >
             &larr; Back to all articles
           </Link>

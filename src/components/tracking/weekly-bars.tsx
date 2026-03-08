@@ -28,23 +28,23 @@ export function WeeklyBars({ weeks }: { weeks: WeekData[] }) {
               <div
                 className={`h-full rounded-[5px] transition-all ${
                   isComplete
-                    ? "shadow-[0_0_8px_rgba(45,138,86,0.3)]"
+                    ? "shadow-[0_0_8px_rgba(52,199,89,0.3)]"
                     : ""
                 }`}
                 style={{
                   width: `${pct}%`,
                   background: isComplete
-                    ? "linear-gradient(90deg, rgba(45,138,86,0.6), #2D8A56)"
+                    ? "linear-gradient(90deg, rgba(52,199,89,0.6), #34C759)"
                     : pct >= 60
-                      ? "linear-gradient(90deg, rgba(184,92,66,0.4), #B85C42)"
+                      ? "linear-gradient(90deg, rgba(0,113,227,0.4), #0071E3)"
                       : pct > 0
-                        ? "linear-gradient(90deg, rgba(184,92,66,0.2), rgba(184,92,66,0.5))"
+                        ? "linear-gradient(90deg, rgba(0,113,227,0.2), rgba(0,113,227,0.5))"
                         : "transparent",
                 }}
               />
             </div>
             <span className={`text-xs w-12 shrink-0 font-medium ${
-              isComplete ? "text-[#2D8A56]" : "text-[#9CA3AF]"
+              isComplete ? "text-[#34C759]" : "text-[#9CA3AF]"
             }`}>
               {week.completed}/{week.total}
             </span>

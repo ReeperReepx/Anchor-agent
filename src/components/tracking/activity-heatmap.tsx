@@ -18,10 +18,10 @@ const RANGE_WEEKS: Record<TimeRange, number> = {
 
 function getColor(value: number): string {
   if (value === 0) return "bg-[#E5E5E5]";
-  if (value === 1) return "bg-[#B85C42]/20";
-  if (value === 2) return "bg-[#B85C42]/40";
-  if (value === 3) return "bg-[#B85C42]/70";
-  return "bg-[#B85C42]";
+  if (value === 1) return "bg-[#0071E3]/20";
+  if (value === 2) return "bg-[#0071E3]/40";
+  if (value === 3) return "bg-[#0071E3]/70";
+  return "bg-[#0071E3]";
 }
 
 function getTooltip(value: number, dateStr: string): string {
@@ -79,7 +79,7 @@ export function ActivityHeatmap({ data }: ActivityHeatmapProps) {
             onClick={() => setRange(r)}
             className={`px-2.5 py-1 rounded-md text-[11px] font-medium transition-colors ${
               range === r
-                ? "bg-[#B85C42] text-white"
+                ? "bg-[#0071E3] text-white"
                 : "text-[#9CA3AF] hover:text-[#1D1D1F] hover:bg-[#F0F0F0]"
             }`}
           >
@@ -131,7 +131,7 @@ export function ActivityHeatmap({ data }: ActivityHeatmapProps) {
                       day.value === -1
                         ? "bg-transparent"
                         : getColor(day.value)
-                    } ${day.value >= 3 ? "shadow-[0_0_6px_rgba(184,92,66,0.3)]" : ""}`}
+                    } ${day.value >= 3 ? "shadow-[0_0_6px_rgba(0,113,227,0.3)]" : ""}`}
                     title={day.value === -1 ? "" : getTooltip(day.value, day.dateStr)}
                   />
                 ))}
@@ -144,10 +144,10 @@ export function ActivityHeatmap({ data }: ActivityHeatmapProps) {
         <div className="flex items-center gap-1.5 mt-3 text-[11px] text-[#9CA3AF]">
           <span>Less</span>
           <div className="w-[14px] h-[14px] rounded-[3px] bg-[#E5E5E5]" />
-          <div className="w-[14px] h-[14px] rounded-[3px] bg-[#B85C42]/20" />
-          <div className="w-[14px] h-[14px] rounded-[3px] bg-[#B85C42]/40" />
-          <div className="w-[14px] h-[14px] rounded-[3px] bg-[#B85C42]/70" />
-          <div className="w-[14px] h-[14px] rounded-[3px] bg-[#B85C42]" />
+          <div className="w-[14px] h-[14px] rounded-[3px] bg-[#0071E3]/20" />
+          <div className="w-[14px] h-[14px] rounded-[3px] bg-[#0071E3]/40" />
+          <div className="w-[14px] h-[14px] rounded-[3px] bg-[#0071E3]/70" />
+          <div className="w-[14px] h-[14px] rounded-[3px] bg-[#0071E3]" />
           <span>More</span>
         </div>
       </div>

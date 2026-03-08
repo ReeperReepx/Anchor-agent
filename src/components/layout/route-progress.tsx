@@ -30,7 +30,7 @@ export function RouteProgress() {
   return (
     <div className="fixed top-0 left-0 right-0 z-[200] h-[3px]">
       <div
-        className="h-full bg-[#B85C42] transition-all duration-200 ease-out"
+        className="h-full bg-[#0071E3] transition-all duration-200 ease-out"
         style={{ width: `${progress}%` }}
       />
     </div>

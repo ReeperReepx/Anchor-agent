@@ -1,21 +1,21 @@
 @import "tailwindcss";
 
 :root {
-  --background: #F8F7F4;
+  --background: #F5F5F7;
   --foreground: #1D1D1F;
   --surface: #FFFFFF;
   --surface-elevated: #F0F0F0;
-  --accent: #B85C42;
-  --accent-hover: #D4917F;
-  --accent-pressed: #9A4E36;
-  --accent-subtle: rgba(184, 92, 66, 0.1);
+  --accent: #0071E3;
+  --accent-hover: #0077ED;
+  --accent-pressed: #005BB5;
+  --accent-subtle: rgba(0, 113, 227, 0.1);
   --text-primary: #1D1D1F;
-  --text-secondary: #6B7280;
+  --text-secondary: #86868B;
   --text-muted: #9CA3AF;
   --border-default: #E5E5E5;
   --border-subtle: #E5E5E5;
-  --border-active: #B85C42;
-  --success: #2D8A56;
+  --border-active: #0071E3;
+  --success: #34C759;
   --warning: #C4900A;
   --error: #C43030;
   --info: #3B6FC4;
@@ -60,8 +60,8 @@ body {
 }
 
 @keyframes mic-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(184, 92, 66, 0.4); }
-  50% { box-shadow: 0 0 0 20px rgba(184, 92, 66, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 113, 227, 0.4); }
+  50% { box-shadow: 0 0 0 20px rgba(0, 113, 227, 0); }
 }
 
 @keyframes slideIn {
@@ -114,16 +114,16 @@ body {
   margin-bottom: 0.5rem;
 }
 .prose-anchor a {
-  color: #B85C42;
+  color: #0071E3;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 .prose-anchor a:hover {
-  color: #D4917F;
+  color: #0077ED;
 }
 
 .skeleton {
-  background: linear-gradient(90deg, #F0F0F0 25%, #F8F7F4 50%, #F0F0F0 75%);
+  background: linear-gradient(90deg, #F0F0F0 25%, #F5F5F7 50%, #F0F0F0 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s ease-in-out infinite;
   border-radius: 8px;

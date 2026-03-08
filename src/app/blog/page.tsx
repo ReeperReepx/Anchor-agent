@@ -16,18 +16,18 @@ export const metadata: Metadata = {
 
 export default function BlogPage() {
   return (
-    <div className="min-h-screen bg-[#F8F7F4]">
+    <div className="min-h-screen bg-[#F5F5F7]">
       <nav className="flex items-center justify-between px-10 py-5 max-w-[1100px] mx-auto border-b border-[#E5E5E5]">
-        <Link href="/" className="text-[22px] font-bold text-[#B85C42]">
+        <Link href="/" className="text-[22px] font-bold text-[#0071E3]">
           Anchor
         </Link>
-        <div className="flex items-center gap-5 text-sm text-[#6B7280]">
+        <div className="flex items-center gap-5 text-sm text-[#86868B]">
           <Link href="/" className="hover:text-[#1D1D1F] transition-colors">
             Home
           </Link>
           <Link
             href="/login"
-            className="bg-[#B85C42] hover:bg-[#D4917F] text-white px-4 py-2 rounded-[10px] text-sm font-semibold transition-all"
+            className="bg-[#0071E3] hover:bg-[#0077ED] text-white px-4 py-2 rounded-[10px] text-sm font-semibold transition-all"
           >
             Start Free Trial
           </Link>
@@ -38,7 +38,7 @@ export default function BlogPage() {
         <h1 className="text-[40px] font-bold tracking-[-0.02em] text-[#1D1D1F] mb-3">
           Blog
         </h1>
-        <p className="text-lg text-[#6B7280] mb-12">
+        <p className="text-lg text-[#86868B] mb-12">
           Accountability strategies, productivity systems, and founder habits
           that actually work.
         </p>
@@ -50,19 +50,19 @@ export default function BlogPage() {
               href={`/blog/${article.slug}`}
               className="block group"
             >
-              <article className="bg-white rounded-[14px] border border-[#E5E5E5] p-8 transition-all hover:border-[#B85C42]/30 hover:shadow-[0_4px_24px_rgba(184,92,66,0.08)]">
+              <article className="bg-white rounded-[14px] border border-[#E5E5E5] p-8 transition-all hover:border-[#0071E3]/30 hover:shadow-[0_4px_24px_rgba(0,113,227,0.08)]">
                 <div className="flex items-center gap-3 mb-3">
-                  <span className="text-[11px] font-semibold text-[#B85C42] uppercase tracking-[1px]">
+                  <span className="text-[11px] font-semibold text-[#0071E3] uppercase tracking-[1px]">
                     {article.category}
                   </span>
                   <span className="text-[12px] text-[#9CA3AF]">
                     {article.readTime}
                   </span>
                 </div>
-                <h2 className="text-xl font-semibold text-[#1D1D1F] mb-2 group-hover:text-[#B85C42] transition-colors leading-snug">
+                <h2 className="text-xl font-semibold text-[#1D1D1F] mb-2 group-hover:text-[#0071E3] transition-colors leading-snug">
                   {article.title}
                 </h2>
-                <p className="text-sm text-[#6B7280] leading-relaxed">
+                <p className="text-sm text-[#86868B] leading-relaxed">
                   {article.description}
                 </p>
               </article>

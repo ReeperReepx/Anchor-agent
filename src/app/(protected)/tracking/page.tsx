@@ -127,11 +127,11 @@ export default async function TrackingPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Tracking</h1>
-        <div className="flex items-center gap-2 text-[13px] text-[#6B7280]">
-          <svg className="w-4 h-4 text-[#B85C42]" fill="currentColor" viewBox="0 0 24 24">
+        <div className="flex items-center gap-2 text-[13px] text-[#86868B]">
+          <svg className="w-4 h-4 text-[#0071E3]" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 23c-3.866 0-7-2.686-7-6 0-1.664.558-3.202 1.5-4.5.96-1.32 1.5-2.836 1.5-4.5 0-.414.336-.75.75-.75.267 0 .501.14.633.35C10.89 10.13 12 12.5 12 14c1.5-2 2-4.5 2-7 0-.414.336-.75.75-.75.2 0 .382.08.516.21C17.632 8.72 19 11.84 19 15c0 4.418-3.134 8-7 8z"/>
           </svg>
-          <span className="font-semibold text-[#B85C42]">{streak?.current_streak ?? 0}</span> day streak
+          <span className="font-semibold text-[#0071E3]">{streak?.current_streak ?? 0}</span> day streak
         </div>
       </div>
 
@@ -140,7 +140,7 @@ export default async function TrackingPage() {
         <Card>
           <CardContent>
             <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] font-semibold text-[#6B7280] uppercase tracking-[1px]">This Week</span>
+              <span className="text-[11px] font-semibold text-[#86868B] uppercase tracking-[1px]">This Week</span>
               <span className="text-[12px] font-medium text-[#9CA3AF]">{weekPct}%</span>
             </div>
             <div className="flex items-baseline gap-2 mb-3">
@@ -152,7 +152,7 @@ export default async function TrackingPage() {
             </div>
             <div className="h-2 bg-[#F0F0F0] rounded-full overflow-hidden">
               <div
-                className="h-full rounded-full transition-all bg-gradient-to-r from-[#B85C42]/60 to-[#B85C42]"
+                className="h-full rounded-full transition-all bg-gradient-to-r from-[#0071E3]/60 to-[#0071E3]"
                 style={{ width: `${weekPct}%` }}
               />
             </div>
@@ -163,7 +163,7 @@ export default async function TrackingPage() {
         <Card>
           <CardContent>
             <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] font-semibold text-[#6B7280] uppercase tracking-[1px]">This Month</span>
+              <span className="text-[11px] font-semibold text-[#86868B] uppercase tracking-[1px]">This Month</span>
               <span className="text-[12px] font-medium text-[#9CA3AF]">{monthPct}%</span>
             </div>
             <div className="flex items-baseline gap-2 mb-3">
@@ -183,19 +183,19 @@ export default async function TrackingPage() {
         </Card>
 
         {/* Streak */}
-        <Card className="!bg-gradient-to-br !from-[rgba(184,92,66,0.07)] !to-[rgba(184,92,66,0.02)] !border-[rgba(184,92,66,0.2)] relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-[rgba(184,92,66,0.06)] rounded-full -translate-y-1/2 translate-x-1/2" />
+        <Card className="!bg-gradient-to-br !from-[rgba(0,113,227,0.07)] !to-[rgba(0,113,227,0.02)] !border-[rgba(0,113,227,0.2)] relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-20 h-20 bg-[rgba(0,113,227,0.06)] rounded-full -translate-y-1/2 translate-x-1/2" />
           <CardContent>
             <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] font-semibold text-[#B85C42] uppercase tracking-[1px]">Current Streak</span>
+              <span className="text-[11px] font-semibold text-[#0071E3] uppercase tracking-[1px]">Current Streak</span>
             </div>
             <div className="flex items-baseline gap-2 mb-1">
-              <span className="text-2xl sm:text-3xl font-bold text-[#B85C42]">
+              <span className="text-2xl sm:text-3xl font-bold text-[#0071E3]">
                 {streak?.current_streak ?? 0}
               </span>
               <span className="text-sm text-[#9CA3AF]">days</span>
             </div>
-            <p className="text-[12px] text-[#2D8A56] font-medium">
+            <p className="text-[12px] text-[#34C759] font-medium">
               Best: {streak?.longest_streak ?? 0} days
             </p>
           </CardContent>
@@ -205,7 +205,7 @@ export default async function TrackingPage() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <svg className="w-4 h-4 text-[#6B7280]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 text-[#86868B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
             </svg>
             Activity
@@ -219,7 +219,7 @@ export default async function TrackingPage() {
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
-            <svg className="w-4 h-4 text-[#6B7280]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 text-[#86868B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
             </svg>
             Weekly Completion

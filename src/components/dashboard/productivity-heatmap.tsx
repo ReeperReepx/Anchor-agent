@@ -19,10 +19,10 @@ function getMonthRange(year: number, month: number) {
 
 function scoreColor(score: number | null): string {
   if (!score) return "bg-[#E5E5E5]";
-  if (score === 1) return "bg-[#B85C42]/30";
-  if (score === 2) return "bg-[#B85C42]/55";
-  if (score === 3) return "bg-[#B85C42]/80";
-  return "bg-[#B85C42]";
+  if (score === 1) return "bg-[#0071E3]/30";
+  if (score === 2) return "bg-[#0071E3]/55";
+  if (score === 3) return "bg-[#0071E3]/80";
+  return "bg-[#0071E3]";
 }
 
 export function ProductivityHeatmap() {
@@ -92,7 +92,7 @@ export function ProductivityHeatmap() {
           className="w-7 h-7 rounded-lg hover:bg-[#F0F0F0] flex items-center justify-center transition-colors"
           aria-label="Previous month"
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#86868B" strokeWidth="2">
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
           </svg>
         </button>
@@ -105,7 +105,7 @@ export function ProductivityHeatmap() {
           className="w-7 h-7 rounded-lg hover:bg-[#F0F0F0] flex items-center justify-center transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
           aria-label="Next month"
         >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#6B7280" strokeWidth="2">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#86868B" strokeWidth="2">
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
           </svg>
         </button>
@@ -136,7 +136,7 @@ export function ProductivityHeatmap() {
                 <div
                   key={i}
                   className={`aspect-square rounded-[5px] ${scoreColor(score)} ${
-                    isToday ? "ring-2 ring-[#B85C42]/40" : ""
+                    isToday ? "ring-2 ring-[#0071E3]/40" : ""
                   } transition-colors`}
                   title={score ? `${MONTHS[month]} ${day}: Score ${score}/4` : `${MONTHS[month]} ${day}: No standup`}
                 />
@@ -148,14 +148,14 @@ export function ProductivityHeatmap() {
       <div className="flex items-center justify-between mt-3">
         <div className="flex items-center gap-1">
           <span className="text-[9px] text-[#9CA3AF]">Less</span>
-          <div className="w-3 h-3 rounded-[3px] bg-[#B85C42]/30" />
-          <div className="w-3 h-3 rounded-[3px] bg-[#B85C42]/55" />
-          <div className="w-3 h-3 rounded-[3px] bg-[#B85C42]/80" />
-          <div className="w-3 h-3 rounded-[3px] bg-[#B85C42]" />
+          <div className="w-3 h-3 rounded-[3px] bg-[#0071E3]/30" />
+          <div className="w-3 h-3 rounded-[3px] bg-[#0071E3]/55" />
+          <div className="w-3 h-3 rounded-[3px] bg-[#0071E3]/80" />
+          <div className="w-3 h-3 rounded-[3px] bg-[#0071E3]" />
           <span className="text-[9px] text-[#9CA3AF]">More</span>
         </div>
         {avgScore && (
-          <span className="text-[11px] text-[#6B7280]">
+          <span className="text-[11px] text-[#86868B]">
             Avg: <span className="font-semibold text-[#1D1D1F]">{avgScore}</span>/4
           </span>
         )}

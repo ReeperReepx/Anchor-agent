@@ -31,12 +31,12 @@ export class ErrorBoundary extends Component<Props, State> {
           <h2 className="text-xl font-semibold text-[#1D1D1F] mb-2">
             Something went wrong
           </h2>
-          <p className="text-sm text-[#6B7280] mb-6">
+          <p className="text-sm text-[#86868B] mb-6">
             An unexpected error occurred. Please try refreshing.
           </p>
           <button
             onClick={() => this.setState({ hasError: false })}
-            className="bg-[#B85C42] text-white px-5 py-2.5 rounded-[10px] text-sm font-semibold transition-all hover:bg-[#D4917F]"
+            className="bg-[#0071E3] text-white px-5 py-2.5 rounded-[10px] text-sm font-semibold transition-all hover:bg-[#0077ED]"
           >
             Try again
           </button>
