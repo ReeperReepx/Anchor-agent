@@ -120,11 +120,11 @@ export default function PricingPage() {
         </div>
 
         {/* Founder */}
-        <div className="relative rounded-xl border border-[#0071E3] p-6 sm:p-8 bg-white shadow-[0_4px_32px_rgba(0,113,227,0.12)]">
-          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#0071E3] to-[#0077ED] rounded-t-[16px]" />
+        <div className="relative rounded-xl border border-[#FF9500] p-6 sm:p-8 bg-white shadow-[0_4px_32px_rgba(255,149,0,0.12)]">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#FF9500] to-[#FFa526] rounded-t-[16px]" />
           <div className="flex items-center gap-2 mb-4">
             <h2 className="text-lg font-semibold text-[#1D1D1F]">{founder.name}</h2>
-            <span className="text-[10px] bg-[rgba(0,113,227,0.1)] text-[#0071E3] px-2 py-0.5 rounded-full font-semibold uppercase tracking-[0.5px]">
+            <span className="text-[10px] bg-[rgba(255,149,0,0.1)] text-[#FF9500] px-2 py-0.5 rounded-full font-semibold uppercase tracking-[0.5px]">
               Popular
             </span>
           </div>

@@ -54,7 +54,7 @@ export function SubscriptionCard() {
         ? "Active"
         : "Inactive";
 
-  const statusColor = access?.hasAccess || access?.isGrandfathered ? "#34C759" : "#0071E3";
+  const statusColor = access?.hasAccess || access?.isGrandfathered ? "#34C759" : "#FF9500";
 
   return (
     <Card>

@@ -15,10 +15,10 @@ const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri"];
 
 function scoreColor(score: number | null): string {
   if (!score) return "bg-[#E5E5E5]";
-  if (score === 1) return "bg-[#0071E3]/30";
-  if (score === 2) return "bg-[#0071E3]/55";
-  if (score === 3) return "bg-[#0071E3]/80";
-  return "bg-[#0071E3]";
+  if (score === 1) return "bg-[#FF9500]/30";
+  if (score === 2) return "bg-[#FF9500]/55";
+  if (score === 3) return "bg-[#FF9500]/80";
+  return "bg-[#FF9500]";
 }
 
 function scoreLabel(score: number | null): string {
@@ -103,7 +103,7 @@ export function WeeklyOverview({ completedDays }: WeeklyOverviewProps) {
                   isCompleted
                     ? "bg-gradient-to-b from-[#34C759] to-[#30D158] text-white shadow-[0_2px_8px_rgba(52,199,89,0.3)]"
                     : isToday
-                    ? "border-2 border-[#0071E3] text-[#0071E3] shadow-[0_0_0_4px_rgba(0,113,227,0.08)]"
+                    ? "border-2 border-[#FF9500] text-[#FF9500] shadow-[0_0_0_4px_rgba(255,149,0,0.08)]"
                     : isPast
                     ? "bg-[#F0F0F0] text-[#D0D0D0]"
                     : "bg-[#F0F0F0] text-[#9CA3AF]"
@@ -123,7 +123,7 @@ export function WeeklyOverview({ completedDays }: WeeklyOverviewProps) {
               {isCompleted && score ? (
                 <div className={`w-2 h-2 rounded-full ${scoreColor(score)}`} title={`Productivity: ${scoreLabel(score)}`} />
               ) : isToday ? (
-                <div className="w-1 h-1 rounded-full bg-[#0071E3]" />
+                <div className="w-1 h-1 rounded-full bg-[#FF9500]" />
               ) : (
                 <div className="w-2 h-2" />
               )}
@@ -141,7 +141,7 @@ export function WeeklyOverview({ completedDays }: WeeklyOverviewProps) {
           <div className="w-10 h-6 rounded bg-[#F0F0F0] animate-pulse" />
         ) : avgPercent !== null ? (
           <>
-            <span className="text-2xl font-bold text-[#0071E3] tracking-tight">{avgPercent}%</span>
+            <span className="text-2xl font-bold text-[#FF9500] tracking-tight">{avgPercent}%</span>
             <span className="text-[10px] text-[#9CA3AF] font-medium">Productivity</span>
           </>
         ) : (

@@ -61,13 +61,13 @@ export function HeroTranscript() {
           <div
             className={`px-4 py-2.5 text-[13px] sm:text-[14px] leading-relaxed rounded-2xl shadow-lg backdrop-blur-sm ${
               bubble.role === "user"
-                ? "bg-[#0071E3] text-white shadow-[#0071E3]/20"
+                ? "bg-[#FF9500] text-white shadow-[#FF9500]/20"
                 : "bg-white text-[#1d1d1f] shadow-black/8 border border-[#e5e5e5]/60"
             }`}
           >
             {bubble.role === "ai" && (
               <div className="flex items-center gap-1.5 mb-1">
-                <div className="w-4 h-4 rounded-full bg-[#0071E3] flex items-center justify-center">
+                <div className="w-4 h-4 rounded-full bg-[#FF9500] flex items-center justify-center">
                   <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
                     <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
                     <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
@@ -96,7 +96,7 @@ export function HeroTranscript() {
 
       {/* Voice waveform at bottom center */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-full px-5 py-3 shadow-lg border border-[#e5e5e5]/60 hero-bubble" style={{ animationDelay: "0.2s" }}>
-        <div className="w-8 h-8 rounded-full bg-[#0071E3] flex items-center justify-center shrink-0 animate-pulse">
+        <div className="w-8 h-8 rounded-full bg-[#FF9500] flex items-center justify-center shrink-0 animate-pulse">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
             <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
             <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
@@ -106,7 +106,7 @@ export function HeroTranscript() {
           {WAVE_BARS.map((h, i) => (
             <div
               key={i}
-              className="w-[3px] rounded-full bg-[#0071E3] shrink-0"
+              className="w-[3px] rounded-full bg-[#FF9500] shrink-0"
               style={{
                 height: `${h}px`,
                 opacity: WAVE_OPACITIES[i] / 100,

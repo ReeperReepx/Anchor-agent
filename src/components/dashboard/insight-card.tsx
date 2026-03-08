@@ -9,7 +9,7 @@ function getInsight(
   if (currentStreak >= longestStreak && currentStreak > 0) {
     return {
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071E3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF9500" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
         </svg>
       ),
@@ -19,7 +19,7 @@ function getInsight(
   } else if (thisWeekCount >= 4) {
     return {
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071E3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF9500" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
         </svg>
       ),
@@ -29,7 +29,7 @@ function getInsight(
   } else if (hasStandups) {
     return {
       icon: (
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0071E3" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF9500" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
           <polyline points="22 4 12 14.01 9 11.01" />
         </svg>
@@ -59,8 +59,8 @@ export function InsightCard({
   if (!insight) return null;
 
   return (
-    <div className="bg-gradient-to-br from-[rgba(0,113,227,0.06)] to-[rgba(0,113,227,0.02)] border border-[rgba(0,113,227,0.15)] rounded-xl p-5 flex items-start gap-4">
-      <div className="w-10 h-10 rounded-xl bg-[rgba(0,113,227,0.1)] flex items-center justify-center shrink-0">
+    <div className="bg-white border border-[#E5E5E5] rounded-xl p-5 flex items-start gap-4">
+      <div className="w-10 h-10 rounded-xl bg-[#F5F5F7] flex items-center justify-center shrink-0">
         {insight.icon}
       </div>
       <div>

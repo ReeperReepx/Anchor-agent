@@ -30,7 +30,7 @@ export function ProfileCard({ profile }: { profile: User }) {
               {profile.goal_categories.map((g) => (
                 <span
                   key={g}
-                  className="bg-[rgba(0,113,227,0.1)] text-[#0071E3] text-xs px-2 py-0.5 rounded-full"
+                  className="bg-[rgba(255,149,0,0.1)] text-[#FF9500] text-xs px-2 py-0.5 rounded-full"
                 >
                   {g}
                 </span>

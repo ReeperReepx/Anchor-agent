@@ -26,14 +26,14 @@ export function Hero() {
             <Link href="/login">
               <Button
                 size="lg"
-                className="bg-[#0071E3] hover:bg-[#0077ED] text-white px-8 py-4 text-base rounded-full shadow-none border-none w-full sm:w-auto min-h-[48px]"
+                className="bg-[#FF9500] hover:bg-[#FFa526] text-white px-8 py-4 text-base rounded-full shadow-none border-none w-full sm:w-auto min-h-[48px]"
               >
                 Start free trial
               </Button>
             </Link>
             <a
               href="#how-it-works"
-              className="text-[#0071E3] text-[15px] font-semibold hover:underline underline-offset-4 min-h-[48px] flex items-center"
+              className="text-[#FF9500] text-[15px] font-semibold hover:underline underline-offset-4 min-h-[48px] flex items-center"
             >
               See how it works &darr;
             </a>

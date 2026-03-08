@@ -40,4 +40,4 @@ export const ACCOUNTABILITY_STYLES = [
 ];
 
 export const INPUT_CLASSES =
-  "w-full rounded-[10px] border border-[#E5E5E5] bg-[#FAFAFA] px-4 py-3 text-base text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#0071E3]/30 focus:border-[#0071E3] focus:bg-white transition-all";
+  "w-full rounded-[10px] border border-[#E5E5E5] bg-[#FAFAFA] px-4 py-3 text-base text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#FF9500]/30 focus:border-[#FF9500] focus:bg-white transition-all";

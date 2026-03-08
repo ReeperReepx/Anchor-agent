@@ -74,7 +74,7 @@ export default function SettingsPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-full bg-gradient-to-b from-[#2A8AF6] to-[#0071E3] flex items-center justify-center text-white text-sm font-semibold shadow-[0_2px_8px_rgba(0,113,227,0.25)]">
+        <div className="w-10 h-10 rounded-full bg-gradient-to-b from-[#FFB040] to-[#FF9500] flex items-center justify-center text-white text-sm font-semibold shadow-[0_2px_8px_rgba(255,149,0,0.25)]">
           {profile.email?.charAt(0).toUpperCase()}
         </div>
         <div>

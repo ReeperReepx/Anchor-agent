@@ -19,10 +19,10 @@ function getMonthRange(year: number, month: number) {
 
 function scoreColor(score: number | null): string {
   if (!score) return "bg-[#E5E5E5]";
-  if (score === 1) return "bg-[#0071E3]/30";
-  if (score === 2) return "bg-[#0071E3]/55";
-  if (score === 3) return "bg-[#0071E3]/80";
-  return "bg-[#0071E3]";
+  if (score === 1) return "bg-[#FF9500]/30";
+  if (score === 2) return "bg-[#FF9500]/55";
+  if (score === 3) return "bg-[#FF9500]/80";
+  return "bg-[#FF9500]";
 }
 
 export function ProductivityHeatmap() {
@@ -136,7 +136,7 @@ export function ProductivityHeatmap() {
                 <div
                   key={i}
                   className={`aspect-square rounded-[5px] ${scoreColor(score)} ${
-                    isToday ? "ring-2 ring-[#0071E3]/40" : ""
+                    isToday ? "ring-2 ring-[#FF9500]/40" : ""
                   } transition-colors`}
                   title={score ? `${MONTHS[month]} ${day}: Score ${score}/4` : `${MONTHS[month]} ${day}: No standup`}
                 />
@@ -148,10 +148,10 @@ export function ProductivityHeatmap() {
       <div className="flex items-center justify-between mt-3">
         <div className="flex items-center gap-1">
           <span className="text-[9px] text-[#9CA3AF]">Less</span>
-          <div className="w-3 h-3 rounded-[3px] bg-[#0071E3]/30" />
-          <div className="w-3 h-3 rounded-[3px] bg-[#0071E3]/55" />
-          <div className="w-3 h-3 rounded-[3px] bg-[#0071E3]/80" />
-          <div className="w-3 h-3 rounded-[3px] bg-[#0071E3]" />
+          <div className="w-3 h-3 rounded-[3px] bg-[#FF9500]/30" />
+          <div className="w-3 h-3 rounded-[3px] bg-[#FF9500]/55" />
+          <div className="w-3 h-3 rounded-[3px] bg-[#FF9500]/80" />
+          <div className="w-3 h-3 rounded-[3px] bg-[#FF9500]" />
           <span className="text-[9px] text-[#9CA3AF]">More</span>
         </div>
         {avgScore && (

@@ -38,12 +38,12 @@ export function Pricing() {
                   <div
                     className={`relative rounded-2xl p-6 sm:p-8 ${
                       isPremium
-                        ? "bg-white ring-1 ring-[#0071E3]/40"
+                        ? "bg-white ring-1 ring-[#FF9500]/40"
                         : "bg-white ring-1 ring-[#e5e5e5]"
                     }`}
                   >
                     {isPremium && (
-                      <div className="absolute -top-2.5 right-6 bg-[#0071E3] text-white text-[10px] font-semibold uppercase tracking-wider px-3 py-0.5 rounded-full">
+                      <div className="absolute -top-2.5 right-6 bg-[#FF9500] text-white text-[10px] font-semibold uppercase tracking-wider px-3 py-0.5 rounded-full">
                         Popular
                       </div>
                     )}
@@ -82,7 +82,7 @@ export function Pricing() {
                           <Button
                             className={`rounded-full px-6 py-2.5 text-[13px] font-semibold w-full sm:w-auto min-h-[44px] ${
                               isPremium
-                                ? "bg-[#0071E3] hover:bg-[#0077ED] text-white border-none"
+                                ? "bg-[#FF9500] hover:bg-[#FFa526] text-white border-none"
                                 : "bg-[#1d1d1f] hover:bg-[#333] text-white border-none"
                             }`}
                             size="sm"

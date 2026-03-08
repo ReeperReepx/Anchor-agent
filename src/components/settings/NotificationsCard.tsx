@@ -41,8 +41,8 @@ export function NotificationsCard() {
                 aria-checked={prefs[item.key]}
                 aria-label={`${item.label}: ${item.sub}`}
                 onClick={() => toggle(item.key)}
-                className={`w-11 h-6 rounded-full transition-colors relative shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0071E3] focus-visible:ring-offset-2 ${
-                  prefs[item.key] ? "bg-[#0071E3]" : "bg-[#D1D5DB]"
+                className={`w-11 h-6 rounded-full transition-colors relative shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9500] focus-visible:ring-offset-2 ${
+                  prefs[item.key] ? "bg-[#FF9500]" : "bg-[#D1D5DB]"
                 }`}
               >
                 <div className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-sm transition-transform ${

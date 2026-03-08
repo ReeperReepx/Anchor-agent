@@ -60,7 +60,7 @@ export default async function DashboardPage() {
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gradient-to-r from-[rgba(0,113,227,0.04)] to-transparent rounded-xl px-5 sm:px-6 py-5 -mx-1">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-white border border-[#E5E5E5] rounded-xl px-5 sm:px-6 py-5">
         <div>
           <h1 className="text-xl sm:text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">
             {getGreeting()}{userName ? `, ${userName}` : ""}
@@ -68,11 +68,11 @@ export default async function DashboardPage() {
           {standupTime && (
             <p className="text-sm text-[#86868B] mt-1">
               Your next standup is at{" "}
-              <span className="text-[#0071E3] font-medium">{standupTime}</span>
+              <span className="text-[#FF9500] font-medium">{standupTime}</span>
             </p>
           )}
         </div>
-        <a href="/standup" className="inline-flex items-center justify-center gap-2 bg-[#0071E3] hover:bg-[#0077ED] text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(0,113,227,0.25)] hover:shadow-[0_4px_20px_rgba(0,113,227,0.35)] hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97] shrink-0">
+        <a href="/standup" className="inline-flex items-center justify-center gap-2 bg-[#FF9500] hover:bg-[#FFa526] text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(255,149,0,0.25)] hover:shadow-[0_4px_20px_rgba(255,149,0,0.35)] hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97] shrink-0">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
             <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
             <path d="M19 10v2a7 7 0 0 1-14 0v-2" />

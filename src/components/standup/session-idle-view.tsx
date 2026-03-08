@@ -30,7 +30,7 @@ export function SessionIdleView({
             }}
             className={`px-5 py-2 rounded-xl text-sm font-medium transition-colors ${
               standupType === t
-                ? "bg-[#0071E3] text-white"
+                ? "bg-[#FF9500] text-white"
                 : t === "weekly" && !canWeekly
                   ? "bg-[#F0F0F0] text-[#D1D5DB] cursor-not-allowed"
                   : "bg-[#F0F0F0] text-[#86868B] hover:text-[#1D1D1F]"
@@ -50,12 +50,12 @@ export function SessionIdleView({
       <p className="text-[13px] text-[#9CA3AF] mb-10">{info.cap}</p>
 
       <div className="relative w-40 h-40 mx-auto flex items-center justify-center">
-        <div className="absolute inset-0 rounded-full bg-[rgba(0,113,227,0.06)] animate-[mic-pulse_2.5s_ease-in-out_infinite]" />
-        <div className="absolute inset-3 rounded-full bg-[rgba(0,113,227,0.08)]" />
+        <div className="absolute inset-0 rounded-full bg-[rgba(255,149,0,0.06)] animate-[mic-pulse_2.5s_ease-in-out_infinite]" />
+        <div className="absolute inset-3 rounded-full bg-[rgba(255,149,0,0.08)]" />
         <button
           onClick={startSession}
           aria-label="Start standup session"
-          className="relative w-28 h-28 rounded-full bg-gradient-to-b from-[#0077ED] to-[#0071E3] text-white flex items-center justify-center transition-all hover:from-[#0077ED] hover:to-[#0077ED] active:scale-95 shadow-[0_4px_24px_rgba(0,113,227,0.35),0_8px_40px_rgba(0,113,227,0.15)] hover:shadow-[0_6px_32px_rgba(0,113,227,0.5)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#0071E3]/50"
+          className="relative w-28 h-28 rounded-full bg-gradient-to-b from-[#FFa526] to-[#FF9500] text-white flex items-center justify-center transition-all hover:from-[#FFa526] hover:to-[#FFa526] active:scale-95 shadow-[0_4px_24px_rgba(255,149,0,0.35),0_8px_40px_rgba(255,149,0,0.15)] hover:shadow-[0_6px_32px_rgba(255,149,0,0.5)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#FF9500]/50"
         >
           <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />

@@ -31,7 +31,7 @@ export function WeeklyProgress({ completedDays }: WeeklyProgressProps) {
                 isCompleted
                   ? "bg-gradient-to-b from-[#34C759] to-[#30D158] text-white shadow-[0_2px_8px_rgba(52,199,89,0.3)]"
                   : isToday
-                  ? "border-2 border-[#0071E3] text-[#0071E3] shadow-[0_0_0_4px_rgba(0,113,227,0.08)]"
+                  ? "border-2 border-[#FF9500] text-[#FF9500] shadow-[0_0_0_4px_rgba(255,149,0,0.08)]"
                   : isPast
                   ? "bg-[#F0F0F0] text-[#D0D0D0]"
                   : "bg-[#F0F0F0] text-[#9CA3AF]"
@@ -48,7 +48,7 @@ export function WeeklyProgress({ completedDays }: WeeklyProgressProps) {
               ) : null}
             </div>
             {isToday && (
-              <div className="w-1 h-1 rounded-full bg-[#0071E3]" />
+              <div className="w-1 h-1 rounded-full bg-[#FF9500]" />
             )}
           </div>
         );

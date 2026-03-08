@@ -13,13 +13,13 @@ interface StepProps {
 export function StepWelcome({ next }: { next: () => void }) {
   return (
     <div className="text-center">
-      <div className="w-16 h-16 bg-[rgba(0,113,227,0.08)] border border-[rgba(0,113,227,0.15)] rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_24px_rgba(0,113,227,0.08)]">
+      <div className="w-16 h-16 bg-[rgba(255,149,0,0.08)] border border-[rgba(255,149,0,0.15)] rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_24px_rgba(255,149,0,0.08)]">
         <svg
           width="28"
           height="28"
           viewBox="0 0 24 24"
           fill="none"
-          stroke="#0071E3"
+          stroke="#FF9500"
           strokeWidth="2"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -133,7 +133,7 @@ export function StepGoals({ data, setData }: StepProps) {
               onClick={() => toggleGoal(goal)}
               className={`px-4 py-2.5 rounded-[10px] text-sm font-medium transition-all ${
                 selected
-                  ? "bg-[#0071E3] text-white shadow-[0_2px_8px_rgba(0,113,227,0.3)]"
+                  ? "bg-[#FF9500] text-white shadow-[0_2px_8px_rgba(255,149,0,0.3)]"
                   : "bg-[#F0F0F0] text-[#86868B] hover:text-[#1D1D1F] hover:bg-[#E5E5E5]"
               }`}
             >

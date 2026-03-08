@@ -128,10 +128,10 @@ export default async function TrackingPage() {
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Tracking</h1>
         <div className="flex items-center gap-2 text-[13px] text-[#86868B]">
-          <svg className="w-4 h-4 text-[#0071E3]" fill="currentColor" viewBox="0 0 24 24">
+          <svg className="w-4 h-4 text-[#FF9500]" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 23c-3.866 0-7-2.686-7-6 0-1.664.558-3.202 1.5-4.5.96-1.32 1.5-2.836 1.5-4.5 0-.414.336-.75.75-.75.267 0 .501.14.633.35C10.89 10.13 12 12.5 12 14c1.5-2 2-4.5 2-7 0-.414.336-.75.75-.75.2 0 .382.08.516.21C17.632 8.72 19 11.84 19 15c0 4.418-3.134 8-7 8z"/>
           </svg>
-          <span className="font-semibold text-[#0071E3]">{streak?.current_streak ?? 0}</span> day streak
+          <span className="font-semibold text-[#FF9500]">{streak?.current_streak ?? 0}</span> day streak
         </div>
       </div>
 
@@ -152,7 +152,7 @@ export default async function TrackingPage() {
             </div>
             <div className="h-2 bg-[#F0F0F0] rounded-full overflow-hidden">
               <div
-                className="h-full rounded-full transition-all bg-gradient-to-r from-[#0071E3]/60 to-[#0071E3]"
+                className="h-full rounded-full transition-all bg-gradient-to-r from-[#FF9500]/60 to-[#FF9500]"
                 style={{ width: `${weekPct}%` }}
               />
             </div>
@@ -183,14 +183,13 @@ export default async function TrackingPage() {
         </Card>
 
         {/* Streak */}
-        <Card className="!bg-gradient-to-br !from-[rgba(0,113,227,0.07)] !to-[rgba(0,113,227,0.02)] !border-[rgba(0,113,227,0.2)] relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-20 h-20 bg-[rgba(0,113,227,0.06)] rounded-full -translate-y-1/2 translate-x-1/2" />
+        <Card className="relative overflow-hidden">
           <CardContent>
             <div className="flex items-center justify-between mb-3">
-              <span className="text-[11px] font-semibold text-[#0071E3] uppercase tracking-[1px]">Current Streak</span>
+              <span className="text-[11px] font-semibold text-[#FF9500] uppercase tracking-[1px]">Current Streak</span>
             </div>
             <div className="flex items-baseline gap-2 mb-1">
-              <span className="text-2xl sm:text-3xl font-bold text-[#0071E3]">
+              <span className="text-2xl sm:text-3xl font-bold text-[#FF9500]">
                 {streak?.current_streak ?? 0}
               </span>
               <span className="text-sm text-[#9CA3AF]">days</span>

@@ -35,7 +35,7 @@ export function FAQ() {
         {/* Left heading (2 cols) */}
         <div className="md:col-span-2">
           <ScrollReveal>
-            <p className="text-[#0071E3] text-sm font-semibold mb-3 tracking-wide">
+            <p className="text-[#FF9500] text-sm font-semibold mb-3 tracking-wide">
               FAQ
             </p>
             <h2 className="text-[32px] sm:text-[40px] font-bold tracking-[-0.035em] text-[#1d1d1f] leading-tight">
@@ -58,7 +58,7 @@ export function FAQ() {
                     className="w-full flex items-center justify-between py-4 sm:py-5 text-left group min-h-[48px]"
                     aria-expanded={isOpen}
                   >
-                    <span className="font-semibold text-[#1d1d1f] text-[15px] sm:text-[16px] pr-4 group-hover:text-[#0071E3] transition-colors">
+                    <span className="font-semibold text-[#1d1d1f] text-[15px] sm:text-[16px] pr-4 group-hover:text-[#FF9500] transition-colors">
                       {item.q}
                     </span>
                     <svg

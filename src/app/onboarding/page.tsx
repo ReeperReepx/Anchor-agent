@@ -117,9 +117,9 @@ export default function OnboardingPage() {
                     key={i}
                     className={`h-2 rounded-full transition-all duration-500 ${
                       isDone
-                        ? "w-8 bg-[#0071E3]"
+                        ? "w-8 bg-[#FF9500]"
                         : isActive
-                          ? "w-8 bg-[#0071E3] shadow-[0_0_8px_rgba(0,113,227,0.4)]"
+                          ? "w-8 bg-[#FF9500] shadow-[0_0_8px_rgba(255,149,0,0.4)]"
                           : "w-2 bg-[#E5E5E5]"
                     }`}
                   />
@@ -127,7 +127,7 @@ export default function OnboardingPage() {
               })}
             </div>
             <p className="text-center text-[13px] text-[#9CA3AF]">
-              Step <span className="text-[#0071E3] font-medium">{step}</span> of {TOTAL_STEPS - 1}
+              Step <span className="text-[#FF9500] font-medium">{step}</span> of {TOTAL_STEPS - 1}
             </p>
           </div>
         </div>

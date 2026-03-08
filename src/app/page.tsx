@@ -23,13 +23,13 @@ export default function LandingPage() {
             <a href="#pricing" className="hidden sm:inline text-[#1d1d1f]/60 hover:text-[#1d1d1f] transition-colors py-2">
               Pricing
             </a>
-            <Link href="/login" className="text-[#0071E3] hover:text-[#0077ED] transition-colors py-2 px-1">
+            <Link href="/login" className="text-[#FF9500] hover:text-[#FFa526] transition-colors py-2 px-1">
               Log in
             </Link>
             <Link href="/login">
               <Button
                 size="sm"
-                className="bg-[#0071E3] hover:bg-[#0077ED] text-white rounded-full px-5 text-[13px] border-none shadow-none"
+                className="bg-[#FF9500] hover:bg-[#FFa526] text-white rounded-full px-5 text-[13px] border-none shadow-none"
               >
                 Try free
               </Button>

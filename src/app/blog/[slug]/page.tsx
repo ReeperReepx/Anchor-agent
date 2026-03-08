@@ -66,7 +66,7 @@ export default async function ArticlePage({
       />
 
       <nav className="flex items-center justify-between px-10 py-5 max-w-[1100px] mx-auto border-b border-[#E5E5E5]">
-        <Link href="/" className="text-[22px] font-bold text-[#0071E3]">
+        <Link href="/" className="text-[22px] font-bold text-[#FF9500]">
           Anchor
         </Link>
         <div className="flex items-center gap-5 text-sm text-[#86868B]">
@@ -78,7 +78,7 @@ export default async function ArticlePage({
           </Link>
           <Link
             href="/login"
-            className="bg-[#0071E3] hover:bg-[#0077ED] text-white px-4 py-2 rounded-[10px] text-sm font-semibold transition-all"
+            className="bg-[#FF9500] hover:bg-[#FFa526] text-white px-4 py-2 rounded-[10px] text-sm font-semibold transition-all"
           >
             Start Free Trial
           </Link>
@@ -88,7 +88,7 @@ export default async function ArticlePage({
       <article className="max-w-[700px] mx-auto px-6 py-16">
         <div className="mb-8">
           <div className="flex items-center gap-3 mb-4">
-            <span className="text-[11px] font-semibold text-[#0071E3] uppercase tracking-[1px]">
+            <span className="text-[11px] font-semibold text-[#FF9500] uppercase tracking-[1px]">
               {article.category}
             </span>
             <span className="text-[12px] text-[#9CA3AF]">
@@ -125,7 +125,7 @@ export default async function ArticlePage({
             </p>
             <Link
               href="/login"
-              className="inline-flex items-center gap-2 bg-[#0071E3] hover:bg-[#0077ED] text-white px-6 py-3 rounded-[10px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(0,113,227,0.3)]"
+              className="inline-flex items-center gap-2 bg-[#FF9500] hover:bg-[#FFa526] text-white px-6 py-3 rounded-[10px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(255,149,0,0.3)]"
             >
               Start Free Trial
             </Link>
@@ -135,7 +135,7 @@ export default async function ArticlePage({
         <div className="mt-8">
           <Link
             href="/blog"
-            className="text-sm text-[#0071E3] hover:text-[#0077ED] transition-colors"
+            className="text-sm text-[#FF9500] hover:text-[#FFa526] transition-colors"
           >
             &larr; Back to all articles
           </Link>

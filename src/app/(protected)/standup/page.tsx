@@ -33,7 +33,7 @@ export default function StandupPage() {
   if (access.loading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[70vh] gap-3">
-        <span className="spinner text-[#0071E3]" style={{ width: 24, height: 24 }} />
+        <span className="spinner text-[#FF9500]" style={{ width: 24, height: 24 }} />
         <p className="text-sm text-[#86868B]">Loading your session...</p>
       </div>
     );

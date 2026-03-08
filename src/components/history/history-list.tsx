@@ -73,8 +73,8 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
     return (
       <Card>
         <CardContent className="py-12 text-center">
-          <div className="w-16 h-16 bg-[rgba(0,113,227,0.08)] border border-[rgba(0,113,227,0.15)] rounded-full flex items-center justify-center mx-auto mb-5 shadow-[0_0_24px_rgba(0,113,227,0.08)]">
-            <svg className="w-7 h-7 text-[#0071E3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-16 h-16 bg-[rgba(255,149,0,0.08)] border border-[rgba(255,149,0,0.15)] rounded-full flex items-center justify-center mx-auto mb-5 shadow-[0_0_24px_rgba(255,149,0,0.08)]">
+            <svg className="w-7 h-7 text-[#FF9500]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
@@ -82,7 +82,7 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
           <p className="text-sm text-[#86868B] mb-5">Complete your first standup to see it here.</p>
           <a
             href="/standup"
-            className="inline-flex items-center gap-2 bg-[#0071E3] hover:bg-[#0077ED] text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(0,113,227,0.3)]"
+            className="inline-flex items-center gap-2 bg-[#FF9500] hover:bg-[#FFa526] text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(255,149,0,0.3)]"
           >
             Start a standup
           </a>
@@ -108,7 +108,7 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search standups..."
-          className="w-full rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] pl-9 pr-3 py-2.5 text-sm text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#0071E3]/30 focus:border-[#0071E3] focus:bg-white transition-all"
+          className="w-full rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] pl-9 pr-3 py-2.5 text-sm text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#FF9500]/30 focus:border-[#FF9500] focus:bg-white transition-all"
         />
       </div>
 
@@ -122,10 +122,10 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
               onClick={() => setTypeFilter(t)}
               aria-label={`Filter: ${label}`}
               aria-pressed={typeFilter === t}
-              className={`px-4 py-2 rounded-full text-[13px] font-medium transition-all min-h-[36px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0071E3] ${
+              className={`px-4 py-2 rounded-full text-[13px] font-medium transition-all min-h-[36px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9500] ${
                 typeFilter === t
-                  ? "bg-[#0071E3] text-white border border-[#0071E3] shadow-[0_2px_8px_rgba(0,113,227,0.25)]"
-                  : "bg-white border border-[#E5E5E5] text-[#86868B] hover:border-[#0071E3]/30"
+                  ? "bg-[#FF9500] text-white border border-[#FF9500] shadow-[0_2px_8px_rgba(255,149,0,0.25)]"
+                  : "bg-white border border-[#E5E5E5] text-[#86868B] hover:border-[#FF9500]/30"
               }`}
             >
               {t === "all" ? "All" : t === "daily" ? "Daily" : "Weekly"}
@@ -143,10 +143,10 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
               onClick={() => setTimeFilter(timeFilter === t ? "all" : t)}
               aria-label={`Filter: ${label}`}
               aria-pressed={timeFilter === t}
-              className={`px-4 py-2 rounded-full text-[13px] font-medium transition-all min-h-[36px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0071E3] ${
+              className={`px-4 py-2 rounded-full text-[13px] font-medium transition-all min-h-[36px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9500] ${
                 timeFilter === t
-                  ? "bg-[#0071E3] text-white border border-[#0071E3] shadow-[0_2px_8px_rgba(0,113,227,0.25)]"
-                  : "bg-white border border-[#E5E5E5] text-[#86868B] hover:border-[#0071E3]/30"
+                  ? "bg-[#FF9500] text-white border border-[#FF9500] shadow-[0_2px_8px_rgba(255,149,0,0.25)]"
+                  : "bg-white border border-[#E5E5E5] text-[#86868B] hover:border-[#FF9500]/30"
               }`}
             >
               {label}
@@ -174,13 +174,13 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
                   onClick={() => toggleExpanded(standup.id)}
                   aria-expanded={isExpanded}
                   aria-label={`${standup.type} standup from ${standup.date}${isExpanded ? ", collapse" : ", expand"}`}
-                  className="w-full text-left px-4 sm:px-6 py-4 hover:bg-[#F5F5F7] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#0071E3]"
+                  className="w-full text-left px-4 sm:px-6 py-4 hover:bg-[#F5F5F7] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#FF9500]"
                 >
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2.5">
                       <div
                         className={`w-2 h-2 rounded-full shrink-0 ${
-                          standup.type === "weekly" ? "bg-[#C4900A]" : "bg-[#0071E3]"
+                          standup.type === "weekly" ? "bg-[#C4900A]" : "bg-[#FF9500]"
                         }`}
                       />
                       <span className="text-[13px] font-medium text-[#1D1D1F] capitalize">

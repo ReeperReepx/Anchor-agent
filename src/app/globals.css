@@ -5,16 +5,16 @@
   --foreground: #1D1D1F;
   --surface: #FFFFFF;
   --surface-elevated: #F0F0F0;
-  --accent: #0071E3;
-  --accent-hover: #0077ED;
-  --accent-pressed: #005BB5;
-  --accent-subtle: rgba(0, 113, 227, 0.1);
+  --accent: #FF9500;
+  --accent-hover: #FFa526;
+  --accent-pressed: #D97F00;
+  --accent-subtle: rgba(255, 149, 0, 0.1);
   --text-primary: #1D1D1F;
   --text-secondary: #86868B;
   --text-muted: #9CA3AF;
   --border-default: #E5E5E5;
   --border-subtle: #E5E5E5;
-  --border-active: #0071E3;
+  --border-active: #FF9500;
   --success: #34C759;
   --warning: #C4900A;
   --error: #C43030;
@@ -60,8 +60,8 @@ body {
 }
 
 @keyframes mic-pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(0, 113, 227, 0.4); }
-  50% { box-shadow: 0 0 0 20px rgba(0, 113, 227, 0); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 149, 0, 0.4); }
+  50% { box-shadow: 0 0 0 20px rgba(255, 149, 0, 0); }
 }
 
 @keyframes slideIn {
@@ -114,12 +114,12 @@ body {
   margin-bottom: 0.5rem;
 }
 .prose-anchor a {
-  color: #0071E3;
+  color: #FF9500;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 .prose-anchor a:hover {
-  color: #0077ED;
+  color: #FFa526;
 }
 
 .skeleton {
