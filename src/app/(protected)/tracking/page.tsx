@@ -40,13 +40,15 @@ function buildWeeklyData(standups: Standup[]): WeekData[] {
     const startStr = weekStart.toISOString().split("T")[0];
     const endStr = weekEnd.toISOString().split("T")[0];
 
-    const completed = standups.filter(
-      (s) => s.type === "daily" && s.date >= startStr && s.date <= endStr
-    ).length;
+    const uniqueDates = new Set(
+      standups
+        .filter((s) => s.type === "daily" && s.date >= startStr && s.date <= endStr)
+        .map((s) => s.date)
+    );
+    const total = Math.max(getWeekdayCount(weekStart, weekEnd), 1);
+    const completed = Math.min(uniqueDates.size, total);
 
-    const total = getWeekdayCount(weekStart, weekEnd);
-
-    weeks.push({ weekLabel: label, completed, total: Math.max(total, 1) });
+    weeks.push({ weekLabel: label, completed, total });
   }
 
   return weeks;
@@ -58,6 +60,16 @@ function buildHeatmapData(standups: Standup[]): Record<string, number> {
     map[s.date] = (map[s.date] || 0) + (s.type === "weekly" ? 2 : 1);
   }
   return map;
+}
+
+function countUniqueDates(standups: Standup[], startDate: string, endDate: string): number {
+  const dates = new Set<string>();
+  for (const s of standups) {
+    if (s.type === "daily" && s.date >= startDate && s.date <= endDate) {
+      dates.add(s.date);
+    }
+  }
+  return dates.size;
 }
 
 async function getTrackingData() {
@@ -79,7 +91,7 @@ async function getTrackingData() {
   const weekStartStr = weekStart.toISOString().split("T")[0];
   const todayStr = now.toISOString().split("T")[0];
 
-  const [standupResult, streakResult, weekCountResult, monthCountResult] = await Promise.all([
+  const [standupResult, streakResult] = await Promise.all([
     supabase
       .from("standups")
       .select("*")
@@ -88,31 +100,22 @@ async function getTrackingData() {
       .order("date", { ascending: true })
       .returns<Standup[]>(),
     supabase.from("streaks").select("*").eq("user_id", user.id).single<Streak>(),
-    supabase
-      .from("standups")
-      .select("id", { count: "exact", head: true })
-      .eq("user_id", user.id)
-      .eq("type", "daily")
-      .gte("date", weekStartStr)
-      .lte("date", todayStr),
-    supabase
-      .from("standups")
-      .select("id", { count: "exact", head: true })
-      .eq("user_id", user.id)
-      .eq("type", "daily")
-      .gte("date", monthStart)
-      .lte("date", todayStr),
   ]);
 
-  const weekdaysThisWeek = getWeekdayCount(weekStart, now);
+  const allStandups = standupResult.data ?? [];
+
+  const weekdaysThisWeek = Math.max(getWeekdayCount(weekStart, now), 1);
   const monthDate = new Date(now.getFullYear(), now.getMonth(), 1);
-  const weekdaysThisMonth = getWeekdayCount(monthDate, now);
+  const weekdaysThisMonth = Math.max(getWeekdayCount(monthDate, now), 1);
+
+  const weekCompleted = countUniqueDates(allStandups, weekStartStr, todayStr);
+  const monthCompleted = countUniqueDates(allStandups, monthStart, todayStr);
 
   return {
-    standups: standupResult.data ?? [],
+    standups: allStandups,
     streak: streakResult.data,
-    thisWeek: { completed: weekCountResult.count ?? 0, total: weekdaysThisWeek },
-    thisMonth: { completed: monthCountResult.count ?? 0, total: weekdaysThisMonth },
+    thisWeek: { completed: Math.min(weekCompleted, weekdaysThisWeek), total: weekdaysThisWeek },
+    thisMonth: { completed: Math.min(monthCompleted, weekdaysThisMonth), total: weekdaysThisMonth },
   };
 }
 
@@ -121,8 +124,8 @@ export default async function TrackingPage() {
   const heatmapData = buildHeatmapData(standups);
   const weeklyData = buildWeeklyData(standups);
 
-  const weekPct = thisWeek ? Math.round((thisWeek.completed / Math.max(thisWeek.total, 1)) * 100) : 0;
-  const monthPct = thisMonth ? Math.round((thisMonth.completed / Math.max(thisMonth.total, 1)) * 100) : 0;
+  const weekPct = thisWeek ? Math.min(Math.round((thisWeek.completed / Math.max(thisWeek.total, 1)) * 100), 100) : 0;
+  const monthPct = thisMonth ? Math.min(Math.round((thisMonth.completed / Math.max(thisMonth.total, 1)) * 100), 100) : 0;
 
   return (
     <div className="space-y-6">

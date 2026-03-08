@@ -10,8 +10,9 @@ export function WeeklyBars({ weeks }: { weeks: WeekData[] }) {
   return (
     <div className="flex items-end justify-between gap-2 sm:gap-3 h-[200px]">
       {weeks.map((week) => {
-        const pct = Math.round(
-          (week.completed / Math.max(week.total, 1)) * 100
+        const pct = Math.min(
+          Math.round((week.completed / Math.max(week.total, 1)) * 100),
+          100
         );
         const isComplete = pct === 100;
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ToastProvider } from "@/components/ui/toast";
 import { RouteProgress } from "@/components/layout/route-progress";
 import "./globals.css";
@@ -52,6 +53,7 @@ export default function RootLayout({
       <body className={`${inter.variable} antialiased`}>
         <RouteProgress />
         <ToastProvider>{children}</ToastProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
