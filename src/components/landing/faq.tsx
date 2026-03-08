@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 const FAQ_ITEMS = [
   {
     q: "Do I need to type anything?",
@@ -15,23 +19,55 @@ const FAQ_ITEMS = [
     q: "Can I cancel anytime?",
     a: "Yes. No contracts, cancel from your settings at any time.",
   },
+  {
+    q: "What happens after the free trial?",
+    a: "You'll be charged for the plan you selected. You can cancel or switch plans before the trial ends to avoid being charged.",
+  },
 ];
 
 export function FAQ() {
+  const [open, setOpen] = useState<number | null>(null);
+
   return (
-    <section className="px-5 sm:px-10 py-12 sm:py-[60px] max-w-[600px] mx-auto border-t border-[#E5E5E5]">
-      <h2 className="text-[28px] sm:text-[36px] font-bold tracking-[-0.02em] text-[#1D1D1F] mb-10 text-center">
+    <section className="px-5 sm:px-10 py-16 sm:py-20 max-w-[640px] mx-auto">
+      <p className="text-center text-xs font-semibold tracking-[0.15em] uppercase text-[#B85C42] mb-3">
         FAQ
+      </p>
+      <h2 className="text-[28px] sm:text-[40px] font-bold tracking-[-0.025em] text-[#1D1D1F] mb-10 sm:mb-12 text-center leading-tight">
+        Questions? Answers.
       </h2>
-      <div className="space-y-6">
-        {FAQ_ITEMS.map((item) => (
-          <div key={item.q}>
-            <h3 className="font-semibold text-[#1D1D1F]">{item.q}</h3>
-            <p className="mt-1 text-sm text-[#6B7280] leading-relaxed">
-              {item.a}
-            </p>
-          </div>
-        ))}
+      <div className="space-y-0 border-t border-[#E5E5E5]">
+        {FAQ_ITEMS.map((item, i) => {
+          const isOpen = open === i;
+          return (
+            <div key={item.q} className="border-b border-[#E5E5E5]">
+              <button
+                onClick={() => setOpen(isOpen ? null : i)}
+                className="w-full flex items-center justify-between py-5 text-left group"
+                aria-expanded={isOpen}
+              >
+                <span className="font-semibold text-[#1D1D1F] text-[15px] pr-4 group-hover:text-[#B85C42] transition-colors">
+                  {item.q}
+                </span>
+                <svg
+                  className={`w-5 h-5 text-[#9CA3AF] shrink-0 transition-transform duration-200 ${isOpen ? "rotate-45" : ""}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                </svg>
+              </button>
+              {isOpen && (
+                <div className="pb-5 animate-fade-in">
+                  <p className="text-sm text-[#6B7280] leading-relaxed pr-8">
+                    {item.a}
+                  </p>
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
     </section>
   );

@@ -5,15 +5,18 @@ import type { PlanKey } from "@/lib/stripe";
 
 export function Pricing() {
   return (
-    <section id="pricing" className="px-5 sm:px-10 py-12 sm:py-[60px] text-center border-t border-[#E5E5E5]">
+    <section id="pricing" className="px-5 sm:px-10 py-16 sm:py-24 text-center">
       <div className="max-w-[800px] mx-auto">
-        <h2 className="text-[28px] sm:text-[36px] font-bold tracking-[-0.02em] text-[#1D1D1F] mb-3">
+        <p className="text-xs font-semibold tracking-[0.15em] uppercase text-[#B85C42] mb-3">
+          Pricing
+        </p>
+        <h2 className="text-[28px] sm:text-[40px] font-bold tracking-[-0.025em] text-[#1D1D1F] mb-4 leading-tight">
           Simple, transparent pricing.
         </h2>
-        <p className="text-[15px] text-[#6B7280] mb-3 leading-relaxed">
+        <p className="text-sm sm:text-base text-[#6B7280] mb-4 leading-relaxed max-w-[520px] mx-auto">
           Start with a 7-day free trial. Cancel anytime. No credit card charged until your trial ends.
         </p>
-        <p className="text-[13px] text-[#9CA3AF] mb-10">
+        <p className="text-xs text-[#9CA3AF] mb-12">
           Both plans include daily voice standups, transcripts, and accountability.
         </p>
 
@@ -24,36 +27,31 @@ export function Pricing() {
               return (
                 <div
                   key={key}
-                  className={`relative bg-white rounded-[16px] border p-6 sm:p-8 ${
+                  className={`relative bg-white rounded-xl border p-6 sm:p-8 transition-all duration-300 hover:shadow-[0_12px_48px_rgba(0,0,0,0.08)] ${
                     isPremium
-                      ? "border-[#B85C42] shadow-[0_4px_32px_rgba(184,92,66,0.12)]"
-                      : "border-[#E5E5E5] shadow-[0_4px_32px_rgba(0,0,0,0.06)]"
+                      ? "border-[#B85C42] shadow-[0_4px_32px_rgba(184,92,66,0.1)] ring-1 ring-[#B85C42]/20"
+                      : "border-[#E5E5E5]"
                   }`}
                 >
                   {isPremium && (
-                    <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#B85C42] to-[#D4917F] rounded-t-[16px]" />
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#B85C42] text-white text-[10px] font-semibold uppercase tracking-[0.5px] px-3 py-1 rounded-full">
+                      Popular
+                    </div>
                   )}
-                  <div className="flex items-center gap-2 mb-4">
-                    <h3 className="text-lg font-semibold text-[#1D1D1F]">
-                      {plan.name}
-                    </h3>
-                    {isPremium && (
-                      <span className="text-[10px] bg-[rgba(184,92,66,0.1)] text-[#B85C42] px-2 py-0.5 rounded-full font-semibold uppercase tracking-[0.5px]">
-                        Popular
-                      </span>
-                    )}
-                  </div>
+                  <h3 className="text-lg font-semibold text-[#1D1D1F] mb-1">
+                    {plan.name}
+                  </h3>
                   <div className="mb-5">
-                    <span className="text-[40px] font-bold text-[#1D1D1F]">
+                    <span className="text-[44px] font-bold text-[#1D1D1F] tracking-tight">
                       ${plan.price}
                     </span>
-                    <span className="text-[#6B7280] text-sm">/month</span>
+                    <span className="text-[#9CA3AF] text-sm">/month</span>
                   </div>
-                  <ul className="space-y-2.5 mb-8">
+                  <ul className="space-y-3 mb-8">
                     {plan.features.map((f) => (
                       <li
                         key={f}
-                        className="text-sm text-[#4B5563] flex items-start gap-2"
+                        className="text-sm text-[#4B5563] flex items-start gap-2.5"
                       >
                         <svg
                           className="w-4 h-4 text-[#2D8A56] shrink-0 mt-0.5"
@@ -76,6 +74,7 @@ export function Pricing() {
                     <Button
                       className="w-full"
                       variant={isPremium ? "primary" : "secondary"}
+                      size="lg"
                     >
                       Start free trial
                     </Button>
