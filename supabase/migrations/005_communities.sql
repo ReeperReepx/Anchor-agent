@@ -2,6 +2,7 @@
 create table public.communities (
   id uuid primary key default gen_random_uuid(),
   name text not null,
+  slug text unique,
   description text,
   is_public boolean not null default true,
   created_by uuid not null references auth.users(id) on delete cascade,
@@ -14,7 +15,7 @@ create table public.community_members (
   id uuid primary key default gen_random_uuid(),
   community_id uuid not null references public.communities(id) on delete cascade,
   user_id uuid not null references auth.users(id) on delete cascade,
-  role text not null default 'member' check (role in ('admin', 'member')),
+  role text not null default 'member' check (role in ('owner', 'admin', 'member')),
   joined_at timestamptz not null default now(),
   unique(community_id, user_id)
 );
