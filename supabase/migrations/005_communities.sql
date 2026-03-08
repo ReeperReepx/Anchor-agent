@@ -9,6 +9,26 @@ create table public.communities (
   created_at timestamptz not null default now()
 );
 
+-- Community members (create before communities RLS policies that reference it)
+create table public.community_members (
+  id uuid primary key default gen_random_uuid(),
+  community_id uuid not null references public.communities(id) on delete cascade,
+  user_id uuid not null references auth.users(id) on delete cascade,
+  role text not null default 'member' check (role in ('admin', 'member')),
+  joined_at timestamptz not null default now(),
+  unique(community_id, user_id)
+);
+
+-- Partner queue
+create table if not exists public.partner_queue (
+  id uuid primary key default gen_random_uuid(),
+  user_id uuid not null references auth.users(id) on delete cascade unique,
+  selected_days text[] not null,
+  status text not null default 'waiting' check (status in ('waiting', 'matched')),
+  joined_at timestamptz not null default now()
+);
+
+-- RLS: communities
 alter table public.communities enable row level security;
 
 create policy "Anyone can view public communities"
@@ -33,16 +53,7 @@ create policy "Creator can update community"
   on public.communities for update
   using (auth.uid() = created_by);
 
--- Community members
-create table public.community_members (
-  id uuid primary key default gen_random_uuid(),
-  community_id uuid not null references public.communities(id) on delete cascade,
-  user_id uuid not null references auth.users(id) on delete cascade,
-  role text not null default 'member' check (role in ('admin', 'member')),
-  joined_at timestamptz not null default now(),
-  unique(community_id, user_id)
-);
-
+-- RLS: community_members
 alter table public.community_members enable row level security;
 
 create policy "Members can view other members"
@@ -63,15 +74,7 @@ create policy "Users can leave communities"
   on public.community_members for delete
   using (auth.uid() = user_id);
 
--- Partner queue
-create table if not exists public.partner_queue (
-  id uuid primary key default gen_random_uuid(),
-  user_id uuid not null references auth.users(id) on delete cascade unique,
-  selected_days text[] not null,
-  status text not null default 'waiting' check (status in ('waiting', 'matched')),
-  joined_at timestamptz not null default now()
-);
-
+-- RLS: partner_queue
 alter table public.partner_queue enable row level security;
 
 create policy "Users can manage own queue entry"
