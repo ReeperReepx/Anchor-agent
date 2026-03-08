@@ -54,7 +54,7 @@ export function SubscriptionCard() {
         ? "Active"
         : "Inactive";
 
-  const statusColor = access?.hasAccess || access?.isGrandfathered ? "#34C759" : "#FF9500";
+  const statusColor = access?.hasAccess || access?.isGrandfathered ? "#34C759" : "#B57308";
 
   return (
     <Card>
@@ -63,13 +63,13 @@ export function SubscriptionCard() {
       </CardHeader>
       <CardContent>
         <div className="space-y-3">
-          <div className="flex justify-between items-center text-sm">
+          <div className="flex justify-between items-center text-[16px]">
             <span className="text-[#86868B]">Plan</span>
-            <span className="bg-[rgba(52,199,89,0.1)] text-[#34C759] text-xs font-medium px-2.5 py-0.5 rounded-full uppercase tracking-[1px]">
+            <span className="bg-[rgba(52,199,89,0.1)] text-[#34C759] text-[14px] font-medium px-2.5 py-0.5 rounded-full uppercase tracking-[1px]">
               {planLabel}
             </span>
           </div>
-          <div className="flex justify-between text-sm">
+          <div className="flex justify-between text-[16px]">
             <span className="text-[#86868B]">Status</span>
             <span style={{ color: statusColor }}>{statusLabel}</span>
           </div>

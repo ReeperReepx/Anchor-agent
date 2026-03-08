@@ -56,32 +56,22 @@ export default async function DashboardPage() {
   const completedDays = recentStandups.filter((s) => s.type === "daily").map((s) => s.date);
 
   return (
-    <div className="space-y-8">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 px-1">
-        <div>
-          <h1 className="text-xl sm:text-2xl font-bold text-[#1D1D1F] tracking-[-0.02em]">
-            {getGreeting()}{userName ? `, ${userName}` : ""}
-          </h1>
-          {standupTime && (
-            <p className="text-sm text-[#86868B] mt-1">
-              Next standup at{" "}
-              <span className="text-[#FF9500] font-semibold">{standupTime}</span>
-            </p>
-          )}
-        </div>
-        <a href="/standup" className="inline-flex items-center justify-center gap-2 bg-[#1D1D1F] hover:bg-[#333] text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97] shrink-0">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-            <line x1="12" y1="19" x2="12" y2="23" />
-          </svg>
-          Start Standup
-        </a>
+    <div className="space-y-6">
+      <div className="mb-8">
+        <h1 className="text-[28px] font-bold text-[#1D1D1F] tracking-[-0.02em]">
+          {getGreeting()}{userName ? `, ${userName}` : ""}
+        </h1>
+        {standupTime && (
+          <p className="text-[16px] text-[#86868B] mt-1.5">
+            Your standup is scheduled for{" "}
+            <span className="text-[#86868B] font-medium">{standupTime}</span>
+          </p>
+        )}
       </div>
 
       <StatsCards streak={streak} totalCount={totalCount} />
 
-      <Card>
+      <Card className="p-6">
         <WeeklyOverview completedDays={completedDays} />
       </Card>
 

@@ -73,6 +73,24 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
+  // Only Founder tier ($40/mo) can create communities
+  const { data: subscription } = await supabase
+    .from("subscriptions")
+    .select("tier, status")
+    .eq("user_id", user.id)
+    .single();
+
+  if (
+    !subscription ||
+    subscription.tier !== "founder" ||
+    !["active", "trialing"].includes(subscription.status)
+  ) {
+    return NextResponse.json(
+      { error: "Creating communities requires the Founder plan" },
+      { status: 403 }
+    );
+  }
+
   const body = await request.json();
   const { name, description, is_public } = body as {
     name: string;

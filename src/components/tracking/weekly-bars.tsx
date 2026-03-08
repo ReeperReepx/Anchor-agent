@@ -34,9 +34,9 @@ export function WeeklyBars({ weeks }: { weeks: WeekData[] }) {
                   background: isComplete
                     ? "linear-gradient(180deg, #34C759, rgba(52,199,89,0.5))"
                     : pct >= 60
-                      ? "linear-gradient(180deg, var(--accent), rgba(212,137,10,0.4))"
+                      ? "linear-gradient(180deg, var(--accent), rgba(181,115,8,0.4))"
                       : pct > 0
-                        ? "linear-gradient(180deg, rgba(212,137,10,0.5), rgba(212,137,10,0.2))"
+                        ? "linear-gradient(180deg, rgba(181,115,8,0.5), rgba(181,115,8,0.2))"
                         : "transparent",
                 }}
               />

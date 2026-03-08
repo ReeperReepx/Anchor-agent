@@ -73,16 +73,16 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
     return (
       <Card>
         <CardContent className="py-12 text-center">
-          <div className="w-16 h-16 bg-[rgba(255,149,0,0.08)] border border-[rgba(255,149,0,0.15)] rounded-full flex items-center justify-center mx-auto mb-5 shadow-[0_0_24px_rgba(255,149,0,0.08)]">
-            <svg className="w-7 h-7 text-[#FF9500]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="w-16 h-16 bg-[rgba(181,115,8,0.08)] border border-[rgba(181,115,8,0.15)] rounded-full flex items-center justify-center mx-auto mb-5 shadow-[0_0_24px_rgba(181,115,8,0.08)]">
+            <svg className="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <p className="text-[15px] font-semibold text-[#1D1D1F] mb-1">No standups yet</p>
-          <p className="text-sm text-[#86868B] mb-5">Complete your first standup to see it here.</p>
+          <p className="text-[18px] font-semibold text-[#1D1D1F] mb-1">No standups yet</p>
+          <p className="text-[16px] text-[#86868B] mb-5">Complete your first standup to see it here.</p>
           <a
             href="/standup"
-            className="inline-flex items-center gap-2 bg-[#FF9500] hover:bg-[#FFa526] text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(255,149,0,0.3)]"
+            className="inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-white px-5 py-2.5 rounded-xl text-[16px] font-semibold transition-all shadow-[0_2px_12px_rgba(181,115,8,0.3)]"
           >
             Start a standup
           </a>
@@ -108,7 +108,7 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search standups..."
-          className="w-full rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] pl-9 pr-3 py-2.5 text-sm text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#FF9500]/30 focus:border-[#FF9500] focus:bg-white transition-all"
+          className="w-full rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] pl-9 pr-3 py-2.5 text-[16px] text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent focus:bg-white transition-all"
         />
       </div>
 
@@ -122,10 +122,10 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
               onClick={() => setTypeFilter(t)}
               aria-label={`Filter: ${label}`}
               aria-pressed={typeFilter === t}
-              className={`px-4 py-2 rounded-full text-[13px] font-medium transition-all min-h-[36px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9500] ${
+              className={`px-4 py-2 rounded-full text-[16px] font-medium transition-all min-h-[36px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                 typeFilter === t
-                  ? "bg-[#FF9500] text-white border border-[#FF9500] shadow-[0_2px_8px_rgba(255,149,0,0.25)]"
-                  : "bg-white border border-[#E5E5E5] text-[#86868B] hover:border-[#FF9500]/30"
+                  ? "bg-accent text-white border border-accent shadow-[0_2px_8px_rgba(181,115,8,0.25)]"
+                  : "bg-white border border-[#E5E5E5] text-[#86868B] hover:border-accent/30"
               }`}
             >
               {t === "all" ? "All" : t === "daily" ? "Daily" : "Weekly"}
@@ -143,10 +143,10 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
               onClick={() => setTimeFilter(timeFilter === t ? "all" : t)}
               aria-label={`Filter: ${label}`}
               aria-pressed={timeFilter === t}
-              className={`px-4 py-2 rounded-full text-[13px] font-medium transition-all min-h-[36px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9500] ${
+              className={`px-4 py-2 rounded-full text-[16px] font-medium transition-all min-h-[36px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
                 timeFilter === t
-                  ? "bg-[#FF9500] text-white border border-[#FF9500] shadow-[0_2px_8px_rgba(255,149,0,0.25)]"
-                  : "bg-white border border-[#E5E5E5] text-[#86868B] hover:border-[#FF9500]/30"
+                  ? "bg-accent text-white border border-accent shadow-[0_2px_8px_rgba(181,115,8,0.25)]"
+                  : "bg-white border border-[#E5E5E5] text-[#86868B] hover:border-accent/30"
               }`}
             >
               {label}
@@ -159,7 +159,7 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
       {filtered.length === 0 ? (
         <Card>
           <CardContent className="py-10 text-center">
-            <p className="text-sm text-[#86868B]">No standups match your filters.</p>
+            <p className="text-[16px] text-[#86868B]">No standups match your filters.</p>
           </CardContent>
         </Card>
       ) : (
@@ -174,25 +174,25 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
                   onClick={() => toggleExpanded(standup.id)}
                   aria-expanded={isExpanded}
                   aria-label={`${standup.type} standup from ${standup.date}${isExpanded ? ", collapse" : ", expand"}`}
-                  className="w-full text-left px-4 sm:px-6 py-4 hover:bg-[#F5F5F7] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#FF9500]"
+                  className="w-full text-left px-4 sm:px-6 py-4 hover:bg-[#F5F5F7] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
                 >
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2.5">
                       <div
                         className={`w-2 h-2 rounded-full shrink-0 ${
-                          standup.type === "weekly" ? "bg-[#C4900A]" : "bg-[#FF9500]"
+                          standup.type === "weekly" ? "bg-[#C4900A]" : "bg-accent"
                         }`}
                       />
-                      <span className="text-[13px] font-medium text-[#1D1D1F] capitalize">
+                      <span className="text-[16px] font-medium text-[#1D1D1F] capitalize">
                         {standup.type}
                       </span>
-                      <span className="text-[13px] text-[#9CA3AF]">
+                      <span className="text-[16px] text-[#9CA3AF]">
                         {formatRelativeDate(standup.date)}
                       </span>
                     </div>
                     <div className="flex items-center gap-2.5">
                       {standup.duration_seconds && (
-                        <span className="text-[12px] text-[#9CA3AF]">
+                        <span className="text-[14px] text-[#9CA3AF]">
                           {formatDuration(standup.duration_seconds)}
                         </span>
                       )}
@@ -210,24 +210,24 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
                   </div>
 
                   {!isExpanded && standup.done_summary && (
-                    <p className="text-sm text-[#4B5563] line-clamp-2 mb-2">
+                    <p className="text-[16px] text-[#4B5563] line-clamp-2 mb-2">
                       {standup.done_summary}
                     </p>
                   )}
 
                   <div className="flex gap-1.5">
                     {standup.done_summary && (
-                      <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-[rgba(52,199,89,0.08)] text-[#34C759]">
+                      <span className="text-[13px] font-medium px-2 py-0.5 rounded-full bg-[rgba(52,199,89,0.08)] text-[#34C759]">
                         Done
                       </span>
                     )}
                     {standup.planned_summary && (
-                      <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-[rgba(59,111,196,0.08)] text-[#3B6FC4]">
+                      <span className="text-[13px] font-medium px-2 py-0.5 rounded-full bg-[rgba(59,111,196,0.08)] text-[#3B6FC4]">
                         Planned
                       </span>
                     )}
                     {standup.blockers_summary && (
-                      <span className="text-[11px] font-medium px-2 py-0.5 rounded-full bg-[rgba(196,48,48,0.08)] text-[#C43030]">
+                      <span className="text-[13px] font-medium px-2 py-0.5 rounded-full bg-[rgba(196,48,48,0.08)] text-[#C43030]">
                         Blockers
                       </span>
                     )}
@@ -239,24 +239,24 @@ export function HistoryList({ standups }: { standups: Standup[] }) {
                   <div className="px-4 sm:px-6 pb-5 space-y-3 animate-fade-in">
                     {standup.done_summary && (
                       <div className="border-l-2 border-[rgba(52,199,89,0.4)] pl-3 py-1">
-                        <p className="text-[12px] font-semibold text-[#34C759] mb-1">Done</p>
-                        <p className="text-sm text-[#4B5563] leading-relaxed whitespace-pre-line">
+                        <p className="text-[14px] font-semibold text-[#34C759] mb-1">Done</p>
+                        <p className="text-[16px] text-[#4B5563] leading-relaxed whitespace-pre-line">
                           {standup.done_summary}
                         </p>
                       </div>
                     )}
                     {standup.planned_summary && (
                       <div className="border-l-2 border-[rgba(59,111,196,0.4)] pl-3 py-1">
-                        <p className="text-[12px] font-semibold text-[#3B6FC4] mb-1">Planned</p>
-                        <p className="text-sm text-[#4B5563] leading-relaxed whitespace-pre-line">
+                        <p className="text-[14px] font-semibold text-[#3B6FC4] mb-1">Planned</p>
+                        <p className="text-[16px] text-[#4B5563] leading-relaxed whitespace-pre-line">
                           {standup.planned_summary}
                         </p>
                       </div>
                     )}
                     {standup.blockers_summary && (
                       <div className="border-l-2 border-[rgba(196,48,48,0.4)] pl-3 py-1">
-                        <p className="text-[12px] font-semibold text-[#C43030] mb-1">Blockers</p>
-                        <p className="text-sm text-[#4B5563] leading-relaxed whitespace-pre-line">
+                        <p className="text-[14px] font-semibold text-[#C43030] mb-1">Blockers</p>
+                        <p className="text-[16px] text-[#4B5563] leading-relaxed whitespace-pre-line">
                           {standup.blockers_summary}
                         </p>
                       </div>

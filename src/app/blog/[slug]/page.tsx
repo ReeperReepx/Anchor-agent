@@ -125,7 +125,7 @@ export default async function ArticlePage({
             </p>
             <Link
               href="/login"
-              className="inline-flex items-center gap-2 bg-[#0071E3] hover:bg-[#0077ED] text-white px-6 py-3 rounded-[10px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(255,149,0,0.3)]"
+              className="inline-flex items-center gap-2 bg-[#0071E3] hover:bg-[#0077ED] text-white px-6 py-3 rounded-[10px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(181,115,8,0.3)]"
             >
               Start Free Trial
             </Link>

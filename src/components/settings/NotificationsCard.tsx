@@ -32,8 +32,8 @@ export function NotificationsCard() {
           {items.map((item) => (
             <div key={item.key} className="flex items-center justify-between py-3 border-b border-[#E5E5E5] last:border-b-0">
               <div>
-                <div className="text-[13px] font-medium text-[#1D1D1F]">{item.label}</div>
-                <div className="text-[11px] text-[#9CA3AF]">{item.sub}</div>
+                <div className="text-[16px] font-medium text-[#1D1D1F]">{item.label}</div>
+                <div className="text-[13px] text-[#9CA3AF]">{item.sub}</div>
               </div>
               <button
                 type="button"
@@ -41,8 +41,8 @@ export function NotificationsCard() {
                 aria-checked={prefs[item.key]}
                 aria-label={`${item.label}: ${item.sub}`}
                 onClick={() => toggle(item.key)}
-                className={`w-11 h-6 rounded-full transition-colors relative shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9500] focus-visible:ring-offset-2 ${
-                  prefs[item.key] ? "bg-[#FF9500]" : "bg-[#D1D5DB]"
+                className={`w-11 h-6 rounded-full transition-colors relative shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B57308] focus-visible:ring-offset-2 ${
+                  prefs[item.key] ? "bg-[#B57308]" : "bg-[#D1D5DB]"
                 }`}
               >
                 <div className={`absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white shadow-sm transition-transform ${

@@ -50,7 +50,7 @@ export default function BlogPage() {
               href={`/blog/${article.slug}`}
               className="block group"
             >
-              <article className="bg-white rounded-[14px] border border-[#E5E5E5] p-8 transition-all hover:border-[#0071E3]/30 hover:shadow-[0_4px_24px_rgba(255,149,0,0.08)]">
+              <article className="bg-white rounded-[14px] border border-[#E5E5E5] p-8 transition-all hover:border-[#0071E3]/30 hover:shadow-[0_4px_24px_rgba(181,115,8,0.08)]">
                 <div className="flex items-center gap-3 mb-3">
                   <span className="text-[11px] font-semibold text-[#0071E3] uppercase tracking-[1px]">
                     {article.category}

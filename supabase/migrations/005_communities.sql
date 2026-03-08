@@ -39,11 +39,7 @@ create policy "Anyone can view public communities"
 create policy "Members can view private communities"
   on public.communities for select
   using (
-    exists (
-      select 1 from public.community_members
-      where community_id = communities.id
-        and user_id = auth.uid()
-    )
+    id in (select public.get_user_community_ids(auth.uid()))
   );
 
 create policy "Authenticated users can create communities"
@@ -54,17 +50,23 @@ create policy "Creator can update community"
   on public.communities for update
   using (auth.uid() = created_by);
 
+-- Helper function to break RLS recursion on community_members
+create or replace function public.get_user_community_ids(uid uuid)
+returns setof uuid
+language sql
+security definer
+set search_path = ''
+as $$
+  select community_id from public.community_members where user_id = uid;
+$$;
+
 -- RLS: community_members
 alter table public.community_members enable row level security;
 
 create policy "Members can view other members"
   on public.community_members for select
   using (
-    exists (
-      select 1 from public.community_members cm
-      where cm.community_id = community_members.community_id
-        and cm.user_id = auth.uid()
-    )
+    community_id in (select public.get_user_community_ids(auth.uid()))
   );
 
 create policy "Users can join communities"

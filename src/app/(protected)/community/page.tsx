@@ -143,7 +143,7 @@ export default function CommunityPage() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">
+        <h1 className="text-[28px] font-semibold text-[#1D1D1F] tracking-[-0.02em]">
           Communities
         </h1>
         <Button onClick={() => setShowCreate(true)} size="sm">
@@ -152,7 +152,7 @@ export default function CommunityPage() {
       </div>
 
       {error && (
-        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600">
+        <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-[16px] text-red-600">
           {error}
         </div>
       )}
@@ -168,7 +168,7 @@ export default function CommunityPage() {
               <CardContent>
                 <form onSubmit={handleCreate} className="space-y-4">
                   <div>
-                    <label className="block text-[13px] font-medium text-[#1D1D1F] mb-1.5">
+                    <label className="block text-[16px] font-medium text-[#1D1D1F] mb-1.5">
                       Name
                     </label>
                     <input
@@ -179,11 +179,11 @@ export default function CommunityPage() {
                       }
                       placeholder="e.g. Indie Hackers NYC"
                       maxLength={50}
-                      className="w-full rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] px-3.5 py-2.5 text-sm text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#FF9500]/30 focus:border-[#FF9500] focus:bg-white transition-all"
+                      className="w-full rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] px-3.5 py-2.5 text-[16px] text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent focus:bg-white transition-all"
                     />
                   </div>
                   <div>
-                    <label className="block text-[13px] font-medium text-[#1D1D1F] mb-1.5">
+                    <label className="block text-[16px] font-medium text-[#1D1D1F] mb-1.5">
                       Description
                     </label>
                     <textarea
@@ -196,11 +196,11 @@ export default function CommunityPage() {
                       }
                       placeholder="What's this community about?"
                       rows={3}
-                      className="w-full rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] px-3.5 py-2.5 text-sm text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#FF9500]/30 focus:border-[#FF9500] focus:bg-white transition-all resize-none"
+                      className="w-full rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] px-3.5 py-2.5 text-[16px] text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent focus:bg-white transition-all resize-none"
                     />
                   </div>
                   <div className="flex items-center justify-between">
-                    <label className="text-[13px] font-medium text-[#1D1D1F]">
+                    <label className="text-[16px] font-medium text-[#1D1D1F]">
                       Public community
                     </label>
                     <button
@@ -212,7 +212,7 @@ export default function CommunityPage() {
                         }))
                       }
                       className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                        createForm.isPublic ? "bg-[#FF9500]" : "bg-[#E5E5E5]"
+                        createForm.isPublic ? "bg-accent" : "bg-[#E5E5E5]"
                       }`}
                     >
                       <span
@@ -224,7 +224,7 @@ export default function CommunityPage() {
                       />
                     </button>
                   </div>
-                  <p className="text-[12px] text-[#9CA3AF]">
+                  <p className="text-[14px] text-[#9CA3AF]">
                     {createForm.isPublic
                       ? "Anyone can find and join this community."
                       : "Only people with the link can join."}
@@ -259,7 +259,7 @@ export default function CommunityPage() {
       {/* My Communities */}
       {myCommunitiesList.length > 0 && (
         <div className="space-y-3">
-          <h2 className="text-[13px] font-semibold text-[#86868B] uppercase tracking-wider">
+          <h2 className="text-[16px] font-semibold text-[#86868B] uppercase tracking-wider">
             My Communities
           </h2>
           <div className="grid gap-3">
@@ -269,10 +269,10 @@ export default function CommunityPage() {
                   <div className="flex items-start justify-between gap-4">
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <h3 className="text-[15px] font-semibold text-[#1D1D1F] truncate">
+                        <h3 className="text-[18px] font-semibold text-[#1D1D1F] truncate">
                           {community.name}
                         </h3>
-                        <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-[rgba(255,149,0,0.08)] px-2.5 py-0.5 text-[11px] font-medium text-[#FF9500]">
+                        <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-[rgba(181,115,8,0.08)] px-2.5 py-0.5 text-[13px] font-medium text-accent">
                           <svg
                             className="w-3 h-3"
                             fill="none"
@@ -312,7 +312,7 @@ export default function CommunityPage() {
 
       {/* Discover */}
       <div className="space-y-3">
-        <h2 className="text-[13px] font-semibold text-[#86868B] uppercase tracking-wider">
+        <h2 className="text-[16px] font-semibold text-[#86868B] uppercase tracking-wider">
           Discover
         </h2>
         {discoverList.length === 0 ? (
@@ -333,7 +333,7 @@ export default function CommunityPage() {
                   />
                 </svg>
               </div>
-              <h2 className="text-[15px] font-semibold text-[#1D1D1F] mb-2">
+              <h2 className="text-[18px] font-semibold text-[#1D1D1F] mb-2">
                 No communities to discover yet
               </h2>
               <p className="text-sm text-[#86868B] max-w-sm mx-auto">
@@ -350,7 +350,7 @@ export default function CommunityPage() {
                   <div className="flex items-start justify-between gap-4">
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 mb-1">
-                        <h3 className="text-[15px] font-semibold text-[#1D1D1F] truncate">
+                        <h3 className="text-[18px] font-semibold text-[#1D1D1F] truncate">
                           {community.name}
                         </h3>
                         <span className="shrink-0 inline-flex items-center gap-1 rounded-full bg-[#F5F5F7] px-2.5 py-0.5 text-[11px] font-medium text-[#86868B]">

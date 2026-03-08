@@ -34,10 +34,10 @@ export default function PricingPage() {
   return (
     <div className="max-w-4xl mx-auto py-4">
       <div className="text-center mb-10">
-        <h1 className="text-2xl sm:text-3xl font-bold text-[#1D1D1F] tracking-[-0.02em] mb-3">
+        <h1 className="text-[28px] sm:text-[36px] font-bold text-[#1D1D1F] tracking-[-0.02em] mb-3">
           Choose your plan
         </h1>
-        <p className="text-[#86868B] text-sm sm:text-base max-w-md mx-auto">
+        <p className="text-[#86868B] text-[16px] sm:text-[18px] max-w-md mx-auto">
           Every plan starts with a 7-day free trial. Cancel anytime.
         </p>
       </div>
@@ -47,14 +47,14 @@ export default function PricingPage() {
         <div className="relative rounded-xl border border-[#34C759] p-6 sm:p-8 bg-white shadow-[0_4px_32px_rgba(52,199,89,0.08)]">
           <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#34C759] to-[#30D158] rounded-t-[16px]" />
           <div className="flex items-center gap-2 mb-4">
-            <h2 className="text-lg font-semibold text-[#1D1D1F]">Free Trial</h2>
-            <span className="text-[10px] bg-[rgba(52,199,89,0.1)] text-[#34C759] px-2 py-0.5 rounded-full font-semibold uppercase tracking-[0.5px]">
+            <h2 className="text-[22px] font-semibold text-[#1D1D1F]">Free Trial</h2>
+            <span className="text-[12px] bg-[rgba(52,199,89,0.1)] text-[#34C759] px-2 py-0.5 rounded-full font-semibold uppercase tracking-[0.5px]">
               7 days
             </span>
           </div>
           <div className="mb-5">
-            <span className="text-[40px] font-bold text-[#1D1D1F]">$0</span>
-            <span className="text-[#86868B] text-sm">/7 days</span>
+            <span className="text-[48px] font-bold text-[#1D1D1F]">$0</span>
+            <span className="text-[#86868B] text-[16px]">/7 days</span>
           </div>
           <ul className="space-y-2.5 mb-8">
             {[
@@ -64,7 +64,7 @@ export default function PricingPage() {
               "No credit card charged",
               "Cancel anytime",
             ].map((f) => (
-              <li key={f} className="text-sm text-[#4B5563] flex items-start gap-2">
+              <li key={f} className="text-[16px] text-[#4B5563] flex items-start gap-2">
                 <svg className="w-4 h-4 text-[#34C759] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
@@ -81,7 +81,7 @@ export default function PricingPage() {
           >
             {loading === "builder" ? "Redirecting..." : "Start free trial"}
           </Button>
-          <p className="text-center text-[11px] text-[#9CA3AF] mt-3">
+          <p className="text-center text-[13px] text-[#9CA3AF] mt-3">
             Then $20/mo after trial ends
           </p>
         </div>
@@ -89,15 +89,15 @@ export default function PricingPage() {
         {/* Builder */}
         <div className="relative rounded-xl border border-[#E5E5E5] p-6 sm:p-8 bg-white">
           <div className="flex items-center gap-2 mb-4">
-            <h2 className="text-lg font-semibold text-[#1D1D1F]">{builder.name}</h2>
+            <h2 className="text-[22px] font-semibold text-[#1D1D1F]">{builder.name}</h2>
           </div>
           <div className="mb-5">
-            <span className="text-[40px] font-bold text-[#1D1D1F]">${builder.price}</span>
-            <span className="text-[#86868B] text-sm">/month</span>
+            <span className="text-[48px] font-bold text-[#1D1D1F]">${builder.price}</span>
+            <span className="text-[#86868B] text-[16px]">/month</span>
           </div>
           <ul className="space-y-2.5 mb-8">
             {builder.features.map((f) => (
-              <li key={f} className="text-sm text-[#4B5563] flex items-start gap-2">
+              <li key={f} className="text-[16px] text-[#4B5563] flex items-start gap-2">
                 <svg className="w-4 h-4 text-[#34C759] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
@@ -114,27 +114,27 @@ export default function PricingPage() {
           >
             {loading === "builder" ? "Redirecting..." : "Start with Builder"}
           </Button>
-          <p className="text-center text-[11px] text-[#9CA3AF] mt-3">
+          <p className="text-center text-[13px] text-[#9CA3AF] mt-3">
             7-day free trial included
           </p>
         </div>
 
         {/* Founder */}
-        <div className="relative rounded-xl border border-[#FF9500] p-6 sm:p-8 bg-white shadow-[0_4px_32px_rgba(255,149,0,0.12)]">
-          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#FF9500] to-[#FFa526] rounded-t-[16px]" />
+        <div className="relative rounded-xl border border-accent p-6 sm:p-8 bg-white shadow-[0_4px_32px_rgba(181,115,8,0.12)]">
+          <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-accent to-accent-hover rounded-t-[16px]" />
           <div className="flex items-center gap-2 mb-4">
-            <h2 className="text-lg font-semibold text-[#1D1D1F]">{founder.name}</h2>
-            <span className="text-[10px] bg-[rgba(255,149,0,0.1)] text-[#FF9500] px-2 py-0.5 rounded-full font-semibold uppercase tracking-[0.5px]">
+            <h2 className="text-[22px] font-semibold text-[#1D1D1F]">{founder.name}</h2>
+            <span className="text-[12px] bg-[rgba(181,115,8,0.1)] text-accent px-2 py-0.5 rounded-full font-semibold uppercase tracking-[0.5px]">
               Popular
             </span>
           </div>
           <div className="mb-5">
-            <span className="text-[40px] font-bold text-[#1D1D1F]">${founder.price}</span>
-            <span className="text-[#86868B] text-sm">/month</span>
+            <span className="text-[48px] font-bold text-[#1D1D1F]">${founder.price}</span>
+            <span className="text-[#86868B] text-[16px]">/month</span>
           </div>
           <ul className="space-y-2.5 mb-8">
             {founder.features.map((f) => (
-              <li key={f} className="text-sm text-[#4B5563] flex items-start gap-2">
+              <li key={f} className="text-[16px] text-[#4B5563] flex items-start gap-2">
                 <svg className="w-4 h-4 text-[#34C759] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
@@ -151,7 +151,7 @@ export default function PricingPage() {
           >
             {loading === "founder" ? "Redirecting..." : "Start with Founder"}
           </Button>
-          <p className="text-center text-[11px] text-[#9CA3AF] mt-3">
+          <p className="text-center text-[13px] text-[#9CA3AF] mt-3">
             7-day free trial included
           </p>
         </div>

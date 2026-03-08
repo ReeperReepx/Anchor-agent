@@ -144,13 +144,13 @@ export function AppShell({
   return (
     <div className="min-h-screen bg-[#F5F5F7]">
       {/* Desktop sidebar */}
-      <aside className="hidden sm:flex fixed top-0 left-0 bottom-0 w-[220px] flex-col border-r border-[#E5E5E5] bg-gradient-to-b from-white via-white to-[#F5F5F7] z-50">
+      <aside className="hidden sm:flex fixed top-0 left-0 bottom-0 w-[240px] flex-col border-r border-[#E5E5E5] bg-white z-50">
         <div className="px-5 h-16 flex items-center">
           <Link
             href="/dashboard"
-            className="flex items-center gap-2 font-bold text-[#FF9500] text-lg"
+            className="flex items-center gap-2.5 font-bold text-accent text-xl"
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FF9500" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="12" cy="5" r="3" />
               <line x1="12" y1="22" x2="12" y2="8" />
               <path d="M5 12H2a10 10 0 0 0 20 0h-3" />
@@ -166,16 +166,16 @@ export function AppShell({
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-[10px] text-[13px] font-medium transition-colors relative ${
+                className={`flex items-center gap-3 px-3.5 py-3 rounded-xl text-[15px] font-medium transition-colors relative ${
                   isActive
-                    ? "bg-[rgba(255,149,0,0.06)] text-[#1D1D1F]"
+                    ? "bg-accent-subtle text-[#1D1D1F]"
                     : "text-[#86868B] hover:text-[#1D1D1F] hover:bg-[#F5F5F7]"
                 }`}
               >
                 {isActive && (
-                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-[#FF9500] rounded-r-full" />
+                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-accent rounded-r-full" />
                 )}
-                <span className={isActive ? "text-[#FF9500]" : ""}>{item.icon}</span>
+                <span className={isActive ? "text-accent" : ""}>{item.icon}</span>
                 {item.label}
               </Link>
             );
@@ -185,17 +185,17 @@ export function AppShell({
         <div className="px-3 pb-4 space-y-3">
           {/* User info */}
           <div className="flex items-center gap-2.5 px-2">
-            <div className="w-8 h-8 rounded-full bg-[rgba(255,149,0,0.15)] flex items-center justify-center text-[#FF9500] text-[13px] font-semibold shrink-0">
+            <div className="w-10 h-10 rounded-full bg-accent-subtle flex items-center justify-center text-accent text-[15px] font-semibold shrink-0">
               {initials}
             </div>
             <div className="min-w-0">
-              <div className="text-[13px] font-medium text-[#1D1D1F] truncate">{displayName}</div>
+              <div className="text-[15px] font-medium text-[#1D1D1F] truncate">{displayName}</div>
               <SidebarStreak />
             </div>
           </div>
 
           <Link href="/standup" className="block">
-            <button className="w-full flex items-center justify-center gap-2 bg-[#FF9500] hover:bg-[#FFa526] text-white px-4 py-2.5 rounded-[10px] text-sm font-semibold transition-all shadow-[0_2px_12px_rgba(255,149,0,0.3)] hover:shadow-[0_4px_16px_rgba(255,149,0,0.4)] hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97]">
+            <button className="w-full flex items-center justify-center gap-2 bg-accent hover:bg-accent-hover text-white px-4 py-3 rounded-xl text-[15px] font-semibold transition-all shadow-[0_2px_12px_rgba(181,115,8,0.3)] hover:shadow-[0_4px_16px_rgba(181,115,8,0.4)] hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97]">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
                 <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
@@ -206,7 +206,7 @@ export function AppShell({
           </Link>
           <button
             onClick={handleSignOut}
-            className="w-full text-left px-3 py-2 text-[13px] text-[#9CA3AF] hover:text-[#1D1D1F] transition-colors rounded-[10px] hover:bg-[#F5F5F7]"
+            className="w-full text-left px-3.5 py-2.5 text-[15px] text-[#9CA3AF] hover:text-[#1D1D1F] transition-colors rounded-xl hover:bg-[#F5F5F7]"
           >
             Sign out
           </button>
@@ -214,7 +214,7 @@ export function AppShell({
       </aside>
 
       {/* Main content - offset by sidebar width on desktop */}
-      <main className="sm:ml-[220px] px-5 sm:px-10 py-8 pb-24 sm:pb-8 animate-fade-in">{children}</main>
+      <main className="sm:ml-[240px] px-5 sm:px-10 py-8 pb-24 sm:pb-8 animate-fade-in">{children}</main>
 
       {/* Mobile bottom tab bar */}
       <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-[#E5E5E5] z-50">
@@ -227,8 +227,8 @@ export function AppShell({
                 key={item.href}
                 href={item.href}
                 aria-label={item.label}
-                className={`flex flex-col items-center gap-1 min-w-[48px] min-h-[48px] justify-center rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9500] ${
-                  isActive ? "text-[#FF9500]" : "text-[#9CA3AF]"
+                className={`flex flex-col items-center gap-1 min-w-[48px] min-h-[48px] justify-center rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                  isActive ? "text-accent" : "text-[#9CA3AF]"
                 }`}
               >
                 {item.icon}
@@ -241,7 +241,7 @@ export function AppShell({
           <Link
             href="/standup"
             aria-label="Start standup"
-            className="flex items-center justify-center w-[52px] h-[52px] -mt-6 rounded-full bg-[#FF9500] text-white shadow-[0_4px_20px_rgba(255,149,0,0.35)] active:scale-95 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9500] focus-visible:ring-offset-2"
+            className="flex items-center justify-center w-[52px] h-[52px] -mt-6 rounded-full bg-accent text-white shadow-[0_4px_20px_rgba(181,115,8,0.35)] active:scale-95 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
@@ -258,8 +258,8 @@ export function AppShell({
                 key={item.href}
                 href={item.href}
                 aria-label={item.label}
-                className={`flex flex-col items-center gap-1 min-w-[48px] min-h-[48px] justify-center rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF9500] ${
-                  isActive ? "text-[#FF9500]" : "text-[#9CA3AF]"
+                className={`flex flex-col items-center gap-1 min-w-[48px] min-h-[48px] justify-center rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${
+                  isActive ? "text-accent" : "text-[#9CA3AF]"
                 }`}
               >
                 {item.icon}

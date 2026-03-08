@@ -111,22 +111,22 @@ export function WeeklyOverview({ completedDays }: WeeklyOverviewProps) {
 
   return (
     <div>
-      {/* Header: big score + completion count */}
-      <div className="flex items-baseline justify-between mb-3">
-        <div className="flex items-baseline gap-1.5">
-          <span className="text-[28px] font-extrabold text-[#FF9500] leading-none tracking-tight">
-            {avgPercent !== null ? `${avgPercent}%` : "--"}
+      {/* Header: title left, percentage right */}
+      <div className="flex items-center justify-between mb-5">
+        <div className="flex items-baseline gap-2.5">
+          <span className="text-[17px] font-semibold text-[#1D1D1F]">Weekly Overview</span>
+          <span className="text-[14px] text-[#86868B]">
+            Last 5 days &middot; <span className="font-bold text-[#1D1D1F]">{completedCount}</span> completed
           </span>
-          <span className="text-[12px] text-[#86868B] font-medium">productivity</span>
         </div>
-        <span className="text-[12px] text-[#86868B]">
-          Last 5 days &middot; <span className="font-bold text-[#1D1D1F]">{completedCount}</span> completed
+        <span className="text-[25px] font-bold text-accent">
+          {avgPercent !== null ? `${avgPercent}%` : "--"}
         </span>
       </div>
 
       {/* Sparkline chart */}
       <div className="relative mb-2">
-        <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-16" preserveAspectRatio="none">
+        <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-20" preserveAspectRatio="none">
           {/* Subtle grid lines */}
           <line x1={PAD_X} y1={PAD_TOP} x2={W - PAD_X} y2={PAD_TOP} stroke="#F5F5F7" strokeWidth="1" />
           <line x1={PAD_X} y1={PAD_TOP + usableH / 2} x2={W - PAD_X} y2={PAD_TOP + usableH / 2} stroke="#F5F5F7" strokeWidth="1" />
@@ -142,7 +142,7 @@ export function WeeklyOverview({ completedDays }: WeeklyOverviewProps) {
             <polyline
               points={linePath}
               fill="none"
-              stroke="#FF9500"
+              stroke="var(--accent)"
               strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -152,8 +152,8 @@ export function WeeklyOverview({ completedDays }: WeeklyOverviewProps) {
           {/* Gradient def */}
           <defs>
             <linearGradient id="sparkGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#FF9500" stopOpacity="0.12" />
-              <stop offset="100%" stopColor="#FF9500" stopOpacity="0" />
+              <stop offset="0%" stopColor="var(--accent)" stopOpacity="0.12" />
+              <stop offset="100%" stopColor="var(--accent)" stopOpacity="0" />
             </linearGradient>
           </defs>
 
@@ -165,7 +165,7 @@ export function WeeklyOverview({ completedDays }: WeeklyOverviewProps) {
               cy={p.y}
               r={p.isToday ? "5" : "4"}
               fill="white"
-              stroke="#FF9500"
+              stroke="var(--accent)"
               strokeWidth={p.isToday ? "2.5" : "2"}
             />
           ))}
@@ -177,7 +177,7 @@ export function WeeklyOverview({ completedDays }: WeeklyOverviewProps) {
               <line
                 key={d.dateStr}
                 x1={x} y1={H - 1} x2={x} y2={H - 4}
-                stroke={d.isCompleted ? "#FF9500" : d.isToday ? "#FF9500" : "#E5E5E5"}
+                stroke={d.isCompleted ? "var(--accent)" : d.isToday ? "var(--accent)" : "#E5E5E5"}
                 strokeWidth="1.5"
                 strokeLinecap="round"
               />
@@ -190,15 +190,15 @@ export function WeeklyOverview({ completedDays }: WeeklyOverviewProps) {
       <div className="flex justify-between px-1">
         {dayData.map((d) => (
           <div key={d.dateStr} className="flex flex-col items-center gap-0.5">
-            <span className={`text-[10px] font-semibold ${
-              d.isToday ? "text-[#FF9500]" : d.isCompleted ? "text-[#1D1D1F]" : "text-[#CACACA]"
+            <span className={`text-[12px] font-semibold ${
+              d.isToday ? "text-accent" : d.isCompleted ? "text-[#1D1D1F]" : "text-[#CACACA]"
             }`}>
               {d.label}
             </span>
-            <span className={`text-[10px] font-medium ${
+            <span className={`text-[12px] font-medium ${
               d.pct !== null && d.pct >= 80 ? "text-[#34C759]" :
-              d.pct !== null ? "text-[#FF9500]" :
-              d.isToday ? "text-[#FF9500]" :
+              d.pct !== null ? "text-accent" :
+              d.isToday ? "text-accent" :
               "text-[#E0E0E0]"
             }`}>
               {d.isToday && d.pct === null ? "now" : d.pct !== null ? `${d.pct}%` : "--"}

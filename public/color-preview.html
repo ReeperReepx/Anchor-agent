@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal Orange Preview — Anchor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: #1D1D1F; color: #1D1D1F; }
+
+    .option-section {
+      padding: 40px 0;
+      border-bottom: 4px solid #333;
+    }
+    .option-label {
+      text-align: center;
+      color: #fff;
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .option-hex {
+      text-align: center;
+      color: #86868B;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+    .option-hex span {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    /* Dashboard mock */
+    .dashboard-frame {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      background: #F5F5F7;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+      min-height: 520px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 200px;
+      background: #fff;
+      border-right: 1px solid #E5E5E5;
+      display: flex;
+      flex-direction: column;
+      padding: 20px 0;
+      flex-shrink: 0;
+    }
+    .sidebar-logo {
+      padding: 0 16px;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sidebar-logo .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .nav-item {
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #86868B;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-left: 3px solid transparent;
+    }
+    .nav-item.active {
+      border-left-color: var(--accent);
+      background: var(--accent-subtle);
+      color: #1D1D1F;
+      font-weight: 600;
+    }
+    .nav-icon {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      background: #E5E5E5;
+    }
+    .nav-item.active .nav-icon {
+      background: var(--accent);
+      opacity: 0.3;
+    }
+    .sidebar-bottom {
+      margin-top: auto;
+      padding: 16px;
+    }
+    .sidebar-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .sidebar-cta {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Main content */
+    .main {
+      flex: 1;
+      padding: 28px 32px;
+      overflow: hidden;
+    }
+    .greeting {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .greeting-sub {
+      font-size: 13px;
+      color: #86868B;
+      margin-bottom: 24px;
+    }
+
+    /* Stats row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .stat-card {
+      background: #fff;
+      border: 1px solid #E5E5E5;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    .stat-label {
+      font-size: 11px;
+      color: #86868B;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+    .stat-value {
+      font-size: 24px;
+      font-weight: 700;
+    }
+    .stat-sub {
+      font-size: 11px;
+      color: #86868B;
+      margin-top: 2px;
+    }
+
+    /* Weekly overview */
+    .weekly-card {
+      background: #fff;
+      border: 1px solid #E5E5E5;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .weekly-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .weekly-title {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .weekly-pct {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .sparkline {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 60px;
+    }
+    .spark-bar {
+      flex: 1;
+      border-radius: 4px 4px 0 0;
+      min-height: 8px;
+    }
+    .spark-labels {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .spark-label {
+      flex: 1;
+      text-align: center;
+      font-size: 10px;
+      color: #86868B;
+    }
+
+    /* Recent standups */
+    .recent-card {
+      background: #fff;
+      border: 1px solid #E5E5E5;
+      border-radius: 12px;
+      padding: 20px;
+    }
+    .recent-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+    .standup-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #F0F0F0;
+    }
+    .standup-item:last-child { border-bottom: none; }
+    .standup-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .standup-text {
+      flex: 1;
+      font-size: 13px;
+      color: #1D1D1F;
+    }
+    .standup-badge {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 5px;
+    }
+    .standup-score {
+      width: 60px;
+      height: 6px;
+      background: #F0F0F0;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .standup-score-fill {
+      height: 100%;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+
+<script>
+const options = [
+  { name: "Current (Landing Page)", hex: "#FF9500", hover: "#FFa526", pressed: "#D97F00" },
+  { name: "Option 1 — Slightly Darker", hex: "#E68A00", hover: "#F09A1A", pressed: "#C07300" },
+  { name: "Option 2 — Muted Amber", hex: "#D4890A", hover: "#E09A20", pressed: "#B57308" },
+  { name: "Option 3 — Warm Subdued", hex: "#CC8400", hover: "#DA9418", pressed: "#AD7000" },
+  { name: "Option 4 — Golden", hex: "#B87A00", hover: "#C98A14", pressed: "#9D6800" },
+  { name: "Option 5 — Soft Brown-Orange", hex: "#C47F17", hover: "#D48F27", pressed: "#A66B0F" },
+  { name: "Option 6 — Sandy Desaturated", hex: "#D98B2B", hover: "#E49B3B", pressed: "#BC7720" },
+];
+
+const days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+const heights = [75, 50, 90, 60, 40];
+const standups = [
+  { text: "Finished auth flow, started dashboard layout", score: 85 },
+  { text: "Refactored API routes, fixed RLS policies", score: 72 },
+  { text: "Community feature — join/leave working", score: 90 },
+];
+
+options.forEach((opt, i) => {
+  const subtle = opt.hex.replace('#', '');
+  const r = parseInt(subtle.substr(0,2), 16);
+  const g = parseInt(subtle.substr(2,2), 16);
+  const b = parseInt(subtle.substr(4,2), 16);
+  const subtleRgba = `rgba(${r},${g},${b},0.1)`;
+
+  const section = document.createElement('div');
+  section.className = 'option-section';
+  section.innerHTML = `
+    <div class="option-label">${i === 0 ? '⚡ ' : ''}${opt.name}</div>
+    <div class="option-hex"><span style="background:${opt.hex}"></span>${opt.hex}</div>
+    <div class="dashboard-frame" style="--accent:${opt.hex};--accent-hover:${opt.hover};--accent-pressed:${opt.pressed};--accent-subtle:${subtleRgba};">
+      <div class="sidebar">
+        <div class="sidebar-logo">
+          <div class="dot" style="background:${opt.hex}"></div>
+          Anchor
+        </div>
+        <div class="nav-item active" style="border-left-color:${opt.hex};background:${subtleRgba};">
+          <div class="nav-icon" style="background:${opt.hex};opacity:0.3;"></div>
+          Dashboard
+        </div>
+        <div class="nav-item"><div class="nav-icon"></div>Partner</div>
+        <div class="nav-item"><div class="nav-icon"></div>Community</div>
+        <div class="nav-item"><div class="nav-icon"></div>Tracking</div>
+        <div class="nav-item"><div class="nav-icon"></div>Summaries</div>
+        <div class="nav-item"><div class="nav-icon"></div>History</div>
+        <div class="nav-item"><div class="nav-icon"></div>Settings</div>
+        <div class="sidebar-bottom">
+          <div class="sidebar-avatar" style="background:${opt.hex};">PK</div>
+          <button class="sidebar-cta" style="background:${opt.hex};">Start Standup</button>
+        </div>
+      </div>
+      <div class="main">
+        <div class="greeting">Good morning, Preet</div>
+        <div class="greeting-sub">Your standup is scheduled for 9:00 AM</div>
+        <div class="stats-row">
+          <div class="stat-card">
+            <div class="stat-label">Current Streak 🔥</div>
+            <div class="stat-value" style="color:${opt.hex};">12</div>
+            <div class="stat-sub">days</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Longest Streak</div>
+            <div class="stat-value">24</div>
+            <div class="stat-sub">days</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Total Standups</div>
+            <div class="stat-value">87</div>
+            <div class="stat-sub">completed</div>
+          </div>
+        </div>
+        <div class="weekly-card">
+          <div class="weekly-header">
+            <div class="weekly-title">Weekly Overview</div>
+            <div class="weekly-pct" style="color:${opt.hex};">78%</div>
+          </div>
+          <div class="sparkline">
+            ${heights.map(h => `<div class="spark-bar" style="height:${h}%;background:${opt.hex};opacity:${h > 60 ? 1 : 0.5};"></div>`).join('')}
+          </div>
+          <div class="spark-labels">
+            ${days.map(d => `<div class="spark-label">${d}</div>`).join('')}
+          </div>
+        </div>
+        <div class="recent-card">
+          <div class="recent-title">Recent Standups</div>
+          ${standups.map(s => `
+            <div class="standup-item">
+              <div class="standup-dot" style="background:${opt.hex};"></div>
+              <div class="standup-text">${s.text}</div>
+              <div class="standup-badge" style="background:${subtleRgba};color:${opt.hex};">Daily</div>
+              <div class="standup-score">
+                <div class="standup-score-fill" style="width:${s.score}%;background:${opt.hex};"></div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(section);
+});
+</script>
+
+</body>
+</html>

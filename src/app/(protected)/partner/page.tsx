@@ -80,7 +80,7 @@ export default function PartnerPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Collaborative Standups</h1>
+        <h1 className="text-[28px] font-semibold text-[#1D1D1F] tracking-[-0.02em]">Collaborative Standups</h1>
         <RotationBadge daysLeft={daysLeft} />
       </div>
 
@@ -89,13 +89,13 @@ export default function PartnerPage() {
           <CardHeader>
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-[rgba(255,149,0,0.15)] flex items-center justify-center text-[#FF9500] text-sm font-semibold shrink-0">
+                <div className="w-8 h-8 rounded-full bg-[rgba(181,115,8,0.15)] flex items-center justify-center text-accent text-[16px] font-semibold shrink-0">
                   P
                 </div>
                 <CardTitle>Your partner&apos;s standup</CardTitle>
                 <Badge variant="info">{partnerStandup.type}</Badge>
               </div>
-              <div className="flex items-center gap-3 text-sm text-[#86868B] pl-10 sm:pl-0">
+              <div className="flex items-center gap-3 text-[16px] text-[#86868B] pl-10 sm:pl-0">
                 {partnerStandup.duration_seconds && (
                   <span>
                     {formatDuration(partnerStandup.duration_seconds)}
@@ -127,7 +127,7 @@ export default function PartnerPage() {
 
 function RotationBadge({ daysLeft }: { daysLeft: number }) {
   return (
-    <div className="flex items-center gap-2 text-sm text-[#86868B]">
+    <div className="flex items-center gap-2 text-[16px] text-[#86868B]">
       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
       </svg>
@@ -179,12 +179,12 @@ function JoinQueueView() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold text-[#1D1D1F] tracking-[-0.02em]">Collaborative Standups</h1>
+      <h1 className="text-[28px] font-semibold text-[#1D1D1F] tracking-[-0.02em]">Collaborative Standups</h1>
       <Card>
         <CardContent className="py-12 text-center">
-          <div className="w-16 h-16 bg-[rgba(255,149,0,0.08)] border border-[rgba(255,149,0,0.15)] rounded-full flex items-center justify-center mx-auto mb-5 shadow-[0_0_24px_rgba(255,149,0,0.08)]">
+          <div className="w-16 h-16 bg-[rgba(181,115,8,0.08)] border border-[rgba(181,115,8,0.15)] rounded-full flex items-center justify-center mx-auto mb-5 shadow-[0_0_24px_rgba(181,115,8,0.08)]">
             <svg
-              className="w-7 h-7 text-[#FF9500]"
+              className="w-7 h-7 text-accent"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -200,27 +200,27 @@ function JoinQueueView() {
 
           {joined ? (
             <>
-              <h2 className="text-[15px] font-semibold text-[#1D1D1F] mb-2">
+              <h2 className="text-[18px] font-semibold text-[#1D1D1F] mb-2">
                 You&apos;re in the queue!
               </h2>
-              <p className="text-[#86868B] text-sm mb-2 max-w-sm mx-auto">
+              <p className="text-[#86868B] text-[16px] mb-2 max-w-sm mx-auto">
                 We&apos;ll match you with another solopreneur for collaborative standups on{" "}
                 <span className="font-medium text-[#1D1D1F]">{selectedDays.join(", ")}</span>.
               </p>
-              <p className="text-[12px] text-[#9CA3AF]">You&apos;ll be notified when your match is ready.</p>
+              <p className="text-[14px] text-[#9CA3AF]">You&apos;ll be notified when your match is ready.</p>
             </>
           ) : (
             <>
-              <h2 className="text-[15px] font-semibold text-[#1D1D1F] mb-2">
+              <h2 className="text-[18px] font-semibold text-[#1D1D1F] mb-2">
                 Join a collaborative standup
               </h2>
-              <p className="text-[#86868B] text-sm mb-6 max-w-sm mx-auto">
+              <p className="text-[#86868B] text-[16px] mb-6 max-w-sm mx-auto">
                 Get matched with another solopreneur for joint standup sessions.
                 You&apos;ll each do your standup separately, then see each other&apos;s summaries.
               </p>
 
               <div className="mb-6">
-                <p className="text-[13px] font-medium text-[#1D1D1F] mb-3">
+                <p className="text-[16px] font-medium text-[#1D1D1F] mb-3">
                   Which days do you want joint sessions?
                 </p>
                 <div className="flex items-center justify-center gap-2">
@@ -228,9 +228,9 @@ function JoinQueueView() {
                     <button
                       key={day}
                       onClick={() => toggleDay(day)}
-                      className={`w-12 h-12 rounded-xl text-sm font-semibold transition-all ${
+                      className={`w-12 h-12 rounded-xl text-[16px] font-semibold transition-all ${
                         selectedDays.includes(day)
-                          ? "bg-[#FF9500] text-white shadow-[0_2px_8px_rgba(255,149,0,0.3)]"
+                          ? "bg-accent text-white shadow-[0_2px_8px_rgba(181,115,8,0.3)]"
                           : "bg-[#F5F5F7] text-[#86868B] hover:bg-[#EEEEEF]"
                       }`}
                     >
@@ -240,9 +240,9 @@ function JoinQueueView() {
                 </div>
               </div>
 
-              <p className="text-[12px] text-[#9CA3AF] mb-6">Partners see each other&apos;s standup summaries, never recordings.</p>
+              <p className="text-[14px] text-[#9CA3AF] mb-6">Partners see each other&apos;s standup summaries, never recordings.</p>
               {error && (
-                <p className="text-[13px] text-red-500 mb-4">{error}</p>
+                <p className="text-[16px] text-red-500 mb-4">{error}</p>
               )}
               <Button onClick={handleJoin} disabled={selectedDays.length === 0 || joining}>
                 {joining ? "Joining..." : "Join the queue"}
@@ -274,7 +274,7 @@ function ChatThread({
       <CardContent>
         <div className="space-y-3 mb-4 max-h-[300px] overflow-y-auto">
           {chat.length === 0 ? (
-            <p className="text-sm text-[#9CA3AF]">
+            <p className="text-[16px] text-[#9CA3AF]">
               No messages yet. Say something about their standup.
             </p>
           ) : (
@@ -286,13 +286,13 @@ function ChatThread({
                 <div
                   className={`max-w-[75%] rounded-[12px] px-4 py-2.5 ${
                     msg.from === "you"
-                      ? "bg-[#FF9500] text-white"
+                      ? "bg-accent text-white"
                       : "bg-[#F0F0F0] text-[#1D1D1F]"
                   }`}
                 >
-                  <p className="text-sm">{msg.text}</p>
+                  <p className="text-[16px]">{msg.text}</p>
                   <p
-                    className={`text-[11px] mt-1 ${
+                    className={`text-[13px] mt-1 ${
                       msg.from === "you" ? "text-white/60" : "text-[#9CA3AF]"
                     }`}
                   >
@@ -315,7 +315,7 @@ function ChatThread({
             }}
             placeholder="Write a message... (Ctrl+Enter to send)"
             aria-label="Message to partner"
-            className="flex-1 rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] px-3.5 py-2.5 text-sm text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#FF9500]/30 focus:border-[#FF9500] focus:bg-white transition-all"
+            className="flex-1 rounded-xl border border-[#E5E5E5] bg-[#FAFAFA] px-3.5 py-2.5 text-[16px] text-[#1D1D1F] placeholder-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent focus:bg-white transition-all"
           />
           <Button type="submit" size="md">
             Send

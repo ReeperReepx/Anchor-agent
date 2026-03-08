@@ -153,7 +153,7 @@ export default async function TrackingPage() {
         <Card>
           <CardContent>
             <div className="flex items-center gap-5">
-              <RingGauge percentage={weekPct} color="#D4890A">
+              <RingGauge percentage={weekPct} color="#B57308">
                 <span className="text-[16px] font-bold text-[#1D1D1F]">{weekPct}%</span>
               </RingGauge>
               <div>
