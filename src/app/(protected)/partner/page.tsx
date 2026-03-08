@@ -143,6 +143,8 @@ const WEEKDAYS = ["Mon", "Tue", "Wed", "Thu", "Fri"] as const;
 function JoinQueueView() {
   const [selectedDays, setSelectedDays] = useState<string[]>([]);
   const [joined, setJoined] = useState(false);
+  const [joining, setJoining] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   function toggleDay(day: string) {
     setSelectedDays((prev) =>
@@ -150,10 +152,29 @@ function JoinQueueView() {
     );
   }
 
-  function handleJoin() {
+  async function handleJoin() {
     if (selectedDays.length === 0) return;
-    // TODO: POST to /api/partner/join with selectedDays
-    setJoined(true);
+    setJoining(true);
+    setError(null);
+
+    try {
+      const res = await fetch("/api/partner/join", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ days: selectedDays }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Failed to join queue");
+      }
+
+      setJoined(true);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Something went wrong");
+    } finally {
+      setJoining(false);
+    }
   }
 
   return (
@@ -220,8 +241,11 @@ function JoinQueueView() {
               </div>
 
               <p className="text-[12px] text-[#9CA3AF] mb-6">Partners see each other&apos;s standup summaries, never recordings.</p>
-              <Button onClick={handleJoin} disabled={selectedDays.length === 0}>
-                Join the queue
+              {error && (
+                <p className="text-[13px] text-red-500 mb-4">{error}</p>
+              )}
+              <Button onClick={handleJoin} disabled={selectedDays.length === 0 || joining}>
+                {joining ? "Joining..." : "Join the queue"}
               </Button>
             </>
           )}

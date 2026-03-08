@@ -92,6 +92,16 @@ export interface Subscription {
   current_period_end: string | null;
 }
 
+export type PartnerQueueStatus = "waiting" | "matched" | "canceled";
+
+export interface PartnerQueue {
+  id: string;
+  user_id: string;
+  selected_days: string[];
+  joined_at: string;
+  status: PartnerQueueStatus;
+}
+
 export interface Database {
   public: {
     Tables: {
@@ -134,6 +144,11 @@ export interface Database {
         Row: Subscription;
         Insert: Omit<Subscription, "id">;
         Update: Partial<Omit<Subscription, "id">>;
+      };
+      partner_queue: {
+        Row: PartnerQueue;
+        Insert: Omit<PartnerQueue, "id">;
+        Update: Partial<Omit<PartnerQueue, "id">>;
       };
     };
   };
