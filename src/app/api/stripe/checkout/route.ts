@@ -51,10 +51,18 @@ export async function POST(request: Request) {
 
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || new URL(request.url).origin;
 
-  // Apply March promo coupon if active and env var is set
+  // Apply March promo coupon if active, env var is set, and slots remain
   const promoCouponId = process.env.STRIPE_MARCH_COUPON_ID;
   const promoEnd = new Date("2026-04-01T00:00:00Z");
-  const promoActive = promoCouponId && new Date() < promoEnd;
+  let promoActive = promoCouponId && new Date() < promoEnd;
+
+  if (promoActive) {
+    const { count } = await supabase
+      .from("subscriptions")
+      .select("*", { count: "exact", head: true })
+      .in("status", ["active", "trialing"]);
+    if ((count ?? 0) >= 10) promoActive = false;
+  }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const sessionParams: any = {

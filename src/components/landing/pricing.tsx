@@ -14,32 +14,18 @@ const DISCOUNTED: Record<PlanKey, { monthly: number; annual: number }> = {
   founder: { monthly: 10, annual: 100 },
 };
 
-function getTimeLeft(target: Date) {
-  const diff = target.getTime() - Date.now();
-  if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0, expired: true };
-  return {
-    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-    minutes: Math.floor((diff / (1000 * 60)) % 60),
-    seconds: Math.floor((diff / 1000) % 60),
-    expired: false,
-  };
-}
-
-function pad(n: number) {
-  return String(n).padStart(2, "0");
-}
-
 export function Pricing() {
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft(PROMO_END));
   const [interval, setInterval] = useState<"monthly" | "annual">("monthly");
+  const [slotsLeft, setSlotsLeft] = useState<number | null>(null);
 
   useEffect(() => {
-    const timer = window.setInterval(() => setTimeLeft(getTimeLeft(PROMO_END)), 1000);
-    return () => window.clearInterval(timer);
+    fetch("/api/promo-slots")
+      .then((r) => r.json())
+      .then((data) => setSlotsLeft(data.remaining))
+      .catch(() => setSlotsLeft(0));
   }, []);
 
-  const promoActive = !timeLeft.expired;
+  const promoActive = slotsLeft !== null && slotsLeft > 0 && new Date() < PROMO_END;
 
   function getPrice(key: PlanKey) {
     const original = PLANS[key].price;
@@ -51,7 +37,7 @@ export function Pricing() {
         strikethrough: promoActive ? `$${Math.round(annualPrice / 12)}` : null,
         sub: promoActive
           ? `$${discounted}/yr`
-          : `$${annualPrice}/yr (save 2 months)`,
+          : `$${annualPrice}/yr (save 16%)`,
       };
     }
     return {
@@ -105,7 +91,7 @@ export function Pricing() {
                 >
                   Annual
                   <span className="text-[10px] font-bold text-[#30D158] bg-[rgba(48,209,88,0.15)] px-1.5 py-0.5 rounded-full">
-                    Save 2mo
+                    Save 16%
                   </span>
                 </button>
               </div>
@@ -135,8 +121,11 @@ export function Pricing() {
                       {promoActive && (
                         <div className="absolute -top-3 left-6 inline-flex items-center gap-2 bg-[#FF3B30] text-white text-[10px] font-semibold uppercase tracking-wider pl-3 pr-2 py-1 rounded-full">
                           <span>75% off — March Launch</span>
-                          <span className="inline-flex items-center gap-0.5 bg-[rgba(0,0,0,0.2)] rounded-full px-2 py-0.5 text-[10px] font-bold tabular-nums tracking-normal normal-case">
-                            {pad(timeLeft.days)}d {pad(timeLeft.hours)}h {pad(timeLeft.minutes)}m
+                          <span className="inline-flex items-center gap-1 bg-[rgba(0,0,0,0.2)] rounded-full px-2 py-0.5 text-[10px] font-bold tracking-normal normal-case">
+                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            {slotsLeft} left
                           </span>
                         </div>
                       )}
