@@ -16,16 +16,18 @@ const DISCOUNTED: Record<PlanKey, { monthly: number; annual: number }> = {
 
 export function Pricing() {
   const [interval, setInterval] = useState<"monthly" | "annual">("monthly");
-  const [slotsLeft, setSlotsLeft] = useState<number | null>(null);
+  const [slotsLeft, setSlotsLeft] = useState<number>(10);
 
   useEffect(() => {
     fetch("/api/promo-slots")
       .then((r) => r.json())
-      .then((data) => setSlotsLeft(data.remaining))
-      .catch(() => setSlotsLeft(0));
+      .then((data) => {
+        if (typeof data.remaining === "number") setSlotsLeft(data.remaining);
+      })
+      .catch(() => {/* keep default of 10 */});
   }, []);
 
-  const promoActive = slotsLeft !== null && slotsLeft > 0 && new Date() < PROMO_END;
+  const promoActive = slotsLeft > 0 && new Date() < PROMO_END;
 
   function getPrice(key: PlanKey) {
     const original = PLANS[key].price;
