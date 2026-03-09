@@ -133,8 +133,11 @@ export function Pricing() {
                         </div>
                       )}
                       {promoActive && (
-                        <div className="absolute -top-2.5 left-6 bg-[#FF3B30] text-white text-[10px] font-semibold uppercase tracking-wider px-3 py-0.5 rounded-full">
-                          75% off — March Launch
+                        <div className="absolute -top-3 left-6 inline-flex items-center gap-2 bg-[#FF3B30] text-white text-[10px] font-semibold uppercase tracking-wider pl-3 pr-2 py-1 rounded-full">
+                          <span>75% off — March Launch</span>
+                          <span className="inline-flex items-center gap-0.5 bg-[rgba(0,0,0,0.2)] rounded-full px-2 py-0.5 text-[10px] font-bold tabular-nums tracking-normal normal-case">
+                            {pad(timeLeft.days)}d {pad(timeLeft.hours)}h {pad(timeLeft.minutes)}m
+                          </span>
                         </div>
                       )}
                       <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
@@ -148,7 +151,7 @@ export function Pricing() {
                             </span>
                             <span className="text-[#86868b] text-sm">/mo</span>
                             {price.strikethrough && (
-                              <span className="ml-2 text-[16px] text-[#9CA3AF] line-through">
+                              <span className="ml-2 text-[22px] text-[#9CA3AF] line-through">
                                 {price.strikethrough}
                               </span>
                             )}
@@ -175,7 +178,7 @@ export function Pricing() {
                           </ul>
                         </div>
 
-                        <div className="shrink-0 w-full sm:w-auto flex flex-col items-center sm:items-end gap-2">
+                        <div className="shrink-0 w-full sm:w-auto">
                           <Link href="/login">
                             <Button
                               className={`rounded-full px-6 py-2.5 text-[13px] font-semibold w-full sm:w-auto min-h-[44px] ${
@@ -188,16 +191,6 @@ export function Pricing() {
                               Start now
                             </Button>
                           </Link>
-                          {promoActive && (
-                            <div className="inline-flex items-center gap-1 bg-[rgba(255,59,48,0.06)] border border-[rgba(255,59,48,0.12)] rounded-lg px-2.5 py-1">
-                              <span className="text-[10px] font-bold text-[#FF6961] uppercase tracking-[0.3px] mr-0.5">Ends</span>
-                              <span className="text-[13px] font-bold text-[#FF6961] tabular-nums bg-[rgba(255,59,48,0.06)] rounded px-1 min-w-[22px] text-center">{pad(timeLeft.days)}</span>
-                              <span className="text-[11px] font-bold text-[#FF6961] opacity-40">:</span>
-                              <span className="text-[13px] font-bold text-[#FF6961] tabular-nums bg-[rgba(255,59,48,0.06)] rounded px-1 min-w-[22px] text-center">{pad(timeLeft.hours)}</span>
-                              <span className="text-[11px] font-bold text-[#FF6961] opacity-40">:</span>
-                              <span className="text-[13px] font-bold text-[#FF6961] tabular-nums bg-[rgba(255,59,48,0.06)] rounded px-1 min-w-[22px] text-center">{pad(timeLeft.minutes)}</span>
-                            </div>
-                          )}
                         </div>
                       </div>
                     </div>
