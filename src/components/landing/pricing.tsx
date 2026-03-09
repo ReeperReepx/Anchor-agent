@@ -64,50 +64,6 @@ export function Pricing() {
   return (
     <section id="pricing" className="px-5 sm:px-10 py-16 sm:py-24 bg-[#000000]">
       <div className="max-w-[1200px] mx-auto">
-        {/* Promo countdown */}
-        {promoActive && (
-          <ScrollReveal>
-            <div className="mb-10 rounded-2xl border border-[#333] bg-[#111] p-5 sm:p-6">
-              <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
-                <div className="flex-1 text-center sm:text-left">
-                  <div className="flex items-center justify-center sm:justify-start gap-2 mb-1">
-                    <span className="inline-flex items-center gap-1.5 text-[13px] font-bold text-black bg-[#FFD60A] px-3 py-1 rounded-full uppercase tracking-[0.5px]">
-                      <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
-                      75% off
-                    </span>
-                    <span className="text-[13px] font-semibold text-[#FFD60A]">March Launch Special</span>
-                  </div>
-                  <p className="text-[14px] text-[#86868b]">
-                    Lock in 75% off your subscription. Ends March 31st.
-                  </p>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  {[
-                    { value: timeLeft.days, label: "days" },
-                    { value: timeLeft.hours, label: "hrs" },
-                    { value: timeLeft.minutes, label: "min" },
-                    { value: timeLeft.seconds, label: "sec" },
-                  ].map((unit, i) => (
-                    <div key={unit.label} className="flex items-center gap-1.5">
-                      <div className="flex flex-col items-center">
-                        <span className="text-[20px] sm:text-[24px] font-bold text-white tabular-nums leading-none bg-[#1d1d1f] border border-[#333] rounded-lg px-2 py-1.5 min-w-[44px] text-center">
-                          {pad(unit.value)}
-                        </span>
-                        <span className="text-[9px] font-medium text-[#86868b] mt-1 uppercase tracking-wider">
-                          {unit.label}
-                        </span>
-                      </div>
-                      {i < 3 && <span className="text-[18px] font-bold text-[#555] mb-3.5">:</span>}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </ScrollReveal>
-        )}
-
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:gap-[5vw] items-start">
           {/* Left — heading (2 cols) */}
           <div className="md:col-span-2">
@@ -120,21 +76,21 @@ export function Pricing() {
                 <br />
                 pricing.
               </h2>
-              <p className="text-[#86868b] text-base mt-3 leading-relaxed max-w-[300px]">
+              <p className="text-white text-base mt-3 leading-relaxed max-w-[300px]">
                 Start with a 7-day free trial. Cancel anytime. No credit card charged until trial ends.
               </p>
-              <p className="text-[#86868b] text-sm mt-4">
+              <p className="text-[#ccc] text-sm mt-4">
                 Both plans include daily voice standups, transcripts, and accountability.
               </p>
 
               {/* Billing toggle */}
-              <div className="mt-6 inline-flex items-center bg-[#1d1d1f] rounded-xl p-1 border border-[#333]">
+              <div className="mt-6 inline-flex items-center bg-[#F2F1EF] rounded-xl p-1 border border-[#E5E5E5]">
                 <button
                   onClick={() => setInterval("monthly")}
                   className={`px-4 py-1.5 rounded-lg text-[13px] font-semibold transition-all ${
                     interval === "monthly"
-                      ? "bg-[#333] text-white"
-                      : "text-[#86868b] hover:text-white"
+                      ? "bg-white text-[#1d1d1f] shadow-sm"
+                      : "text-[#86868b] hover:text-[#1d1d1f]"
                   }`}
                 >
                   Monthly
@@ -143,8 +99,8 @@ export function Pricing() {
                   onClick={() => setInterval("annual")}
                   className={`px-4 py-1.5 rounded-lg text-[13px] font-semibold transition-all flex items-center gap-1.5 ${
                     interval === "annual"
-                      ? "bg-[#333] text-white"
-                      : "text-[#86868b] hover:text-white"
+                      ? "bg-white text-[#1d1d1f] shadow-sm"
+                      : "text-[#86868b] hover:text-[#1d1d1f]"
                   }`}
                 >
                   Annual
@@ -167,8 +123,8 @@ export function Pricing() {
                     <div
                       className={`relative rounded-2xl p-6 sm:p-8 ${
                         isPremium
-                          ? "bg-white ring-1 ring-[#0071E3]/40"
-                          : "bg-white ring-1 ring-[#e5e5e5]"
+                          ? "bg-[#F2F1EF] ring-1 ring-[#0071E3]/40"
+                          : "bg-[#F2F1EF] ring-1 ring-[#e5e5e5]"
                       }`}
                     >
                       {isPremium && (
@@ -178,7 +134,7 @@ export function Pricing() {
                       )}
                       {promoActive && (
                         <div className="absolute -top-2.5 left-6 bg-[#FF3B30] text-white text-[10px] font-semibold uppercase tracking-wider px-3 py-0.5 rounded-full">
-                          75% off
+                          75% off — March Launch
                         </div>
                       )}
                       <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
@@ -219,7 +175,7 @@ export function Pricing() {
                           </ul>
                         </div>
 
-                        <div className="shrink-0 w-full sm:w-auto">
+                        <div className="shrink-0 w-full sm:w-auto flex flex-col items-center sm:items-end gap-2">
                           <Link href="/login">
                             <Button
                               className={`rounded-full px-6 py-2.5 text-[13px] font-semibold w-full sm:w-auto min-h-[44px] ${
@@ -232,6 +188,16 @@ export function Pricing() {
                               Start now
                             </Button>
                           </Link>
+                          {promoActive && (
+                            <div className="inline-flex items-center gap-1 bg-[rgba(255,59,48,0.06)] border border-[rgba(255,59,48,0.12)] rounded-lg px-2.5 py-1">
+                              <span className="text-[10px] font-bold text-[#FF6961] uppercase tracking-[0.3px] mr-0.5">Ends</span>
+                              <span className="text-[13px] font-bold text-[#FF6961] tabular-nums bg-[rgba(255,59,48,0.06)] rounded px-1 min-w-[22px] text-center">{pad(timeLeft.days)}</span>
+                              <span className="text-[11px] font-bold text-[#FF6961] opacity-40">:</span>
+                              <span className="text-[13px] font-bold text-[#FF6961] tabular-nums bg-[rgba(255,59,48,0.06)] rounded px-1 min-w-[22px] text-center">{pad(timeLeft.hours)}</span>
+                              <span className="text-[11px] font-bold text-[#FF6961] opacity-40">:</span>
+                              <span className="text-[13px] font-bold text-[#FF6961] tabular-nums bg-[rgba(255,59,48,0.06)] rounded px-1 min-w-[22px] text-center">{pad(timeLeft.minutes)}</span>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
