@@ -35,7 +35,7 @@ function getTimeLeft(target: Date) {
 
 const PROMO_END = new Date("2026-04-01T00:00:00Z");
 
-// 75% off actual prices shown as "50% off"
+// 75% off actual prices shown as "75% off"
 const DISCOUNTED = {
   builder: { monthly: 5, annual: 50 },
   founder: { monthly: 10, annual: 100 },
@@ -123,12 +123,12 @@ export default function PricingPage() {
                   <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
-                  50% off
+                  75% off
                 </span>
                 <span className="text-[13px] font-semibold text-accent">March Launch Special</span>
               </div>
               <p className="text-[14px] text-[#86868B]">
-                Lock in 50% off your first subscription. Offer ends March 31st.
+                Lock in 75% off your first subscription. Offer ends March 31st.
               </p>
             </div>
 
@@ -244,7 +244,7 @@ export default function PricingPage() {
           {promoActive && (
             <div className="absolute -top-3 right-4">
               <span className="inline-flex items-center gap-1 text-[11px] font-bold text-white bg-[#FF3B30] px-2.5 py-1 rounded-full uppercase tracking-[0.5px] shadow-sm">
-                50% off
+                75% off
               </span>
             </div>
           )}
@@ -295,7 +295,7 @@ export default function PricingPage() {
           {promoActive && (
             <div className="absolute -top-3 right-4">
               <span className="inline-flex items-center gap-1 text-[11px] font-bold text-white bg-[#FF3B30] px-2.5 py-1 rounded-full uppercase tracking-[0.5px] shadow-sm">
-                50% off
+                75% off
               </span>
             </div>
           )}

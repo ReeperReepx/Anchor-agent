@@ -75,12 +75,12 @@ export function Pricing() {
                       <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                       </svg>
-                      50% off
+                      75% off
                     </span>
                     <span className="text-[13px] font-semibold text-[#FFD60A]">March Launch Special</span>
                   </div>
                   <p className="text-[14px] text-[#86868b]">
-                    Lock in 50% off your subscription. Ends March 31st.
+                    Lock in 75% off your subscription. Ends March 31st.
                   </p>
                 </div>
                 <div className="flex items-center gap-1.5">
@@ -178,7 +178,7 @@ export function Pricing() {
                       )}
                       {promoActive && (
                         <div className="absolute -top-2.5 left-6 bg-[#FF3B30] text-white text-[10px] font-semibold uppercase tracking-wider px-3 py-0.5 rounded-full">
-                          50% off
+                          75% off
                         </div>
                       )}
                       <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
