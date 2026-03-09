@@ -40,6 +40,7 @@ export const PLANS = {
     name: "Builder",
     price: 20,
     priceId: process.env.STRIPE_BUILDER_PRICE_ID || "",
+    annualPriceId: process.env.STRIPE_BUILDER_ANNUAL_PRICE_ID || "",
     features: [
       "30 daily standups/month (10 min each)",
       "AI-generated summaries",
@@ -52,6 +53,7 @@ export const PLANS = {
     name: "Founder",
     price: 40,
     priceId: process.env.STRIPE_FOUNDER_PRICE_ID || "",
+    annualPriceId: process.env.STRIPE_FOUNDER_ANNUAL_PRICE_ID || "",
     features: [
       "Everything in Builder",
       "60 daily standups/month (15 min each)",
@@ -63,3 +65,4 @@ export const PLANS = {
 } as const;
 
 export type PlanKey = keyof typeof PLANS;
+export type BillingInterval = "monthly" | "annual";
