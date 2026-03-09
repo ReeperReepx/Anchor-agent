@@ -5,34 +5,6 @@ import { Button } from "@/components/ui/button";
 import { PLANS } from "@/lib/stripe";
 import type { PlanKey } from "@/lib/stripe";
 
-function useCountdown(targetDate: Date) {
-  const [timeLeft, setTimeLeft] = useState(getTimeLeft(targetDate));
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(getTimeLeft(targetDate));
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [targetDate]);
-
-  return timeLeft;
-}
-
-function getTimeLeft(target: Date) {
-  const now = new Date();
-  const diff = target.getTime() - now.getTime();
-
-  if (diff <= 0) return { days: 0, hours: 0, minutes: 0, seconds: 0, expired: true };
-
-  return {
-    days: Math.floor(diff / (1000 * 60 * 60 * 24)),
-    hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
-    minutes: Math.floor((diff / (1000 * 60)) % 60),
-    seconds: Math.floor((diff / 1000) % 60),
-    expired: false,
-  };
-}
-
 const PROMO_END = new Date("2026-04-01T00:00:00Z");
 
 // 75% off actual prices shown as "75% off"
@@ -41,17 +13,21 @@ const DISCOUNTED = {
   founder: { monthly: 10, annual: 100 },
 } as const;
 
-// Annual = 10 months cost (save 2 months)
-const ANNUAL = {
-  builder: { full: 200, price: 200 },    // $20 × 10
-  founder: { full: 400, price: 400 },    // $40 × 10
-} as const;
-
 export default function PricingPage() {
   const [loading, setLoading] = useState<string | null>(null);
   const [interval, setInterval] = useState<"monthly" | "annual">("monthly");
-  const countdown = useCountdown(PROMO_END);
-  const promoActive = !countdown.expired;
+  const [slotsLeft, setSlotsLeft] = useState<number>(10);
+
+  useEffect(() => {
+    fetch("/api/promo-slots")
+      .then((r) => r.json())
+      .then((data) => {
+        if (typeof data.remaining === "number") setSlotsLeft(data.remaining);
+      })
+      .catch(() => {/* keep default */});
+  }, []);
+
+  const promoActive = slotsLeft > 0 && new Date() < PROMO_END;
 
   async function handleCheckout(plan: PlanKey) {
     setLoading(plan);
@@ -106,10 +82,6 @@ export default function PricingPage() {
   const builderPrice = getPrice("builder");
   const founderPrice = getPrice("founder");
 
-  function pad(n: number) {
-    return String(n).padStart(2, "0");
-  }
-
   return (
     <div className="max-w-4xl mx-auto py-4">
       {/* Promo Banner */}
@@ -125,35 +97,19 @@ export default function PricingPage() {
                   </svg>
                   75% off
                 </span>
-                <span className="text-[13px] font-semibold text-accent">March Launch Special</span>
+                <span className="text-[13px] font-semibold text-accent">Launch discount</span>
               </div>
               <p className="text-[14px] text-[#86868B]">
-                Lock in 75% off your first subscription. Offer ends March 31st.
+                Lock in 75% off your subscription. Only <strong className="text-[#1D1D1F]">{slotsLeft} spots</strong> left at this price.
               </p>
             </div>
 
-            {/* Countdown */}
-            <div className="flex items-center gap-1.5 sm:gap-2">
-              {[
-                { value: countdown.days, label: "days" },
-                { value: countdown.hours, label: "hrs" },
-                { value: countdown.minutes, label: "min" },
-                { value: countdown.seconds, label: "sec" },
-              ].map((unit, i) => (
-                <div key={unit.label} className="flex items-center gap-1.5 sm:gap-2">
-                  <div className="flex flex-col items-center">
-                    <span className="text-[22px] sm:text-[26px] font-bold text-[#1D1D1F] tabular-nums leading-none bg-white border border-[#E5E5E5] rounded-lg px-2.5 py-2 min-w-[48px] sm:min-w-[54px] text-center shadow-sm">
-                      {pad(unit.value)}
-                    </span>
-                    <span className="text-[10px] font-medium text-[#86868B] mt-1 uppercase tracking-wider">
-                      {unit.label}
-                    </span>
-                  </div>
-                  {i < 3 && (
-                    <span className="text-[20px] font-bold text-[#86868B] mb-4">:</span>
-                  )}
-                </div>
-              ))}
+            <div className="flex items-center gap-2 bg-white border border-[#E5E5E5] rounded-xl px-4 py-3 shadow-sm">
+              <svg className="w-5 h-5 text-[#FF3B30]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <span className="text-[22px] font-bold text-[#1D1D1F] tabular-nums">{slotsLeft}</span>
+              <span className="text-[13px] font-medium text-[#86868B]">spots left</span>
             </div>
           </div>
         </div>
@@ -189,7 +145,7 @@ export default function PricingPage() {
           >
             Annual
             <span className="text-[11px] font-bold text-[#34C759] bg-[rgba(52,199,89,0.1)] px-1.5 py-0.5 rounded-full">
-              Save 2mo
+              Save 16%
             </span>
           </button>
         </div>

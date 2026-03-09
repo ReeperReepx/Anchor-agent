@@ -20,8 +20,8 @@ export const PLAN_LIMITS = {
     weeklyMaxMinutes: 0,
   },
   founder: {
-    dailyStandupsPerMonth: 60,
-    dailyMaxMinutes: 15,
+    dailyStandupsPerMonth: 30,
+    dailyMaxMinutes: 10,
     weeklyEnabled: true,
     weeklyMaxMinutes: 45,
   },
@@ -56,7 +56,6 @@ export const PLANS = {
     annualPriceId: process.env.STRIPE_FOUNDER_ANNUAL_PRICE_ID || "",
     features: [
       "Everything in Builder",
-      "60 daily standups/month (15 min each)",
       "Weekly planning sessions (45 min)",
       "Monthly deep-dive summaries",
       "Priority partner matching",
