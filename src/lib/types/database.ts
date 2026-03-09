@@ -121,6 +121,15 @@ export interface CommunityMember {
   joined_at: string;
 }
 
+export interface CommunityMessage {
+  id: string;
+  community_id: string;
+  user_id: string;
+  body: string;
+  created_at: string;
+  user_name?: string;
+}
+
 export interface Database {
   public: {
     Tables: {
@@ -178,6 +187,11 @@ export interface Database {
         Row: CommunityMember;
         Insert: Omit<CommunityMember, "id">;
         Update: Partial<Omit<CommunityMember, "id">>;
+      };
+      community_messages: {
+        Row: CommunityMessage;
+        Insert: Omit<CommunityMessage, "id" | "created_at">;
+        Update: Partial<Omit<CommunityMessage, "id" | "created_at">>;
       };
     };
   };
