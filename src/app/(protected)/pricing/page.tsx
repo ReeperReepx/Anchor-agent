@@ -39,9 +39,17 @@ export default function PricingPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ plan, interval }),
       });
-      const data = await res.json();
-      if (data.error) {
-        setError(data.error);
+      const text = await res.text();
+      let data: { url?: string; error?: string };
+      try {
+        data = JSON.parse(text);
+      } catch {
+        setError(`Server returned ${res.status}: ${text.slice(0, 200)}`);
+        setLoading(null);
+        return;
+      }
+      if (!res.ok || data.error) {
+        setError(`Checkout failed (${res.status}): ${data.error || text.slice(0, 200)}`);
         setLoading(null);
         return;
       }
@@ -54,9 +62,9 @@ export default function PricingPage() {
           }
         } catch { /* invalid URL */ }
       }
-      setError("Failed to create checkout session. Please try again.");
-    } catch {
-      setError("Something went wrong. Please try again.");
+      setError("Failed to create checkout session — no valid URL returned.");
+    } catch (e) {
+      setError(`Network error: ${e instanceof Error ? e.message : "unknown"}`);
     }
     setLoading(null);
   }
