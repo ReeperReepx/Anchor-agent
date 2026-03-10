@@ -1,30 +1,62 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { PLANS } from "@/lib/stripe";
 import type { PlanKey } from "@/lib/stripe";
 
+const PROMO_END = new Date("2026-04-01T00:00:00Z");
+
+// 75% off actual prices
+const DISCOUNTED = {
+  builder: { monthly: 5, annual: 50 },
+  founder: { monthly: 10, annual: 100 },
+} as const;
+
 export default function PricingPage() {
   const [loading, setLoading] = useState<string | null>(null);
   const [interval, setInterval] = useState<"monthly" | "annual">("monthly");
+  const [slotsLeft, setSlotsLeft] = useState<number>(10);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch("/api/promo-slots")
+      .then((r) => r.json())
+      .then((data) => {
+        if (typeof data.remaining === "number") setSlotsLeft(data.remaining);
+      })
+      .catch(() => {/* keep default */});
+  }, []);
+
+  const promoActive = slotsLeft > 0 && new Date() < PROMO_END;
 
   async function handleCheckout(plan: PlanKey) {
     setLoading(plan);
-    const res = await fetch("/api/stripe/checkout", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ plan, interval }),
-    });
-    const data = await res.json();
-    if (data.url && typeof data.url === "string") {
-      try {
-        const parsed = new URL(data.url);
-        if (parsed.hostname.endsWith("stripe.com")) {
-          window.location.href = data.url;
-          return;
-        }
-      } catch { /* invalid URL */ }
+    setError(null);
+    try {
+      const res = await fetch("/api/stripe/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan, interval }),
+      });
+      const data = await res.json();
+      if (data.error) {
+        setError(data.error);
+        setLoading(null);
+        return;
+      }
+      if (data.url && typeof data.url === "string") {
+        try {
+          const parsed = new URL(data.url);
+          if (parsed.hostname.endsWith("stripe.com")) {
+            window.location.href = data.url;
+            return;
+          }
+        } catch { /* invalid URL */ }
+      }
+      setError("Failed to create checkout session. Please try again.");
+    } catch {
+      setError("Something went wrong. Please try again.");
     }
     setLoading(null);
   }
@@ -35,15 +67,21 @@ export default function PricingPage() {
   function getPrice(plan: "builder" | "founder") {
     const original = PLANS[plan].price;
     if (interval === "annual") {
+      const annualFull = original * 12;
       const annualPrice = original * 10; // save 2 months
+      const discountedAnnual = promoActive ? DISCOUNTED[plan].annual : annualPrice;
       return {
-        display: Math.round(annualPrice / 12),
-        billedLabel: `$${annualPrice}/yr (save $${original * 12 - annualPrice})`,
+        display: promoActive ? Math.round(discountedAnnual / 12) : Math.round(annualPrice / 12),
+        billedLabel: promoActive
+          ? `$${discountedAnnual}/yr (save $${annualFull - discountedAnnual})`
+          : `$${annualPrice}/yr (save $${annualFull - annualPrice})`,
+        strikethrough: promoActive ? `$${Math.round(annualPrice / 12)}` : null,
       };
     }
     return {
-      display: original,
+      display: promoActive ? DISCOUNTED[plan].monthly : original,
       billedLabel: null,
+      strikethrough: promoActive ? `$${original}/mo` : null,
     };
   }
 
@@ -87,6 +125,13 @@ export default function PricingPage() {
           </button>
         </div>
       </div>
+
+      {/* Error message */}
+      {error && (
+        <div className="mb-6 rounded-xl border border-[#EF4444]/20 bg-[rgba(239,68,68,0.06)] p-4 text-center">
+          <p className="text-[14px] text-[#EF4444] font-medium">{error}</p>
+        </div>
+      )}
 
       {/* Feedback deal */}
       <div className="mb-8 rounded-2xl border border-[#5B5FC7]/20 bg-gradient-to-r from-[rgba(91,95,199,0.06)] via-white to-[rgba(91,95,199,0.06)] p-5 sm:p-6 relative overflow-hidden">
@@ -168,12 +213,24 @@ export default function PricingPage() {
 
         {/* Builder */}
         <div className="relative rounded-xl border border-[#E5E5E5] p-6 sm:p-8 bg-white">
+          {promoActive && (
+            <div className="absolute -top-3 right-4">
+              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-white bg-[#FF3B30] px-2.5 py-1 rounded-full uppercase tracking-[0.5px] shadow-sm">
+                75% off
+              </span>
+            </div>
+          )}
           <div className="flex items-center gap-2 mb-4">
             <h2 className="text-[22px] font-semibold text-[#1D1D1F]">{builder.name}</h2>
           </div>
           <div className="mb-5">
             <span className="text-[48px] font-bold text-[#1D1D1F]">${builderPrice.display}</span>
             <span className="text-[#86868B] text-[16px]">/month</span>
+            {builderPrice.strikethrough && (
+              <span className="block text-[18px] text-[#9CA3AF] line-through mt-0.5">
+                {builderPrice.strikethrough}
+              </span>
+            )}
             {builderPrice.billedLabel && (
               <span className="block text-[13px] text-[#34C759] font-medium mt-1">
                 {builderPrice.billedLabel}
@@ -207,6 +264,13 @@ export default function PricingPage() {
         {/* Founder */}
         <div className="relative rounded-xl border border-accent p-6 sm:p-8 bg-white shadow-[0_4px_32px_rgba(181,115,8,0.12)]">
           <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-accent to-accent-hover rounded-t-[16px]" />
+          {promoActive && (
+            <div className="absolute -top-3 right-4">
+              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-white bg-[#FF3B30] px-2.5 py-1 rounded-full uppercase tracking-[0.5px] shadow-sm">
+                75% off
+              </span>
+            </div>
+          )}
           <div className="flex items-center gap-2 mb-4">
             <h2 className="text-[22px] font-semibold text-[#1D1D1F]">{founder.name}</h2>
             <span className="text-[12px] bg-[rgba(181,115,8,0.1)] text-accent px-2 py-0.5 rounded-full font-semibold uppercase tracking-[0.5px]">
@@ -216,6 +280,11 @@ export default function PricingPage() {
           <div className="mb-5">
             <span className="text-[48px] font-bold text-[#1D1D1F]">${founderPrice.display}</span>
             <span className="text-[#86868B] text-[16px]">/month</span>
+            {founderPrice.strikethrough && (
+              <span className="block text-[18px] text-[#9CA3AF] line-through mt-0.5">
+                {founderPrice.strikethrough}
+              </span>
+            )}
             {founderPrice.billedLabel && (
               <span className="block text-[13px] text-[#34C759] font-medium mt-1">
                 {founderPrice.billedLabel}
