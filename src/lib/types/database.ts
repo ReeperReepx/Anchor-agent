@@ -14,6 +14,7 @@ export interface User {
   goal_categories: string[];
   preference: UserPreference | null;
   accountability_style: AccountabilityStyle | null;
+  pain_points: string[];
   onboarded_at: string | null;
   created_at: string;
 }

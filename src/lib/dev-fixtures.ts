@@ -110,6 +110,7 @@ export const DEV_PROFILE: User = {
   goal_categories: ["shipping", "fitness", "reading"],
   preference: "both",
   accountability_style: "direct",
+  pain_points: ["no-accountability", "losing-momentum"],
   onboarded_at: "2026-02-15T10:00:00Z",
   created_at: "2026-02-15T10:00:00Z",
 };
