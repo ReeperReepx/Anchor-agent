@@ -145,7 +145,8 @@ export default function PricingPage() {
         {/* 3 months free for feedback */}
         <div className="relative rounded-xl border border-[#5B5FC7]/30 p-6 bg-white shadow-[0_4px_32px_rgba(91,95,199,0.08)] flex flex-col">
           <div className="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-[#5B5FC7] to-[#8385D3] rounded-t-[16px]" />
-          <h2 className="text-[20px] sm:text-[22px] font-semibold text-[#1D1D1F] mb-4">3 Months Free</h2>
+          <h2 className="text-[20px] sm:text-[22px] font-semibold text-[#1D1D1F] mb-1">3 Months Free</h2>
+          <p className="text-[13px] text-[#86868B] mb-4">Share your honest feedback, get full access free for 3 months.</p>
           <div className="mb-5 h-[72px] flex items-end">
             <div>
               <span className="text-[42px] sm:text-[48px] font-bold text-[#1D1D1F] leading-none">$0</span>
@@ -196,7 +197,8 @@ export default function PricingPage() {
               </span>
             </div>
           )}
-          <h2 className="text-[20px] sm:text-[22px] font-semibold text-[#1D1D1F] mb-4">{builder.name}</h2>
+          <h2 className="text-[20px] sm:text-[22px] font-semibold text-[#1D1D1F] mb-1">{builder.name}</h2>
+          <p className="text-[13px] text-[#86868B] mb-4">Daily voice standups, AI summaries, and accountability partner matching.</p>
           <div className="mb-5 h-[72px] flex items-end">
             <div>
               <span className="text-[42px] sm:text-[48px] font-bold text-[#1D1D1F] leading-none">${builderPrice.display}</span>
@@ -255,6 +257,7 @@ export default function PricingPage() {
               Popular
             </span>
           </div>
+          <p className="text-[13px] text-[#86868B] mb-4">Everything in Builder, plus weekly planning sessions and monthly deep-dives.</p>
           <div className="mb-5 h-[72px] flex items-end">
             <div>
               <span className="text-[42px] sm:text-[48px] font-bold text-[#1D1D1F] leading-none">${founderPrice.display}</span>
