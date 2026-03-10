@@ -37,12 +37,25 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Stripe secret key not configured" }, { status: 500 });
     }
 
-    // Check if user already has a Stripe customer ID
-    const { data: existingSub } = await supabase
-      .from("subscriptions")
-      .select("stripe_customer_id")
-      .eq("user_id", user.id)
-      .single();
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL || new URL(request.url).origin;
+    const promoCouponId = process.env.STRIPE_MARCH_COUPON_ID;
+    const promoEnd = new Date("2026-04-01T00:00:00Z");
+    const maybePromo = promoCouponId && new Date() < promoEnd;
+
+    // Run independent queries in parallel
+    const [{ data: existingSub }, promoSlots] = await Promise.all([
+      supabase
+        .from("subscriptions")
+        .select("stripe_customer_id")
+        .eq("user_id", user.id)
+        .single(),
+      maybePromo
+        ? supabase
+            .from("subscriptions")
+            .select("*", { count: "exact", head: true })
+            .in("status", ["active", "trialing"])
+        : Promise.resolve({ count: null }),
+    ]);
 
     let customerId = existingSub?.stripe_customer_id;
 
@@ -54,20 +67,7 @@ export async function POST(request: Request) {
       customerId = customer.id;
     }
 
-    const appUrl = process.env.NEXT_PUBLIC_APP_URL || new URL(request.url).origin;
-
-    // Apply March promo coupon if active, env var is set, and slots remain
-    const promoCouponId = process.env.STRIPE_MARCH_COUPON_ID;
-    const promoEnd = new Date("2026-04-01T00:00:00Z");
-    let promoActive = promoCouponId && new Date() < promoEnd;
-
-    if (promoActive) {
-      const { count } = await supabase
-        .from("subscriptions")
-        .select("*", { count: "exact", head: true })
-        .in("status", ["active", "trialing"]);
-      if ((count ?? 0) >= 10) promoActive = false;
-    }
+    const promoActive = maybePromo && ((promoSlots.count ?? 0) < 10);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const sessionParams: any = {
