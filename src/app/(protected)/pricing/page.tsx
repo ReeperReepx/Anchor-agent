@@ -97,7 +97,7 @@ export default function PricingPage() {
   const founderPrice = getPrice("founder");
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-6 sm:py-8">
+    <div className="max-w-5xl mx-auto px-4 py-6 sm:py-8">
       <div className="text-center mb-8">
         <h1 className="text-[26px] sm:text-[36px] font-bold text-[#1D1D1F] tracking-[-0.02em] mb-3">
           Choose your plan
