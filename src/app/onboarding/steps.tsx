@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { RadioCard } from "./radio-card";
 import type { OnboardingData } from "./types";
-import { GOAL_OPTIONS, ACCOUNTABILITY_STYLES, INPUT_CLASSES } from "./types";
+import { GOAL_OPTIONS, ACCOUNTABILITY_STYLES, PAIN_POINT_OPTIONS, INPUT_CLASSES } from "./types";
 import type { UserPreference } from "@/lib/types/database";
 
 interface StepProps {
@@ -60,6 +60,128 @@ export function StepName({ data, setData, next, canProceed }: StepProps & { canP
         className={INPUT_CLASSES}
         onKeyDown={(e) => e.key === "Enter" && canProceed && next()}
       />
+    </div>
+  );
+}
+
+export function StepPainPoints({ data, setData }: StepProps) {
+  function togglePain(id: string) {
+    setData({
+      ...data,
+      pain_points: data.pain_points.includes(id)
+        ? data.pain_points.filter((p) => p !== id)
+        : [...data.pain_points, id],
+    });
+  }
+
+  return (
+    <div>
+      <h2 className="text-2xl font-bold text-[#1D1D1F] mb-2">
+        What&apos;s getting in your way?
+      </h2>
+      <p className="text-[#86868B] text-sm mb-8">
+        Pick everything that resonates. No wrong answers.
+      </p>
+      <div className="space-y-3">
+        {PAIN_POINT_OPTIONS.map((opt) => {
+          const selected = data.pain_points.includes(opt.id);
+          return (
+            <button
+              key={opt.id}
+              onClick={() => togglePain(opt.id)}
+              className={`w-full text-left px-5 py-4 rounded-[12px] border transition-all ${
+                selected
+                  ? "border-[#FF9500] bg-[rgba(255,149,0,0.08)] shadow-[0_0_0_3px_rgba(255,149,0,0.08)]"
+                  : "border-[#E5E5E5] bg-white hover:border-[#FF9500]/30 hover:bg-[#FAFAFA]"
+              }`}
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className={`text-sm font-semibold ${selected ? "text-[#1D1D1F]" : "text-[#4B5563]"}`}>
+                    {opt.label}
+                  </div>
+                  <div className="text-[13px] text-[#86868B] mt-0.5">{opt.desc}</div>
+                </div>
+                <div
+                  className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${
+                    selected ? "border-[#FF9500] bg-[#FF9500]" : "border-[#E5E5E5]"
+                  }`}
+                >
+                  {selected && (
+                    <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                    </svg>
+                  )}
+                </div>
+              </div>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+const VALUE_PROPS = [
+  {
+    icon: (
+      <svg className="w-6 h-6 text-[#FF9500]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+      </svg>
+    ),
+    title: "5 minutes. 3 questions. Every day.",
+    desc: "A short voice standup that forces clarity on what actually matters today.",
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-[#FF9500]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+      </svg>
+    ),
+    title: "An AI that actually remembers.",
+    desc: "Tracks your goals, calls out patterns, and won't let you off the hook.",
+  },
+  {
+    icon: (
+      <svg className="w-6 h-6 text-[#FF9500]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
+    title: "Accountability without the awkwardness.",
+    desc: "Optional partner matching — someone sees your standup. No calls, no scheduling.",
+  },
+];
+
+export function StepHowItWorks({ next }: { next: () => void }) {
+  return (
+    <div>
+      <h2 className="text-2xl font-bold text-[#1D1D1F] mb-2">
+        Here&apos;s how Anchor fixes that
+      </h2>
+      <p className="text-[#86868B] text-sm mb-8">
+        Built for people who work alone but don&apos;t want to lose their edge.
+      </p>
+      <div className="space-y-4">
+        {VALUE_PROPS.map((prop) => (
+          <div
+            key={prop.title}
+            className="flex gap-4 p-4 rounded-[12px] border border-[#E5E5E5] bg-white"
+          >
+            <div className="w-10 h-10 rounded-full bg-[rgba(255,149,0,0.08)] flex items-center justify-center shrink-0">
+              {prop.icon}
+            </div>
+            <div>
+              <div className="text-sm font-semibold text-[#1D1D1F]">{prop.title}</div>
+              <div className="text-[13px] text-[#86868B] mt-0.5">{prop.desc}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="mt-10 text-center">
+        <Button size="lg" onClick={next}>
+          Got it — let&apos;s set up
+        </Button>
+      </div>
     </div>
   );
 }
@@ -213,6 +335,41 @@ export function StepAccountability({ data, setData }: StepProps) {
           />
         ))}
       </div>
+    </div>
+  );
+}
+
+export function StepCommitment({
+  data,
+  next,
+}: {
+  data: OnboardingData;
+  next: () => void;
+}) {
+  const topPain = PAIN_POINT_OPTIONS.find((p) => p.id === data.pain_points[0]);
+
+  return (
+    <div className="text-center">
+      <div className="w-16 h-16 bg-[rgba(255,149,0,0.08)] border border-[rgba(255,149,0,0.15)] rounded-full flex items-center justify-center mx-auto mb-6 shadow-[0_0_24px_rgba(255,149,0,0.08)]">
+        <svg className="w-7 h-7 text-[#FF9500]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      </div>
+      <h2 className="text-[24px] font-bold text-[#1D1D1F] mb-4 leading-snug">
+        {data.name}, you said{" "}
+        <span className="text-[#FF9500]">
+          {topPain ? topPain.label.toLowerCase() : "staying consistent"}
+        </span>{" "}
+        is holding you back.
+      </h2>
+      <p className="text-[#86868B] text-base mb-10 max-w-sm mx-auto leading-relaxed">
+        Starting tomorrow at{" "}
+        <span className="text-[#1D1D1F] font-medium">{data.standup_time}</span>,
+        Anchor will be there every day to make sure that changes.
+      </p>
+      <Button size="lg" onClick={next}>
+        I&apos;m in
+      </Button>
     </div>
   );
 }

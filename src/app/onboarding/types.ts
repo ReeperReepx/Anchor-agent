@@ -7,7 +7,16 @@ export interface OnboardingData {
   goal_categories: string[];
   preference: UserPreference;
   accountability_style: string;
+  pain_points: string[];
 }
+
+export const PAIN_POINT_OPTIONS = [
+  { id: "no-accountability", label: "No accountability", desc: "nobody to answer to" },
+  { id: "losing-momentum", label: "Losing momentum", desc: "start strong, fizzle out" },
+  { id: "working-alone", label: "Working alone", desc: "no team, no check-ins" },
+  { id: "no-structure", label: "No structure", desc: "days blur together" },
+  { id: "cant-see-progress", label: "Can't see progress", desc: "unsure if I'm moving forward" },
+];
 
 export const GOAL_OPTIONS = [
   "SaaS",

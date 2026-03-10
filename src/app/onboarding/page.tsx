@@ -8,14 +8,17 @@ import type { OnboardingData } from "./types";
 import {
   StepWelcome,
   StepName,
+  StepPainPoints,
+  StepHowItWorks,
   StepSchedule,
   StepGoals,
   StepPreference,
   StepAccountability,
+  StepCommitment,
   StepComplete,
 } from "./steps";
 
-const TOTAL_STEPS = 6;
+const TOTAL_STEPS = 9;
 
 export default function OnboardingPage() {
   const [step, setStep] = useState(0);
@@ -27,6 +30,7 @@ export default function OnboardingPage() {
     goal_categories: [],
     preference: "solo",
     accountability_style: "direct",
+    pain_points: [],
   });
   const router = useRouter();
 
@@ -75,6 +79,7 @@ export default function OnboardingPage() {
         goal_categories: data.goal_categories,
         preference: data.preference,
         accountability_style: data.accountability_style,
+        pain_points: data.pain_points,
         onboarded_at: new Date().toISOString(),
       });
 
@@ -93,7 +98,9 @@ export default function OnboardingPage() {
     switch (step) {
       case 1:
         return data.name.trim().length > 0;
-      case 3:
+      case 2:
+        return data.pain_points.length > 0;
+      case 5:
         return data.goal_categories.length > 0;
       default:
         return true;
@@ -104,44 +111,53 @@ export default function OnboardingPage() {
 
   return (
     <div className="min-h-screen bg-[#F5F5F7] flex flex-col">
-      {step > 0 && step < TOTAL_STEPS && (
-        <div className="px-6 pt-6">
-          <div className="max-w-lg mx-auto">
-            <div className="flex items-center justify-center gap-2 mb-2">
-              {Array.from({ length: TOTAL_STEPS - 1 }).map((_, i) => {
-                const stepNum = i + 1;
-                const isDone = step > stepNum;
-                const isActive = step === stepNum;
-                return (
-                  <div
-                    key={i}
-                    className={`h-2 rounded-full transition-all duration-500 ${
-                      isDone
-                        ? "w-8 bg-[#FF9500]"
-                        : isActive
-                          ? "w-8 bg-[#FF9500] shadow-[0_0_8px_rgba(255,149,0,0.4)]"
-                          : "w-2 bg-[#E5E5E5]"
-                    }`}
-                  />
-                );
-              })}
+      {step > 0 && step < 8 && step !== 3 && (() => {
+        // Data-collection steps only: 1,2,4,5,6,7 → mapped to progress 1-6
+        const dataSteps = [1, 2, 4, 5, 6, 7];
+        const totalDataSteps = dataSteps.length;
+        const currentProgress = dataSteps.indexOf(step) + 1;
+        return (
+          <div className="px-6 pt-6">
+            <div className="max-w-lg mx-auto">
+              <div className="flex items-center justify-center gap-2 mb-2">
+                {Array.from({ length: totalDataSteps }).map((_, i) => {
+                  const progressNum = i + 1;
+                  const isDone = currentProgress > progressNum;
+                  const isActive = currentProgress === progressNum;
+                  return (
+                    <div
+                      key={i}
+                      className={`h-2 rounded-full transition-all duration-500 ${
+                        isDone
+                          ? "w-8 bg-[#FF9500]"
+                          : isActive
+                            ? "w-8 bg-[#FF9500] shadow-[0_0_8px_rgba(255,149,0,0.4)]"
+                            : "w-2 bg-[#E5E5E5]"
+                      }`}
+                    />
+                  );
+                })}
+              </div>
+              <p className="text-center text-[13px] text-[#9CA3AF]">
+                Step <span className="text-[#FF9500] font-medium">{currentProgress}</span> of {totalDataSteps}
+              </p>
             </div>
-            <p className="text-center text-[13px] text-[#9CA3AF]">
-              Step <span className="text-[#FF9500] font-medium">{step}</span> of {TOTAL_STEPS - 1}
-            </p>
           </div>
-        </div>
-      )}
+        );
+      })()}
 
       <div className="flex-1 flex items-center justify-center px-4">
         <div className="w-full max-w-lg">
           {step === 0 && <StepWelcome next={next} />}
           {step === 1 && <StepName {...stepProps} canProceed={canProceed} />}
-          {step === 2 && <StepSchedule {...stepProps} />}
-          {step === 3 && <StepGoals {...stepProps} />}
-          {step === 4 && <StepPreference {...stepProps} />}
-          {step === 5 && <StepAccountability {...stepProps} />}
-          {step === 6 && (
+          {step === 2 && <StepPainPoints {...stepProps} />}
+          {step === 3 && <StepHowItWorks next={next} />}
+          {step === 4 && <StepSchedule {...stepProps} />}
+          {step === 5 && <StepGoals {...stepProps} />}
+          {step === 6 && <StepPreference {...stepProps} />}
+          {step === 7 && <StepAccountability {...stepProps} />}
+          {step === 8 && <StepCommitment data={data} next={next} />}
+          {step === 9 && (
             <StepComplete
               data={data}
               loading={loading}
@@ -150,7 +166,7 @@ export default function OnboardingPage() {
             />
           )}
 
-          {step > 0 && step < 6 && (
+          {step > 0 && step < 8 && step !== 3 && (
             <div className="flex items-center justify-between mt-10">
               <button
                 onClick={back}
