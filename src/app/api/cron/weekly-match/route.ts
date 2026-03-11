@@ -12,8 +12,8 @@ import { getWeekStart } from "@/lib/utils/week";
  *
  * Protected by CRON_SECRET header.
  */
-export async function POST(request: Request) {
-  // Verify cron secret
+export async function GET(request: Request) {
+  // Verify cron secret (Vercel adds Authorization header automatically)
   const authHeader = request.headers.get("authorization");
   const cronSecret = process.env.CRON_SECRET;
 
