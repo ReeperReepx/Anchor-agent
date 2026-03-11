@@ -4,9 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import type { User } from "@supabase/supabase-js";
+import type { ProductType } from "@/lib/types/database";
 import { SidebarStreak } from "./sidebar-streak";
 
-const NAV_ITEMS = [
+/* ─── Nav items for standup product ─── */
+
+const STANDUP_NAV_ITEMS = [
   {
     href: "/dashboard",
     label: "Dashboard",
@@ -73,7 +76,77 @@ const NAV_ITEMS = [
   },
 ];
 
-const MOBILE_LEFT = [
+/* ─── Nav items for matching product ─── */
+
+const MATCHING_NAV_ITEMS = [
+  {
+    href: "/match-dashboard",
+    label: "My Match",
+    icon: (
+      <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
+  },
+  {
+    href: "/match-history",
+    label: "Past Matches",
+    icon: (
+      <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  },
+  {
+    href: "/settings",
+    label: "Settings",
+    icon: (
+      <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
+  },
+];
+
+/* ─── Mobile nav for matching ─── */
+
+const MATCHING_MOBILE_LEFT = [
+  {
+    href: "/match-dashboard",
+    label: "Match",
+    icon: (
+      <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
+  },
+  {
+    href: "/match-history",
+    label: "History",
+    icon: (
+      <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    ),
+  },
+];
+
+const MATCHING_MOBILE_RIGHT = [
+  {
+    href: "/settings",
+    label: "Settings",
+    icon: (
+      <svg className="w-[18px] h-[18px]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 12h.01M12 12h.01M19 12h.01" />
+      </svg>
+    ),
+  },
+];
+
+/* ─── Mobile nav for standup ─── */
+
+const STANDUP_MOBILE_LEFT = [
   {
     href: "/dashboard",
     label: "Home",
@@ -94,7 +167,7 @@ const MOBILE_LEFT = [
   },
 ];
 
-const MOBILE_RIGHT = [
+const STANDUP_MOBILE_RIGHT = [
   {
     href: "/community",
     label: "Community",
@@ -117,13 +190,21 @@ const MOBILE_RIGHT = [
 
 export function AppShell({
   user,
+  productType = "standup",
   children,
 }: {
   user: User;
+  productType?: ProductType;
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
   const router = useRouter();
+  const isMatching = productType === "matching";
+
+  const navItems = isMatching ? MATCHING_NAV_ITEMS : STANDUP_NAV_ITEMS;
+  const mobileLeft = isMatching ? MATCHING_MOBILE_LEFT : STANDUP_MOBILE_LEFT;
+  const mobileRight = isMatching ? MATCHING_MOBILE_RIGHT : STANDUP_MOBILE_RIGHT;
+  const homeHref = isMatching ? "/match-dashboard" : "/dashboard";
 
   async function handleSignOut() {
     if (!window.confirm("Sign out of Anchor?")) return;
@@ -147,7 +228,7 @@ export function AppShell({
       <aside className="hidden sm:flex fixed top-0 left-0 bottom-0 w-[240px] flex-col border-r border-[#E5E5E5] bg-white z-50">
         <div className="px-5 h-16 flex items-center">
           <Link
-            href="/dashboard"
+            href={homeHref}
             className="flex items-center gap-2.5 font-bold text-accent text-xl"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -160,7 +241,7 @@ export function AppShell({
         </div>
 
         <nav className="flex-1 px-3 py-2 space-y-0.5">
-          {NAV_ITEMS.map((item) => {
+          {navItems.map((item) => {
             const isActive = pathname === item.href;
             return (
               <Link
@@ -190,20 +271,31 @@ export function AppShell({
             </div>
             <div className="min-w-0">
               <div className="text-[15px] font-medium text-[#1D1D1F] truncate">{displayName}</div>
-              <SidebarStreak />
+              {!isMatching && <SidebarStreak />}
             </div>
           </div>
 
-          <Link href="/standup" className="block">
-            <button className="w-full flex items-center justify-center gap-2 bg-accent hover:bg-accent-hover text-white px-4 py-3 rounded-xl text-[15px] font-semibold transition-all shadow-[0_2px_12px_rgba(181,115,8,0.3)] hover:shadow-[0_4px_16px_rgba(181,115,8,0.4)] hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97]">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-                <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-                <line x1="12" y1="19" x2="12" y2="23" />
-              </svg>
-              Start Standup
-            </button>
-          </Link>
+          {isMatching ? (
+            <Link href="/match-dashboard" className="block">
+              <button className="w-full flex items-center justify-center gap-2 bg-accent hover:bg-accent-hover text-white px-4 py-3 rounded-xl text-[15px] font-semibold transition-all shadow-[0_2px_12px_rgba(181,115,8,0.3)] hover:shadow-[0_4px_16px_rgba(181,115,8,0.4)] hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97]">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                Schedule Call
+              </button>
+            </Link>
+          ) : (
+            <Link href="/standup" className="block">
+              <button className="w-full flex items-center justify-center gap-2 bg-accent hover:bg-accent-hover text-white px-4 py-3 rounded-xl text-[15px] font-semibold transition-all shadow-[0_2px_12px_rgba(181,115,8,0.3)] hover:shadow-[0_4px_16px_rgba(181,115,8,0.4)] hover:-translate-y-[1px] active:translate-y-0 active:scale-[0.97]">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                  <line x1="12" y1="19" x2="12" y2="23" />
+                </svg>
+                Start Standup
+              </button>
+            </Link>
+          )}
           <button
             onClick={handleSignOut}
             className="w-full text-left px-3.5 py-2.5 text-[15px] text-[#9CA3AF] hover:text-[#1D1D1F] transition-colors rounded-xl hover:bg-[#F5F5F7]"
@@ -220,7 +312,7 @@ export function AppShell({
       <nav className="sm:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-[#E5E5E5] z-50">
         <div className="flex items-center justify-around h-16 px-2">
           {/* Left tabs */}
-          {MOBILE_LEFT.map((item) => {
+          {mobileLeft.map((item) => {
             const isActive = pathname === item.href;
             return (
               <Link
@@ -238,20 +330,32 @@ export function AppShell({
           })}
 
           {/* Center FAB */}
-          <Link
-            href="/standup"
-            aria-label="Start standup"
-            className="flex items-center justify-center w-[52px] h-[52px] -mt-6 rounded-full bg-accent text-white shadow-[0_4px_20px_rgba(181,115,8,0.35)] active:scale-95 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 10v2a7 7 0 0 1-14 0v-2" />
-              <line x1="12" y1="19" x2="12" y2="23" strokeWidth={2.5} />
-            </svg>
-          </Link>
+          {isMatching ? (
+            <Link
+              href="/match-dashboard"
+              aria-label="Schedule call"
+              className="flex items-center justify-center w-[52px] h-[52px] -mt-6 rounded-full bg-accent text-white shadow-[0_4px_20px_rgba(181,115,8,0.35)] active:scale-95 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </Link>
+          ) : (
+            <Link
+              href="/standup"
+              aria-label="Start standup"
+              className="flex items-center justify-center w-[52px] h-[52px] -mt-6 rounded-full bg-accent text-white shadow-[0_4px_20px_rgba(181,115,8,0.35)] active:scale-95 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                <line x1="12" y1="19" x2="12" y2="23" strokeWidth={2.5} />
+              </svg>
+            </Link>
+          )}
 
           {/* Right tabs */}
-          {MOBILE_RIGHT.map((item) => {
+          {mobileRight.map((item) => {
             const isActive = pathname === item.href;
             return (
               <Link

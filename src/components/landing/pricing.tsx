@@ -14,7 +14,7 @@ const DISCOUNTED: Record<PlanKey, { monthly: number; annual: number }> = {
   founder: { monthly: 10, annual: 100 },
 };
 
-export function Pricing() {
+export function Pricing({ loginHref = "/login" }: { loginHref?: string }) {
   const [interval, setInterval] = useState<"monthly" | "annual">("monthly");
   const [slotsLeft, setSlotsLeft] = useState<number>(10);
 
@@ -122,7 +122,7 @@ export function Pricing() {
                       )}
                       {promoActive && (
                         <div className="absolute -top-3 left-6 inline-flex items-center gap-2 bg-[#FF3B30] text-white text-[10px] font-semibold uppercase tracking-wider pl-3 pr-2 py-1 rounded-full">
-                          <span>75% off — Launch discount</span>
+                          <span>75% off, Launch discount</span>
                           <span className="inline-flex items-center gap-1 bg-[rgba(0,0,0,0.2)] rounded-full px-2 py-0.5 text-[10px] font-bold tracking-normal normal-case">
                             <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -170,7 +170,7 @@ export function Pricing() {
                         </div>
 
                         <div className="shrink-0 w-full sm:w-auto">
-                          <Link href="/login">
+                          <Link href={loginHref}>
                             <Button
                               className={`rounded-full px-6 py-2.5 text-[13px] font-semibold w-full sm:w-auto min-h-[44px] ${
                                 isPremium

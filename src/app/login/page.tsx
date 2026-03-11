@@ -1,25 +1,48 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 
-export default function LoginPage() {
+function LoginForm() {
+  const searchParams = useSearchParams();
+  const product = searchParams.get("product"); // "matching" or null
+  const isMatching = product === "matching";
+
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  function getCallbackUrl() {
+    const origin = window.location.origin;
+    return isMatching
+      ? `${origin}/auth/callback?product=matching`
+      : `${origin}/auth/callback`;
+  }
+
+  // Persist product type so the callback can read it even if
+  // query-param is stripped by Supabase redirect URL rules
+  function persistProduct() {
+    if (isMatching) {
+      localStorage.setItem("anchor_signup_product", "matching");
+    } else {
+      localStorage.removeItem("anchor_signup_product");
+    }
+  }
+
   async function handleMagicLink(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
     setError(null);
+    persistProduct();
 
     const supabase = createClient();
     const { error } = await supabase.auth.signInWithOtp({
       email,
-      options: { emailRedirectTo: `${window.location.origin}/auth/callback` },
+      options: { emailRedirectTo: getCallbackUrl() },
     });
 
     if (error) {
@@ -31,10 +54,11 @@ export default function LoginPage() {
   }
 
   async function handleGoogleLogin() {
+    persistProduct();
     const supabase = createClient();
     await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: `${window.location.origin}/auth/callback` },
+      options: { redirectTo: getCallbackUrl() },
     });
   }
 
@@ -53,14 +77,29 @@ export default function LoginPage() {
         </div>
 
         <div className="relative z-10">
-          <h1 className="text-[38px] font-bold text-white leading-[1.2] tracking-[-0.02em] mb-5">
-            Five minutes.<br />
-            Three questions.<br />
-            <span className="text-[#0077ED]">Every damn day.</span>
-          </h1>
-          <p className="text-[16px] text-[#9CA3AF] leading-relaxed max-w-[360px]">
-            The voice-first daily standup for solopreneurs who ship. No typing, no dashboards, no excuses.
-          </p>
+          {isMatching ? (
+            <>
+              <h1 className="text-[38px] font-bold text-white leading-[1.2] tracking-[-0.02em] mb-5">
+                One founder.<br />
+                One call.<br />
+                <span className="text-[#0077ED]">Every week.</span>
+              </h1>
+              <p className="text-[16px] text-[#9CA3AF] leading-relaxed max-w-[360px]">
+                Get matched with a random founder for a weekly call. No AI, no apps — just a real conversation with someone who gets it.
+              </p>
+            </>
+          ) : (
+            <>
+              <h1 className="text-[38px] font-bold text-white leading-[1.2] tracking-[-0.02em] mb-5">
+                Five minutes.<br />
+                Three questions.<br />
+                <span className="text-[#0077ED]">Every damn day.</span>
+              </h1>
+              <p className="text-[16px] text-[#9CA3AF] leading-relaxed max-w-[360px]">
+                The voice-first daily standup for solopreneurs who ship. No typing, no dashboards, no excuses.
+              </p>
+            </>
+          )}
         </div>
 
         <div className="relative z-10">
@@ -136,10 +175,10 @@ export default function LoginPage() {
               <>
                 <div className="text-center mb-6">
                   <h2 className="text-xl font-semibold text-[#1D1D1F] mb-1">
-                    Welcome back
+                    {isMatching ? "Join Anchor Matching" : "Welcome back"}
                   </h2>
                   <p className="text-sm text-[#86868B]">
-                    Sign in to continue your streak
+                    {isMatching ? "Sign in to get matched with a founder" : "Sign in to continue your streak"}
                   </p>
                 </div>
 
@@ -202,5 +241,17 @@ export default function LoginPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-[#F5F5F7]">
+        <div className="text-[#86868B]">Loading...</div>
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   );
 }

@@ -111,6 +111,7 @@ export const DEV_PROFILE: User = {
   preference: "both",
   accountability_style: "direct",
   pain_points: ["no-accountability", "losing-momentum"],
+  product_type: "standup",
   onboarded_at: "2026-02-15T10:00:00Z",
   created_at: "2026-02-15T10:00:00Z",
 };

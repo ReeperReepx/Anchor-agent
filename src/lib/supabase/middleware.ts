@@ -1,8 +1,13 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-const PUBLIC_ROUTES = ["/", "/home", "/login", "/onboarding", "/auth/callback"];
+const PUBLIC_ROUTES = ["/", "/home", "/login", "/onboarding", "/onboarding/matching", "/auth/callback"];
 const PUBLIC_PREFIXES = ["/blog"];
+
+// Routes exclusive to the standup product
+const STANDUP_ONLY_ROUTES = ["/dashboard", "/standup", "/tracking", "/summaries", "/history", "/partner", "/community"];
+// Routes exclusive to the matching product
+const MATCHING_ONLY_ROUTES = ["/match-dashboard", "/match-history"];
 // Routes that require auth but NOT a subscription
 const NO_SUB_REQUIRED = ["/pricing", "/settings", "/api/stripe/", "/api/subscription", "/api/onboarding", "/api/calendar/"];
 
@@ -58,9 +63,25 @@ export async function updateSession(request: NextRequest) {
     // Check if user is grandfathered (created before cutoff)
     const { data: profile } = await supabase
       .from("users")
-      .select("created_at")
+      .select("created_at, product_type")
       .eq("id", user.id)
       .single();
+
+    // Redirect users to the right portal if they hit a route for the wrong product
+    const productType = profile?.product_type ?? "standup";
+    const isStandupRoute = STANDUP_ONLY_ROUTES.some((r) => pathname.startsWith(r));
+    const isMatchingRoute = MATCHING_ONLY_ROUTES.some((r) => pathname.startsWith(r));
+
+    if (productType === "matching" && isStandupRoute) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/match-dashboard";
+      return NextResponse.redirect(url);
+    }
+    if (productType === "standup" && isMatchingRoute) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/dashboard";
+      return NextResponse.redirect(url);
+    }
 
     const GRANDFATHER_CUTOFF = "2026-03-07T23:00:00Z";
     const isGrandfathered = profile && profile.created_at < GRANDFATHER_CUTOFF;

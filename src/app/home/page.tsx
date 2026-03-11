@@ -1,121 +1,70 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ScrollReveal } from "@/components/landing/scroll-reveal";
 import { Pricing } from "@/components/landing/pricing";
 
-/* ─── Hero transcript bubbles (shared standup angle) ─── */
+/* ─── Hero visual: two founder cards being matched ─── */
 
-const BUBBLES = [
-  {
-    role: "ai" as const,
-    text: "What did you ship yesterday?",
-    className: "top-[2%] right-[0%] md:rotate-[2deg]",
-  },
-  {
-    role: "user" as const,
-    text: "Launched the waitlist page and set up analytics.",
-    className: "top-[18%] right-[0%] md:right-[5%] md:-rotate-[1deg]",
-  },
-  {
-    role: "ai" as const,
-    text: "What's on deck for today?",
-    className: "top-[36%] left-[0%] md:rotate-[1.5deg]",
-  },
-  {
-    role: "user" as const,
-    text: "Building the invite flow. Want 50 signups by Friday.",
-    className: "top-[52%] right-[0%] md:right-[2%] md:-rotate-[2deg]",
-  },
-  {
-    role: "ai" as const,
-    text: "Your partner Maya shipped 3 features this week. Ready to keep up?",
-    className: "top-[68%] left-[0%] md:left-[5%] md:rotate-[1deg]",
-  },
-  {
-    role: "user" as const,
-    text: "Oh, it's on.",
-    className: "top-[80%] right-[0%] md:-rotate-[1.5deg]",
-  },
-];
-
-const WAVE_BARS = [4, 7, 10, 13, 15, 17, 18, 19, 20, 19, 18, 17, 15, 13, 10, 7, 4];
-const WAVE_OPACITIES = [30, 40, 50, 55, 65, 70, 75, 78, 80, 78, 75, 70, 65, 55, 50, 40, 30];
-
-function HeroTranscript() {
-  const [visible, setVisible] = useState(0);
-
-  useEffect(() => {
-    if (visible >= BUBBLES.length) return;
-    const timer = setTimeout(() => setVisible((v) => v + 1), 700);
-    return () => clearTimeout(timer);
-  }, [visible]);
-
+function HeroMatchVisual() {
   return (
-    <div className="relative w-full h-[420px] sm:h-[460px]">
-      {BUBBLES.slice(0, visible).map((bubble, i) => (
-        <div
-          key={i}
-          className={`absolute max-w-[280px] sm:max-w-[300px] ${bubble.className} hero-bubble`}
-          style={{ animationDelay: `${i * 0.05}s` }}
-        >
-          <div
-            className={`px-4 py-2.5 text-[13px] sm:text-[14px] leading-relaxed rounded-2xl shadow-lg backdrop-blur-sm ${
-              bubble.role === "user"
-                ? "bg-[#0071E3] text-white shadow-[#0071E3]/20"
-                : "bg-white text-[#1d1d1f] shadow-black/8 border border-[#e5e5e5]/60"
-            }`}
-          >
-            {bubble.role === "ai" && (
-              <div className="flex items-center gap-1.5 mb-1">
-                <div className="w-4 h-4 rounded-full bg-[#0071E3] flex items-center justify-center">
-                  <svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
-                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-                    <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
-                  </svg>
-                </div>
-                <span className="text-[10px] font-semibold text-[#86868b] uppercase tracking-wider">Anchor AI</span>
-              </div>
-            )}
-            {bubble.text}
-          </div>
-        </div>
-      ))}
+    <div className="relative w-full h-[420px] sm:h-[460px] flex items-center justify-center">
+      {/* Connection line */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-[2px] bg-gradient-to-r from-[#0071E3] to-[#34C759] opacity-60" />
 
-      {visible < BUBBLES.length && visible > 0 && (
-        <div className={`absolute ${BUBBLES[visible].className} hero-bubble`}>
-          <div className="bg-white rounded-2xl px-4 py-3 shadow-lg border border-[#e5e5e5]/60 flex gap-1">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#86868b] animate-bounce" style={{ animationDelay: "0s" }} />
-            <span className="w-1.5 h-1.5 rounded-full bg-[#86868b] animate-bounce" style={{ animationDelay: "0.15s" }} />
-            <span className="w-1.5 h-1.5 rounded-full bg-[#86868b] animate-bounce" style={{ animationDelay: "0.3s" }} />
+      {/* Founder card 1 */}
+      <div className="absolute top-[15%] left-[5%] sm:left-[8%] w-[200px] sm:w-[220px] hero-bubble" style={{ animationDelay: "0.1s" }}>
+        <div className="bg-white rounded-2xl p-5 shadow-lg border border-[#e5e5e5]/60">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-full bg-[#0071E3]/10 flex items-center justify-center text-[#0071E3] text-[15px] font-bold">A</div>
+            <div>
+              <div className="text-[14px] font-semibold text-[#1d1d1f]">Alex</div>
+              <div className="text-[11px] text-[#86868b]">SaaS founder</div>
+            </div>
           </div>
+          <div className="text-[12px] text-[#6e6e73] leading-relaxed">Building a scheduling tool for freelancers. Just hit 100 users.</div>
         </div>
-      )}
+      </div>
 
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 flex items-center gap-3 bg-white/90 backdrop-blur-sm rounded-full px-5 py-3 shadow-lg border border-[#e5e5e5]/60 hero-bubble" style={{ animationDelay: "0.2s" }}>
-        <div className="w-8 h-8 rounded-full bg-[#0071E3] flex items-center justify-center shrink-0 animate-pulse">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
-            <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+      {/* Founder card 2 */}
+      <div className="absolute bottom-[15%] right-[5%] sm:right-[8%] w-[200px] sm:w-[220px] hero-bubble" style={{ animationDelay: "0.5s" }}>
+        <div className="bg-white rounded-2xl p-5 shadow-lg border border-[#e5e5e5]/60">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-10 h-10 rounded-full bg-[#5B5FC7]/10 flex items-center justify-center text-[#5B5FC7] text-[15px] font-bold">M</div>
+            <div>
+              <div className="text-[14px] font-semibold text-[#1d1d1f]">Maya</div>
+              <div className="text-[11px] text-[#86868b]">SaaS founder</div>
+            </div>
+          </div>
+          <div className="text-[12px] text-[#6e6e73] leading-relaxed">Launched beta for an invoicing app. Focused on getting to $1k MRR.</div>
+        </div>
+      </div>
+
+      {/* Match badge in center */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hero-bubble" style={{ animationDelay: "0.9s" }}>
+        <div className="bg-[#0071E3] text-white rounded-full px-5 py-2.5 shadow-lg flex items-center gap-2 text-[13px] font-semibold">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
+          Matched for this week
         </div>
-        <div className="flex items-center gap-[3px]">
-          {WAVE_BARS.map((h, i) => (
-            <div
-              key={i}
-              className="w-[3px] rounded-full bg-[#0071E3] shrink-0"
-              style={{
-                height: `${h}px`,
-                opacity: WAVE_OPACITIES[i] / 100,
-                animation: "wave 1.8s ease-in-out infinite",
-                animationDelay: `${i * 0.07}s`,
-              }}
-            />
-          ))}
+      </div>
+
+      {/* Calendar invite preview */}
+      <div className="absolute bottom-[5%] left-1/2 -translate-x-1/2 hero-bubble" style={{ animationDelay: "1.3s" }}>
+        <div className="bg-white/90 backdrop-blur-sm rounded-xl px-4 py-3 shadow-lg border border-[#e5e5e5]/60 flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-[#34C759]/10 flex items-center justify-center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#34C759" strokeWidth="2">
+              <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <div>
+            <div className="text-[12px] font-semibold text-[#1d1d1f]">Weekly Founder Call</div>
+            <div className="text-[11px] text-[#86868b]">Wednesday, 30 min</div>
+          </div>
         </div>
-        <span className="text-[12px] text-[#86868b] font-medium tabular-nums shrink-0">4:32</span>
       </div>
     </div>
   );
@@ -124,16 +73,16 @@ function HeroTranscript() {
 /* ─── Ticker ─── */
 
 const TICKER_ITEMS = [
-  "Accountability Partner",
-  "Weekly Partner Matching",
-  "Shared Standups",
-  "Voice-First",
-  "AI Summaries",
-  "No Calls Required",
-  "Async by Design",
-  "Streak Tracking",
+  "Weekly Matching",
+  "Real Conversations",
+  "Goal-Aligned Pairs",
+  "Fresh Perspectives",
+  "No Scheduling Hassle",
+  "15-30 Min Calls",
   "Founder Community",
-  "Zero Typing",
+  "New Match Every Monday",
+  "Accountability That Works",
+  "No AI, Just Humans",
 ];
 
 function StatsBar() {
@@ -156,7 +105,7 @@ function StatsBar() {
   );
 }
 
-/* ─── How it works (shared angle) ─── */
+/* ─── How it works ─── */
 
 function HowItWorks() {
   return (
@@ -164,7 +113,7 @@ function HowItWorks() {
       <ScrollReveal>
         <div className="text-center mb-8 sm:mb-10 max-w-[1080px] mx-auto">
           <h2 className="text-[28px] sm:text-[36px] font-bold tracking-[-0.035em] text-[#f5f5f7]">
-            How shared standups work
+            How it works
           </h2>
         </div>
       </ScrollReveal>
@@ -175,35 +124,31 @@ function HowItWorks() {
             <span className="w-3 h-3 rounded-full bg-[#FF5F57]" />
             <span className="w-3 h-3 rounded-full bg-[#FEBC2E]" />
             <span className="w-3 h-3 rounded-full bg-[#28C840]" />
-            <span className="text-[12px] text-[#86868b] ml-3 font-medium">Anchor | Shared Standup</span>
+            <span className="text-[12px] text-[#86868b] ml-3 font-medium">Anchor | Weekly Matching</span>
           </div>
 
           <div className="p-5 sm:p-8 space-y-6">
-            {/* Step 1 */}
             <div className="flex gap-4 items-start">
               <div className="w-8 h-8 rounded-full bg-[#0071E3] text-white text-[13px] font-bold flex items-center justify-center shrink-0">1</div>
               <div>
-                <div className="text-[14px] font-semibold text-[#1d1d1f]">You do your standup</div>
-                <div className="text-[13px] text-[#86868b] mt-0.5">5 minutes, voice-first. What you shipped, what&apos;s next, any blockers.</div>
+                <div className="text-[14px] font-semibold text-[#1d1d1f]">Sign up and tell us what you&apos;re building</div>
+                <div className="text-[13px] text-[#86868b] mt-0.5">Takes 30 seconds. Pick your goals and timezone.</div>
               </div>
             </div>
-            {/* Step 2 */}
             <div className="flex gap-4 items-start">
               <div className="w-8 h-8 rounded-full bg-[#0071E3] text-white text-[13px] font-bold flex items-center justify-center shrink-0">2</div>
               <div>
-                <div className="text-[14px] font-semibold text-[#1d1d1f]">Your partner does theirs</div>
-                <div className="text-[13px] text-[#86868b] mt-0.5">Separately, on their own time. No scheduling, no calls, no awkward silences.</div>
+                <div className="text-[14px] font-semibold text-[#1d1d1f]">Get matched with a founder every Monday</div>
+                <div className="text-[13px] text-[#86868b] mt-0.5">Randomly paired with someone building in a similar space. Fresh match every week.</div>
               </div>
             </div>
-            {/* Step 3 */}
             <div className="flex gap-4 items-start">
               <div className="w-8 h-8 rounded-full bg-[#0071E3] text-white text-[13px] font-bold flex items-center justify-center shrink-0">3</div>
               <div>
-                <div className="text-[14px] font-semibold text-[#1d1d1f]">You see each other&apos;s summaries</div>
-                <div className="text-[13px] text-[#86868b] mt-0.5">Once you both finish, AI summaries are shared. You know someone else is watching.</div>
+                <div className="text-[14px] font-semibold text-[#1d1d1f]">Hop on a 15-30 min call</div>
+                <div className="text-[13px] text-[#86868b] mt-0.5">Schedule it at a time that works for both of you. Share wins, blockers, and keep each other honest.</div>
               </div>
             </div>
-            {/* Step 4 */}
             <div className="flex gap-4 items-start">
               <div className="w-8 h-8 rounded-full bg-[#34C759] text-white text-[13px] font-bold flex items-center justify-center shrink-0">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -211,8 +156,8 @@ function HowItWorks() {
                 </svg>
               </div>
               <div>
-                <div className="text-[14px] font-semibold text-[#1d1d1f]">Partners rotate weekly</div>
-                <div className="text-[13px] text-[#86868b] mt-0.5">Fresh perspective every week. Matched by goals so it actually matters.</div>
+                <div className="text-[14px] font-semibold text-[#1d1d1f]">Repeat every week</div>
+                <div className="text-[13px] text-[#86868b] mt-0.5">New founder, new perspective, every single Monday.</div>
               </div>
             </div>
           </div>
@@ -222,10 +167,10 @@ function HowItWorks() {
       <ScrollReveal>
         <div className="text-center mt-8 sm:mt-10">
           <Link
-            href="/login"
+            href="/login?product=matching"
             className="inline-flex items-center justify-center bg-[#0071E3] hover:bg-[#0077ED] text-white px-8 py-3 rounded-full text-[14px] font-semibold transition-colors min-h-[48px]"
           >
-            Find your accountability partner
+            Get matched this week
           </Link>
         </div>
       </ScrollReveal>
@@ -233,7 +178,7 @@ function HowItWorks() {
   );
 }
 
-/* ─── Outcomes (partner angle) ─── */
+/* ─── Outcomes ─── */
 
 function OutcomeCards() {
   return (
@@ -245,12 +190,14 @@ function OutcomeCards() {
               The difference
             </p>
             <h2 className="text-[32px] sm:text-[44px] font-bold tracking-[-0.035em] text-[#1d1d1f] leading-tight">
-              Someone is watching.
+              Someone else is
+              <br />
+              in the trenches.
               <br />
               <span className="text-[#86868b]">That changes everything.</span>
             </h2>
             <p className="text-[#86868b] text-base sm:text-lg mt-4 max-w-[420px] leading-relaxed">
-              When another founder sees your standup, you stop letting things slide. You ship more, skip less, and actually follow through.
+              When you talk to another founder every week, you stop spinning your wheels. You get perspective, accountability, and the energy that comes from knowing you&apos;re not alone.
             </p>
           </div>
         </ScrollReveal>
@@ -258,40 +205,40 @@ function OutcomeCards() {
         <ScrollReveal direction="right">
           <div className="bg-[#f5f5f7] rounded-2xl p-6 sm:p-8 max-w-[360px] mx-auto md:ml-auto md:mr-0">
             <div className="flex items-center justify-between mb-5">
-              <div className="text-[15px] font-semibold text-[#1d1d1f]">Partner standup</div>
+              <div className="text-[15px] font-semibold text-[#1d1d1f]">This week&apos;s match</div>
               <div className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#34C759]" />
-                <span className="text-[12px] text-[#86868b]">Both completed</span>
+                <span className="text-[12px] text-[#86868b]">Call scheduled</span>
               </div>
             </div>
 
-            {/* Your summary */}
+            {/* Your card */}
             <div className="bg-white rounded-xl p-4 border border-[#e5e5e5]/80 mb-3">
               <div className="flex items-center gap-2 mb-2">
                 <div className="w-6 h-6 rounded-full bg-[#0071E3] flex items-center justify-center text-[10px] font-bold text-white">Y</div>
                 <span className="text-[12px] font-semibold text-[#1d1d1f]">You</span>
               </div>
-              <p className="text-[12px] text-[#6e6e73] leading-relaxed">Shipped payment flow, fixing edge cases today. No blockers.</p>
+              <p className="text-[12px] text-[#6e6e73] leading-relaxed">Shipped the payment flow, onboarding 5 beta users this week.</p>
             </div>
 
-            {/* Partner summary */}
+            {/* Match card */}
             <div className="bg-white rounded-xl p-4 border border-[#e5e5e5]/80">
               <div className="flex items-center gap-2 mb-2">
-                <div className="w-6 h-6 rounded-full bg-[#5B5FC7] flex items-center justify-center text-[10px] font-bold text-white">M</div>
-                <span className="text-[12px] font-semibold text-[#1d1d1f]">Maya</span>
+                <div className="w-6 h-6 rounded-full bg-[#5B5FC7] flex items-center justify-center text-[10px] font-bold text-white">J</div>
+                <span className="text-[12px] font-semibold text-[#1d1d1f]">Jordan</span>
                 <span className="text-[10px] text-[#86868b] ml-auto">SaaS founder</span>
               </div>
-              <p className="text-[12px] text-[#6e6e73] leading-relaxed">Launched beta to 20 users, collecting feedback. Blocked on email deliverability.</p>
+              <p className="text-[12px] text-[#6e6e73] leading-relaxed">Launched to Product Hunt, working on retention. Wants to hit $2k MRR by April.</p>
             </div>
 
             <div className="mt-4 pt-3 border-t border-[#e5e5e5] flex items-center justify-between">
               <div className="flex items-center gap-1.5">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#34C759" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#0071E3" strokeWidth="2">
+                  <path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
-                <span className="text-[11px] text-[#86868b]">Week 3 together</span>
+                <span className="text-[11px] text-[#86868b]">Wed 3pm ET</span>
               </div>
-              <span className="text-[10px] text-[#86868b]">New partner Monday</span>
+              <span className="text-[10px] text-[#86868b]">New match Monday</span>
             </div>
           </div>
         </ScrollReveal>
@@ -300,24 +247,12 @@ function OutcomeCards() {
   );
 }
 
-/* ─── Why Anchor (shared angle) ─── */
+/* ─── Why Anchor ─── */
 
 const VALUE_PROPS = [
   {
-    heading: "Accountability without the scheduling",
-    body: "No syncing calendars, no video calls. You each standup when it suits you. Summaries are shared automatically.",
-    icon: (
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-      </svg>
-    ),
-  },
-  {
     heading: "Matched by what you're building",
-    body: "Partners are paired by goal type — SaaS, freelance, e-commerce, side projects. Someone who gets what you're doing.",
+    body: "Paired with founders in similar spaces: SaaS, freelance, e-commerce, side projects. Someone who actually gets what you're doing.",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10" />
@@ -328,8 +263,17 @@ const VALUE_PROPS = [
     ),
   },
   {
-    heading: "Fresh perspective every week",
-    body: "Partners rotate weekly. See how other founders work, pick up habits, stay motivated by people who are actually in the trenches.",
+    heading: "One call, zero prep",
+    body: "No agenda required. Just show up, talk about what you're working on, and get the energy boost of talking to someone who's in it too.",
+    icon: (
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+      </svg>
+    ),
+  },
+  {
+    heading: "New founder every week",
+    body: "Fresh perspective every Monday. See how other builders work, pick up ideas, and stay motivated by people who are actually shipping.",
     icon: (
       <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <polyline points="23 4 23 10 17 10" />
@@ -355,14 +299,14 @@ function WhyAnchor() {
               energy you&apos;re missing.
             </h2>
             <p className="text-[#86868b] text-base mt-3 leading-relaxed max-w-[320px]">
-              You don&apos;t need a co-founder. You need someone who notices when you don&apos;t show up.
+              You don&apos;t need a co-founder. You need someone who shows up every week and asks &ldquo;what did you ship?&rdquo;
             </p>
             <div className="mt-8">
               <Link
-                href="/login"
+                href="/login?product=matching"
                 className="inline-flex items-center justify-center gap-2 bg-[#0071E3] hover:bg-[#0077ED] text-white px-7 py-3 rounded-full text-[14px] font-semibold transition-colors w-full sm:w-auto min-h-[48px]"
               >
-                Get matched with a partner
+                Get matched with a founder
               </Link>
             </div>
           </ScrollReveal>
@@ -392,28 +336,28 @@ function WhyAnchor() {
   );
 }
 
-/* ─── FAQ (shared angle) ─── */
+/* ─── FAQ ─── */
 
 const FAQ_ITEMS = [
   {
-    q: "How does partner matching work?",
-    a: "After onboarding, you're matched with another founder based on what you're building. Partners rotate every week so you get fresh perspectives.",
+    q: "How does matching work?",
+    a: "Every Monday, you get matched with a random founder who's building something in a similar space. You see their name, what they're building, and their email. Then you schedule a call that week.",
   },
   {
-    q: "Do I have to get on a call with my partner?",
-    a: "No. Everything is async. You each do your standup separately with the AI, then you see each other's summaries. No calls, no scheduling.",
+    q: "What do we talk about on the call?",
+    a: "Whatever's useful. Most people share what they shipped, what's blocking them, and set a commitment for next week. No agenda required — just show up and be real.",
   },
   {
-    q: "What if my partner doesn't show up?",
-    a: "You still get the full value of your own standup. If a partner goes inactive, we'll match you with someone new the following week.",
+    q: "What if my match doesn't show up?",
+    a: "It happens. If your match goes inactive, you'll get a new one the following Monday. We're building a community of people who actually show up.",
   },
   {
-    q: "Can I do it solo instead?",
-    a: "Absolutely. You can switch between solo and shared anytime from your settings.",
+    q: "How long is the call?",
+    a: "15-30 minutes is the sweet spot. Short enough to not be a burden, long enough to actually help. You and your match decide the exact time.",
   },
   {
-    q: "How long does a standup take?",
-    a: "5-10 minutes. Three questions, all voice. No typing required.",
+    q: "Is there a free trial?",
+    a: "Yes — 7 days free, no credit card required. Try it for a week and see if having a weekly founder call changes how you work.",
   },
 ];
 
@@ -498,15 +442,15 @@ export default function HomeLandingPage() {
             <a href="#pricing" className="hidden sm:inline text-[#1d1d1f]/60 hover:text-[#1d1d1f] transition-colors py-2">
               Pricing
             </a>
-            <Link href="/login" className="text-[#0071E3] hover:text-[#0077ED] transition-colors py-2 px-1">
+            <Link href="/login?product=matching" className="text-[#0071E3] hover:text-[#0077ED] transition-colors py-2 px-1">
               Log in
             </Link>
-            <Link href="/login">
+            <Link href="/login?product=matching">
               <Button
                 size="sm"
                 className="bg-[#0071E3] hover:bg-[#0077ED] text-white rounded-full px-5 text-[13px] border-none shadow-none"
               >
-                Try free
+                Get matched
               </Button>
             </Link>
           </div>
@@ -519,25 +463,25 @@ export default function HomeLandingPage() {
           <div>
             <div className="inline-flex items-center gap-2 bg-[#f5f5f7] rounded-full px-3.5 py-1.5 mb-5 sm:mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-[#34C759]" />
-              <span className="text-[12px] text-[#86868b] font-medium">New partners matched every Monday</span>
+              <span className="text-[12px] text-[#86868b] font-medium">New matches every Monday</span>
             </div>
             <h1 className="text-[36px] sm:text-[52px] md:text-[60px] font-bold tracking-[-0.04em] leading-[1.06] text-[#1d1d1f]">
-              Stop building
+              Meet a new
               <br />
-              alone.{" "}
+              founder{" "}
               <br className="hidden sm:block" />
-              <span className="text-[#86868b]">Start shipping together.</span>
+              <span className="text-[#86868b]">every week.</span>
             </h1>
             <p className="mt-4 sm:mt-5 text-[15px] sm:text-[17px] text-[#86868b] max-w-[400px] leading-relaxed">
-              Get matched with a founder who sees your standup every day. Async accountability that actually works — no calls, no scheduling.
+              Get randomly matched with another builder for a weekly call. No AI, no apps — just a real conversation with someone who gets it.
             </p>
             <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
-              <Link href="/login">
+              <Link href="/login?product=matching">
                 <Button
                   size="lg"
                   className="bg-[#0071E3] hover:bg-[#0077ED] text-white px-8 py-4 text-base rounded-full shadow-none border-none w-full sm:w-auto min-h-[48px]"
                 >
-                  Find your partner
+                  Get matched free
                 </Button>
               </Link>
               <a
@@ -550,7 +494,7 @@ export default function HomeLandingPage() {
           </div>
 
           <div className="relative">
-            <HeroTranscript />
+            <HeroMatchVisual />
           </div>
         </div>
       </section>
@@ -559,7 +503,7 @@ export default function HomeLandingPage() {
       <HowItWorks />
       <OutcomeCards />
       <WhyAnchor />
-      <Pricing />
+      <Pricing loginHref="/login?product=matching" />
       <FAQ />
 
       {/* Footer */}

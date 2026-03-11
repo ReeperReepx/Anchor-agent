@@ -1,9 +1,11 @@
 import { NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
+import { cookies } from "next/headers";
 
 export async function GET(request: Request) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
+  const product = searchParams.get("product"); // "matching" or null
 
   if (code) {
     const responseHeaders = new Headers();
@@ -36,13 +38,34 @@ export async function GET(request: Request) {
       if (user) {
         const { data: profile } = await supabase
           .from("users")
-          .select("onboarded_at")
+          .select("onboarded_at, product_type")
           .eq("id", user.id)
           .single();
 
         if (!profile?.onboarded_at) {
-          redirectTo = `${origin}/onboarding`;
+          // New user — route to the right onboarding based on query param
+          redirectTo = product === "matching"
+            ? `${origin}/onboarding/matching`
+            : `${origin}/onboarding`;
+        } else {
+          // Returning user — route based on their stored product type
+          const userProduct = profile.product_type ?? "standup";
+          redirectTo = userProduct === "matching"
+            ? `${origin}/match-dashboard`
+            : `${origin}/dashboard`;
         }
+      }
+
+      // Set a cookie with the product type so client can read it as fallback
+      if (product === "matching") {
+        responseHeaders.append(
+          "set-cookie",
+          serializeCookie("anchor_product", "matching", {
+            path: "/",
+            maxAge: 3600, // 1 hour, just needs to survive through onboarding
+            sameSite: "lax",
+          })
+        );
       }
 
       const response = NextResponse.redirect(redirectTo);

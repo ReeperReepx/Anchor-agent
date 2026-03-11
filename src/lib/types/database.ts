@@ -4,6 +4,7 @@ export type AccountabilityStyle = "gentle" | "direct" | "drill";
 export type MatchStatus = "pending" | "active" | "paused" | "ended";
 export type SubscriptionTier = "builder" | "founder";
 export type SubscriptionStatus = "trialing" | "active" | "canceled" | "expired";
+export type ProductType = "standup" | "matching";
 
 export interface User {
   id: string;
@@ -16,6 +17,7 @@ export interface User {
   accountability_style: AccountabilityStyle | null;
   pain_points: string[];
   onboarded_at: string | null;
+  product_type: ProductType;
   created_at: string;
 }
 

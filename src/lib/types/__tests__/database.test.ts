@@ -26,6 +26,8 @@ describe("Database types", () => {
       goal_categories: ["fitness", "coding"],
       preference: "solo",
       accountability_style: "direct",
+      pain_points: [],
+      product_type: "standup",
       onboarded_at: "2024-01-01T00:00:00Z",
       created_at: "2024-01-01T00:00:00Z",
     };
@@ -45,6 +47,8 @@ describe("Database types", () => {
       goal_categories: [],
       preference: null,
       accountability_style: null,
+      pain_points: [],
+      product_type: "standup",
       onboarded_at: null,
       created_at: "2024-01-01T00:00:00Z",
     };
