@@ -27,6 +27,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Missing goal_category" }, { status: 400 });
   }
 
+  // Get the requesting user's product type
+  const { data: profile } = await supabase
+    .from("users")
+    .select("product_type")
+    .eq("id", user.id)
+    .single();
+
+  const userProductType = profile?.product_type ?? "standup";
+
   const weekOf = getWeekStart();
 
   // Check if user already has a match for this week
@@ -54,17 +63,31 @@ export async function POST(request: Request) {
     .eq("status", "active")
     .or(`user_a_id.eq.${user.id},user_b_id.eq.${user.id}`);
 
-  // Look for a pending match this week with same goal category
-  const { data: pendingMatch } = await supabase
-    .from("matches")
-    .select("*")
-    .eq("goal_category", body.goal_category)
-    .eq("week_of", weekOf)
-    .is("user_b_id", null)
-    .eq("status", "pending")
-    .neq("user_a_id", user.id)
-    .limit(1)
-    .single();
+  // Get IDs of users with the same product type to filter pending matches
+  // This prevents standup-partner users from matching with matching-only users
+  const { data: sameProductUsers } = await supabase
+    .from("users")
+    .select("id")
+    .eq("product_type", userProductType)
+    .neq("id", user.id);
+
+  const sameProductIds = (sameProductUsers ?? []).map((u) => u.id);
+
+  // Look for a pending match this week with same goal category and same product type
+  let pendingMatch = null;
+  if (sameProductIds.length > 0) {
+    const { data } = await supabase
+      .from("matches")
+      .select("*")
+      .eq("goal_category", body.goal_category)
+      .eq("week_of", weekOf)
+      .is("user_b_id", null)
+      .eq("status", "pending")
+      .in("user_a_id", sameProductIds)
+      .limit(1)
+      .single();
+    pendingMatch = data;
+  }
 
   if (pendingMatch) {
     const { data: match, error } = await supabase

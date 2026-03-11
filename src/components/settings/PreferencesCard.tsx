@@ -20,6 +20,8 @@ export function PreferencesCard({
   saving: boolean;
   saved: boolean;
 }) {
+  const isMatching = profile.product_type === "matching";
+
   return (
     <Card>
       <CardHeader>
@@ -47,39 +49,43 @@ export function PreferencesCard({
             </select>
           </div>
 
-          <div>
-            <label className="block text-[16px] font-medium text-[#86868B] mb-1">
-              Standup Time
-            </label>
-            <input
-              type="time"
-              value={profile.standup_time ?? ""}
-              onChange={(e) =>
-                setProfile({ ...profile, standup_time: e.target.value })
-              }
-              className={inputClasses}
-            />
-          </div>
+          {!isMatching && (
+            <>
+              <div>
+                <label className="block text-[16px] font-medium text-[#86868B] mb-1">
+                  Standup Time
+                </label>
+                <input
+                  type="time"
+                  value={profile.standup_time ?? ""}
+                  onChange={(e) =>
+                    setProfile({ ...profile, standup_time: e.target.value })
+                  }
+                  className={inputClasses}
+                />
+              </div>
 
-          <div>
-            <label className="block text-[16px] font-medium text-[#86868B] mb-1">
-              Standup Mode
-            </label>
-            <select
-              value={profile.preference ?? ""}
-              onChange={(e) =>
-                setProfile({
-                  ...profile,
-                  preference: e.target.value as UserPreference,
-                })
-              }
-              className={inputClasses}
-            >
-              <option value="solo">Solo</option>
-              <option value="shared">Shared</option>
-              <option value="both">Both</option>
-            </select>
-          </div>
+              <div>
+                <label className="block text-[16px] font-medium text-[#86868B] mb-1">
+                  Standup Mode
+                </label>
+                <select
+                  value={profile.preference ?? ""}
+                  onChange={(e) =>
+                    setProfile({
+                      ...profile,
+                      preference: e.target.value as UserPreference,
+                    })
+                  }
+                  className={inputClasses}
+                >
+                  <option value="solo">Solo</option>
+                  <option value="shared">Shared</option>
+                  <option value="both">Both</option>
+                </select>
+              </div>
+            </>
+          )}
 
           <div className="flex items-center gap-3">
             <Button type="submit" loading={saving}>

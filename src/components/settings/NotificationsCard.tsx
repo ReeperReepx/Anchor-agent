@@ -3,24 +3,32 @@
 import { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 
-export function NotificationsCard() {
+export function NotificationsCard({ isMatching = false }: { isMatching?: boolean }) {
   const [prefs, setPrefs] = useState({
     dailyReminder: true,
     streakWarnings: true,
     partnerUpdates: false,
     weeklySummary: true,
+    matchNotification: true,
   });
 
   function toggle(key: keyof typeof prefs) {
     setPrefs((p) => ({ ...p, [key]: !p[key] }));
   }
 
-  const items = [
+  const standupItems = [
     { key: "dailyReminder" as const, label: "Daily reminder", sub: "Email at your standup time" },
     { key: "streakWarnings" as const, label: "Streak warnings", sub: "Alert before you lose your streak" },
     { key: "partnerUpdates" as const, label: "Partner updates", sub: "When your partner completes a standup" },
     { key: "weeklySummary" as const, label: "Weekly summary email", sub: "Recap sent every Monday morning" },
   ];
+
+  const matchingItems = [
+    { key: "matchNotification" as const, label: "New match notification", sub: "Email when you get matched on Monday" },
+    { key: "weeklySummary" as const, label: "Weekly reminder", sub: "Reminder to schedule your call" },
+  ];
+
+  const items = isMatching ? matchingItems : standupItems;
 
   return (
     <Card>

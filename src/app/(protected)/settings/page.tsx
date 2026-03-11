@@ -93,7 +93,7 @@ export default function SettingsPage() {
         saved={saved}
       />
 
-      <NotificationsCard />
+      <NotificationsCard isMatching={profile.product_type === "matching"} />
 
       <SubscriptionCard />
     </div>

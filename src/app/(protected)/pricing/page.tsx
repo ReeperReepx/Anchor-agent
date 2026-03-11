@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { PLANS } from "@/lib/stripe";
 import type { PlanKey } from "@/lib/stripe";
+import { createClient } from "@/lib/supabase/client";
+import type { ProductType } from "@/lib/types/database";
 
 const PROMO_END = new Date("2026-04-01T00:00:00Z");
 
@@ -13,11 +15,29 @@ const DISCOUNTED = {
   founder: { monthly: 10, annual: 100 },
 } as const;
 
+// Matching-specific feature descriptions
+const MATCHING_FEATURES: Record<PlanKey, string[]> = {
+  builder: [
+    "Weekly founder matching",
+    "Goal-aligned pairing",
+    "Schedule calls via Google Calendar",
+    "Match history",
+    "Email support",
+  ],
+  founder: [
+    "Everything in Builder",
+    "Priority matching",
+    "Preferred call day selection",
+    "Extended match history",
+  ],
+};
+
 export default function PricingPage() {
   const [loading, setLoading] = useState<string | null>(null);
   const [interval, setInterval] = useState<"monthly" | "annual">("monthly");
   const [slotsLeft, setSlotsLeft] = useState<number>(10);
   const [error, setError] = useState<string | null>(null);
+  const [productType, setProductType] = useState<ProductType>("standup");
 
   useEffect(() => {
     fetch("/api/promo-slots")
@@ -26,6 +46,21 @@ export default function PricingPage() {
         if (typeof data.remaining === "number") setSlotsLeft(data.remaining);
       })
       .catch(() => {/* keep default */});
+
+    // Fetch user's product type
+    async function loadProductType() {
+      const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        const { data } = await supabase
+          .from("users")
+          .select("product_type")
+          .eq("id", user.id)
+          .single();
+        if (data?.product_type) setProductType(data.product_type);
+      }
+    }
+    loadProductType();
   }, []);
 
   const promoActive = slotsLeft > 0 && new Date() < PROMO_END;
@@ -62,7 +97,7 @@ export default function PricingPage() {
           }
         } catch { /* invalid URL */ }
       }
-      setError("Failed to create checkout session — no valid URL returned.");
+      setError("Failed to create checkout session. No valid URL returned.");
     } catch (e) {
       setError(`Network error: ${e instanceof Error ? e.message : "unknown"}`);
     }
@@ -198,7 +233,11 @@ export default function PricingPage() {
             </div>
           )}
           <h2 className="text-[20px] sm:text-[22px] font-semibold text-[#1D1D1F] mb-1">{builder.name}</h2>
-          <p className="text-[13px] text-[#86868B] mb-4">Daily voice standups, AI summaries, and accountability partner matching.</p>
+          <p className="text-[13px] text-[#86868B] mb-4">
+            {productType === "matching"
+              ? "Weekly founder matching with goal-aligned pairing."
+              : "Daily voice standups, AI summaries, and accountability partner matching."}
+          </p>
           <div className="mb-5 h-[72px] flex items-end">
             <div>
               <span className="text-[42px] sm:text-[48px] font-bold text-[#1D1D1F] leading-none">${builderPrice.display}</span>
@@ -216,7 +255,7 @@ export default function PricingPage() {
             </div>
           </div>
           <ul className="space-y-2.5 flex-1">
-            {builder.features.map((f) => (
+            {(productType === "matching" ? MATCHING_FEATURES.builder : builder.features).map((f) => (
               <li key={f} className="text-[14px] sm:text-[15px] text-[#4B5563] flex items-start gap-2">
                 <svg className="w-4 h-4 text-[#34C759] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
@@ -257,7 +296,11 @@ export default function PricingPage() {
               Popular
             </span>
           </div>
-          <p className="text-[13px] text-[#86868B] mb-4">Everything in Builder, plus weekly planning sessions and monthly deep-dives.</p>
+          <p className="text-[13px] text-[#86868B] mb-4">
+            {productType === "matching"
+              ? "Everything in Builder, plus priority matching and extended history."
+              : "Everything in Builder, plus weekly planning sessions and monthly deep-dives."}
+          </p>
           <div className="mb-5 h-[72px] flex items-end">
             <div>
               <span className="text-[42px] sm:text-[48px] font-bold text-[#1D1D1F] leading-none">${founderPrice.display}</span>
@@ -275,7 +318,7 @@ export default function PricingPage() {
             </div>
           </div>
           <ul className="space-y-2.5 flex-1">
-            {founder.features.map((f) => (
+            {(productType === "matching" ? MATCHING_FEATURES.founder : founder.features).map((f) => (
               <li key={f} className="text-[14px] sm:text-[15px] text-[#4B5563] flex items-start gap-2">
                 <svg className="w-4 h-4 text-[#34C759] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
